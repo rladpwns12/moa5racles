@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.moa.mybatis.UserMapper">
+<mapper namespace="com.moa.mybatis.UserMapper" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 
     <resultMap id="userInfo_map" type="com.moa.model.vo.SimpleUserInfoVO">
         <id property="profileName" column="PICTURE_NAME"  />
@@ -25,5 +25,22 @@
 
     <select id="signUpUser" parameterType="hashMap" resultType="com.moa.model.vo.LoginVO">
         SELECT * From login_view WHERE email = #{email} AND password=#{password};
+    </select>
+
+    <select id="duplicationCheck" parameterType="hasMap" resultType="int">
+        SELECT COUNT(*) FROM login_view
+        <choose>
+            <when test="nick != null">
+                WHERE nick = #{nick}
+                <c:if test="email != null">
+                    AND email = #{email}
+                </c:if>
+            </when>
+            <otherwise>
+                <c:if test="email != null">
+                    WHERE email = #{email}
+                </c:if>
+            </otherwise>
+        </choose>
     </select>
 </mapper>
