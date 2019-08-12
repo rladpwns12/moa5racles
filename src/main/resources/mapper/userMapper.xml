@@ -43,4 +43,8 @@
             </otherwise>
         </choose>
     </select>
+    <select id="signUpUser" parameterType="hashMap" resultType="int">
+        CALL PI_INSERT_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
+        #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.nick},#{UserVO.name},"profile.png",#{res})
+    </select>
 </mapper>
