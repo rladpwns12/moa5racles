@@ -4,7 +4,7 @@ package com.moa.controller;
 import com.moa.message.MessengerStateMessage;
 import com.moa.model.service.LuggageRequestInfoService;
 import com.moa.model.service.LuggageRequestRecordService;
-import com.moa.model.service.MemberInfoService;
+import com.moa.model.service.MemberInfoServiceImpl;
 import com.moa.model.service.MessengerListServiceImpl;
 import com.moa.model.vo.MessageVO;
 import com.moa.model.vo.ReadStoreRequestVO;
@@ -31,7 +31,7 @@ public class MyPageController {
     @Autowired
     private MessengerListServiceImpl messengerListService;
     @Autowired
-    private MemberInfoService memberInfoService;
+    private MemberInfoServiceImpl memberInfoService;
 
     @RequestMapping(value="", method= RequestMethod.GET)
     public ModelAndView myPage() {
