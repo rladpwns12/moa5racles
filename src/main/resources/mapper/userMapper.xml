@@ -24,7 +24,7 @@
     </select>
 
     <select id="checkLogin" parameterType="hashMap" resultType="com.moa.model.vo.LoginVO">
-        SELECT * From login_view WHERE email = #{email} AND password=#{password};
+        SELECT * FROM login_view WHERE email = #{email} AND password=#{password}
     </select>
 
     <select id="duplicationCheck" parameterType="hashMap" resultType="int">
@@ -43,8 +43,8 @@
             </otherwise>
         </choose>
     </select>
-    <select id="signUpUser" parameterType="hashMap" resultType="int">
+    <select id="signUpUser" statementType="CALLABLE" parameterType="hashMap">
         CALL PI_INSERT_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
-        #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.nick},#{UserVO.name},"profile.png",#{res})
+        #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.nick},#{UserVO.name},'profile.png',#{res, mode=OUT, jdbcType=INTEGER })
     </select>
 </mapper>
