@@ -2,20 +2,18 @@ package com.moa.model.service;
 
 
 import com.moa.model.dao.UserDAO;
+import com.moa.model.vo.LoginVO;
 import com.moa.model.vo.SimpleUserInfoVO;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-@NoArgsConstructor
-public class MemberInfoService {
-    @Autowired
-    private UserDAO userDAO;
-    public boolean checkExistUser(String userNick){
-        return userDAO.checkExistUser(userNick);
-    }
-    public SimpleUserInfoVO selectMemberInfo(int userId){
-        return userDAO.selectUserInfo(userId);
-    }
+import java.util.Map;
+
+public interface MemberInfoService {
+    public boolean checkExistUser(String userNick);
+    public SimpleUserInfoVO selectMemberInfo(int userId);
+    public boolean signUpMember(Map<String, Object> userInfo);
+    public boolean signUpDuplicationCheck(Map<String, Object> duplicationInfo);
+    public LoginVO memberLogin(Map<String, Object> loginInfo);
 }
