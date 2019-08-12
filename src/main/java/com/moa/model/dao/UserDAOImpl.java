@@ -39,7 +39,8 @@ public class UserDAOImpl implements UserDAO {
         boolean result;
 
         mapper = sqlSession.getMapper(UserMapper.class);
-        result = (mapper.signUpUser(userInfo) == 1) ? true : false;
+        mapper.signUpUser(userInfo);
+        result = ((int)userInfo.get("res") == 1) ? true : false;
 
         return result;
     }
