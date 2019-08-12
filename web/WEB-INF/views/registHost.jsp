@@ -78,7 +78,7 @@
             <input type="text" id="address" name="address" placeholder="주소를 입력하세요.">
             <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소를 입력하세요.">
             <input type="hidden" id="latitude" name="latitude">
-            <input type="hidden" id="logitude" name="longitude">
+            <input type="hidden" id="longitude" name="longitude">
           </div>
         </div>
         <div class="company_info">
