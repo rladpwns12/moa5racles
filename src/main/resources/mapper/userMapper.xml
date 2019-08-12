@@ -22,4 +22,8 @@
     <select id="selectUserExist" parameterType="String" resultType="Integer">
         select count(*) as exist from user_tb where nickname = #{userNick}
     </select>
+
+    <select id="signUpUser" parameterType="hashMap" resultType="com.moa.model.vo.LoginVO">
+        SELECT * From login_view WHERE email = #{email} AND password=#{password};
+    </select>
 </mapper>
