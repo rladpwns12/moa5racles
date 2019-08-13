@@ -142,7 +142,7 @@ public class TestUserDAO {
         int a= 0;
         testMap.put("res",a);
 
-        assertEquals(0,dao.updateUser(testMap));
+        assertEquals(0,dao.updateUser(testMap));}
 
 
     @Test
