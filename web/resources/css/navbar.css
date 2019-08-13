@@ -1,6 +1,6 @@
-body {
-    margin: 0;
-    padding: 0;
+body{
+  margin: 0;
+  padding: 0;
 }
 
 .navbar {
@@ -183,6 +183,18 @@ body {
 .fa-align-justify:before {
     content: "\f039";
 }
+#loginout_btn{
+  style:none;
+  background: #ffffff;
+  border: none;
+  display: flex;
+  box-sizing: inherit;
+  text-align: inherit;
+  align-items: inherit;
+}
+/* .container{
+
+  margin-top:100px;
 
 .fa-times:before {
     content: "\f00d";

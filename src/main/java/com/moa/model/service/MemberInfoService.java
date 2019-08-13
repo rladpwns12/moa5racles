@@ -15,5 +15,4 @@ public interface MemberInfoService {
     public SimpleUserInfoVO selectMemberInfo(int userId);
     public boolean signUpMember(Map<String, Object> userInfo);
     public boolean signUpDuplicationCheck(Map<String, Object> duplicationInfo);
-    public LoginVO memberLogin(Map<String, Object> loginInfo);
 }

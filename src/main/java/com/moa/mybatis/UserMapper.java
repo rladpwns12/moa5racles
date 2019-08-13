@@ -11,7 +11,7 @@ public interface UserMapper {
     int selectUserExist(String userNick);
     void signUpUser(Map<String,Object> userInfo);
     int duplicationCheck(Map<String,Object> duplicationInfo);
-    LoginVO checkLogin(Map<String,Object> loginInfo);
+    LoginVO checkLogin(String email);
     String findEmail(Map<String,Object> findEmailInfo );
     int updatePassword(Map<String,Object> updatePasswordInfo);
     void updateUser(Map<String,Object> updateUserInfo);

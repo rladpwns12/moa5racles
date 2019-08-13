@@ -23,8 +23,26 @@
         select count(*) as exist from user_tb where  nickname = #{userNick}
     </select>
 
-    <select id="checkLogin" parameterType="hashMap" resultType="com.moa.model.vo.LoginVO">
-        SELECT * FROM login_view WHERE email = #{email} AND password=#{password}
+    <resultMap id="checkLoginMap" type="com.moa.model.vo.LoginVO">
+        <id property="userId" column="USERID"  />
+        <result property="userId" column="USERID"  />
+        <result property="password" column="password"  />
+        <result property="nick" column="nick"  />
+        <result property="name" column="name"  />
+        <result property="email" column="email"  />
+        <result property="phoneNumber" column="phoneNumber"  />
+        <result property="profile" column="profile"  />
+        <result property="flag" column="flag" />
+        <collection property="authVOList" resultMap="authMap"  />
+    </resultMap>
+
+    <resultMap id="authMap" type="com.moa.model.vo.AuthVO">
+        <result property="userId" column="userid" />
+        <result property="auth" column="auth"  />
+    </resultMap>
+
+    <select id="checkLogin" parameterType="java.lang.String" resultMap="checkLoginMap">
+        SELECT * FROM login_view WHERE email = #{email}
     </select>
 
     <select id="duplicationCheck" parameterType="hashMap" resultType="int">
