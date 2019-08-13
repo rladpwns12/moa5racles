@@ -5,16 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
-@RequestMapping(value = "/login")
 public class LoginController {
 
     // 로그인
-    @RequestMapping(value = "")
+    @RequestMapping(value = "/login")
     public String loginPage() {
-//        request.getSession();
         return "login";
     }
 
@@ -28,7 +24,7 @@ public class LoginController {
 
     // 회원가입
     @RequestMapping("/registration")
-    public String registeration(HttpServletRequest request)
+    public String registeration()
     {
         return "registration";
     }
