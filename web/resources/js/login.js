@@ -63,8 +63,8 @@
 })(jQuery);
 
 function searchId() {
-    let width = 340;
-    let height = 400;
+    let width = 380;
+    let height = 440;
     let popUpUrl = "/searchId";
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
@@ -75,8 +75,8 @@ function searchId() {
 }
 
 function searchPassword() {
-    let width = 340;
-    let height = 480;
+    let width = 380;
+    let height = 500;
     let popUpUrl = "/searchPassword";
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);

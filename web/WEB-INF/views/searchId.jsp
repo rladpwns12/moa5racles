@@ -17,7 +17,10 @@
 <div class="page-wrapper bg-gra-02 font-poppins">
     <div class="wrapper wrapper--w680">
 
-        <div class="card card-4">
+
+        <div class="card_t card-4">
+
+
             <div class="add_margin card-body">
                 <h2 class="title">아이디 찾기</h2>
                 <form id="regForm" method="POST">
@@ -25,23 +28,33 @@
                         <div class="col-2">
                             <label class="label">이름을 입력하세요</label>
                             <div class="input-group">
-                                <input id="name" class="short input100 input--style-4" type="text" name="name">
+
+                                <input id="name" class="short2 input100 input--style-4" type="text" name="name">
+
                                 <span class="focus-input100"></span>
                             </div>
                         </div>
                     </div>
                     <div cla ss="row row-space">
                         <div class="col-2">
+
+                            <label class="short label">휴대폰 번호를 입력하세요</label>
                             <div class="input-group">
-                                <label class="short label">휴대폰 번호를 입력하세요</label>
-                                <input id="phone" class="short input100 input--style-4" type="text" name="phone">
+                                <input id="phone" class="short2 input100 input--style-4" type="text" name="phone">
                                 <span class="focus-input100"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="input-group">
+
                                 <label class="short label">휴대폰 인증</label>
                                 <button id="identification" class="btn btn--radius-2 btn--purple" type="button">
                                     휴대폰 인증
                                 </button>
                             </div>
                         </div>
+
                     </div>
                 </form>
                 <div class="p-t-15">
