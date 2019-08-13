@@ -1,27 +1,23 @@
 package com.moa.controller;
 
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.moa.message.MessengerStateMessage;
 import com.moa.model.service.LuggageRequestInfoService;
 import com.moa.model.service.LuggageRequestRecordService;
 import com.moa.model.service.MemberInfoServiceImpl;
 import com.moa.model.service.MessengerListServiceImpl;
-import com.moa.model.vo.MessageVO;
-import com.moa.model.vo.ReadStoreRequestVO;
-import com.moa.model.vo.SimpleUserInfoVO;
+import com.moa.model.vo.*;
 import com.moa.paging.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value="/mypage")
@@ -33,14 +29,19 @@ public class MyPageController {
     @Autowired
     private MessengerListServiceImpl messengerListService;
     @Autowired
+
+    @Qualifier("memberService")
     private MemberInfoServiceImpl memberInfoService;
 
     @RequestMapping(value="", method= RequestMethod.GET)
-    public ModelAndView myPage() {
+    public ModelAndView myPage(Authentication auth) {
         ModelAndView mav = new ModelAndView();
-        int userId = 28;
-        SimpleUserInfoVO simpleUserInfoVO = memberInfoService.selectMemberInfo(userId);
+        int userId;
 
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        userId = Integer.parseInt(customUser.getLoginVO().getUserId());
+
+        SimpleUserInfoVO simpleUserInfoVO = memberInfoService.selectMemberInfo(userId);
         mav.addObject("profileName", simpleUserInfoVO.getProfileName());
         mav.addObject("userName", simpleUserInfoVO.getName());
         mav.addObject("userEmail", simpleUserInfoVO.getEmail());
@@ -48,15 +49,19 @@ public class MyPageController {
         mav.addObject("notReadMessageCnt", simpleUserInfoVO.getNotReadMessageCnt());
         mav.addObject("usingStorageCnt", simpleUserInfoVO.getUsingStorageCnt());
         mav.setViewName("myPage");
+
         return mav;
     }
 
     @RequestMapping(value="/requestlist/{curPage}", method=RequestMethod.GET)
-    public ModelAndView myPageRequestList(@PathVariable("curPage") int curPage){
+    public ModelAndView myPageRequestList(@PathVariable("curPage") int curPage, Authentication auth){
         ModelAndView mav = new ModelAndView();
-        Map<String, Object> map;
-        int userId = 28;
-        int totPageCnt = 0;
+        Map<String, Object> map = new HashMap<>();
+        int userId;
+        int totPageCnt;
+
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
         map = luggageRequestRecordService.selectLuggageRequestRecord(userId, curPage);
         totPageCnt = luggageRequestRecordService.LuggageRequestCountService(userId);
@@ -65,7 +70,6 @@ public class MyPageController {
         mav.addObject("productList", map.get("productList"));
         mav.addObject("totPageCnt", totPageCnt);
         mav.addObject("curPage", curPage);
-
         mav.setViewName("requestList");
 
         return mav;
@@ -80,20 +84,14 @@ public class MyPageController {
         return requestVO;
     }
 
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleException(Exception e){
-        ModelAndView mav=new ModelAndView();
-        mav.setViewName("/error/page");
-        mav.addObject("message","존재하지 않는 페이지 입니다.");
-        return mav;
-    }
     @RequestMapping(value = {"/message/receive","/message"})
-    public ModelAndView message(HttpServletRequest request){
-        HttpSession session = request.getSession();//추후 로그인 처리
-        int userId = 7;
+    public ModelAndView message(Authentication auth){
         ModelAndView mav = new ModelAndView();
+        int userId;
 
-        //--list logic
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        userId = Integer.parseInt(customUser.getLoginVO().getUserId());
+
         Map<String,Object> messageInfo = new HashMap<String,Object>();
         messageInfo.put("messageType", MessengerStateMessage.MESSAGE_TYPE_RECEIVER);
         messageInfo.put("userId",userId);
@@ -111,15 +109,16 @@ public class MyPageController {
         mav.addObject(list);
         mav.addObject(pagination);
 
-
         return mav;
     }
     @RequestMapping("/message/receive/{curPage}")
-    public ModelAndView messageCurPage(HttpServletRequest request,
+    public ModelAndView messageCurPage(Authentication auth,
                                        @PathVariable int curPage){
-        HttpSession session = request.getSession();//추후 로그인 처리
-        int userId = 7;
+        int userId;
         ModelAndView mav = new ModelAndView();
+
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
         //--list logic
         Map<String,Object> messageInfo = new HashMap<String,Object>();
@@ -147,11 +146,12 @@ public class MyPageController {
     //보낸 메세지
 
     @RequestMapping("/message/send")
-    public ModelAndView messageSendCurPage(HttpServletRequest request){
-        HttpSession session = request.getSession();//추후 로그인 처리
-        int userId = 7;
+    public ModelAndView messageSendCurPage(Authentication auth){
+        int userId;
         ModelAndView mav = new ModelAndView();
 
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        userId = Integer.parseInt(customUser.getLoginVO().getUserId());
         //--list logic
         Map<String,Object> messageInfo = new HashMap<String,Object>();
         messageInfo.put("messageType", MessengerStateMessage.MESSAGE_TYPE_SENDER);
@@ -174,11 +174,13 @@ public class MyPageController {
         return mav;
     }
     @RequestMapping("/message/send/{curPage}")
-    public ModelAndView messageSend(HttpServletRequest request,
+    public ModelAndView messageSend(Authentication auth,
                                     @PathVariable int curPage){
-        HttpSession session = request.getSession();//추후 로그인 처리
-        int userId = 7;
+        int userId;
         ModelAndView mav = new ModelAndView();
+
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
         //--list logic
         Map<String,Object> messageInfo = new HashMap<String,Object>();
@@ -222,12 +224,14 @@ public class MyPageController {
         return mav;
     }
     @RequestMapping(value = {"/message/submit"}, method = RequestMethod.GET)
-    public ModelAndView messageSubmitForm(){
+    public ModelAndView messageSubmitForm(Authentication auth){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageSendDetail");
 
-        //SESSION에 있는 닉네임 정보
-        mav.addObject("userNick","성진킴");
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        String nick = customUser.getLoginVO().getNick();
+
+        mav.addObject("userNick",nick);
         return mav;
     }
     @ResponseBody
@@ -239,14 +243,17 @@ public class MyPageController {
         return messengerListService.messageSend(messageSendInfo);
     }
     @RequestMapping(value = {"/message/submit/{receiverNick}"}, method = RequestMethod.GET)
-    public ModelAndView messageReply(@PathVariable String receiverNick){
+    public ModelAndView messageReply(@PathVariable String receiverNick, Authentication auth){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageSendDetail");
         if(!receiverNick.equals("") || receiverNick != null){
             mav.addObject("receiverNick",receiverNick);
         }
-        //SESSION에 있는 닉네임 정보
-        mav.addObject("userNick","성진킴");
+
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        String nick = customUser.getLoginVO().getNick();
+
+        mav.addObject("userNick",nick);
         return mav;
     }
 
