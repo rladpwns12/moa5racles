@@ -68,7 +68,6 @@ button {
 }
 
 .page-wrapper {
-    margin-top: 80px;
     min-height: 100vh;
 }
 
@@ -263,7 +262,7 @@ input {
 }
 
 .input100 {
-    width: 200px;
+    width: 220px;
 }
 
 .input--style-4 {
@@ -377,6 +376,7 @@ input {
 .input-group {
     position: relative;
     margin-bottom: 22px;
+    width: 270px;
 }
 
 .input-group-icon {
@@ -500,6 +500,13 @@ input {
     -moz-border-radius: 3px;
     border-radius: 3px;
     background: #fff;
+    margin-top: 80px;
+}
+.card_t {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #fff;
 }
 
 .card-4 {
@@ -515,6 +522,7 @@ input {
     padding-bottom: 65px;
     border-radius: 10px;
     background: #fff;
+    /*margin-top: 80px;*/
 }
 
 @media (max-width: 767px) {
@@ -527,7 +535,11 @@ input {
     width: 260px;
 }
 
-#email, #address, #detailAddress {
+.email {
+    width: 500px;
+}
+
+#address, #detailAddress {
     width: 500px;
     margin-bottom: 5px;
 }
@@ -587,6 +599,10 @@ input {
 
 .short {
     width: 260px;
+}
+
+.short2 {
+    width: 220px;
 }
 
 .move {

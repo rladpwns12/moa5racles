@@ -115,12 +115,10 @@ function submit() {
 
     if(isValid(name)) {
         alert("이름을 입력하세요");
-        name.focus();
         return;
     }
     if(isValid(nickname)) {
         alert("닉네임을 입력하세요");
-        nickname.focus();
         return;
     }
 
@@ -147,7 +145,6 @@ function submit() {
 // 유효성 검사
 function isValid(input) {
     if(input == null || input.trim() == "") {
-        input.val("");
         return true;
     }
 }
