@@ -18,6 +18,8 @@
     <div class="wrapper wrapper--w680">
 
         <div class="card_t card-4">
+
+
             <div class="add_margin card-body">
                 <h2 class="title">비밀번호 찾기</h2>
                 <form id="regForm" method="POST">
@@ -25,7 +27,9 @@
                         <div class="col-2">
                             <label class="label">이름을 입력하세요</label>
                             <div class="input-group">
+                              
                                 <input id="name" class="short2 input100 input--style-4" type="text" name="name">
+
                                 <span class="focus-input100"></span>
                             </div>
                         </div>
@@ -41,6 +45,7 @@
                     </div>
                     <div cla ss="row row-space">
                         <div class="col-2">
+
                             <label class="short label">휴대폰 번호를 입력하세요</label>
                             <div class="input-group">
                                 <input id="phone" class="short2 input100 input--style-4" type="text" name="phone">

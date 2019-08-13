@@ -68,6 +68,7 @@ button {
 }
 
 .page-wrapper {
+
     min-height: 100vh;
 }
 
@@ -608,7 +609,6 @@ input {
 .move {
     top: 60px;
 }
-
 .add_margin {
     margin-left: 45px;
 }

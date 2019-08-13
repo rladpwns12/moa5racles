@@ -115,10 +115,12 @@ function submit() {
 
     if(isValid(name)) {
         alert("이름을 입력하세요");
+
         return;
     }
     if(isValid(nickname)) {
         alert("닉네임을 입력하세요");
+
         return;
     }
 
