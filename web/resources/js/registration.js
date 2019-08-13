@@ -67,7 +67,6 @@
     }
 })(jQuery);
 
-//////////////////////추가
 var execDaumPostcode = function() {
     var width = 500;
     var height = 600;
@@ -107,28 +106,47 @@ function submit() {
     let email = $('#email').val();
     let password = $('#password').val();
     let phone = $('#phone').val();
-    var postcode = $('#postcode').val();
-    var address = $('#address').val();
-    var detailAddress = $('#detailAddress').val();
+    let postcode = $('#postcode').val();
+    let address = $('#address').val();
+    let detailAddress = $('#detailAddress').val();
+    //
+    let latitude = 14.02;
+    let longitude = 13.001;
 
-    let form= {
-        name, nickname
+    if(isValid(name)) {
+        alert("이름을 입력하세요");
+
+        return;
+    }
+    if(isValid(nickname)) {
+        alert("닉네임을 입력하세요");
+
+        return;
     }
 
-    console.log(form);
+    let form= {
+        name, nickname, email, password, phone, postcode, address, detailAddress, latitude, longitude
+    }
 
     $.ajax({
         type: "POST",
         url: "registerationForm",
         data: form,
-
         success(data) {
-            alert("success: " + data);
+            alert("회원가입에 성공하셨습니다.")
+            alert(data);
+            $('#regForm')[0].reset();
+            location.href = "/login";
         },
         error: function() {
-            alert("error 발생");
+            alert("회원가입에 실패하셨습니다.");
         }
-
     });
+}
 
+// 유효성 검사
+function isValid(input) {
+    if(input == null || input.trim() == "") {
+        return true;
+    }
 }
