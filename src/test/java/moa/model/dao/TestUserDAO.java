@@ -13,8 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations ={
@@ -114,5 +113,13 @@ public class TestUserDAO {
         testMap.put("nick","테스트닉1231231");
 
         assertFalse(dao.signUpDuplicationCheck(testMap));
+    }
+    @Test
+    public void TEST_회원삭제_성공(){
+        assertEquals(1,dao.deleteUser("mylovec@gmail.com"));
+    }
+    @Test
+    public void TEST_회원삭제_실패(){
+        assertEquals(0,dao.deleteUser("mylasdasovec@gmail.com"));
     }
  }

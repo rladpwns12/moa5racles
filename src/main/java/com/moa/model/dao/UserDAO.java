@@ -11,4 +11,8 @@ public interface UserDAO {
     boolean signUpUser(Map<String, Object> userInfo);
     boolean signUpDuplicationCheck(Map<String, Object> duplicationInfo);
     LoginVO checkLogin(Map<String, Object> loginInfo);
+    String findEmail(Map<String,Object> findEmailInfo );
+    int updatePassword(Map<String,Object> updatePasswordInfo);
+    int updateUser(Map<String,Object> updateUserInfo);
+    int deleteUser(String email);
 }

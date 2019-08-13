@@ -66,4 +66,35 @@ public class UserDAOImpl implements UserDAO {
 
         return result;
     }
+
+    @Override
+    public String findEmail(Map<String, Object> findEmailInfo) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        String name = mapper.findEmail(findEmailInfo);
+        return name;
+    }
+
+    @Override
+    public int updatePassword(Map<String, Object> updatePasswordInfo) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int result = mapper.updatePassword(updatePasswordInfo);
+        return result;
+    }
+
+    @Override
+    public int updateUser(Map<String, Object> updateUserInfo) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        mapper.updateUser(updateUserInfo);
+        int result = ((int)updateUserInfo.get("res")== 1 ) ?  1 : 0 ;
+        return result;
+    }
+
+    @Override
+    public int deleteUser(String email) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int result = mapper.deleteUser(email);
+        return result;
+    }
+
+
 }
