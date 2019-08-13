@@ -107,28 +107,28 @@ function submit() {
     let email = $('#email').val();
     let password = $('#password').val();
     let phone = $('#phone').val();
-    var postcode = $('#postcode').val();
-    var address = $('#address').val();
-    var detailAddress = $('#detailAddress').val();
+    let postcode = $('#postcode').val();
+    let address = $('#address').val();
+    let detailAddress = $('#detailAddress').val();
+    let latitude = $('#latitude').val();
+    let longitude = $('#longitude').val();
 
     let form= {
-        name, nickname
+        name, nickname, email, password, phone, postcode, address, detailAddress, latitude, longitude
     }
-
-    console.log(form);
 
     $.ajax({
         type: "POST",
         url: "registerationForm",
         data: form,
-
         success(data) {
-            alert("success: " + data);
+            alert("회원가입에 성공하셨습니다.")
+            alert(data);
+            $('#regForm')[0].reset();
+            location.href = "/login";
         },
         error: function() {
-            alert("error 발생");
+            alert("회원가입에 실패하셨습니다.");
         }
-
     });
-
 }

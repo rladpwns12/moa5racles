@@ -1,29 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<%--<html lang="en">--%>
 <html>
 <head>
-    <!-- Required meta tags-->
+    <title>회원가입</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Colorlib Templates">
     <meta name="author" content="Colorlib">
     <meta name="keywords" content="Colorlib Templates">
-
-    <!-- Title Page-->
-    <title>Registration</title>
-
-    <!-- Icons font CSS-->
-    <%--<link href="/resources/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="/resources/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">--%>
-    <!-- Font special for pages-->
-    <%--<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">--%>
-
-    <!-- Vendor CSS-->
-    <%--<link href="/resources/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="/resources/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">--%>
-
-    <!-- Main CSS-->
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
@@ -32,9 +16,7 @@
 <body>
 <%@ include file="navbar.jsp" %>
 <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-<%--    <img src="/resources/image/main/slide3.jpg"/>--%>
     <div class="wrapper wrapper--w680">
-
         <div class="card card-4">
             <div class="card-body">
                 <h2 class="title">회원가입</h2>
@@ -130,7 +112,8 @@
                                            disabled readonly>
                                 </div>
                                 <div class="long search_address_btn">
-                                    <input type="text" id="detailAddress" class="input100 input--style-4" name="detailAddress"
+                                    <input type="text" id="detailAddress" class="input100 input--style-4"
+                                           name="detailAddress"
                                            placeholder="상세주소를 입력하세요">
                                     <span class="move long focus-input100"></span>
                                 </div>
@@ -147,19 +130,7 @@
         </div>
     </div>
 </div>
-
-<!-- Jquery JS-->
-<%--<script src="/resources/vendor/jquery/jquery.min.js"></script>--%>
-<!-- Vendor JS-->
-<%--<script src="/resources/vendor/select2/select2.min.js"></script>
-<script src="/resources/vendor/datepicker/moment.min.js"></script>
-<script src="/resources/vendor/datepicker/daterangepicker.js"></script>--%>
-
-<!-- Main JS-->
+</body>
 <script src="/resources/js/registration.js"></script>
-<%--<script src="/resources/js/jquery-3.4.1.min.js"></script>--%>
 <%@ include file="footer.jsp" %>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
 </html>
-<!-- end document-->
