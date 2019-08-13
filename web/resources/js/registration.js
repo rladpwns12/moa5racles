@@ -92,7 +92,8 @@ var execDaumPostcode = function() {
             document.getElementById('postcode').value = data.zonecode;
             document.getElementById("address").value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("detailAddress").focus();
+            document.getElementById("detailAddress").focus()
+            console.log(data);
         }
     }).open({
         left: (window.screen.width / 2) - (width / 2),
@@ -101,23 +102,33 @@ var execDaumPostcode = function() {
 }
 
 function submit() {
-    let name = document.getElementById("name");
-    alert(name);
-    let nickname = document.getElementById("nickname");
-    alert(nickname);
-    let email = document.getElementById("email");
-    alert(email);
-    let password = document.getElementById("password");
-    alert(password);
-    let password2 = document.getElementById("password2");
-    alert(password2);
-    let phone = document.getElementById("phone");
-    alert(phone);
+    let name = $('#name').val();
+    let nickname = $('#nickname').val();
+    let email = $('#email').val();
+    let password = $('#password').val();
+    let phone = $('#phone').val();
     var postcode = $('#postcode').val();
-    alert(postcode);
     var address = $('#address').val();
-    alert(address);
     var detailAddress = $('#detailAddress').val();
-    alert(detailAddress);
+
+    let form= {
+        name, nickname
+    }
+
+    console.log(form);
+
+    $.ajax({
+        type: "POST",
+        url: "registerationForm",
+        data: form,
+
+        success(data) {
+            alert("success: " + data);
+        },
+        error: function() {
+            alert("error 발생");
+        }
+
+    });
 
 }
