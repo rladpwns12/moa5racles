@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.mybatis.TokenMapper">
+
+    <insert id="insertToken" parameterType="com.moa.model.vo.Token">
+        insert into persistent_login_tb (username, series, token) values (#{username}, #{series}, #{token})
+    </insert>
+
+    <update id="updateToken" parameterType="com.moa.model.vo.Token">
+        <if test="series neq null and token neq null and date neq null" >
+            update persistent_login_tb set
+                last_used = #{date},
+                token = #{token}
+            where series = #{series}
+        </if>
+    </update>
+
+    <resultMap id="searchOneTokenMap" type="com.moa.model.vo.Token">
+        <id property="username" column="username"  />
+        <id property="series" column="series"  />
+        <id property="token" column="token"  />
+        <id property="date" column="last_used"  />
+    </resultMap>
+
+    <select id="searchOneToken" parameterType="java.lang.String" resultMap="searchOneTokenMap">
+        select * from persistent_login_tb where series = #{series}
+    </select>
+
+    <delete id="deleteToken" parameterType="java.lang.String">
+        delete from persistent_login_tb where username = #{userName}
+    </delete>
+</mapper>
