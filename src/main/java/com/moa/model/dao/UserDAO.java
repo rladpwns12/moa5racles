@@ -15,4 +15,5 @@ public interface UserDAO {
     int updatePassword(Map<String,Object> updatePasswordInfo);
     int updateUser(Map<String,Object> updateUserInfo);
     int deleteUser(String email);
+
 }

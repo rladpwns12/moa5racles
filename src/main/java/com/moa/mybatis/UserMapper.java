@@ -16,4 +16,5 @@ public interface UserMapper {
     int updatePassword(Map<String,Object> updatePasswordInfo);
     void updateUser(Map<String,Object> updateUserInfo);
     int deleteUser(String email);
+
 }

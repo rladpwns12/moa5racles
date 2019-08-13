@@ -67,7 +67,6 @@
     }
 })(jQuery);
 
-//////////////////////추가
 var execDaumPostcode = function() {
     var width = 500;
     var height = 600;
@@ -92,7 +91,8 @@ var execDaumPostcode = function() {
             document.getElementById('postcode').value = data.zonecode;
             document.getElementById("address").value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("detailAddress").focus();
+            document.getElementById("detailAddress").focus()
+            console.log(data);
         }
     }).open({
         left: (window.screen.width / 2) - (width / 2),
@@ -101,23 +101,52 @@ var execDaumPostcode = function() {
 }
 
 function submit() {
-    let name = document.getElementById("name");
-    alert(name);
-    let nickname = document.getElementById("nickname");
-    alert(nickname);
-    let email = document.getElementById("email");
-    alert(email);
-    let password = document.getElementById("password");
-    alert(password);
-    let password2 = document.getElementById("password2");
-    alert(password2);
-    let phone = document.getElementById("phone");
-    alert(phone);
-    var postcode = $('#postcode').val();
-    alert(postcode);
-    var address = $('#address').val();
-    alert(address);
-    var detailAddress = $('#detailAddress').val();
-    alert(detailAddress);
+    let name = $('#name').val();
+    let nickname = $('#nickname').val();
+    let email = $('#email').val();
+    let password = $('#password').val();
+    let phone = $('#phone').val();
+    let postcode = $('#postcode').val();
+    let address = $('#address').val();
+    let detailAddress = $('#detailAddress').val();
+    //
+    let latitude = 14.02;
+    let longitude = 13.001;
 
+    if(isValid(name)) {
+        alert("이름을 입력하세요");
+
+        return;
+    }
+    if(isValid(nickname)) {
+        alert("닉네임을 입력하세요");
+
+        return;
+    }
+
+    let form= {
+        name, nickname, email, password, phone, postcode, address, detailAddress, latitude, longitude
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "registerationForm",
+        data: form,
+        success(data) {
+            alert("회원가입에 성공하셨습니다.")
+            alert(data);
+            $('#regForm')[0].reset();
+            location.href = "/login";
+        },
+        error: function() {
+            alert("회원가입에 실패하셨습니다.");
+        }
+    });
+}
+
+// 유효성 검사
+function isValid(input) {
+    if(input == null || input.trim() == "") {
+        return true;
+    }
 }

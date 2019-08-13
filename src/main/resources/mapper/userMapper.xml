@@ -59,8 +59,8 @@
         CALL PI_UPDATE_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
         #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.profile},#{res, mode=OUT, jdbcType=INTEGER })
     </select>
-
     <update id="deleteUser" parameterType="String">
         UPDATE user_tb SET del_flag = 'Y' WHERE email = #{email }
     </update>
+
 </mapper>
