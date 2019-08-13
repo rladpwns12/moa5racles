@@ -119,5 +119,5 @@ function submit() {
     alert(address);
     var detailAddress = $('#detailAddress').val();
     alert(detailAddress);
-
 }
+
