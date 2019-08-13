@@ -33,7 +33,7 @@ public class StoreBoardController {
     @RequestMapping(value="/Search" , method=  RequestMethod.POST)
     public @ResponseBody
     List<Object> hostSearch2(DetailOptionVO detail){
-        System.out.println("전송중....");
+        System.out.println("전송 캍"+detail.getCategory().get(0));
         List<Object> documents = storeBoard.search(detail);
         System.out.println(documents.get(1));
 
