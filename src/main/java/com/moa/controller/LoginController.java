@@ -1,9 +1,7 @@
 package com.moa.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
@@ -29,13 +27,30 @@ public class LoginController {
         return "registration";
     }
 
-    @RequestMapping("/registerationForm")
+    @RequestMapping(value="/registerationForm", method= RequestMethod.POST)
     @ResponseBody
-    public String registerationForm(
+    public boolean registerationForm(
             @RequestParam String name,
-            @RequestParam String nickname)
-    {
-        return "1";
+            @RequestParam String nickname,
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam String phone,
+            @RequestParam String postcode,
+            @RequestParam String address,
+            @RequestParam String detailAddress,
+            @RequestParam String latitude,
+            @RequestParam String longitude) {
+//        System.out.println(name);
+//        System.out.println(nickname);
+//        System.out.println(email);
+//        System.out.println(password);
+//        System.out.println(phone);
+//        System.out.println(postcode);
+//        System.out.println(address);
+//        System.out.println(detailAddress);
+//        System.out.println(latitude);
+//        System.out.println(longitude);
+        return true;
     }
 
     // 아이디, 비밀번호 찾기
