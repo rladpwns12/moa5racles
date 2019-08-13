@@ -32,33 +32,37 @@
 <body>
 <%@ include file="navbar.jsp" %>
 <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-    <img src="/resources/image/main/slide3.jpg"/>
+<%--    <img src="/resources/image/main/slide3.jpg"/>--%>
     <div class="wrapper wrapper--w680">
 
         <div class="card card-4">
             <div class="card-body">
-                <h2 class="title">Registration</h2>
-                <form method="POST">
+                <h2 class="title">회원가입</h2>
+                <form id="regForm" method="POST">
                     <div class="row row-space">
                         <div class="col-2">
+                            <label class="label">이름</label>
                             <div class="input-group">
-                                <label class="label">Name</label>
-                                <input id="name" class="input--style-4" type="text" name="name">
+                                <input id="name" class="input100 input--style-4" type="text" name="name">
+                                <span class="focus-input100"></span>
                             </div>
                         </div>
                         <div class="col-2">
+                            <label class="label">닉네임</label>
                             <div class="input-group">
-                                <label class="label">Nickname</label>
-                                <input id="nickname" class="input--style-4" type="text" name="nickname">
+                                <input id="nickname" class="input100 input--style-4" type="text" name="nickname">
+                                <span class="focus-input100"></span>
                             </div>
                         </div>
                     </div>
                     <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
-                                <label class="label">Email</label>
+                                <label class="label">이메일</label>
                                 <div class="input-group-icon">
-                                    <input id="email" class=" email input--style-4 js-datepicker" type="text" name="email">
+                                    <input id="email" class="email input100 input--style-4 js-datepicker" type="text"
+                                           name="email">
+                                    <span class="long focus-input100"></span>
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
@@ -66,30 +70,33 @@
                     </div>
                     <div class="row row-space">
                         <div class="col-2">
+                            <label class="label">비밀번호</label>
                             <div class="input-group">
-                                <label class="label">Password</label>
-                                <input id="password" class="input--style-4" type="password" name="password">
+                                <input id="password" class="input100 input--style-4" type="password" name="password">
+                                <span class="focus-input100"></span>
                             </div>
                         </div>
                         <div class="col-2">
+                            <label class="label">비밀번호 확인</label>
                             <div class="input-group">
-                                <label class="label">Repeat password</label>
-                                <input id="password2" class="input--style-4" type="password" name="password">
+                                <input id="password2" class="input100 input--style-4" type="password" name="password">
+                                <span class="focus-input100"></span>
                             </div>
                         </div>
                     </div>
                     <div class="row row-space">
                         <div class="col-2">
+                            <label class="label">휴대폰 번호</label>
                             <div class="input-group">
-                                <label class="label">Phone Number</label>
-                                <input id="phone" class="input--style-4" type="text" name="phone">
+                                <input id="phone" class="input100 input--style-4" type="text" name="phone">
+                                <span class="focus-input100"></span>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
-                                <label class="label">Identification</label>
+                                <label class="label">휴대폰 인증</label>
                                 <button id="identification" class="btn btn--radius-2 btn--purple" type="button">
-                                    identification
+                                    휴대폰 인증
                                 </button>
                             </div>
                         </div>
@@ -98,18 +105,19 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <div class="search_address_btn">
-                                    <label class="label">PostCode</label>
+                                    <label class="label">우편번호</label>
                                     <input type="text" id="postcode" class="input--style-4" name="postcode"
-                                           placeholder="우편번호를 입력하세요.">
+                                           readonly disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <div class="search_address_btn">
-                                    <label class="label">Address Number</label>
+                                    <label class="label">우편번호 찾기</label>
                                     <button type="button" id="search_address_btn" class="btn btn--radius-2 btn--purple"
-                                            onclick="execDaumPostcode()" value="우편번호 찾기" > Search Number </button>
+                                            onclick="execDaumPostcode()" value="우편번호 찾기"> 우편번호 찾기
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -119,19 +127,22 @@
                             <div class="input-group">
                                 <div class="search_address_btn">
                                     <input type="text" id="address" class="input--style-4" name="address"
-                                           placeholder="주소를 입력하세요.">
-                                    <input type="text" id="detailAddress" class="input--style-4" name="detailAddress"
-                                           placeholder="상세주소를 입력하세요.">
-                                    <input type="hidden" id="latitude" class="input--style-4" name="latitude">
-                                    <input type="hidden" id="longitude" class="input--style-4" name="longitude">
+                                           disabled readonly>
                                 </div>
+                                <div class="long search_address_btn">
+                                    <input type="text" id="detailAddress" class="input100 input--style-4" name="detailAddress"
+                                           placeholder="상세주소를 입력하세요">
+                                    <span class="move long focus-input100"></span>
+                                </div>
+                                <input type="hidden" id="latitude" class="input--style-4" name="latitude">
+                                <input type="hidden" id="longitude" class="input--style-4" name="longitude">
                             </div>
                         </div>
                     </div>
-                    <div class="p-t-15">
-                        <button class="btn btn--radius-2 btn--purple" type="submit" onclick="submit()">Submit</button>
-                    </div>
                 </form>
+                <div class="p-t-15">
+                    <button class="btn btn--radius-2 btn--purple" type="submit" onclick="submit()">회원가입</button>
+                </div>
             </div>
         </div>
     </div>
@@ -152,4 +163,3 @@
 
 </html>
 <!-- end document-->
-

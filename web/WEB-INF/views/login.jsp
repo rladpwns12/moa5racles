@@ -40,15 +40,15 @@
 
 <div class="limiter">
     <div class="container-login100">
-        <img src="/resources/image/main/slide3.jpg"/>
+<%--        <img src="/resources/image/main/slide3.jpg"/>--%>
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
             <form class="login100-form validate-form flex-sb flex-w">
 					<span class="login100-form-title p-b-32">
-						Login
+						로그인
 					</span>
 
                 <span class="txt1 p-b-11">
-						Email
+						이메일
 					</span>
                 <div class="wrap-input100 validate-input m-b-36" data-validate="Username is required">
                     <input class="input100" type="text" name="username">
@@ -56,7 +56,7 @@
                 </div>
 
                 <span class="txt1 p-b-11">
-						Password
+						비밀번호
 					</span>
                 <div class="wrap-input100 validate-input m-b-12" data-validate="Password is required">
 						<span class="btn-show-pass">
@@ -70,20 +70,28 @@
                     <div class="contact100-form-checkbox">
                         <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                         <label class="label-checkbox100" for="ckb1">
-                            Remember me
+                            로그인 상태 유지
                         </label>
                     </div>
 
                     <div>
                         <a href="#" class="txt3">
-                            Forgot Password?
+                            아이디 찾기
+                        </a>
+                        /
+                        <a href="#" class="txt3">
+                            비밀번호 찾기
+                        </a>
+                        /
+                        <a href="#" class="txt3">
+                            회원가입
                         </a>
                     </div>
                 </div>
 
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
-                        Login
+                        로그인
                     </button>
                 </div>
 
@@ -114,4 +122,3 @@
 
 </body>
 </html>
-

@@ -68,9 +68,5 @@
             $(this).find('i').addClass('fa-eye');
             showPass = 0;
         }
-        
     });
-    
-
 })(jQuery);
-
