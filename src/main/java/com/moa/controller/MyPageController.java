@@ -1,6 +1,7 @@
 package com.moa.controller;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.moa.message.MessengerStateMessage;
 import com.moa.model.service.LuggageRequestInfoService;
 import com.moa.model.service.LuggageRequestRecordService;
@@ -10,6 +11,8 @@ import com.moa.model.vo.MessageVO;
 import com.moa.model.vo.ReadStoreRequestVO;
 import com.moa.model.vo.SimpleUserInfoVO;
 import com.moa.paging.Pagination;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -252,6 +256,40 @@ public class MyPageController {
     @RequestMapping("/message/read/{messageNumber}")
     public boolean messageRead(@PathVariable int messageNumber){
         return messengerListService.messageRead(messageNumber);
+    }
+    @ResponseBody
+    @RequestMapping(value = {"/message/receive/delete"}, method = RequestMethod.POST)
+    public boolean messageReceiveDelete(@RequestBody List<String> deleteList){
+
+        int size = deleteList.size();
+        List<Integer> deleteNum = new ArrayList<Integer>();
+
+        for(int i = 0; i < size; i++){
+            deleteNum.add(Integer.parseInt(deleteList.get(i)));
+        }
+        Map<String,Object> deleteInfo = new HashMap<String, Object>();
+        deleteInfo.put("messageType","receive");
+        deleteInfo.put("list",deleteNum);
+
+        boolean result = messengerListService.messageDelete(deleteInfo);
+        return result;
+    }
+    @ResponseBody
+    @RequestMapping(value = {"/message/send/delete"}, method = RequestMethod.POST)
+    public boolean messageSendDelete(@RequestBody List<String> deleteList){
+
+        int size = deleteList.size();
+        List<Integer> deleteNum = new ArrayList<Integer>();
+
+        for(int i = 0; i < size; i++){
+            deleteNum.add(Integer.parseInt(deleteList.get(i)));
+        }
+        Map<String,Object> deleteInfo = new HashMap<String, Object>();
+        deleteInfo.put("messageType","send");
+        deleteInfo.put("list",deleteNum);
+
+        boolean result = messengerListService.messageDelete(deleteInfo);
+        return result;
     }
 
 

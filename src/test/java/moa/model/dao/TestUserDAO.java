@@ -13,8 +13,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations ={
@@ -59,6 +64,7 @@ public class TestUserDAO {
 
         System.out.println(dao.signUpUser(testMap));
     }
+
     @Test
     public void TEST_이메일_찾기_성공(){
         Map<String,Object> testMap = new HashMap<String, Object>();
@@ -137,5 +143,61 @@ public class TestUserDAO {
         testMap.put("res",a);
 
         assertEquals(0,dao.updateUser(testMap));
+
+
+    @Test
+    public void TEST_닉네임_중복체크_중복있음(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("nick","테스트닉5");
+
+        assertTrue(dao.signUpDuplicationCheck(testMap));
+    }
+
+    @Test
+    public void TEST_닉네임_중복체크_중복없음(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("nick","테스트닉500");
+
+        assertFalse(dao.signUpDuplicationCheck(testMap));
+    }
+
+    @Test
+    public void TEST_이메일_중복체크_중복있음(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("email","cms3136@gmail.com");
+
+        assertTrue(dao.signUpDuplicationCheck(testMap));
+    }
+
+    @Test
+    public void TEST_이메일_중복체크_중복없음(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("email","cmsasdas@gmail.com");
+
+        assertFalse(dao.signUpDuplicationCheck(testMap));
+    }
+    @Test
+    public void TEST_이메일_닉네임_중복체크_성공(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("email","tt1@naver.com");
+        testMap.put("nick","테스트닉1");
+
+        assertTrue(dao.signUpDuplicationCheck(testMap));
+    }
+    @Test
+    public void TEST_이메일_닉네임_중복체크_실패01(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("email","cmsasdas3136@gmail.com");
+        testMap.put("nick","테스트닉1");
+
+        assertFalse(dao.signUpDuplicationCheck(testMap));
+    }
+    @Test
+    public void TEST_이메일_닉네임_중복체크_실패02(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("email","cmsasdas3136@gmail.com");
+        testMap.put("nick","테스트닉1231231");
+
+        assertFalse(dao.signUpDuplicationCheck(testMap));
     }
  }
