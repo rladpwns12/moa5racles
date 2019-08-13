@@ -49,8 +49,7 @@
                                     onclick="sendPopup()">
                                 메세지 작성
                             </button>
-                            <button id="delete_btn"type="button" name="button"
-                                    onclick="location.href='${contextPath}/moa/keep'">
+                            <button id="delete_btn"type="button" name="button">
                                 삭제
                             </button>
                         </th>
@@ -76,7 +75,7 @@
                             <c:forEach var="i" begin="0" end="${pagination.curListCnt}" step="1" items="${messageVOList}">
                                 <c:if test="${i.readState == 0}">
                                     <tr>
-                                        <td><input type="checkbox" value="${i.messageId}"></td>
+                                        <td><input type="checkbox" name="chk" value="${i.messageId}"></td>
                                         <td style="font-weight: bold;"><i class="far fa-envelope"></i></td>
                                         <td style="font-weight: bold;">${i.senderNick}</td>
                                         <c:if test="${fn:length(i.content) > 35}">
@@ -91,7 +90,7 @@
                                 </c:if>
                                 <c:if test="${i.readState == 1}">
                                     <tr>
-                                        <td><input type="checkbox" value="${i.messageId}"></td>
+                                        <td><input type="checkbox" name="chk"  value="${i.messageId}"></td>
                                         <td><i class="far fa-envelope-open"></i></td>
                                         <td>${i.senderNick}</td>
                                         <c:if test="${fn:length(i.content) > 30}">
