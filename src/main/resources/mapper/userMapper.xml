@@ -20,7 +20,7 @@
     </select>
 
     <select id="selectUserExist" parameterType="String" resultType="Integer">
-        select count(*) as exist from user_tb where nickname = #{userNick}
+        select count(*) as exist from user_tb where  nickname = #{userNick}
     </select>
 
     <select id="checkLogin" parameterType="hashMap" resultType="com.moa.model.vo.LoginVO">
@@ -47,4 +47,17 @@
         CALL PI_INSERT_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
         #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.nick},#{UserVO.name},'profile.png',#{res, mode=OUT, jdbcType=INTEGER })
     </select>
+    
+    <select id="findEmail" parameterType="hashMap" resultType="String">
+        SELECT email FROM login_view WHERE auth='ROLE_USER'
+        AND PHONENUMBER LIKE #{phoneNumber}||'%' AND name = #{name}
+    </select>
+    <update id="updatePassword" parameterType="hashMap">
+        UPDATE user_tb SET user_pw = #{password} WHERE email = #{email}
+    </update>
+    <select id="updateUser" statementType="CALLABLE" parameterType="hashMap">
+        CALL PI_UPDATE_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
+        #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.profile},#{res, mode=OUT, jdbcType=INTEGER })
+    </select>
+
 </mapper>
