@@ -20,7 +20,7 @@
         <div class="card card-4">
             <div class="card-body">
                 <h2 class="title">회원가입</h2>
-                <form id="regForm" method="POST">
+                <form id="regForm">
                     <div class="row row-space">
                         <div class="col-2">
                             <label class="label">이름</label>
@@ -88,7 +88,7 @@
                             <div class="input-group">
                                 <div class="search_address_btn">
                                     <label class="label">우편번호</label>
-                                    <input type="text" id="postcode" class="input--style-4" name="postcode"
+                                    <input type="text" id="postcode" class="input100 input--style-4" name="postcode"
                                            readonly disabled>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                     </div>
                 </form>
                 <div class="p-t-15">
-                    <button class="btn btn--radius-2 btn--purple" type="submit" onclick="submit()">회원가입</button>
+                    <button class="btn btn--radius-2 btn--purple" type="button" onclick="submit()">회원가입</button>
                 </div>
             </div>
         </div>

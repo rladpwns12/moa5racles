@@ -116,14 +116,6 @@ h6 {
     background: linear-gradient(to top, #fbc2eb 0%, #a18cd1 100%);
 }
 
-.p-t-100 {
-    padding-top: 100px;
-}
-
-.p-t-130 {
-    padding-top: 130px;
-}
-
 .p-t-180 {
     padding-top: 180px;
 }
@@ -270,8 +262,8 @@ input {
     font-size: 14px;
 }
 
-.email {
-    width: 550px;
+.input100 {
+    width: 200px;
 }
 
 .input--style-4 {
@@ -535,8 +527,8 @@ input {
     width: 260px;
 }
 
-#address, #detailAddress {
-    width: 550px;
+#email, #address, #detailAddress {
+    width: 500px;
     margin-bottom: 5px;
 }
 
