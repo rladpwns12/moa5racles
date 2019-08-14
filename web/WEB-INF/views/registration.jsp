@@ -15,7 +15,7 @@
 
 <body>
 <%@ include file="navbar.jsp" %>
-<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+<div class="page-wrapper bg-gra-02 p-b-100 font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
             <div class="card-body">
@@ -32,7 +32,8 @@
                         <div class="col-2">
                             <label class="label">닉네임</label>
                             <div class="input-group">
-                                <input id="nickname" class="input100 input--style-4" type="text" name="nickname">
+                                <input id="nickname" class="input100 input--style-4" type="text" name="nickname"
+                                       onfocus="emptyNickname()">
                                 <span class="focus-input100"></span>
                             </div>
                         </div>
@@ -43,7 +44,7 @@
                                 <label class="label">이메일</label>
                                 <div class="input-group-icon">
                                     <input id="email" class="email input100 input--style-4 js-datepicker" type="text"
-                                           name="email">
+                                           name="email" onfocus="emptyEmail()">
                                     <span class="long focus-input100"></span>
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
@@ -89,7 +90,7 @@
                                 <div class="search_address_btn">
                                     <label class="label">우편번호</label>
                                     <input type="text" id="postcode" class="input100 input--style-4" name="postcode"
-                                           readonly disabled>
+                                           readonly>
                                 </div>
                             </div>
                         </div>

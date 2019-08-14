@@ -53,6 +53,21 @@ public class LoginController {
         return true;
     }
 
+    //회원가입 중복 검사
+    @RequestMapping(value="/checkNickname", method= RequestMethod.POST)
+    public @ResponseBody boolean checkNickname(@RequestParam String nickname) {
+
+
+        return true;
+    }
+
+    @RequestMapping(value="/checkEmail", method= RequestMethod.POST)
+    public @ResponseBody boolean checkEmail(@RequestParam String email) {
+
+
+        return false;
+    }
+
     // 아이디, 비밀번호 찾기
     @RequestMapping("/searchId")
     public String searchId() {

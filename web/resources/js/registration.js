@@ -139,34 +139,34 @@ function submit() {
 function isValid(input) {
     if (!isNameValid(input.name)) {
         $("#name").focus();
-        return;
+        return false;
     }
     if (!isNicknameValid(input.nickname)) {
         $("#nickname").focus();
-        return;
+        return false;
     }
     if (!isEmailValid(input.email)) {
         $("#email").focus();
-        return;
+        return false;
     }
     if (!isPasswordValid(input.password)) {
         $("#password").focus();
-        return;
+        return false;
     }
     if (!isPassword2Valid(input.password2, input.password)) {
         $("#password2").focus();
-        return;
+        return false;
     }
     if (!isPhoneValid(input.phone)) {
         $("#phone").focus();
-        return;
+        return false;
     }
     if (!isPostcodeValid(input.postcode)) {
-        return;
+        return false;
     }
     if (!isDetailAddressValid(input.detailAddress)) {
         $("#detailAddress").focus();
-        return;
+        return false;
     }
     return true;
 }
@@ -194,17 +194,26 @@ function isNicknameValid(input) {
         alert("닉네임이 너무 깁니다");
         return false;
     }
+    if($('#nickname').val()=="닉네임이 중복됩니다") {
+        alert("새로운 닉네임을 입력해주세요");
+        $('#nickname').val("");
+        return false;
+    }
     return true;
 }
 
 function isEmailValid(input) {
     if (!emptyCheck(input)) {
         alert("이메일을 입력하세요");
-        $("#email").val("");
         return false;
     }
     if (getByteLength(input) > 60) {
         alert("이메일이 너무 깁니다");
+        return false;
+    }
+    if($('#email').val()=="이메일이 중복됩니다") {
+        alert("새로운 이메일을 입력해주세요");
+        $('#email').val("");
         return false;
     }
     let emailValid = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
@@ -310,4 +319,57 @@ function getByteLength(input) {
         }
     }
     return byte;
+}
+
+$('#nickname').focusout(function () {
+    let nickname = $("#nickname").val();
+    $.ajax({
+        type: "POST",
+        url: "checkNickname",
+        data: {nickname},
+        cache: false,
+        success(data) {
+            if (data) {
+                $('#nickname').css('border', 'solid 2px green');
+            } else {
+                $('#nickname').css('border', 'solid 2px red');
+                $('#nickname').val("닉네임이 중복됩니다");
+            }
+        },
+        error() {
+            console.log("전송 오류");
+        }
+    });
+});
+
+$('#email').focusout(function () {
+    let email = $("#email").val();
+    $.ajax({
+        type: "POST",
+        url: "checkEmail",
+        data: {email},
+        cache: false,
+        success(data) {
+            if (data) {
+                $('#email').css('border', 'solid 2px green');
+            } else {
+                $('#email').css('border', 'solid 2px red');
+                $('#email').val("이메일이 중복됩니다");
+            }
+        },
+        error() {
+            console.log("전송 오류");
+        }
+    });
+});
+
+function emptyNickname() {
+    if ($('#nickname').val() == "닉네임이 중복됩니다") {
+        $('#nickname').val("");
+    }
+}
+
+function emptyEmail() {
+    if ($('#email').val() == "이메일이 중복됩니다")
+        $('#email').val("");
 }
