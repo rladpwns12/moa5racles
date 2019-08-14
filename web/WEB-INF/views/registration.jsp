@@ -13,6 +13,7 @@
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 </head>
 
 <body>
@@ -24,14 +25,14 @@
                 <h2 class="title">회원가입</h2>
                 <div class="row row-space">
                     <div class="col-2">
-                        <label class="label">이름</label>
+                        <label class="label">이름을 입력해주세요</label>
                         <div class="input-group">
                             <input id="name" class="input100 input--style-4" type="text" name="name">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
                     <div class="col-2">
-                        <label class="label">닉네임</label>
+                        <label class="label">닉네임을 입력해주세요</label>
                         <div class="input-group">
                             <input id="nickname" class="input100 input--style-4" type="text" name="nickname"
                                    onfocus="emptyNickname()">
@@ -42,7 +43,7 @@
                 <div class="row row-space">
                     <div class="col-2">
                         <div class="input-group">
-                            <label class="label">이메일</label>
+                            <label class="label">이메일을 입력해주세요</label>
                             <div class="input-group-icon">
                                 <input id="email" class="email input100 input--style-4 js-datepicker" type="text"
                                        name="email" onfocus="emptyEmail()">
@@ -54,14 +55,14 @@
                 </div>
                 <div class="row row-space">
                     <div class="col-2">
-                        <label class="label">비밀번호</label>
+                        <label class="label">비밀번호를 입력해주세요</label>
                         <div class="input-group">
                             <input id="password" class="input100 input--style-4" type="password" name="password">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
                     <div class="col-2">
-                        <label class="label">비밀번호 확인</label>
+                        <label class="label">비밀번호를 다시 한번 입력해주세요</label>
                         <div class="input-group">
                             <input id="password2" class="input100 input--style-4" type="password" name="password">
                             <span class="focus-input100"></span>
@@ -70,9 +71,9 @@
                 </div>
                 <div class="row row-space">
                     <div class="col-2">
-                        <label class="label">휴대폰 번호</label>
+                        <label class="label">휴대폰 인증 버튼을 눌려주세요</label>
                         <div class="input-group">
-                            <input id="phone" class="input100 input--style-4" type="text" name="phone">
+                            <input id="phone" class="input--style-4" type="text" name="phone" readonly>
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -91,16 +92,14 @@
                             </form>
                         </div>
                     </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <div class="search_address_btn">
-                                    <label class="label">우편번호</label>
-                                    <input type="text" id="postcode" class="input100 input--style-4" name="postcode"
-                                           readonly>
-                                    <input type="text" id="lat" style="display:none">
-                                    <input type="text" id="lng" style="display:none">
-                                </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="search_address_btn">
+                                <label class="label">우편번호 찾기 버튼을 눌러주세요</label>
+                                <input type="text" id="postcode" class="input100 input--style-4" name="postcode"
+                                       readonly>
                             </div>
                         </div>
                     </div>
@@ -120,19 +119,31 @@
                         <div class="input-group">
                             <div class="search_address_btn">
                                 <input type="text" id="address" class="input--style-4" name="address"
-                                       disabled readonly>
+                                       readonly>
                             </div>
                             <div class="long search_address_btn">
+                                <label class="label">상세 주소를 입력해주세요</label>
                                 <input type="text" id="detailAddress" class="input100 input--style-4"
                                        name="detailAddress"
                                        placeholder="상세주소를 입력하세요">
                                 <span class="move long focus-input100"></span>
                             </div>
-                            <input type="hidden" id="latitude" class="input--style-4" name="latitude">
-                            <input type="hidden" id="longitude" class="input--style-4" name="longitude">
+                            <input type="hidden" id="lat" class="input--style-4" name="latitude">
+                            <input type="hidden" id="lng" class="input--style-4" name="longitude">
                         </div>
                     </div>
                 </div>
+                <div class="add_m_t row row-space">
+                    <input type="checkbox" id="confirm1"/>
+                    <label for="confirm1" class="confirm">&nbsp;&nbsp;MOA 이용약관 동의</label>
+                    <a href="#" class="agree"> [이용약관 보기] </a>
+                </div>
+                <div class="add_m_t row row-space">
+                    <input type="checkbox" id="confirm2"/>
+                    <label for="confirm2" class="confirm">&nbsp;&nbsp;위치정보 이용약관 동의</label>
+                    <a href="#" class="agree"> [이용약관 보기] </a>
+                </div>
+
                 <div class="p-t-15">
                     <button class="btn btn--radius-2 btn--purple" type="button" onclick="submit()">회원가입</button>
                 </div>
