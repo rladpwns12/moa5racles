@@ -11,7 +11,6 @@ public class LoginController {
     // 로그인
     @RequestMapping(value = "/login")
     public String loginPage() {
-        System.out.println("로그인 접속중");
         return "login";
     }
 
