@@ -157,7 +157,6 @@ $(document).ready(function() {			//실행시
 			}
 		}).done(function(data)
 			{
-				console.log("검색정보"+data.documents);
 				if(data.documents=="")		//만일 검색결과가 없을시
 				{
 				alert("검색된 정보가 없습니다");
@@ -189,7 +188,6 @@ $(document).ready(function() {			//실행시
 			if($('#ct'+iv).prop('checked'))
 				catAry[i++]=($('#ct'+iv).val());
 		}
-		console.log(catAry);
 		jQuery.ajaxSettings.traditional = true;
 		let form={
 			category:catAry,
@@ -203,7 +201,6 @@ $(document).ready(function() {			//실행시
 			latitude:lan,
 			longitude:log
 		}
-		console.log(form);
 		 $('#selection_content_id1').empty();
 		 //요주의!!!!
 			var token = $("meta[name='_csrf']").attr("content");
@@ -219,10 +216,6 @@ $(document).ready(function() {			//실행시
 		 }).then(function(data,status){
 		if(status=="success"){
 			var positions = new Array();
-				console.log(data);
-				console.log(data[0].articleNum);
-				console.log(data[0].distanceResult);
-
 			 for(let i=0;i<data.length;i++){
 				let div = $('<div />', {id:"article"+data[i].articleNum,class : 'room_select',onclick:"roomSelect("+data[i].articleNum+");"}).appendTo($('#selection_content_id1'));
 				$('<img/>',{src:"/resources/image/hostSearch/"+data[i].pictureName}).appendTo(div);
