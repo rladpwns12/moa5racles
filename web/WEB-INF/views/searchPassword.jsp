@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,7 @@
     <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
+    <sec:csrfMetaTags/>
 </head>
 
 <body>
@@ -42,7 +44,8 @@
                     <div class="col-2">
                         <label class="short label">휴대폰 인증 버튼을 눌러주세요</label>
                             <div class="input-group">
-                                <input id="phone" class="short2 input100 input--style-4" type="text" name="phone" readonly>
+                                <input id="phone" class="short2 input100 input--style-4" type="text" name="phone">
+                                <span class="focus-input100"></span>
                             </div>
                         </div>
                     <div class="col-2">

@@ -1,17 +1,40 @@
 function submit() {
-    if (!isValid()) {
+    if (!isValid())
         return;
-    }
 
-    alert("유효성 검사 성공");
-    //전송 구현 필요
+    let name = $('#name').val();
+    let phone = $('#phone').val();
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $.ajax({
+        type: "POST",
+        url: "searchId",
+        data: {name, phone},
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
+        success(data) {
+            alert(data);
+            if (data != null) {
+                alert("회원님의 아이디는: " + data + " 입니다");
+                window.close();
+            } else {
+                alert("아이디 찾기에 실패하셨습니다");
+            }
+        }, error: function (request, status, error) {
+            console.log("전송 오류");
+        }
+    });
 }
 
 function isValid() {
-    if(!isNameValid()) {
+    if (!isNameValid()) {
         return false;
     }
-    if(!isPhoneValid()) {
+    if (!isPhoneValid()) {
         return false;
     }
     return true;

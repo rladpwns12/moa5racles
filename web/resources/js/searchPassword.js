@@ -3,18 +3,45 @@ function submit() {
         return;
     }
 
-    alert("유효성 검사 성공");
+    let name = $('#name').val();
+    let email = $('#email').val();
+    let phone = $('#phone').val();
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $.ajax({
+        type: "POST",
+        url: "searchPassword",
+        data: {name, email, phone},
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
+        success(data) {
+            alert(data);
+            if (data == "success") {
+                alert("Password found");
+            } else {
+                alert("비밀번호 찾기에 실패하셨습니다");
+            }
+        }, error() {
+            console.log("전송 오류");
+        }
+
+    })
+
     //전송 구현 필요
 }
 
 function isValid() {
-    if(!isNameValid()) {
+    if (!isNameValid()) {
         return false;
     }
-    if(!isEmailValid()) {
+    if (!isEmailValid()) {
         return false;
     }
-    if(!isPhoneValid()) {
+    if (!isPhoneValid()) {
         return false;
     }
     return true;
