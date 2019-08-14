@@ -10,6 +10,7 @@
     <meta name="keywords" content="Colorlib Templates">
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
 </head>
 
@@ -23,7 +24,6 @@
 
             <div class="add_margin card-body">
                 <h2 class="title">아이디 찾기</h2>
-                <form id="regForm" method="POST">
                     <div class="row row-space">
                         <div class="col-2">
                             <label class="label">이름을 입력하세요</label>
@@ -48,15 +48,20 @@
                         <div class="col-2">
                             <div class="input-group">
 
-                                <label class="short label">휴대폰 인증</label>
-                                <button id="identification" class="btn btn--radius-2 btn--purple" type="button">
+                                <form method="get" action="https://www.accountkit.com/v1.0/basic/dialog/sms_login/">
+                                    <input type="hidden" name="app_id" value="2291269470991007">
+                                    <input type="hidden" name="redirect" value="http://localhost:8089/searchId">
+                                    <input type="hidden" name="state" value="112133">
+                                    <input type="hidden" name="fbAppEventsEnabled" value=true>
+                                    <input type="hidden" name="debug" value=true>
+                                <button id="identification" class="btn btn--radius-2 btn--purple" type="submit">
                                     휴대폰 인증
                                 </button>
+                                </form>
                             </div>
                         </div>
 
                     </div>
-                </form>
                 <div class="p-t-15">
                     <button class="short btn btn--radius-2 btn--purple" type="submit">아이디 찾기</button>
                 </div>
