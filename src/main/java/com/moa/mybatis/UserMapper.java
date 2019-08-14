@@ -1,5 +1,6 @@
 package com.moa.mybatis;
 
+import com.moa.model.vo.AddressVO;
 import com.moa.model.vo.LoginVO;
 import com.moa.model.vo.SimpleUserInfoVO;
 
@@ -15,4 +16,5 @@ public interface UserMapper {
     String findEmail(Map<String,Object> findEmailInfo );
     int updatePassword(Map<String,Object> updatePasswordInfo);
     void updateUser(Map<String,Object> updateUserInfo);
+    AddressVO searchAddress(int userId);
 }

@@ -16,20 +16,21 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+
             <form class="login100-form validate-form flex-sb flex-w">
 					<span class="login100-form-title p-b-32">
 						로그인
 					</span>
                 <span class="txt1 p-b-11">
-						이메일
-					</span>
+                  이메일
+               </span>
                 <div class="wrap-input100 validate-input m-b-36" data-validate="Username is required">
                     <input class="l_i input100" type="text" name="username">
                     <span class="focus-input100"></span>
                 </div>
                 <span class="txt1 p-b-11">
-						비밀번호
-					</span>
+                  비밀번호
+               </span>
                 <div class="wrap-input100 validate-input m-b-12" data-validate="Password is required">
 						<span class="btn-show-pass">
 							<i class="fa fa-eye"></i>
