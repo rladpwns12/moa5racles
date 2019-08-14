@@ -27,8 +27,7 @@ public class LoginController {
 
     @RequestMapping(value="")
     public String loginPage(String error, String logout, Model model){
-        System.out.println(error);
-        System.out.println(logout);
+        System.out.println("loginPage()...");
         return "login";
     }
 

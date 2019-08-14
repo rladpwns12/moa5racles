@@ -7,6 +7,7 @@ import com.moa.model.vo.LoginVO;
 import com.moa.model.vo.SimpleUserInfoVO;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,7 +41,11 @@ public class MemberInfoServiceImpl implements MemberInfoService, UserDetailsServ
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         LoginVO loginVO = userDAO.checkLogin(email);
-        return loginVO == null ? null : new CustomUser(loginVO);
+        System.out.println("loadUserByUsername");
+        if(loginVO==null) {
+            throw new InternalAuthenticationServiceException(email);
+        }
+        return new CustomUser(loginVO);
     }
 
 }

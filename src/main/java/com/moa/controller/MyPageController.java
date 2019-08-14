@@ -15,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Controller
@@ -42,7 +40,13 @@ public class MyPageController {
         userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
         SimpleUserInfoVO simpleUserInfoVO = memberInfoService.selectMemberInfo(userId);
-        mav.addObject("profileName", simpleUserInfoVO.getProfileName());
+        System.out.println(simpleUserInfoVO);
+        if(simpleUserInfoVO.getProfileName() == null){
+            mav.addObject("profileName", "profile.png");
+        }
+        else {
+            mav.addObject("profileName", simpleUserInfoVO.getProfileName());
+        }
         mav.addObject("userName", simpleUserInfoVO.getName());
         mav.addObject("userEmail", simpleUserInfoVO.getEmail());
         mav.addObject("requestCnt", simpleUserInfoVO.getRequestCnt());
@@ -84,7 +88,7 @@ public class MyPageController {
         return requestVO;
     }
 
-    @RequestMapping(value = {"/message/receive","/message"})
+    @RequestMapping(value = {"/WEB-INF/message/receive", "/WEB-INF/message"})
     public ModelAndView message(Authentication auth){
         ModelAndView mav = new ModelAndView();
         int userId;
@@ -111,7 +115,7 @@ public class MyPageController {
 
         return mav;
     }
-    @RequestMapping("/message/receive/{curPage}")
+    @RequestMapping("/WEB-INF/message/receive/{curPage}")
     public ModelAndView messageCurPage(Authentication auth,
                                        @PathVariable int curPage){
         int userId;
@@ -145,7 +149,7 @@ public class MyPageController {
 
     //보낸 메세지
 
-    @RequestMapping("/message/send")
+    @RequestMapping("/WEB-INF/message/send")
     public ModelAndView messageSendCurPage(Authentication auth){
         int userId;
         ModelAndView mav = new ModelAndView();
@@ -173,7 +177,7 @@ public class MyPageController {
 
         return mav;
     }
-    @RequestMapping("/message/send/{curPage}")
+    @RequestMapping("/WEB-INF/message/send/{curPage}")
     public ModelAndView messageSend(Authentication auth,
                                     @PathVariable int curPage){
         int userId;
@@ -205,7 +209,7 @@ public class MyPageController {
         return mav;
     }
     //메시지 상세보기
-    @RequestMapping("/message/send/detail/{messageNum}")
+    @RequestMapping("/WEB-INF/message/send/detail/{messageNum}")
     public ModelAndView messageSendDetail(@PathVariable int messageNum){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageDetail");
@@ -214,7 +218,7 @@ public class MyPageController {
         mav.addObject("messageType","send");
         return mav;
     }
-    @RequestMapping("/message/receive/detail/{messageNum}")
+    @RequestMapping("/WEB-INF/message/receive/detail/{messageNum}")
     public ModelAndView messageReceiveDetail(@PathVariable int messageNum){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageDetail");
@@ -223,7 +227,7 @@ public class MyPageController {
         mav.addObject("messageType","receive");
         return mav;
     }
-    @RequestMapping(value = {"/message/submit"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/WEB-INF/message/submit"}, method = RequestMethod.GET)
     public ModelAndView messageSubmitForm(Authentication auth){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageSendDetail");
@@ -235,14 +239,14 @@ public class MyPageController {
         return mav;
     }
     @ResponseBody
-    @RequestMapping(value = {"/message/sendmessage"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/WEB-INF/message/sendmessage"}, method = RequestMethod.POST)
     public boolean messageSubmit(@RequestBody Map<String,Object> messageSendInfo){
         if(memberInfoService.checkExistUser((String)messageSendInfo.get("receiverNick"))==false){
             return false;
         }
         return messengerListService.messageSend(messageSendInfo);
     }
-    @RequestMapping(value = {"/message/submit/{receiverNick}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/WEB-INF/message/submit/{receiverNick}"}, method = RequestMethod.GET)
     public ModelAndView messageReply(@PathVariable String receiverNick, Authentication auth){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageSendDetail");
@@ -258,12 +262,12 @@ public class MyPageController {
     }
 
     @ResponseBody
-    @RequestMapping("/message/read/{messageNumber}")
+    @RequestMapping("/WEB-INF/message/read/{messageNumber}")
     public boolean messageRead(@PathVariable int messageNumber){
         return messengerListService.messageRead(messageNumber);
     }
     @ResponseBody
-    @RequestMapping(value = {"/message/receive/delete"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/WEB-INF/message/receive/delete"}, method = RequestMethod.POST)
     public boolean messageReceiveDelete(@RequestBody List<String> deleteList){
 
         int size = deleteList.size();
@@ -280,7 +284,7 @@ public class MyPageController {
         return result;
     }
     @ResponseBody
-    @RequestMapping(value = {"/message/send/delete"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/WEB-INF/message/send/delete"}, method = RequestMethod.POST)
     public boolean messageSendDelete(@RequestBody List<String> deleteList){
 
         int size = deleteList.size();

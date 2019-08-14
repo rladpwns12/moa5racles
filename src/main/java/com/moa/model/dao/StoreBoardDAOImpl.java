@@ -156,6 +156,7 @@ public class StoreBoardDAOImpl implements StoreBoardDAO {
     public StoreBoardVO searchOne(int articleNum) {
         StoreBoardMapper mapper=sqlSession_oracle.getMapper(StoreBoardMapper.class);
         Map<String,Object> map=mapper.selectOne(articleNum);
+
         StoreBoardVO vo=new StoreBoardVO();
 
         vo.setArticleNum(articleNum);

@@ -56,7 +56,6 @@
 			</div>
 
 			<form id="regForm" class="regForm">
-				<input type="hidden" id="hostId" name="hostId" value="${hostId}"/>
 				<div class="content0" id="content0">
 					<h2 class="head_0">보관 장소를 선택해주세요</h2>
 					<div class="storage_type">

@@ -1,15 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2019-08-03
-  Time: 오후 2:14
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="com.moa.model.vo.*" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="articlesList" value="${articlesMap.articlesList}"/>
@@ -103,7 +97,12 @@
 <div class="wrap" id="wrap">
     <div class="wrap_header">
         <div class="title" id="title"><c:out value="${storeBoardVO.title}"></c:out></div>
-        <button class="delete_btn moabtn" id="delete_btn">삭제</button>
+        <sec:authentication property="principal" var="customVO" />
+            <sec:authorize access="isAuthenticated()" >
+                <c:if test="${customVO.loginVO.nick eq hostReputationVO.nick}">
+                    <button class="delete_btn moabtn" id="delete_btn">삭제</button>
+                </c:if>
+            </sec:authorize>
     </div>
     <div class="wrap_content">
         <div class="host_info" id='host_info'>
@@ -130,9 +129,10 @@
                     </tr>
                     <tr>
                         <th>가격</th>
-                        <td>${storeBoardVO.detailPrice.month}원/5호박스 (1달)</td>
+                        <td>${storeBoardVO.detailPrice["1달"]}원/5호박스 (1달)</td>
                     </tr>
                     <tr>
+
                         <th>주소</th>
                         <td>${fn:substring(storeBoardVO.baseAddress,0,15)}  </td>
                     </tr>
@@ -202,28 +202,28 @@
         </div>
         <div class="more_info" id='more_info'>
             <div class="more_info_icon"><i class="fas fa-money-bill"></i>  </div>
-            <div class="more_info_desc">${storeBoardVO.detailPrice.month}원</div>
+            <div class="more_info_desc">${storeBoardVO.detailPrice["1달"]}원</div>
             <span>금액<div class='more_info_item'>5호박스 기준으로 측정한 가격입니다.<br>
           <table class='item_price_tb'>
             <tr>
               <th>1일</th>
-              <td>${storeBoardVO.detailPrice.day}원</td>
+              <td>${storeBoardVO.detailPrice["1일"]}원</td>
             </tr>
             <tr>
               <th>1주</th>
-              <td>${storeBoardVO.detailPrice.week}원</td>
+              <td>${storeBoardVO.detailPrice["1주일"]}원</td>
             </tr>
             <tr>
               <th>1개월</th>
-              <td>${storeBoardVO.detailPrice.month}원</td>
+              <td>${storeBoardVO.detailPrice["1달"]}원</td>
             </tr>
             <tr>
               <th>6개월</th>
-              <td>${storeBoardVO.detailPrice.halfYear}원</td>
+              <td>${storeBoardVO.detailPrice["6개월"]}원</td>
             </tr>
             <tr>
               <th>1년</th>
-              <td>${storeBoardVO.detailPrice.year}원</td>
+              <td>${storeBoardVO.detailPrice["1년"]}원</td>
             </tr>
           </table>
           </div></span>
@@ -302,14 +302,19 @@
         <div class="review_footer">
             <div class="review_paging">
             </div>
-            <a class="review_btn moabtn btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">리뷰 쓰기</a>
+            <sec:authorize access="isAuthenticated()" >
+                <a class="review_btn moabtn btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">리뷰 쓰기</a>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()" >
+                <a class="review_btn" />
+            </sec:authorize>
         </div>
     </div>
     <div class="row" id="post-review-box" style="display:none;">
         <div class="col-md-12">
             <form name="reviewForm" accept-charset="UTF-8" onsubmit="return false;" method="post">
                 <input id="ratings-hidden" name="rating" type="hidden">
-                <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
+                <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="리뷰를 작성해주세요." rows="5"></textarea>
 
                 <div class="text-right">
                     <div class="stars starrr" data-rating="0"></div>
