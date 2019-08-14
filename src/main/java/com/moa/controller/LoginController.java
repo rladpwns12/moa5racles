@@ -1,6 +1,10 @@
 package com.moa.controller;
 
+import com.moa.model.service.MemberInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -18,12 +22,12 @@ public class LoginController {
     }
 
     // 회원가입
-    @RequestMapping("/registration")
+    @RequestMapping(value="/registration", method=RequestMethod.GET)
     public String registeration() {
         return "registration";
     }
 
-    @RequestMapping(value = "/registerationForm", method = RequestMethod.POST)
+    @RequestMapping(value="/registration", method=RequestMethod.POST)
     @ResponseBody
     public boolean registerationForm(
             @RequestParam String name,

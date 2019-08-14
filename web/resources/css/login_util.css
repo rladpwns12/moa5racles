@@ -2714,6 +2714,7 @@
 	justify-content: space-between;
 	-ms-align-items: center;
 	align-items: center;
+    margin-top: 5px;
 }
 
 /* ------------------------------------ */

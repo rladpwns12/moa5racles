@@ -383,9 +383,9 @@ $('#nickname').focusout(function () {
         },
         success(data) {
             if (data) {
-                $('#nickname').css('border', 'solid 2px green');
+                $('#nickname').css('border', 'solid 0.2px green');
             } else {
-                $('#nickname').css('border', 'solid 2px red');
+                $('#nickname').css('border', 'solid 0.2px red');
                 $('#nickname').val("닉네임이 중복됩니다");
             }
         },
@@ -411,9 +411,9 @@ $('#email').focusout(function () {
         },
         success(data) {
             if (data) {
-                $('#email').css('border', 'solid 2px green');
+                $('#email').css('border', 'solid 0.2px green');
             } else {
-                $('#email').css('border', 'solid 2px red');
+                $('#email').css('border', 'solid 0.2px red');
                 $('#email').val("이메일이 중복됩니다");
             }
         },

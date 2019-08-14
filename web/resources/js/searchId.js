@@ -74,6 +74,13 @@ function emptyName() {
     }
 }
 
+function emptyPhone() {
+    if ($('#phone').val() == "휴대폰 인증 버튼을 눌러주세요") {
+        $('#phone').val("");
+        $('#phone').css("color", "#555555");
+        $('#phone').css("font-size", "14pt");
+    }
+}
 
 function smsCheck(){
 
