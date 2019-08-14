@@ -14,15 +14,15 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //test 할 경우에는 tomcat이 구동되어 xml파일들이 연동되는 것이 아니기 때문에 따로 연동시켜야한다.
 @ContextConfiguration(locations ={
         "file:web/WEB-INF/dispatcher-servlet.xml",
-        "file:web/WEB-INF/mybatis-config.xml"
+        "file:web/WEB-INF/mybatis-config.xml",
+        "file:web/WEB-INF/security-context.xml"
 })
 @WebAppConfiguration
 public class TestHostStorageDAOImpl {
@@ -32,6 +32,7 @@ public class TestHostStorageDAOImpl {
     private StoreRequestDAO storeRequestDAO;
     @Autowired
     private StoreBoardDAO storeBoardDAO;
+
     @Test
     public void test_호스트신청_신규상가(){
         boolean res =  hostStorageDAO.insertNewCompany(new NewCompanyStorageVO(1,1,"1","1","1",29,"1","1","1"));
@@ -78,4 +79,12 @@ public class TestHostStorageDAOImpl {
     public void test_요청목록(){
 //        storeRequestDAO.searchList(28);
     }
+    @Test
+    public void 짐보관글가져오기(){
+        int articleNum=2;
+        StoreBoardVO map= storeBoardDAO.searchOne(articleNum);
+        System.out.println(map);
+        assertNotNull("짐보관글 가져오기 실패",map);
+    }
+
 }

@@ -7,7 +7,6 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
 
     <bean id="userAccessDenied" class="com.moa.security.MemberDeniedHandler" />
-    <bean id="userLoginSuccess" class="com.moa.security.UserSuccessHandler" />
     <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
     <bean id="MemberInfoServiceImpl" class="com.moa.model.service.MemberInfoServiceImpl"></bean>
     <bean id="rememberMeServices"       class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
@@ -15,7 +14,12 @@
         <constructor-arg name="tokenRepository" ref="customTokenRepository"/>
         <constructor-arg name="userDetailsService" ref="MemberInfoServiceImpl"/>
         <property name="tokenValiditySeconds" value="604800" />
-        <property name="alwaysRemember" value="true" />
+    </bean>
+    <bean id="loginFailureHandler" class="com.moa.security.LoginFailureHandler">
+        <property name="username" value="username"/>
+        <property name="password" value="password"/>
+        <property name="errorMessage" value="ERRORMSG"/>
+        <property name="defaultFailureUrl" value="/login?error"/>
     </bean>
 
     <security:http>
@@ -25,9 +29,16 @@
         <security:intercept-url pattern="/storeboard/keep" access="hasRole('ROLE_HOST')" />
         <security:intercept-url pattern="/registhost" access="hasRole('ROLE_USER')" />
 
-        <security:form-login login-page="/login" authentication-success-handler-ref="userLoginSuccess"/>
-        <security:access-denied-handler error-page="/accessError" />
-        <security:logout logout-url="/userlogout" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
+        <security:form-login
+            username-parameter="username"
+            password-parameter="password"
+            login-processing-url="/login"
+            login-page="/login"
+            default-target-url="/main"
+            authentication-failure-handler-ref = "loginFailureHandler"
+        />
+        <security:access-denied-handler error-page="/notHostErrorPage" />
+        <security:logout logout-url="/logout" logout-success-url="/main" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
         <security:remember-me services-ref="rememberMeServices" key="moa"  />
     </security:http>
 
