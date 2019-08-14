@@ -2,6 +2,8 @@ package com.moa.controller;
 
 
 import com.moa.message.MessengerStateMessage;
+import com.moa.model.dao.UserDAO;
+import com.moa.model.dao.UserDAOImpl;
 import com.moa.model.service.LuggageRequestInfoService;
 import com.moa.model.service.LuggageRequestRecordService;
 import com.moa.model.service.MemberInfoServiceImpl;
@@ -27,9 +29,11 @@ public class MyPageController {
     @Autowired
     private MessengerListServiceImpl messengerListService;
     @Autowired
-
     @Qualifier("memberService")
     private MemberInfoServiceImpl memberInfoService;
+    //test dao
+    @Autowired
+    private UserDAO userDAO;
 
     @RequestMapping(value="", method= RequestMethod.GET)
     public ModelAndView myPage(Authentication auth) {
@@ -300,6 +304,20 @@ public class MyPageController {
         boolean result = messengerListService.messageDelete(deleteInfo);
         return result;
     }
+    @RequestMapping("myinfo")
+    public ModelAndView myInfo(Authentication auth){
+        // USER ID
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
+        System.out.println("userId:"+userId);
+        //MODELANDVIEW SETTING
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("myInfo");
+        //test dao
+        AddressVO addressVO = userDAO.searchAddress(userId);
+        mav.addObject("address",addressVO);
 
+        return mav;
+    }
 
 }
