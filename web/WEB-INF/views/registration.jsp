@@ -11,6 +11,7 @@
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
 </head>
 
@@ -96,6 +97,8 @@
                                     <label class="label">우편번호</label>
                                     <input type="text" id="postcode" class="input100 input--style-4" name="postcode"
                                            readonly>
+                                    <input type="text" id="lat" style="display:none">
+                                    <input type="text" id="lng" style="display:none">
                                 </div>
                             </div>
                         </div>
