@@ -357,11 +357,18 @@ function getByteLength(input) {
 
 $('#nickname').focusout(function () {
     let nickname = $("#nickname").val();
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
         url: "checkNickname",
         data: {nickname},
         cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
         success(data) {
             if (data) {
                 $('#nickname').css('border', 'solid 2px green');
@@ -378,11 +385,18 @@ $('#nickname').focusout(function () {
 
 $('#email').focusout(function () {
     let email = $("#email").val();
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
         url: "checkEmail",
         data: {email},
         cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
         success(data) {
             if (data) {
                 $('#email').css('border', 'solid 2px green');
