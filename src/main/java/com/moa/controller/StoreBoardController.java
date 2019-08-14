@@ -69,6 +69,7 @@ public class StoreBoardController {
     @ExceptionHandler(Exception.class)
     public ModelAndView handleException(Exception e){
         ModelAndView mav=new ModelAndView();
+        e.printStackTrace();
         mav.setViewName("/error/page");
         mav.addObject("message","존재하지 않는 페이지 입니다.");
         return mav;

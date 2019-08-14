@@ -103,7 +103,7 @@ iframe {
 }
 
 .container-login100 {
-    margin-top: -80px;
+    margin-top: 80px;
     width: 100%;
     min-height: 100vh;
     display: -webkit-box;
@@ -115,7 +115,7 @@ iframe {
     justify-content: center;
     align-items: center;
     padding: 15px;
-
+    margin-bottom: -280px;
     background-color: #ffffff;
 }
 
@@ -128,6 +128,7 @@ iframe {
 
 .login100-form {
     width: 100%;
+    margin-top: -320px;
 }
 
 .login100-form-title {
