@@ -63,19 +63,19 @@
 })(jQuery);
 
 function searchId() {
-    let width = 380;
+    let width = 340;
     let height = 440;
     let popUpUrl = "/searchId";
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
-    let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +
+    let popUpOption = "width=" + width + ", height=" + height + ", resizable=true, " +
         "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
 
     window.open(popUpUrl, "", popUpOption);
 }
 
 function searchPassword() {
-    let width = 380;
+    let width = 340;
     let height = 500;
     let popUpUrl = "/searchPassword";
     let popUpX = (window.screen.width / 2) - (width / 2);

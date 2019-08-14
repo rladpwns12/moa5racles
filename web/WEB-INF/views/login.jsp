@@ -22,16 +22,16 @@
 						로그인
 					</span>
                 <span class="txt1 p-b-11">
-                  이메일
-               </span>
-                <div class="wrap-input100 validate-input m-b-36" data-validate="Username is required">
+						이메일
+					</span>
+                <div class="wrap-input100 validate-input m-b-36" data-validate="이메일을 입력하세요">
                     <input class="l_i input100" type="text" name="username">
                     <span class="focus-input100"></span>
                 </div>
                 <span class="txt1 p-b-11">
-                  비밀번호
-               </span>
-                <div class="wrap-input100 validate-input m-b-12" data-validate="Password is required">
+						비밀번호
+					</span>
+                <div class="wrap-input100 validate-input" data-validate="비밀번호를 입력하세요">
 						<span class="btn-show-pass">
 							<i class="fa fa-eye"></i>
 						</span>
