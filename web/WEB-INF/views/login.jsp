@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +9,7 @@
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/resources/css/login_util.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
+    <sec:csrfMetaTags/>
 </head>
 
 <body>

@@ -537,7 +537,7 @@ input {
 }
 
 .email {
-    width: 500px;
+    width: 510px;
 }
 
 #address, #detailAddress {
@@ -604,10 +604,6 @@ input {
 
 .short2 {
     width: 220px;
-}
-
-.move {
-    top: 60px;
 }
 
 .add_margin {
