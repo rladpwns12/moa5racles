@@ -119,7 +119,7 @@ public class MyPageController {
 
         return mav;
     }
-    @RequestMapping("/WEB-INF/message/receive/{curPage}")
+    @RequestMapping("/message/receive/{curPage}")
     public ModelAndView messageCurPage(Authentication auth,
                                        @PathVariable int curPage){
         int userId;
@@ -153,7 +153,7 @@ public class MyPageController {
 
     //보낸 메세지
 
-    @RequestMapping("/WEB-INF/message/send")
+    @RequestMapping("/message/send")
     public ModelAndView messageSendCurPage(Authentication auth){
         int userId;
         ModelAndView mav = new ModelAndView();
@@ -181,7 +181,7 @@ public class MyPageController {
 
         return mav;
     }
-    @RequestMapping("/WEB-INF/message/send/{curPage}")
+    @RequestMapping("/message/send/{curPage}")
     public ModelAndView messageSend(Authentication auth,
                                     @PathVariable int curPage){
         int userId;
@@ -213,7 +213,7 @@ public class MyPageController {
         return mav;
     }
     //메시지 상세보기
-    @RequestMapping("/WEB-INF/message/send/detail/{messageNum}")
+    @RequestMapping("/message/send/detail/{messageNum}")
     public ModelAndView messageSendDetail(@PathVariable int messageNum){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageDetail");
@@ -222,7 +222,7 @@ public class MyPageController {
         mav.addObject("messageType","send");
         return mav;
     }
-    @RequestMapping("/WEB-INF/message/receive/detail/{messageNum}")
+    @RequestMapping("/message/receive/detail/{messageNum}")
     public ModelAndView messageReceiveDetail(@PathVariable int messageNum){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageDetail");
@@ -231,7 +231,7 @@ public class MyPageController {
         mav.addObject("messageType","receive");
         return mav;
     }
-    @RequestMapping(value = {"/WEB-INF/message/submit"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/message/submit"}, method = RequestMethod.GET)
     public ModelAndView messageSubmitForm(Authentication auth){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageSendDetail");
@@ -243,14 +243,14 @@ public class MyPageController {
         return mav;
     }
     @ResponseBody
-    @RequestMapping(value = {"/WEB-INF/message/sendmessage"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/message/sendmessage"}, method = RequestMethod.POST)
     public boolean messageSubmit(@RequestBody Map<String,Object> messageSendInfo){
         if(memberInfoService.checkExistUser((String)messageSendInfo.get("receiverNick"))==false){
             return false;
         }
         return messengerListService.messageSend(messageSendInfo);
     }
-    @RequestMapping(value = {"/WEB-INF/message/submit/{receiverNick}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/message/submit/{receiverNick}"}, method = RequestMethod.GET)
     public ModelAndView messageReply(@PathVariable String receiverNick, Authentication auth){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("messageSendDetail");
@@ -266,12 +266,12 @@ public class MyPageController {
     }
 
     @ResponseBody
-    @RequestMapping("/WEB-INF/message/read/{messageNumber}")
+    @RequestMapping("/message/read/{messageNumber}")
     public boolean messageRead(@PathVariable int messageNumber){
         return messengerListService.messageRead(messageNumber);
     }
     @ResponseBody
-    @RequestMapping(value = {"/WEB-INF/message/receive/delete"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/message/receive/delete"}, method = RequestMethod.POST)
     public boolean messageReceiveDelete(@RequestBody List<String> deleteList){
 
         int size = deleteList.size();
@@ -288,7 +288,7 @@ public class MyPageController {
         return result;
     }
     @ResponseBody
-    @RequestMapping(value = {"/WEB-INF/message/send/delete"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/message/send/delete"}, method = RequestMethod.POST)
     public boolean messageSendDelete(@RequestBody List<String> deleteList){
 
         int size = deleteList.size();
