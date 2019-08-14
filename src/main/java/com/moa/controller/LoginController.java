@@ -71,6 +71,7 @@ public class LoginController {
     // 아이디, 비밀번호 찾기
     @RequestMapping("/searchId")
     public String searchId() {
+        System.out.println("접속");
         return "searchId";
     }
 

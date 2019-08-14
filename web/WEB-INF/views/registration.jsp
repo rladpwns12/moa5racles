@@ -9,6 +9,7 @@
     <meta name="author" content="Colorlib">
     <meta name="keywords" content="Colorlib Templates">
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
 </head>
@@ -20,14 +21,12 @@
         <div class="card card-4">
             <div class="card-body">
                 <h2 class="title">회원가입</h2>
-                <form id="regForm">
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <label class="label">이름</label>
-                            <div class="input-group">
-                                <input id="name" class="input100 input--style-4" type="text" name="name">
-                                <span class="focus-input100"></span>
-                            </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <label class="label">이름</label>
+                        <div class="input-group">
+                            <input id="name" class="input100 input--style-4" type="text" name="name">
+                            <span class="focus-input100"></span>
                         </div>
                         <div class="col-2">
                             <label class="label">닉네임</label>
@@ -51,37 +50,43 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <label class="label">비밀번호</label>
-                            <div class="input-group">
-                                <input id="password" class="input100 input--style-4" type="password" name="password">
-                                <span class="focus-input100"></span>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <label class="label">비밀번호 확인</label>
-                            <div class="input-group">
-                                <input id="password2" class="input100 input--style-4" type="password" name="password">
-                                <span class="focus-input100"></span>
-                            </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <label class="label">비밀번호</label>
+                        <div class="input-group">
+                            <input id="password" class="input100 input--style-4" type="password" name="password">
+                            <span class="focus-input100"></span>
                         </div>
                     </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <label class="label">휴대폰 번호</label>
-                            <div class="input-group">
-                                <input id="phone" class="input100 input--style-4" type="text" name="phone">
-                                <span class="focus-input100"></span>
-                            </div>
+                    <div class="col-2">
+                        <label class="label">비밀번호 확인</label>
+                        <div class="input-group">
+                            <input id="password2" class="input100 input--style-4" type="password" name="password">
+                            <span class="focus-input100"></span>
                         </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">휴대폰 인증</label>
-                                <button id="identification" class="btn btn--radius-2 btn--purple" type="button">
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <label class="label">휴대폰 번호</label>
+                        <div class="input-group">
+                            <input id="phone" class="input100 input--style-4" type="text" name="phone">
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <form method="get" action="https://www.accountkit.com/v1.0/basic/dialog/sms_login/">
+                                <input type="hidden" name="app_id" value="2291269470991007">
+                                <input type="hidden" name="redirect" value="http://localhost:8089/registration">
+                                <input type="hidden" name="state" value="112133">
+                                <input type="hidden" name="fbAppEventsEnabled" value=true>
+                                <input type="hidden" name="debug" value=true>
+                                <button id="identification" class="btn btn--radius-2 btn--purple" type="submit">
                                     휴대폰 인증
                                 </button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="row row-space">
@@ -94,36 +99,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <div class="search_address_btn">
-                                    <label class="label">우편번호 찾기</label>
-                                    <button type="button" id="search_address_btn" class="btn btn--radius-2 btn--purple"
-                                            onclick="execDaumPostcode()" value="우편번호 찾기"> 우편번호 찾기
-                                    </button>
-                                </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="search_address_btn">
+                                <button type="button" id="search_address_btn" class="btn btn--radius-2 btn--purple"
+                                        onclick="execDaumPostcode()" value="우편번호 찾기"> 우편번호 찾기
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <div class="search_address_btn">
-                                    <input type="text" id="address" class="input--style-4" name="address"
-                                           disabled readonly>
-                                </div>
-                                <div class="long search_address_btn">
-                                    <input type="text" id="detailAddress" class="input100 input--style-4"
-                                           name="detailAddress"
-                                           placeholder="상세주소를 입력하세요">
-                                    <span class="move long focus-input100"></span>
-                                </div>
-                                <input type="hidden" id="latitude" class="input--style-4" name="latitude">
-                                <input type="hidden" id="longitude" class="input--style-4" name="longitude">
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="search_address_btn">
+                                <input type="text" id="address" class="input--style-4" name="address"
+                                       disabled readonly>
                             </div>
+                            <div class="long search_address_btn">
+                                <input type="text" id="detailAddress" class="input100 input--style-4"
+                                       name="detailAddress"
+                                       placeholder="상세주소를 입력하세요">
+                                <span class="move long focus-input100"></span>
+                            </div>
+                            <input type="hidden" id="latitude" class="input--style-4" name="latitude">
+                            <input type="hidden" id="longitude" class="input--style-4" name="longitude">
                         </div>
                     </div>
-                </form>
+                </div>
                 <div class="p-t-15">
                     <button class="btn btn--radius-2 btn--purple" type="button" onclick="submit()">회원가입</button>
                 </div>

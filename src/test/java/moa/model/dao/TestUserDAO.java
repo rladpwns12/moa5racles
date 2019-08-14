@@ -24,7 +24,8 @@ import static junit.framework.TestCase.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations ={
         "file:web/WEB-INF/dispatcher-servlet.xml",
-        "file:web/WEB-INF/mybatis-config.xml"
+        "file:web/WEB-INF/mybatis-config.xml",
+        "file:web/WEB-INF/security-context.xml"
 })
 @WebAppConfiguration
 public class TestUserDAO {
@@ -33,19 +34,15 @@ public class TestUserDAO {
 
     @Test
     public void TEST_로그인(){
-        Map<String,Object> testMap = new HashMap<String, Object>();
-        testMap.put("email","asda216@naver.com");
-        testMap.put("password","$2a$10$AXW7Bb69e5byb7QmkSUIleApBrFSYZvmbikvo2zQKX0euECWak3IW");
-
-        System.out.println(dao.checkLogin(testMap));
+        System.out.println(dao.checkLogin("jiho9478@naver.com"));
     }
     @Test
     public void TEST_회원가입(){
         UserVO userVO = new UserVO();
-        userVO.setEmail("tt6@naver.com");
+        userVO.setEmail("asda216@naver.com");
         userVO.setPassword("45pw1234");
-        userVO.setPhoneNumber("010-5764-0006");
-        userVO.setNick("테스트닉6");
+        userVO.setPhoneNumber("010-5764-0336");
+        userVO.setNick("테스트닉7");
         userVO.setName("테스트");
 
         AddressVO addressVO = new AddressVO();
@@ -200,4 +197,9 @@ public class TestUserDAO {
 
         assertFalse(dao.signUpDuplicationCheck(testMap));
     }
+    @Test
+    public void TEST_개인주소_불러오기(){
+        System.out.println(dao.searchAddress(91));
+    }
  }
+

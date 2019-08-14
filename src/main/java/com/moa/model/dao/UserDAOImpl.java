@@ -1,12 +1,15 @@
 package com.moa.model.dao;
 
 
+import com.moa.model.vo.AddressVO;
 import com.moa.model.vo.LoginVO;
 import com.moa.model.vo.SimpleUserInfoVO;
+import com.moa.model.vo.UserVO;
 import com.moa.mybatis.UserMapper;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -16,6 +19,8 @@ import java.util.Map;
 public class UserDAOImpl implements UserDAO {
     @Autowired
     private SqlSession sqlSession;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public SimpleUserInfoVO selectUserInfo(int userId) {
@@ -37,6 +42,13 @@ public class UserDAOImpl implements UserDAO {
     public boolean signUpUser(Map<String, Object> userInfo) {
         UserMapper mapper;
         boolean result;
+        UserVO userVO =  (UserVO) userInfo.get("UserVO");
+        String password = userVO.getPassword();
+        password = passwordEncoder.encode(password);
+        userVO.setPassword(password);
+
+        System.out.println(password);
+        userInfo.put("UserVO", userVO);
 
         mapper = sqlSession.getMapper(UserMapper.class);
         mapper.signUpUser(userInfo);
@@ -57,14 +69,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public LoginVO checkLogin(Map<String, Object> loginInfo) {
+    public LoginVO checkLogin(String email) {
         UserMapper mapper;
         LoginVO result;
 
         mapper = sqlSession.getMapper(UserMapper.class);
-        result = mapper.checkLogin(loginInfo);
 
-        return result;
+        return mapper.checkLogin(email);
     }
 
     @Override
@@ -87,5 +98,12 @@ public class UserDAOImpl implements UserDAO {
         mapper.updateUser(updateUserInfo);
         int result = ((int)updateUserInfo.get("res")== 1 ) ?  1 : 0 ;
         return result;
+    }
+
+    @Override
+    public AddressVO searchAddress(int userId) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        AddressVO addressVO = mapper.searchAddress(userId);
+        return addressVO;
     }
 }
