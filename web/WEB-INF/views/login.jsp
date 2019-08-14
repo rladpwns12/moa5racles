@@ -25,25 +25,23 @@
 						이메일
 					</span>
                 <div class="wrap-input100 validate-input m-b-36" data-validate="이메일을 입력하세요">
-                    <input class="l_i input100" type="text" name="username">
+                    <input type="text" id="email" class="l_i input100" name="email">
                     <span class="focus-input100"></span>
                 </div>
                 <span class="txt1 p-b-11">
 						비밀번호
 					</span>
-                <div class="wrap-input100 validate-input" data-validate="비밀번호를 입력하세요">
+                <div class="wrap-input100 validate-input space" data-validate="비밀번호를 입력하세요">
 						<span class="btn-show-pass">
 							<i class="fa fa-eye"></i>
 						</span>
-                    <input class="l_i input100" type="password" name="pass">
+                    <input type="password" id="password" class="l_i l_m input100" name="password">
                     <span class="focus-input100"></span>
                 </div>
                 <div class="flex-sb-m w-full p-b-48">
                     <div class="contact100-form-checkbox">
-                        <input class="l_i input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="l_l label-checkbox100" for="ckb1">
-                            로그인 상태 유지
-                        </label>
+                        <input type="checkbox" class="l_i" id="maintain1">
+                        <label for="maintain1" class="l_l maintain"> 로그인 상태 유지 </label>
                     </div>
                     <div>
                         <a class="l_a" href="#" onclick="searchId(); return false;" class="txt3">
@@ -60,12 +58,12 @@
                         </a>
                     </div>
                 </div>
-                <div class="container-login100-form-btn">
-                    <button class="l_b login100-form-btn">
-                        로그인
-                    </button>
-                </div>
             </form>
+            <div class="container-login100-form-btn">
+                <button type="button" class="l_b login100-form-btn" onclick="submit()">
+                    로그인
+                </button>
+            </div>
         </div>
     </div>
 </div>

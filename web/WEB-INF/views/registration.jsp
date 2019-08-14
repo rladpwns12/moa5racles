@@ -48,7 +48,7 @@
                         <div class="input-group">
                             <label class="label">이메일을 입력해주세요</label>
                             <div class="input-group-icon">
-                                <input type="text" id="email" class="email input100 input--style-4 js-datepicker"
+                                <input type="text" id="email" class="email input100 input--style-4"
                                        name="email" onfocus="emptyEmail()">
                                 <span class="long focus-input100"></span>
                                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
@@ -60,7 +60,8 @@
                     <div class="col-2">
                         <label class="label">비밀번호를 입력해주세요</label>
                         <div class="input-group">
-                            <input id="password" class="input100 input--style-4" type="password" name="password">
+                            <input id="password" class="input100 input--style-4" type="password"
+                                   onfocus="emptyEmail()">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -76,7 +77,7 @@
                     <div class="col-2">
                         <label class="label">휴대폰 인증 버튼을 눌려주세요</label>
                         <div class="input-group">
-                            <input id="phone" class="input--style-4" type="text" name="phone">
+                            <input id="phone" class="input100 input--style-4" type="text" name="phone">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -89,10 +90,10 @@
                                 <input type="hidden" name="state" value="112133">
                                 <input type="hidden" name="fbAppEventsEnabled" value=true>
                                 <input type="hidden" name="debug" value=true>--%>
-                                <button id="identification"
-                                        onclick="smsCheck()" class="btn btn--radius-2 btn--purple" type="submit">
-                                    휴대폰 인증
-                                </button>
+                            <button id="identification"
+                                    onclick="smsCheck()" class="btn btn--radius-2 btn--purple" type="submit">
+                                휴대폰 인증
+                            </button>
                             </form>
                         </div>
                     </div>
@@ -131,14 +132,12 @@
                         <div class="input-group">
                             <label class="label">상세 주소를 입력해주세요</label>
                             <div class="input-group-icon">
-                                <%--                            <div class="long search_address_btn">--%>
-                                <input type="text" id="detailAddress" class="input100 input--style-4"
+                                <input type="text" id="detailAddress" class="detailAddress input100 input--style-4"
                                        name="detailAddress" placeholder="상세주소를 입력하세요">
                                 <span class="long focus-input100"></span>
-                                <%--                            </div>--%>
-                                <input type="hidden" id="lat" class="input--style-4" name="latitude">
-                                <input type="hidden" id="lng" class="input--style-4" name="longitude">
                             </div>
+                            <input type="hidden" id="lat" class="input--style-4" name="latitude">
+                            <input type="hidden" id="lng" class="input--style-4" name="longitude">
                         </div>
                     </div>
                 </div>

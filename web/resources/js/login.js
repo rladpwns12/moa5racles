@@ -4,17 +4,14 @@
 
     $('.validate-form').on('submit', function () {
         var check = true;
-
         for (var i = 0; i < input.length; i++) {
             if (validate(input[i]) == false) {
                 showValidate(input[i]);
                 check = false;
             }
         }
-
         return check;
     });
-
 
     $('.validate-form .input100').each(function () {
         $(this).focus(function () {
@@ -84,4 +81,42 @@ function searchPassword() {
         "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
 
     window.open(popUpUrl, "", popUpOption);
+}
+
+function submit() {
+    if (!isValid()) {
+        return;
+    }
+
+    $.ajax({});
+
+    return true;
+}
+
+function isValid() {
+    if (!isEmailValid()) {
+        return false;
+    }
+    if (!isPasswordValid()) {
+        return false;
+    }
+    return true;
+}
+
+function isEmailValid() {
+    if ($('#email').val()==null || $('#email').val().trim()=="") {
+        alert("이메일을 입력해주세요");
+        $('#email').focus();
+        return false;
+    }
+    return true;
+}
+
+function isPasswordValid() {
+    if ($('#password').val()==null || $('#password').val().trim()=="") {
+        alert("비밀번호를 입력해주세요");
+        $('#password').focus();
+        return false;
+    }
+    return true;
 }

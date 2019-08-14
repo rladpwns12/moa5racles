@@ -269,10 +269,11 @@ input {
 .input--style-4 {
     line-height: 1.2;
     background: #fafafa;
-    height: 55px;
     padding: 0 25px 0 25px;
     font-size: 18px;
     color: #555555;
+    width: 220px;
+    height: 56px;
 }
 
 .input--style-4::-webkit-input-placeholder {
@@ -533,25 +534,25 @@ input {
 }
 
 #identification, #search_address_btn {
-    width: 260px;
+    width: 270px;
 }
 
-.email {
+.email, .detailAddress {
     width: 510px;
 }
 
 #address, #detailAddress {
-    width: 500px;
+    width: 510px;
     margin-bottom: 5px;
 }
 
 .focus-input100 {
     position: absolute;
     display: block;
-    width: calc(100% + 2px);
-    height: calc(100% + 2px);
-    top: -1px;
-    left: -1px;
+    width: calc(100% + 0px);
+    height: calc(100% + 0px);
+    top: -1.5px;
+    left: -1.0px;
     pointer-events: none;
     border: 1px solid #423257;
     border-radius: 3px;
@@ -594,12 +595,12 @@ input {
 }
 
 .long {
-    width: 550px;
+    width: 558px;
     height: 55px;
 }
 
 .short {
-    width: 260px;
+    width: 270px;
 }
 
 .short2 {
@@ -612,7 +613,7 @@ input {
 
 #confirm1, #confirm2 {
     display: none;
-    color: #423257;
+    /*color: #423257;*/
 }
 
 .confirm, .agree {
@@ -634,4 +635,9 @@ input {
 
 .add_m_t {
     margin-top: 15px;
+}
+
+.setting {
+    width: 563px;
+    height: 57px;
 }

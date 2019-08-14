@@ -20,7 +20,7 @@ function submit() {
         },
         success(data) {
             alert(data);
-            if (data == "success") {
+            if (data != null) {
                 alert("Password found");
             } else {
                 alert("비밀번호 찾기에 실패하셨습니다");
@@ -102,9 +102,15 @@ function emptyEmail() {
     }
 }
 
+function emptyPhone() {
+    if ($('#phone').val() == "휴대폰 인증 버튼을 눌러주세요") {
+        $('#phone').val("");
+        $('#phone').css("color", "#555555");
+        $('#phone').css("font-size", "14pt");
+    }
+}
 
 function smsCheck(){
-
     let width = 500;
     let height = 600;
     let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fregistration&state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL

@@ -35,7 +35,7 @@
                         <div class="col-2">
                             <label class="short label">휴대폰 인증 버튼을 눌러주세요</label>
                             <div class="input-group">
-                                <input id="phone" class="short2 input100 input--style-4" type="text" name="phone">
+                                <input id="phone" class="short2 input100 input--style-4" type="text" name="phone" onfocus="emptyPhone()">
                                 <span class="focus-input100"></span>
                             </div>
                         </div>
