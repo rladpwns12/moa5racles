@@ -503,6 +503,7 @@ input {
     background: #fff;
     margin-top: 80px;
 }
+
 .card_t {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -523,7 +524,6 @@ input {
     padding-bottom: 65px;
     border-radius: 10px;
     background: #fff;
-    /*margin-top: 80px;*/
 }
 
 @media (max-width: 767px) {
@@ -609,6 +609,33 @@ input {
 .move {
     top: 60px;
 }
+
 .add_margin {
     margin-left: 45px;
+}
+
+#confirm1, #confirm2 {
+    display: none;
+    color: #423257;
+}
+
+.confirm, .agree {
+    margin: 5px;
+    font-size: 14pt;
+}
+
+.confirm:before {
+    content: "\f111";
+    font-family: "Font Awesome 5 Free";
+    color: #423257;
+}
+
+#confirm1:checked + .confirm:before,
+#confirm2:checked + .confirm:before {
+    content: "\f058";
+    color: #423257;
+}
+
+.add_m_t {
+    margin-top: 15px;
 }
