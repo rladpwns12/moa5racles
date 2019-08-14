@@ -128,8 +128,8 @@
                                        placeholder="상세주소를 입력하세요">
                                 <span class="move long focus-input100"></span>
                             </div>
-                            <input type="hidden" id="latitude" class="input--style-4" name="latitude">
-                            <input type="hidden" id="longitude" class="input--style-4" name="longitude">
+                            <input type="hidden" id="lat" class="input--style-4" name="latitude">
+                            <input type="hidden" id="lng" class="input--style-4" name="longitude">
                         </div>
                     </div>
                 </div>
