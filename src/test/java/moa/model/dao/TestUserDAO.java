@@ -197,4 +197,9 @@ public class TestUserDAO {
 
         assertFalse(dao.signUpDuplicationCheck(testMap));
     }
+    @Test
+    public void TEST_개인주소_불러오기(){
+        System.out.println(dao.searchAddress(91));
+    }
  }
+

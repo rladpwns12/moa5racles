@@ -1,6 +1,7 @@
 package com.moa.model.dao;
 
 
+import com.moa.model.vo.AddressVO;
 import com.moa.model.vo.LoginVO;
 import com.moa.model.vo.SimpleUserInfoVO;
 import com.moa.model.vo.UserVO;
@@ -97,5 +98,12 @@ public class UserDAOImpl implements UserDAO {
         mapper.updateUser(updateUserInfo);
         int result = ((int)updateUserInfo.get("res")== 1 ) ?  1 : 0 ;
         return result;
+    }
+
+    @Override
+    public AddressVO searchAddress(int userId) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        AddressVO addressVO = mapper.searchAddress(userId);
+        return addressVO;
     }
 }

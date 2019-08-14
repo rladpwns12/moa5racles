@@ -1,5 +1,6 @@
 package com.moa.model.dao;
 
+import com.moa.model.vo.AddressVO;
 import com.moa.model.vo.LoginVO;
 import com.moa.model.vo.SimpleUserInfoVO;
 
@@ -14,4 +15,5 @@ public interface UserDAO {
     int updatePassword(Map<String,Object> updatePasswordInfo);
     int updateUser(Map<String,Object> updateUserInfo);
     LoginVO checkLogin(String email);
+    AddressVO searchAddress(int userId);
 }
