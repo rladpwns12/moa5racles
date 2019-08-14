@@ -11,6 +11,7 @@
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 </head>
