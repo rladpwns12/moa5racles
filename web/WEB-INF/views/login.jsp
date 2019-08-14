@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +16,11 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-            <form class="login100-form validate-form flex-sb flex-w" method="post" action="/login">
-               <span class="login100-form-title p-b-32">
-                  로그인
-               </span>
 
+            <form class="login100-form validate-form flex-sb flex-w">
+					<span class="login100-form-title p-b-32">
+						로그인
+					</span>
                 <span class="txt1 p-b-11">
                   이메일
                </span>
@@ -28,18 +28,16 @@
                     <input class="l_i input100" type="text" name="username">
                     <span class="focus-input100"></span>
                 </div>
-
                 <span class="txt1 p-b-11">
                   비밀번호
                </span>
                 <div class="wrap-input100 validate-input m-b-12" data-validate="Password is required">
-                  <span class="btn-show-pass">
-                     <i class="fa fa-eye"></i>
-                  </span>
-                    <input class="input100" type="password" name="password">
+						<span class="btn-show-pass">
+							<i class="fa fa-eye"></i>
+						</span>
+                    <input class="l_i input100" type="password" name="pass">
                     <span class="focus-input100"></span>
                 </div>
-
                 <div class="flex-sb-m w-full p-b-48">
                     <div class="contact100-form-checkbox">
                         <input class="l_i input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
@@ -47,7 +45,6 @@
                             로그인 상태 유지
                         </label>
                     </div>
-
                     <div>
                         <a class="l_a" href="#" onclick="searchId(); return false;" class="txt3">
                             <%--return false: 링크를 눌렀을 때 페이지 맨 위로 스크롤 되는걸 방지--%>
@@ -63,22 +60,17 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="container-login100-form-btn">
-                    <input type="submit" class="l_b login100-form-btn" value="로그인" />
+                    <button class="l_b login100-form-btn">
+                        로그인
+                    </button>
                 </div>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form>
         </div>
     </div>
 </div>
-
-
 <div id="dropDownSelect1"></div>
-
-
 <script src="/resources/js/login.js"></script>
-
 </body>
 <%@ include file="footer.jsp" %>
 </html>
