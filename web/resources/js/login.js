@@ -4,17 +4,14 @@
 
     $('.validate-form').on('submit', function () {
         var check = true;
-
         for (var i = 0; i < input.length; i++) {
             if (validate(input[i]) == false) {
                 showValidate(input[i]);
                 check = false;
             }
         }
-
         return check;
     });
-
 
     $('.validate-form .input100').each(function () {
         $(this).focus(function () {
@@ -63,9 +60,21 @@
 })(jQuery);
 
 function searchId() {
-    let width = 380;
-    let height = 440;
+    let width = 500;
+    let height = 600;
     let popUpUrl = "/searchId";
+    let popUpX = (window.screen.width / 2) - (width / 2);
+    let popUpY = (window.screen.height / 2) - (height / 2);
+    let popUpOption = "width=" + width + ", height=" + height + ", resizable=true, " +
+        "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
+
+    window.open(popUpUrl, "", popUpOption);
+}
+
+function searchPassword() {
+    let width = 500;
+    let height = 600;
+    let popUpUrl = "/searchPassword";
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +
@@ -74,14 +83,40 @@ function searchId() {
     window.open(popUpUrl, "", popUpOption);
 }
 
-function searchPassword() {
-    let width = 380;
-    let height = 500;
-    let popUpUrl = "/searchPassword";
-    let popUpX = (window.screen.width / 2) - (width / 2);
-    let popUpY = (window.screen.height / 2) - (height / 2);
-    let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +
-        "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
+function submit() {
+    if (!isValid()) {
+        return;
+    }
 
-    window.open(popUpUrl, "", popUpOption);
+    $.ajax({});
+
+    return true;
+}
+
+function isValid() {
+    if (!isEmailValid()) {
+        return false;
+    }
+    if (!isPasswordValid()) {
+        return false;
+    }
+    return true;
+}
+
+function isEmailValid() {
+    if ($('#email').val()==null || $('#email').val().trim()=="") {
+        alert("이메일을 입력해주세요");
+        $('#email').focus();
+        return false;
+    }
+    return true;
+}
+
+function isPasswordValid() {
+    if ($('#password').val()==null || $('#password').val().trim()=="") {
+        alert("비밀번호를 입력해주세요");
+        $('#password').focus();
+        return false;
+    }
+    return true;
 }

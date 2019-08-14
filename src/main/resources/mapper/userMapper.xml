@@ -73,11 +73,14 @@
     <update id="updatePassword" parameterType="hashMap">
         UPDATE user_tb SET user_pw = #{password} WHERE email = #{email}
     </update>
+
     <select id="updateUser" statementType="CALLABLE" parameterType="hashMap">
-        CALL PI_UPDATE_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
-        #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.profile},#{res, mode=OUT, jdbcType=INTEGER })
+        CALL PI_UPDATE_MY_INFO(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
+        #{userId},#{phoneNumber},#{profile},#{res, mode=OUT, jdbcType=INTEGER })
     </select>
-    <select id="searchAddress" parameterType="int" resultType="com.moa.model.vo.AddressVO">
+
+
+    <select id="searchAddress" parameterType="hashMap" resultType="com.moa.model.vo.AddressVO">
         select postcode,baseaddress,detailaddress,latitude lat,longitude lng
         from address_view where userid = #{userId}
     </select>

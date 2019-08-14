@@ -103,9 +103,9 @@ iframe {
 }
 
 .container-login100 {
-    margin-top: -80px;
+    margin-top: 80px;
     width: 100%;
-    min-height: 100vh;
+    min-height: 90vh;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -115,7 +115,7 @@ iframe {
     justify-content: center;
     align-items: center;
     padding: 15px;
-
+    margin-bottom: -280px;
     background-color: #ffffff;
 }
 
@@ -128,6 +128,7 @@ iframe {
 
 .login100-form {
     width: 100%;
+    margin-top: -320px;
 }
 
 .login100-form-title {
@@ -141,6 +142,7 @@ iframe {
 }
 
 .wrap-input100 {
+    margin-bottom: 20px;
     width: 100%;
     position: relative;
     background-color: #fff;
@@ -153,7 +155,7 @@ iframe {
     line-height: 1.2;
     font-size: 18px;
     display: block;
-    width: 100%;
+    width: 510px;
     background: transparent;
     height: 55px;
     padding: 0 25px 0 25px;
@@ -246,10 +248,9 @@ iframe {
 }
 
 .label-checkbox100::before {
-    content: "\f00c";
-    font-size: 13px;
+    content: "\f14a";
+    font-size: 14px;
     color: transparent;
-
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -273,7 +274,8 @@ iframe {
 }
 
 .input-checkbox100:checked + .label-checkbox100::before {
-    color: #57b846;
+    content: "\f14a";
+    color: #423257;
 }
 
 .container-login100-form-btn {
@@ -290,7 +292,6 @@ iframe {
     font-size: 16px;
     color: #fff;
     line-height: 1.2;
-    width: 388px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -303,7 +304,7 @@ iframe {
     height: 55px;
     background-color: #999999;
     border-radius: 5px;
-    width: 550px;
+    width: 560px;
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -382,4 +383,32 @@ iframe {
         padding-left: 15px;
         padding-right: 15px;
     }
+}
+
+#maintain1 {
+    display: none;
+    font-size: 14pt;
+}
+
+.maintain:before {
+    content: "\f0c8";
+    font-family: "Font Awesome 5 Free";
+    color: #423257;
+    font-size: 14pt;
+}
+
+#maintain1:checked + .maintain:before {
+    content: "\f14a";
+    color: #423257;
+    font-size: 14pt;
+}
+
+.space {
+    width: 563px;
+    height: 57px;
+}
+
+.l_m {
+    margin-left: 1px;
+    margin-top: 1px;
 }
