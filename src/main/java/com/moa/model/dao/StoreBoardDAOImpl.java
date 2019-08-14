@@ -145,11 +145,8 @@ public class StoreBoardDAOImpl implements StoreBoardDAO {
     }
 
     public List<EntrustSearchVO> searchEntrust(DetailOptionVO detail) {
-        System.out.println("전송 카테고리"+detail.getCategory());
         StoreBoardMapper mapper = sqlSession_oracle.getMapper(StoreBoardMapper.class);
-        System.out.println(mapper);
         List<EntrustSearchVO> entrustAry = mapper.searchEntrust(detail);
-        System.out.println("DAO 완료");
         return entrustAry;
     }
     @Override
