@@ -21,12 +21,12 @@ public class LoginController {
     }
 
     // 회원가입
-    @RequestMapping("/registration")
+    @RequestMapping(value="/registration", method=RequestMethod.GET)
     public String registeration() {
         return "registration";
     }
 
-    @RequestMapping(value = "/registerationForm", method = RequestMethod.POST)
+    @RequestMapping(value="/registration", method=RequestMethod.POST)
     @ResponseBody
     public boolean registerationForm(
             @RequestParam String name,
