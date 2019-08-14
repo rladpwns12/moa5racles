@@ -92,7 +92,7 @@ public class MyPageController {
         return requestVO;
     }
 
-    @RequestMapping(value = {"/WEB-INF/message/receive", "/WEB-INF/message"})
+    @RequestMapping(value = {"/message/receive", "/message"})
     public ModelAndView message(Authentication auth){
         ModelAndView mav = new ModelAndView();
         int userId;
