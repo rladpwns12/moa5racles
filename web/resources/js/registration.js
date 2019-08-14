@@ -168,6 +168,9 @@ function isValid(input) {
         $("#detailAddress").focus();
         return false;
     }
+    if (!isConfirmValid()) {
+        return false;
+    }
     return true;
 }
 
@@ -295,6 +298,18 @@ function isDetailAddressValid(input) {
     }
     if (getByteLength(input) > 200) {
         alert("상세주소가 너무 깁니다.");
+        return false;
+    }
+    return true;
+}
+
+function isConfirmValid() {
+    if(!$('#confirm1').prop('checked')) {
+        alert("MOA 이용약관에 동의해주세요");
+        return false;
+    }
+    if(!$('#confirm2').prop('checked')) {
+        alert("위치 이용약관에 동의해주세요");
         return false;
     }
     return true;
