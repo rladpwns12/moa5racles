@@ -39,13 +39,13 @@
                         </div>
                         <div class="col-2">
                             <div class="input-group">
-                                <form method="get" action="https://www.accountkit.com/v1.0/basic/dialog/sms_login/">
+                                <%--<form method="get" action="https://www.accountkit.com/v1.0/basic/dialog/sms_login/">
                                     <input type="hidden" name="app_id" value="2291269470991007">
                                     <input type="hidden" name="redirect" value="http://localhost:8089/searchId">
                                     <input type="hidden" name="state" value="112133">
                                     <input type="hidden" name="fbAppEventsEnabled" value=true>
-                                    <input type="hidden" name="debug" value=true>
-                                <button id="identification" class="btn btn--radius-2 btn--purple" type="submit">
+                                    <input type="hidden" name="debug" value=true>--%>
+                                <button id="identification" class="btn btn--radius-2 btn--purple" onclick="smsCheck()">
                                     휴대폰 인증
                                 </button>
                                 </form>
