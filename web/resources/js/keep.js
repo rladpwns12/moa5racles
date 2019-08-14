@@ -179,14 +179,20 @@ function submitForm() {
         var form = $('#regForm')[0];
         let data = new FormData(form);
 
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
         $.ajax({
             type: "POST",
             enctype: "multipart/form-data",
-            url: "/storeboard/keepregister",
+            url: "/storeboard/keep",
             data: data,
             processData: false,
             contentType: false,
             cache: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("AJAX", true);
+                xhr.setRequestHeader(header, token);
+            },
             success: function () {
                 $("#left_side").hide();
                 $("#content6").hide();

@@ -584,7 +584,7 @@ window.onload = function(){
 			<!-- 반려동물 끝 --> 
 			</div>
 			<div class="keep">
-    			<button class="keepBtn" onclick="location.href='${pageContext.request.contextPath}/moa/keep'">보관소 등록</button>
+    			<button class="keepBtn" onclick="location.href='/storeboard/keep'">보관소 등록</button>
 			</div>
 			
 			<div class="mapSize">

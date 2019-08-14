@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +12,11 @@
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <sec:csrfMetaTags/>
 </head>
 
 <body>
@@ -45,7 +48,7 @@
                         <div class="input-group">
                             <label class="label">이메일을 입력해주세요</label>
                             <div class="input-group-icon">
-                                <input id="email" class="email input100 input--style-4 js-datepicker" type="text"
+                                <input type="text" id="email" class="email input100 input--style-4 js-datepicker"
                                        name="email" onfocus="emptyEmail()">
                                 <span class="long focus-input100"></span>
                                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
@@ -73,7 +76,7 @@
                     <div class="col-2">
                         <label class="label">휴대폰 인증 버튼을 눌려주세요</label>
                         <div class="input-group">
-                            <input id="phone" class="input--style-4" type="text" name="phone" readonly>
+                            <input id="phone" class="input--style-4" type="text" name="phone">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -114,23 +117,28 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row row-space">
                     <div class="col-2">
                         <div class="input-group">
                             <div class="search_address_btn">
                                 <input type="text" id="address" class="input--style-4" name="address"
                                        readonly>
                             </div>
-                            <div class="long search_address_btn">
-                                <label class="label">상세 주소를 입력해주세요</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <label class="label">상세 주소를 입력해주세요</label>
+                            <div class="input-group-icon">
+                                <%--                            <div class="long search_address_btn">--%>
                                 <input type="text" id="detailAddress" class="input100 input--style-4"
-                                       name="detailAddress"
-                                       placeholder="상세주소를 입력하세요">
-                                <span class="move long focus-input100"></span>
+                                       name="detailAddress" placeholder="상세주소를 입력하세요">
+                                <span class="long focus-input100"></span>
+                                <%--                            </div>--%>
+                                <input type="hidden" id="lat" class="input--style-4" name="latitude">
+                                <input type="hidden" id="lng" class="input--style-4" name="longitude">
                             </div>
-                            <input type="hidden" id="lat" class="input--style-4" name="latitude">
-                            <input type="hidden" id="lng" class="input--style-4" name="longitude">
                         </div>
                     </div>
                 </div>
@@ -144,7 +152,6 @@
                     <label for="confirm2" class="confirm">&nbsp;&nbsp;위치정보 이용약관 동의</label>
                     <a href="#" class="agree"> [이용약관 보기] </a>
                 </div>
-
                 <div class="p-t-15">
                     <button class="btn btn--radius-2 btn--purple" type="button" onclick="submit()">회원가입</button>
                 </div>

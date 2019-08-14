@@ -96,12 +96,12 @@ var execDaumPostcode = function () {
 
 }
 
-function searchLocation(addr){
+function searchLocation(addr) {
     var geocoder = new kakao.maps.services.Geocoder();
-    var callback = function(result, status) {
+    var callback = function (result, status) {
         if (status === kakao.maps.services.Status.OK) {
-            document.getElementById("lat").value= result[0].y;
-            document.getElementById("lng").value= result[0].x;
+            document.getElementById("lat").value = result[0].y;
+            document.getElementById("lng").value = result[0].x;
         }
     };
     geocoder.addressSearch(addr, callback);
@@ -129,8 +129,8 @@ function submit() {
     let postcode = $('#postcode').val();
     let address = $('#address').val();
     let detailAddress = $('#detailAddress').val();
-    let latitude = 14.02;
-    let longitude = 13.001;
+    let latitude = $('#lat').val();
+    let longitude = $('#lng').val();
 
     let form = {
         name, nickname, email, password, password2, phone, postcode, address, detailAddress, latitude, longitude
@@ -139,6 +139,8 @@ function submit() {
     if (!isValid(form))
         return;
 
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
         url: "registerationForm",
@@ -146,6 +148,10 @@ function submit() {
             name, nickname, email, password, phone, postcode, address, detailAddress, latitude, longitude
         },
         cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
         success(data) {
             if (data) {
                 alert("회원가입에 성공하셨습니다.");
@@ -222,7 +228,7 @@ function isNicknameValid(input) {
         alert("닉네임이 너무 깁니다");
         return false;
     }
-    if($('#nickname').val()=="닉네임이 중복됩니다") {
+    if ($('#nickname').val() == "닉네임이 중복됩니다") {
         alert("새로운 닉네임을 입력해주세요");
         $('#nickname').val("");
         return false;
@@ -239,7 +245,7 @@ function isEmailValid(input) {
         alert("이메일이 너무 깁니다");
         return false;
     }
-    if($('#email').val()=="이메일이 중복됩니다") {
+    if ($('#email').val() == "이메일이 중복됩니다") {
         alert("새로운 이메일을 입력해주세요");
         $('#email').val("");
         return false;
@@ -329,11 +335,11 @@ function isDetailAddressValid(input) {
 }
 
 function isConfirmValid() {
-    if(!$('#confirm1').prop('checked')) {
+    if (!$('#confirm1').prop('checked')) {
         alert("MOA 이용약관에 동의해주세요");
         return false;
     }
-    if(!$('#confirm2').prop('checked')) {
+    if (!$('#confirm2').prop('checked')) {
         alert("위치 이용약관에 동의해주세요");
         return false;
     }
@@ -363,11 +369,18 @@ function getByteLength(input) {
 
 $('#nickname').focusout(function () {
     let nickname = $("#nickname").val();
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
         url: "checkNickname",
         data: {nickname},
         cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
         success(data) {
             if (data) {
                 $('#nickname').css('border', 'solid 2px green');
@@ -384,11 +397,18 @@ $('#nickname').focusout(function () {
 
 $('#email').focusout(function () {
     let email = $("#email").val();
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
         url: "checkEmail",
         data: {email},
         cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
         success(data) {
             if (data) {
                 $('#email').css('border', 'solid 2px green');
