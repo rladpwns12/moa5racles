@@ -3,7 +3,9 @@ package com.moa.controller;
 
 import com.moa.model.service.AddressSearchService;
 import com.moa.model.service.HostRegistrationService;
+import com.moa.model.vo.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,24 +26,28 @@ public class RegistHostController {
     private AddressSearchService addressSearchService;
 
     @RequestMapping(value="/registhost", method = RequestMethod.GET)
-    public ModelAndView registHost(HttpServletRequest request){
+    public ModelAndView registHost(Authentication auth){
         ModelAndView mav = new ModelAndView();
         Map<String, Object> addressInfo = null;
-        HttpSession session = request.getSession();
+        int userId;
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
 
-        //session에서 가져온다.
-        int userId = 31;
-
-        addressInfo =  addressSearchService.searchAddress(userId);
-        if(addressInfo != null) {
-            mav.setViewName("registHost");
-            mav.addObject("addressId", addressInfo.get("addressId"));
-            mav.addObject("address", addressInfo.get("address"));
+        if(customUser.getLoginVO().getFlag() != null){
+            mav.setViewName("/main");
         }
         else{
-            //사용자 주소를 가져오지 못할 경우
-        }
+            userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
+            addressInfo =  addressSearchService.searchAddress(userId);
+            if(addressInfo != null) {
+                mav.setViewName("registHost");
+                mav.addObject("addressId", addressInfo.get("addressId"));
+                mav.addObject("address", addressInfo.get("address"));
+            }
+            else{
+                //사용자 주소를 가져오지 못할 경우
+            }
+        }
         return mav;
     }
 
@@ -56,39 +62,43 @@ public class RegistHostController {
                                  @RequestParam (value="detailAddress") String detailAddress,
                                  @RequestParam (value="company_name") String businessName,
                                  @RequestParam (value="company_registration_name") String registrationNum,
-                                 @RequestParam (value="company_representative_name") String representative){
-        int userId = 31;
+                                 @RequestParam (value="company_representative_name") String representative,
+                                 Authentication auth){
+        int userId;
         double longitude = 21.45333;
         double latitude = 34.2513551;
 
-        Map<String, Object> hostInfo = new HashMap<String, Object>();
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
-        hostInfo.put("userId", userId);
-        hostInfo.put("addressId", addressId);
-        hostInfo.put("storageType", storagetype);
-        hostInfo.put("originOrNew", originOrNew);
-        hostInfo.put("businessName", businessName);
-        hostInfo.put("registrationNum", registrationNum);
-        hostInfo.put("representative", representative);
-        hostInfo.put("otherText", otherText);
-        hostInfo.put("postCode", postCode);
-        hostInfo.put("baseAddress", baseAddress);
-        hostInfo.put("detailAddress", detailAddress);
-        hostInfo.put("longitude", longitude);
-        hostInfo.put("latitude", latitude);
-
-        boolean res = hostRegistrationService.registHost(hostInfo);
-
-        if(res) {
-            System.out.println("insert HostDB information successed");
-            return "success";
+        if(customUser.getLoginVO().getFlag() != null){
+            return "/main";
         }
         else {
-            System.out.println("insert HostDB information failed");
-            return "fail";
+
+            Map<String, Object> hostInfo = new HashMap<String, Object>();
+
+            hostInfo.put("userId", userId);
+            hostInfo.put("addressId", addressId);
+            hostInfo.put("storageType", storagetype);
+            hostInfo.put("originOrNew", originOrNew);
+            hostInfo.put("businessName", businessName);
+            hostInfo.put("registrationNum", registrationNum);
+            hostInfo.put("representative", representative);
+            hostInfo.put("otherText", otherText);
+            hostInfo.put("postCode", postCode);
+            hostInfo.put("baseAddress", baseAddress);
+            hostInfo.put("detailAddress", detailAddress);
+            hostInfo.put("longitude", longitude);
+            hostInfo.put("latitude", latitude);
+
+            boolean res = hostRegistrationService.registHost(hostInfo);
+
+            if (res) {
+                return "success";
+            } else {
+                return "fail";
+            }
         }
-
     }
-
-
 }

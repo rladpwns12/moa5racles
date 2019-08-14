@@ -33,9 +33,10 @@ public class StoreBoardController {
     @RequestMapping(value="/Search" , method=  RequestMethod.POST)
     public @ResponseBody
     List<Object> hostSearch2(DetailOptionVO detail){
-        System.out.println("전송 캍"+detail.getCategory().get(0));
+
+
         List<Object> documents = storeBoard.search(detail);
-        System.out.println(documents.get(1));
+        System.out.println(documents.get(0));
 
         return documents;
     }
@@ -69,6 +70,7 @@ public class StoreBoardController {
     @ExceptionHandler(Exception.class)
     public ModelAndView handleException(Exception e){
         ModelAndView mav=new ModelAndView();
+        e.printStackTrace();
         mav.setViewName("/error/page");
         mav.addObject("message","존재하지 않는 페이지 입니다.");
         return mav;
