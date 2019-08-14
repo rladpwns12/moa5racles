@@ -30,12 +30,8 @@
         <security:intercept-url pattern="/registhost" access="hasRole('ROLE_USER')" />
 
         <security:form-login
-            username-parameter="username"
-            password-parameter="password"
-            login-processing-url="/login"
-            login-page="/login"
-            default-target-url="/main"
-            authentication-failure-handler-ref = "loginFailureHandler"
+                login-page="/login"
+                authentication-failure-handler-ref = "loginFailureHandler"
         />
         <security:access-denied-handler error-page="/notHostErrorPage" />
         <security:logout logout-url="/logout" logout-success-url="/main" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
@@ -44,7 +40,7 @@
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="MemberInfoServiceImpl">
-                <security:password-encoder ref="bcryptPasswordEncoder" />
+            <security:password-encoder ref="bcryptPasswordEncoder" />
         </security:authentication-provider>
     </security:authentication-manager>
 

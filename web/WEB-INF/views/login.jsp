@@ -16,7 +16,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-            <form class="login100-form validate-form flex-sb flex-w">
+            <form class="login100-form validate-form flex-sb flex-w" action="/login" method="post">
 					<span class="login100-form-title p-b-32">
 						로그인
 					</span>
@@ -24,7 +24,7 @@
 						이메일
 					</span>
                 <div class="wrap-input100 validate-input m-b-36" data-validate="이메일을 입력하세요">
-                    <input type="text" id="email" class="l_i input100" name="email">
+                    <input type="text" id="email" class="l_i input100" name="username">
                     <span class="focus-input100"></span>
                 </div>
                 <span class="txt1 p-b-11">
@@ -39,8 +39,10 @@
                 </div>
                 <div class="flex-sb-m w-full p-b-48">
                     <div class="contact100-form-checkbox">
-                        <input type="checkbox" class="l_i" id="maintain1">
-                        <label for="maintain1" class="l_l maintain"> 로그인 상태 유지 </label>
+                        <input class="l_i" id="maintain1" type="checkbox" name="remember-me">
+                        <label for="maintain1" class="l_l maintain">
+                            로그인 상태 유지
+                        </label>
                     </div>
                     <div>
                         <a class="l_a" href="#" onclick="searchId(); return false;" class="txt3">
@@ -66,12 +68,8 @@
                     <input type="submit" class="l_b login100-form-btn" value="로그인" />
 
                 </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
-            <div class="container-login100-form-btn">
-                <button type="button" class="l_b login100-form-btn" onclick="submit()">
-                    로그인
-                </button>
-            </div>
         </div>
     </div>
 </div>
