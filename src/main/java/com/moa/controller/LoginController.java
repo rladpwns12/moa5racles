@@ -5,19 +5,16 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
+    private static final String SUCCESS = "success";
+    private static final String FAIL = "fail";
+    @Qualifier("memberService")
+    @Autowired
+    private MemberInfoService memberInfoService;
 
-    // 로그인
-    @RequestMapping(value = "/login")
-    public String loginPage() {
+    @RequestMapping(value="/login")
+    public String loginPage(String error, String logout, Model model){
+        System.out.println("loginPage()...");
         return "login";
-    }
-
-    // ??
-    @RequestMapping(value = "/do")
-    @ResponseBody
-    public String login(@RequestParam(value = "email") String email,
-                        @RequestParam(value = "password") String password) {
-        return "success";
     }
 
     // 회원가입
