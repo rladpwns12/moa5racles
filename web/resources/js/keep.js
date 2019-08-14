@@ -184,7 +184,7 @@ function submitForm() {
         $.ajax({
             type: "POST",
             enctype: "multipart/form-data",
-            url: "/storeboard/keepregister",
+            url: "/storeboard/keep",
             data: data,
             processData: false,
             contentType: false,

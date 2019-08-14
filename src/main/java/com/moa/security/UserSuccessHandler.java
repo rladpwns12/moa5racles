@@ -20,20 +20,14 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler {
         Collection<? extends GrantedAuthority> authorities
                 = authentication.getAuthorities();
 
-//        Enumeration<String> e  = httpServletRequest.getSession().getAttributeNames();
-////        while(e.hasMoreElements()){
-////            System.out.println(e.nextElement());
-////        }
-        for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_MEMBER")) {
-                System.out.println("role memnner 님");
-            } else {
-                System.out.println("role memnner 아님");
-            }
-        }
+//        for (GrantedAuthority grantedAuthority : authorities) {
+//            if (grantedAuthority.getAuthority().equals("ROLE_MEMBER")) {
+//                System.out.println("role memnner 님");
+//            } else {
+//                System.out.println("role memnner 아님");
+//            }
+//        }
+        System.out.println("UserSuccessHnadler...");
 
-
-        System.out.println(authentication.toString());
-        System.out.println("success``` ");
     }
 }

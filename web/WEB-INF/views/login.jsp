@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
     <sec:csrfMetaTags/>
 </head>
-
 <body>
 <%@ include file="navbar.jsp" %>
 <div class="limiter">
@@ -60,10 +59,14 @@
                         </a>
                     </div>
                 </div>
+                <c:if test="${not empty ERRORMSG}">
+                    <div style="color:red">
+                        <p> ${ERRORMSG }</p>
+                    </div>
+                </c:if>
                 <div class="container-login100-form-btn">
-                    <button class="l_b login100-form-btn">
-                        로그인
-                    </button>
+                    <input type="submit" class="l_b login100-form-btn" value="로그인" />
+
                 </div>
             </form>
         </div>
