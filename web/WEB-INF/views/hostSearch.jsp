@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,36 +17,23 @@
 
 <script>
 
-	function roomSelect(articleNum) {
+	function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
 	alert(articleNum);
-}
+	}
 
 
-$(document).ready(function() {
+$(document).ready(function() {			//실행시
 
-	$('input[name="category"]').click(function() {
-		for(let iv=0 ; iv<11;iv++) {
-			alert($('input[id=("ct"+"das")]').val());
+	$('#categoryAllBtn').click(function() { //카테고리 전체 클릭 이벤트
+		$('input[name="category"]').prop('checked', !$('input[name="category"]').prop('checked'));
+	});
+	$('input[name="category"]').click(function() { //카테고리 전체 클릭 이벤트
+		for(let iv=1 ; iv<11;iv++) {
+			if($('#ct'+iv).prop('checked')==false)
+				$('#ct0').prop('checked', false);
 		}
 	});
-	$('input[name="category"]').click(function() {
-		alert($(this).val());
-		alert($('input[name="category"]').val());
-		alert($(this).prop('checked'));
-		$(this).prev().css('background-color','RED');
-		$(this).next().css('background-color','RED');
-		$(this).css('background-color','RED');
-
-		/*for(let i =1;i<11;i++) {
-			var con = document.getElementById('ct' + i);
-			if (con.prop('checked')) {
-				$('#category2>label').style.backgroundColor = 'BLUE';
-			} else {
-				$('#category2>label').style.backgroundColor = 'WHITE';
-			}
-		}*/
-	});
-	$('#categoryBtn').click(function() {
+	$('#categoryBtn').click(function() {		//카테고리 버튼 클릭이벤트
 		var con =  document.getElementById('category');
 		if(con.style.display=='none'){
 			con.style.display = 'block';
@@ -53,9 +41,8 @@ $(document).ready(function() {
 		}else{
 			con.style.display = 'none';
 		}
-
 	});
-	$('#rangeBtn').click(function() {
+	$('#rangeBtn').click(function() {			//거리 버튼 클릭 이벤트
 		var con =  document.getElementById('range-slider');
 		if(con.style.display=='none'){
 			con.style.display = 'block';
@@ -64,9 +51,7 @@ $(document).ready(function() {
 		}
 
 	});
-
-
-	var rangeSlider = function(){
+	var rangeSlider = function(){			//슬라이더 변경 이벤트
 		var slider = $('#range-slider'),
 				range = $('#range-slider__range'),
 				value = $('#range-slider__value');
@@ -86,42 +71,17 @@ $(document).ready(function() {
 
 	rangeSlider();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	$('.mapBtn').click(function() {
+	$('.mapBtn').click(function() {						//맵 화면 크기 조정 이벤트
 		
 		let map = $('.selection_wrapper');
 		map.width('730px');
 		$(".map_wrapper").css("left", "730px");
 		$('#map').width('1174px');
 	});
-	/*$('.room_select').click(function(){
-		alert("이동합니다");
-	});
-	$('.selection_wrapper>div').click(function(){
-		alert("안쪽망함으로 이동합니다");
-	});*/
 
 
 
-	var container = document.getElementById('map');
+	var container = document.getElementById('map');					//맵 api 세팅
 	var options = {
 		center: new kakao.maps.LatLng(33.450701, 126.570667),
 		level: 3
@@ -171,38 +131,41 @@ $(document).ready(function() {
 	//요주의!!!!!!!
 	
 	    
-	map = new kakao.maps.Map(container, options);
+	map = new kakao.maps.Map(container, options);	//맵 기본 세팅
 	var mapTypeControl = new kakao.maps.MapTypeControl();
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 	var zoomControl = new kakao.maps.ZoomControl();
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); 
-	$('.room_select').click(function(){alert("이동한다");});
-	$('.search_btn').click(function() 
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+	$('.search_btn').click(function() 			//검색 버튼 클릭시
 	{
-		let address=$(".search_input").val();
-		$.ajax
+		let address=$(".search_input").val();	//검색 키워드
+		if(address ==""){
+			alert("검색어를 입력해주세요");
+			return;
+		}
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$.ajax									//카카오 api get
 		({
 		    url: "https://dapi.kakao.com/v2/local/search/keyword.json?query="+address,
 		    headers: { 'Authorization': 'KakaoAK ea031870cc4a7a31182ea665a1eb62fc'},
-		    type: 'GET'
+		    type: 'GET',
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("AJAX", true);
+				xhr.setRequestHeader(header, token);
+			}
 		}).done(function(data)
 			{
-				if(data.documents[0].length == 0)
+				if(data.documents=="")		//만일 검색결과가 없을시
 				{
 				alert("검색된 정보가 없습니다");
+				return;
 				}
 				else
 				{
 			    var lan=data.documents[0].y;
 			    var log=data.documents[0].x;
-			    alert(data);
-			    /*var container = document.getElementById('map');
-				var options = {
-					center: new kakao.maps.LatLng(lan, log),
-					level: 3
-				};
-				var map = new kakao.maps.Map(container, options);*/
-			    
 				var coords = new kakao.maps.LatLng(lan, log);
 				var marker = new kakao.maps.Marker
 				({
@@ -215,10 +178,20 @@ $(document).ready(function() {
 				
 			});	
 	});
-	function search(lan,log){
-		var form={
-			category:($("#category").val()),
-			distance:($("#distance").val()),
+		function search(lan,log){//검색 함수
+
+		let catAry = new Array();
+		let catAry2 = ["1","2"];
+
+		let i = 0;
+		for(let iv=1 ; iv<11;iv++) { 				//카테고리 체크
+			if($('#ct'+iv).prop('checked'))
+				catAry[i++]=($('#ct'+iv).val());
+		}
+		jQuery.ajaxSettings.traditional = true;
+		let form={
+			category:catAry,
+			distance:($("#range-slider__range").val()),
 			filter:($("#filter").val()),
 			storageType:($("#storageType").val()),
 			transactionType : ($("#transactionType").val()),
@@ -228,37 +201,21 @@ $(document).ready(function() {
 			latitude:lan,
 			longitude:log
 		}
-
-
 		 $('#selection_content_id1').empty();
 		 //요주의!!!!
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
 		 $.ajax("storeboard/Search",{
 		type:"POST",
-		data : form
-		/*{
+		data : form,
+			 beforeSend: function (xhr) {
+				 xhr.setRequestHeader("AJAX", true);
+				 xhr.setRequestHeader(header, token);
+			 }
 
-			category:($("#category").val()),
-			distance:($("#distance").val()),
-			filter:($("#filter").val()),
-			storageType:($("#storageType").val()),
-			transactionType : ($("#transactionType").val()),
-			storagePeriodType:($("#storagePeriodType").val()),
-			securityFacility:($("#securityFacility").val()),
-			petFlag:($("#petFlag").val()),
-	        lan:lan,
-	        log:log
-		}*/
 		 }).then(function(data,status){
 		if(status=="success"){
 			var positions = new Array();
-			 if(data.length>4){
-				console.log(data);
-				console.log(data[0].articleNum);
-				console.log(data[0].distanceResult);
-			} 
-			 else{
-
-			 }
 			 for(let i=0;i<data.length;i++){
 				let div = $('<div />', {id:"article"+data[i].articleNum,class : 'room_select',onclick:"roomSelect("+data[i].articleNum+");"}).appendTo($('#selection_content_id1'));
 				$('<img/>',{src:"/resources/image/hostSearch/"+data[i].pictureName}).appendTo(div);
@@ -426,6 +383,7 @@ window.onload = function(){
 	
 	
 </script>
+	<sec:csrfMetaTags/>
 </head>
 <body>
  <%@ include file="navbar.jsp" %>
@@ -450,74 +408,59 @@ window.onload = function(){
 				<button name="전체"  id="categoryBtn" value="전체">카테고리
 					<i class="fas fa-angle-down" style="margin-left: 50px; font-size: 19px;"></i></button>
 				<div class="category"  id="category" style="display:none;">
-					<div id="category2">
-						<label for="ct%"><input type="checkbox" name="category" value="%" id="ct%">
+					<div class="category2" id="categoryAllBtn">
+						<label for="ct0" style="display:contents">
+							<input type="checkbox" name="category" value="%" id="ct0">
 							전체</label>
 					</div>
-					<div id="category2">
-						<label for="ct1"><input type="checkbox" name="category" value="1" id="ct1"> 의류</label>
+					<div class="category2" >
+						<label for="ct1"><input type="checkbox" name="category" value="1" id="ct1" >
+							의류</label>
 					</div>
-					<div id="category2">
-						<label for="ct2"><input type="checkbox" name="category" value="2" id="ct2"> 도서</label>
+					<div class="category2">
+						<label for="ct2"><input type="checkbox" name="category" value="2" id="ct2" >
+							도서</label>
 					</div>
-					<div id="category2">
-						<label for="ct3"><input type="checkbox" name="category" value="3" id="ct3"> 패션잡화</label>
+					<div class="category2">
+						<label for="ct3"><input type="checkbox" name="category" value="3" id="ct3" >
+							패션잡화</label>
 					</div>
-					<div id="category2">
-						<label for="ct4"><input type="checkbox" name="category" value="4" id="ct4"> 페브릭</label>
+					<div class="category2">
+						<label for="ct4"><input type="checkbox" name="category" value="4" id="ct4" >
+							페브릭</label>
 					</div>
-					<div id="category2">
-						<label for="ct5"><input type="checkbox" name="category" value="5" id="ct5"> 소형가전</label>
+					<div class="category2">
+						<label for="ct5"><input type="checkbox" name="category" value="5" id="ct5" >
+							소형가전</label>
 					</div>
-					<div id="category2">
-						<label for="ct6"><input type="checkbox" name="category" value="6" id="ct6"> 취미용품</label>
+					<div class="category2">
+						<label for="ct6"><input type="checkbox" name="category" value="6" id="ct6" >
+							취미용품</label>
 					</div>
-					<div id="category2">
-						<label for="ct7"><input type="checkbox" name="category" value="7" id="ct7"> 캠핑용품</label>
+					<div class="category2">
+						<label for="ct7"><input type="checkbox" name="category" value="7" id="ct7" >
+							캠핑용품</label>
 					</div>
-					<div id="category2">
-						<label for="ct8"><input type="checkbox" name="category" value="8" id="ct8"> 유아용품</label>
+					<div class="category2">
+						<label for="ct8"><input type="checkbox" name="category" value="8" id="ct8" >
+							유아용품</label>
 					</div>
-					<div id="category2">
-						<label for="ct9"><input type="checkbox" name="category" value="9" id="ct9"> 음반/DVD</label>
+					<div class="category2">
+						<label for="ct9"><input type="checkbox" name="category" value="9" id="ct9" >
+							음반/DVD</label>
 					</div>
-					<div id="category2">
-						<label for="ct10"><input type="checkbox" name="category" value="10" id="ct10"> 기타</label>
+					<div class="category2">
+						<label for="ct10"><input type="checkbox" name="category" value="10" id="ct10" checked="checked">
+							기타</label>
 					</div>
 				</div>
-
-
-
-			<%--<div class="select_mate" data-mate-select="active" >
-				<select name="" onchange="" onclick="return false;" id="category">
-				<option value="%">전체</option>
-				<option value="1">의류</option>
-				<option value="2">도서</option>
-				<option value="3">패션잡화</option>
-				<option value="4">페브릭</option>
-				<option value="5">소형가전</option>
-				<option value="6">취미용품</option>
-				<option value="7">캠핑용품</option>
-				<option value="8">유아용품</option>
-				<option value="9">음반/DVD</option>
-				<option value="10">기타</option>
-				</select>
-				<p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" ><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-				    <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
-				    <path d="M0-.75h24v24H0z" fill="none"/>
-				</svg></span>
-				<div class="cont_list_select_mate">
-				  <ul class="cont_select_int"> </ul> 
-				</div>
-			 </div>--%>
-		  	<!-- 카테고리 끝 -->
-		  	<!-- 거리조건  -->
+			<!-- 거리조건  -->
 				<button name="전체"  id="rangeBtn" value="전체">거리
 					<i class="fas fa-angle-down" style="margin-left: 50px; font-size: 19px;"></i></button>
 
 				<div class="category" id="range-slider" style="display:none;">
-					<input id="range-slider__range" type="range" value="10" min="1" max="50">
-					<span id="range-slider__value">10km</span>
+					<input id="range-slider__range" type="range" value="30" min="1" max="50">
+					<span id="range-slider__value">30km</span>
 				</div>
 			<%--<div class="select_mate" data-mate-select="active" >
 				<select name="" onchange="" onclick="return false;" id="distance">
