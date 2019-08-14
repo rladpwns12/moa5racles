@@ -29,25 +29,25 @@
                             <input id="name" class="input100 input--style-4" type="text" name="name">
                             <span class="focus-input100"></span>
                         </div>
-                        <div class="col-2">
-                            <label class="label">닉네임</label>
-                            <div class="input-group">
-                                <input id="nickname" class="input100 input--style-4" type="text" name="nickname"
-                                       onfocus="emptyNickname()">
-                                <span class="focus-input100"></span>
-                            </div>
+                    </div>
+                    <div class="col-2">
+                        <label class="label">닉네임</label>
+                        <div class="input-group">
+                            <input id="nickname" class="input100 input--style-4" type="text" name="nickname"
+                                   onfocus="emptyNickname()">
+                            <span class="focus-input100"></span>
                         </div>
                     </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">이메일</label>
-                                <div class="input-group-icon">
-                                    <input id="email" class="email input100 input--style-4 js-datepicker" type="text"
-                                           name="email" onfocus="emptyEmail()">
-                                    <span class="long focus-input100"></span>
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <label class="label">이메일</label>
+                            <div class="input-group-icon">
+                                <input id="email" class="email input100 input--style-4 js-datepicker" type="text"
+                                       name="email" onfocus="emptyEmail()">
+                                <span class="long focus-input100"></span>
+                                <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                             </div>
                         </div>
                     </div>
@@ -77,6 +77,7 @@
                         </div>
                     </div>
                     <div class="col-2">
+                        <label class="label">&nbsp;</label>
                         <div class="input-group">
                             <form method="get" action="https://www.accountkit.com/v1.0/basic/dialog/sms_login/">
                                 <input type="hidden" name="app_id" value="2291269470991007">
@@ -104,6 +105,7 @@
                         </div>
                     </div>
                     <div class="col-2">
+                        <label class="label">&nbsp;</label>
                         <div class="input-group">
                             <div class="search_address_btn">
                                 <button type="button" id="search_address_btn" class="btn btn--radius-2 btn--purple"
@@ -137,6 +139,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 <script src="/resources/js/registration.js"></script>
