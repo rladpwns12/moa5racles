@@ -14,7 +14,6 @@
         <constructor-arg name="tokenRepository" ref="customTokenRepository"/>
         <constructor-arg name="userDetailsService" ref="MemberInfoServiceImpl"/>
         <property name="tokenValiditySeconds" value="604800" />
-        <property name="alwaysRemember" value="true" />
     </bean>
     <bean id="loginFailureHandler" class="com.moa.security.LoginFailureHandler">
         <property name="username" value="username"/>
