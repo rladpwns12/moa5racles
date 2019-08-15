@@ -45,7 +45,7 @@
                 <div class="box__description-text">서버 오류입니다.<br/>관리자에게 문의하세요.<br/><br/></div>
             </div>
 
-            <a href="/main" target="_blank" class="box__button">모아 홈으로 가기</a>
+            <a href="/main" class="box__button">모아 홈으로 가기</a>
         </div>
     </div>
 </div>

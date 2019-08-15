@@ -60,12 +60,10 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public boolean signUpDuplicationCheck(Map<String, Object> duplicationInfo) {
         UserMapper mapper;
-        boolean result;
 
         mapper = sqlSession.getMapper(UserMapper.class);
-        result = (mapper.duplicationCheck(duplicationInfo) == 1) ? true : false;
 
-        return result;
+        return (mapper.duplicationCheck(duplicationInfo) >= 1) ? true : false;
     }
 
     @Override
@@ -76,6 +74,12 @@ public class UserDAOImpl implements UserDAO {
         mapper = sqlSession.getMapper(UserMapper.class);
 
         return mapper.checkLogin(email);
+    }
+    @Override
+    public boolean findPassword(Map<String, Object> findPasswordInfo){
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        return mapper.findPassword(findPasswordInfo) != null ? true : false;
     }
 
     @Override
@@ -105,5 +109,12 @@ public class UserDAOImpl implements UserDAO {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         AddressVO addressVO = mapper.searchAddress(userId);
         return addressVO;
+    }
+  
+    @Override
+    public int withdrawalUser(int userId) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int result = mapper.withdrawalUser(userId);
+        return result;
     }
 }

@@ -3,6 +3,8 @@
 .back_box{
   width: 100%;
   height: 850px;
+    background-color: #dfe6e9;
+    margin-top: 80px;
 }
 .box {
     clear: both;

@@ -98,6 +98,9 @@
                  RECIPIENT_DEL_FLAG = 1
              </when>
          </choose>
-         WHERE MESSAGE_ID = #{messageNum}
+         WHERE MESSAGE_ID in
+         <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+         </foreach>
     </update>
 </mapper>

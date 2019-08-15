@@ -11,7 +11,7 @@ function submit() {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "searchPassword",
+        url: "/searchPassword",
         data: {name, email, phone},
         cache: false,
         beforeSend: function (xhr) {
@@ -52,6 +52,47 @@ function submitPassword() {
     $.ajax({
         type: "POST",
         url: "updatePassword",
+        data: {password},
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
+        success(data) {
+            if (data) {
+                window.alert("비밀번호가 변경되었습니다");
+                window.close();
+            } else {
+                alert("비밀번호 수정에 실패하였습니다");
+            }
+        }, error: function (request, status, error) {
+            console.log("전송 오류");
+        }
+
+    });
+}
+
+function submitPassword() {
+    if(!isPasswordValid()) {
+        return;
+    }
+    if(!isPassword2Valid()) {
+        return;
+    }
+
+    let password = $('#password').val();
+    let password2 = $('#password2').val();
+
+    if(password!=password2) {
+        window.alert("비밀번호가 일치하지 않습니다");
+        return;
+    }
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $.ajax({
+        type: "POST",
+        url: "/updatePassword",
         data: {password},
         cache: false,
         beforeSend: function (xhr) {
@@ -181,7 +222,9 @@ function emptyPassword2() {
 function smsCheck(){
     let width = 500;
     let height = 600;
-    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fregistration&state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
+    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/" +
+        "?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fexit&" +
+        "state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +

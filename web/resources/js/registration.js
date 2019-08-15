@@ -111,7 +111,9 @@ function smsCheck() {
 
     let width = 500;
     let height = 600;
-    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fregistration&state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
+    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/" +
+        "?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fexit&" +
+        "state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +
@@ -228,11 +230,11 @@ function isNicknameValid(input) {
         alert("닉네임이 너무 깁니다");
         return false;
     }
-    /*if ($('#nickname').val() == "닉네임이 중복됩니다") {
+    if ($('#nickname').val() == "닉네임이 중복됩니다") {
         alert("새로운 닉네임을 입력해주세요");
         $('#nickname').val("");
         return false;
-    }*/
+    }
     return true;
 }
 
@@ -374,8 +376,8 @@ $('#nickname').focusout(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "checkNickname",
-        data: {nickname},
+        url: "/checkNick",
+        data: {nick:nickname},
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
@@ -402,7 +404,7 @@ $('#email').focusout(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "checkEmail",
+        url: "/checkEmail",
         data: {email},
         cache: false,
         beforeSend: function (xhr) {
