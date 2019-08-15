@@ -40,10 +40,10 @@
             </div>
             <div class="menubar_list">
                 <ul>
-                    <li onclick="moveToInfo();">개인정보</li>
-                    <li onclick="moveToMessage();">메세지함</li>
+                    <li onclick="location.href='/mypage/myinfo'">개인정보</li>
+                    <li onclick="location.href='/mypage/message'">메세지함</li>
                     <li onclick="moveToTransaction();">거래내역</li>
-                    <li onclick="moveToRequest();">보관해주세요 신청 목록</li>
+                    <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
                     <li onclick="moveToLatest();">최근 본 보관소</li>
                     <li onclick="moveToFavorite();">즐겨찾는 보관소</li>
                 </ul>
@@ -57,7 +57,7 @@
                         <th id="table_title2" onclick="location.href='/mypage/myinfo'">회원 정보</th>
                         <th id="table_title1" onclick="location.href='/mypage/myinfo/changepassword'">비밀번호 변경</th>
                         <th id="table_space">
-                            <button id="withdrawal_btn"type="button" name="button">회원탈퇴</button>
+                            <button id="withdrawal_btn"type="button" name="button" onclick="location.href='/mypage/myinfo/withdrawal'">회원탈퇴</button>
                         </th>
                     </tr>
                 </table>
@@ -69,14 +69,14 @@
                         <div class="card card-4">
                             <div class="card-body">
                                 <form id="regForm">
-                                    <div class="row row-space">
-                                        <div class="col-2">
-                                            <label for="photo_main1">
-                                                <img id="main_1" name="profile_img" class="photo_main" src="/resources/image/profile.png"/>
-                                            </label>
-                                            <input type="file" id="photo_main1" class="input_p" name="photo" accept=".jpg, .png"/>
-                                        </div>
-                                    </div>
+<%--                                    <div class="row row-space">--%>
+<%--                                        <div class="col-2">--%>
+<%--                                            <label for="photo_main1">--%>
+<%--                                                <img id="main_1" name="profile_img" class="photo_main" src="/resources/image/profile.png"/>--%>
+<%--                                            </label>--%>
+<%--                                            <input type="file" id="photo_main1" class="input_p" name="photo" accept=".jpg, .png"/>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
                                     <div class="row row-space">
                                         <div class="col-2">
                                             <label class="label">이름</label>

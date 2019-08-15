@@ -71,7 +71,7 @@
         AND PHONENUMBER LIKE #{phoneNumber}||'%' AND name = #{name}
     </select>
     <update id="updatePassword" parameterType="hashMap">
-        UPDATE user_tb SET user_pw = #{password} WHERE email = #{email}
+        UPDATE user_tb SET user_pw = #{password} WHERE user_id = #{userId}
     </update>
 
     <select id="updateUser" statementType="CALLABLE" parameterType="hashMap">
@@ -84,5 +84,8 @@
         select postcode,baseaddress,detailaddress,latitude lat,longitude lng
         from address_view where userid = #{userId}
     </select>
+    <update id="withdrawalUser" parameterType="int">
+        UPDATE user_tb SET del_flag = 'Y' WHERE user_id = #{userId}
+    </update>
 
 </mapper>

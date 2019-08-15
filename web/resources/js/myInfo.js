@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
     var addrLat = 0;
     var addrLng = 0;
