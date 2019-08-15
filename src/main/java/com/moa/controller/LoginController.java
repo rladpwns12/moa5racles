@@ -118,4 +118,10 @@ public class LoginController {
         System.out.println("password: " + password);
         return true;
     }
+
+    @RequestMapping(value = "/termsOfService", method = RequestMethod.GET)
+    public String termsOfService() {
+        return "termsOfService";
+    }
+
 }
