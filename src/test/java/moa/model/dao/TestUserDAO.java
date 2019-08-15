@@ -202,9 +202,11 @@ public class TestUserDAO {
     public void TEST_개인주소_불러오기(){
         System.out.println(dao.searchAddress(91));
     }
+
     @Test
     public void TEST_회월탈퇴(){
         assertEquals(1,dao.withdrawalUser(69));
     }
+
  }
 

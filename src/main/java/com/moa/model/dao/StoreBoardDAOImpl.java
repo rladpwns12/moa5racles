@@ -145,17 +145,15 @@ public class StoreBoardDAOImpl implements StoreBoardDAO {
     }
 
     public List<EntrustSearchVO> searchEntrust(DetailOptionVO detail) {
-        System.out.println(detail.getLatitude());
         StoreBoardMapper mapper = sqlSession_oracle.getMapper(StoreBoardMapper.class);
-        System.out.println(mapper);
         List<EntrustSearchVO> entrustAry = mapper.searchEntrust(detail);
-        System.out.println("DAO 완료");
         return entrustAry;
     }
     @Override
     public StoreBoardVO searchOne(int articleNum) {
         StoreBoardMapper mapper=sqlSession_oracle.getMapper(StoreBoardMapper.class);
         Map<String,Object> map=mapper.selectOne(articleNum);
+
         StoreBoardVO vo=new StoreBoardVO();
 
         vo.setArticleNum(articleNum);

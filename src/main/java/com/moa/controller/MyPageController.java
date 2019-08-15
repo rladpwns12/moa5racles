@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import java.util.*;
 
 @Controller
@@ -39,8 +40,10 @@ public class MyPageController {
     @Autowired
     @Qualifier("memberService")
     private MemberInfoServiceImpl memberInfoService;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     //test dao
     @Autowired
     private UserDAO userDAO;
@@ -54,7 +57,13 @@ public class MyPageController {
         userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
         SimpleUserInfoVO simpleUserInfoVO = memberInfoService.selectMemberInfo(userId);
-        mav.addObject("profileName", simpleUserInfoVO.getProfileName());
+        System.out.println(simpleUserInfoVO);
+        if(simpleUserInfoVO.getProfileName() == null){
+            mav.addObject("profileName", "profile.png");
+        }
+        else {
+            mav.addObject("profileName", simpleUserInfoVO.getProfileName());
+        }
         mav.addObject("userName", simpleUserInfoVO.getName());
         mav.addObject("userEmail", simpleUserInfoVO.getEmail());
         mav.addObject("requestCnt", simpleUserInfoVO.getRequestCnt());
@@ -96,7 +105,7 @@ public class MyPageController {
         return requestVO;
     }
 
-    @RequestMapping(value = {"/message/receive","/message"})
+    @RequestMapping(value = {"/message/receive", "/message"})
     public ModelAndView message(Authentication auth){
         ModelAndView mav = new ModelAndView();
         int userId;

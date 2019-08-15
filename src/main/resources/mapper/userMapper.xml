@@ -78,6 +78,10 @@
         CALL PI_UPDATE_MY_INFO(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
         #{userId},#{phoneNumber},#{profile},#{res, mode=OUT, jdbcType=INTEGER })
     </select>
+    <select id="searchAddress" parameterType="int" resultType="com.moa.model.vo.AddressVO">
+        select postcode,baseaddress,detailaddress,latitude lat,longitude lng
+        from address_view where userid = #{userId}
+    </select>
 
 
     <select id="searchAddress" parameterType="hashMap" resultType="com.moa.model.vo.AddressVO">

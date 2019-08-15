@@ -17,4 +17,5 @@ public interface UserDAO {
     LoginVO checkLogin(String email);
     AddressVO searchAddress(int userId);
     int withdrawalUser(int userId);
+
 }
