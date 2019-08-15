@@ -2,6 +2,9 @@ package com.moa.controller;
 
 import com.moa.model.service.FindUserInfoService;
 import com.moa.model.service.MemberInfoService;
+import com.moa.model.service.MemberRegistService;
+import com.moa.model.vo.AddressVO;
+import com.moa.model.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class LoginController {
     private static final String SUCCESS = "success";
@@ -22,7 +28,10 @@ public class LoginController {
     @Autowired
     private MemberInfoService memberInfoService;
     @Autowired
+    private MemberRegistService memberRegistService;
+    @Autowired
     private FindUserInfoService findUserInfoService;
+
 
     @RequestMapping(value="/login")
     public String loginPage(String error, String logout, Model model){
@@ -79,19 +88,21 @@ public class LoginController {
             @RequestParam String postcode,
             @RequestParam String address,
             @RequestParam String detailAddress,
-            @RequestParam String latitude,
-            @RequestParam String longitude) {
-//        System.out.println(name);
-//        System.out.println(nickname);
-//        System.out.println(email);
-//        System.out.println(password);
-//        System.out.println(phone);
-//        System.out.println(postcode);
-//        System.out.println(address);
-//        System.out.println(detailAddress);
-//        System.out.println(latitude);
-//        System.out.println(longitude);
-        return true;
+            @RequestParam double latitude,
+            @RequestParam double longitude) {
+        UserVO userVO = new UserVO(email, password, phone, nickname, name, null);
+        AddressVO addressVO = new AddressVO(address, detailAddress, postcode, latitude, longitude);
+
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("UserVO", userVO);
+        userInfo.put("AddressVO", addressVO);
+        userInfo.put("res", 0);
+
+        Map<String, Object> duplicationInfo = new HashMap<>();
+        duplicationInfo.put("email", email);
+        duplicationInfo.put("nick", nickname);
+
+        return memberRegistService.addMember(userInfo, duplicationInfo);
     }
 
     // 아이디, 비밀번호 찾기
@@ -138,7 +149,6 @@ public class LoginController {
             @RequestParam String email,
             @RequestParam String password) {
         boolean result = true;
-
         return result;
     }
 }

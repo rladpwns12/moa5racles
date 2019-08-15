@@ -20,7 +20,7 @@
 <div class="page-wrapper bg-gra-02 font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card_t card-4">
-            <div class="add_margin card-body" id="content1" >
+            <div id="content1" class="add_margin card-body">
                 <h2 class="title">아이디 찾기</h2>
                     <div class="row row-space">
                         <div class="col-2">
