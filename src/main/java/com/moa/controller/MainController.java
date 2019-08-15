@@ -6,8 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
     @RequestMapping(value = {"main",""})
-    public String test(){
+    public String main(){
 
         return "main";
+    }
+
+    @RequestMapping(value = "test")
+    public String test(){
+
+        return "test";
     }
 }
