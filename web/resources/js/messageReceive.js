@@ -42,6 +42,7 @@ $(document).ready(function () {
 function popupOpen(num, readState){
     console.log("num:"+num+",readState:"+readState);
     if(readState == 0){
+        
         $.ajax({
             url:"/mypage/message/read/"+num,
             type:"get",
