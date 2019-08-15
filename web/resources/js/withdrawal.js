@@ -45,7 +45,8 @@ $(document).ready(function () {
                 },
                 success:function(result) {
                     if (result == true) {
-                        alert("비밀번호 변경이 완료되었습니다.");
+                        alert("회원탈퇴가 되었습니다.");
+                        location.reload();
                     }
                     else{
                         alert("현재 비밀번호가 올바르지 않습니다.");

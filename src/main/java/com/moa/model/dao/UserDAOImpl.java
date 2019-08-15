@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
         boolean result;
 
         mapper = sqlSession.getMapper(UserMapper.class);
-        result = (mapper.duplicationCheck(duplicationInfo) == 1) ? true : false;
+        result = (mapper.duplicationCheck(duplicationInfo) >= 1) ? true : false;
 
         return result;
     }

@@ -227,8 +227,6 @@ public class MyPageController {
         mav.addObject(list);
         mav.addObject(pagination);
 
-
-
         return mav;
     }
     //메시지 상세보기
@@ -326,20 +324,6 @@ public class MyPageController {
         return result;
     }
 
-
-        int size = deleteList.size();
-        List<Integer> deleteNum = new ArrayList<Integer>();
-
-        for(int i = 0; i < size; i++){
-            deleteNum.add(Integer.parseInt(deleteList.get(i)));
-        }
-        Map<String,Object> deleteInfo = new HashMap<String, Object>();
-        deleteInfo.put("messageType","send");
-        deleteInfo.put("list",deleteNum);
-
-        boolean result = messengerListService.messageDelete(deleteInfo);
-        return result;
-    }
     @RequestMapping("myinfo")
     public ModelAndView myInfo(Authentication auth){
         // USER ID

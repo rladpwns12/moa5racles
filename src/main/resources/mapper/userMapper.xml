@@ -84,10 +84,6 @@
     </select>
 
 
-    <select id="searchAddress" parameterType="hashMap" resultType="com.moa.model.vo.AddressVO">
-        select postcode,baseaddress,detailaddress,latitude lat,longitude lng
-        from address_view where userid = #{userId}
-    </select>
     <update id="withdrawalUser" parameterType="int">
         UPDATE user_tb SET del_flag = 'Y' WHERE user_id = #{userId}
     </update>

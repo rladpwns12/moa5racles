@@ -146,7 +146,7 @@ public class TestUserDAO {
     @Test
     public void TEST_닉네임_중복체크_중복있음(){
         Map<String,Object> testMap = new HashMap<String, Object>();
-        testMap.put("nick","테스트닉5");
+        testMap.put("nick","용용희");
 
         assertTrue(dao.signUpDuplicationCheck(testMap));
     }
@@ -154,7 +154,7 @@ public class TestUserDAO {
     @Test
     public void TEST_닉네임_중복체크_중복없음(){
         Map<String,Object> testMap = new HashMap<String, Object>();
-        testMap.put("nick","테스트닉500");
+        testMap.put("nick","용용희");
 
         assertFalse(dao.signUpDuplicationCheck(testMap));
     }
