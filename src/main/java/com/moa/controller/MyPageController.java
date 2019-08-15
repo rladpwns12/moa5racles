@@ -1,6 +1,7 @@
 package com.moa.controller;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.moa.message.MessengerStateMessage;
 import com.moa.model.dao.UserDAO;
 import com.moa.model.dao.UserDAOImpl;
@@ -10,6 +11,8 @@ import com.moa.model.service.MemberInfoServiceImpl;
 import com.moa.model.service.MessengerListServiceImpl;
 import com.moa.model.vo.*;
 import com.moa.paging.Pagination;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -21,12 +24,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
 import java.util.*;
+
 
 @Controller
 @RequestMapping(value="/mypage")
@@ -304,6 +310,22 @@ public class MyPageController {
     @ResponseBody
     @RequestMapping(value = {"/message/send/delete"}, method = RequestMethod.POST)
     public boolean messageSendDelete(@RequestBody List<String> deleteList){
+
+
+        int size = deleteList.size();
+        List<Integer> deleteNum = new ArrayList<Integer>();
+
+        for(int i = 0; i < size; i++){
+            deleteNum.add(Integer.parseInt(deleteList.get(i)));
+        }
+        Map<String,Object> deleteInfo = new HashMap<String, Object>();
+        deleteInfo.put("messageType","send");
+        deleteInfo.put("list",deleteNum);
+        
+        boolean result = messengerListService.messageDelete(deleteInfo);
+        return result;
+    }
+
 
         int size = deleteList.size();
         List<Integer> deleteNum = new ArrayList<Integer>();

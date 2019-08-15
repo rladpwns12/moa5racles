@@ -49,8 +49,7 @@
                                     onclick="location.href='${contextPath}/moa/keep'">
                                 메세지 작성
                             </button>
-                            <button id="delete_btn"type="button" name="button"
-                                    onclick="location.href='${contextPath}/moa/keep'">
+                            <button id="delete_btn"type="button" name="button">
                                 삭제
                             </button>
                         </th>
@@ -61,7 +60,7 @@
             <div class="main_content">
                 <table>
                     <tr>
-                        <td id="title_select">선택</td>
+                        <td id="title_select">선택<input id="selectAll"type="checkbox"></td>
                         <td id="title_profile">읽음</td>
                         <td id="title_nick">닉네임</td>
                         <td id="title_content">내용</td>
@@ -70,6 +69,7 @@
                     </tr>
                     <c:choose>
                         <c:when test="${pagination.listCnt == 0}">
+
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -78,11 +78,12 @@
                                 <td></td>
                                 <td></td>
                             </tr>
+
                         </c:when>
                         <c:when test="${pagination.listCnt != 0}">
                             <c:forEach var="i" begin="0" end="${pagination.curListCnt}" step="1" items="${messageVOList}">
                                     <tr>
-                                        <td><input type="checkbox" value="${i.messageId}"></td>
+                                        <td><input type="checkbox" name="chk" value="${i.messageId}"></td>
                                         <c:if test="${i.readState == 0}">
                                             <td><i class="far fa-envelope"></i></td>
                                         </c:if>
