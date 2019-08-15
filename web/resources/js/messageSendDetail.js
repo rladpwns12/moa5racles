@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $(".cancel_btn").click(function close(){
         window.close();
     });
@@ -18,6 +20,10 @@ $(document).ready(function () {
                contentType:"application/json",
                dataType:"json",
                data :JSON.stringify(messageData),
+               beforeSend: function(xhr) {
+                   xhr.setRequestHeader("AJAX", true);
+                   xhr.setRequestHeader(header, token);
+               },
                success:function(result){
                    if(result == true){
                        alert("전송되었습니다.");

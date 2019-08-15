@@ -126,6 +126,7 @@ $(document).ready(function () {
                         success:function(result) {
                             if (result == true) {
                                 alert("수정이 완료되었습니다.");
+                                location.reload();
                             }
                             else{
                                 alert("비정상적으로 수정이 완료되었습니다.");
