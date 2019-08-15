@@ -252,7 +252,7 @@ function isEmailValid(input) {
         $('#email').val("");
         return false;
     }
-    let emailValid = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
+    let emailValid = /^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-_.]?[0-9a-z])*.[a-z]{2,3}$/i;//이메일 정규식
     if (!emailValid.test(input)) {
         alert("이메일 형식이 올바르지 않습니다.");
         $("email").focus();
@@ -376,15 +376,15 @@ $('#nickname').focusout(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "checkNickname",
-        data: {nickname},
+        url: "/checkNick",
+        data: {nick:nickname},
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            if (data) {
+            if (data == "success") {
                 $('#nickname').css('border', 'solid 0.2px green');
             } else {
                 $('#nickname').css('border', 'solid 0.2px red');
@@ -404,7 +404,7 @@ $('#email').focusout(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "checkEmail",
+        url: "/checkEmail",
         data: {email},
         cache: false,
         beforeSend: function (xhr) {
@@ -412,7 +412,7 @@ $('#email').focusout(function () {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            if (data) {
+            if (data == "success") {
                 $('#email').css('border', 'solid 0.2px green');
             } else {
                 $('#email').css('border', 'solid 0.2px red');

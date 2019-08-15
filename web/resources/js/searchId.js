@@ -9,7 +9,7 @@ function submit() {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "searchId",
+        url: "/searchId",
         data: {name, phone},
         cache: false,
         beforeSend: function (xhr) {
@@ -17,10 +17,10 @@ function submit() {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            alert(data);
-            if (data != null) {
-                alert("회원님의 아이디는: " + data + " 입니다");
-                window.close();
+            if (data != "") {
+                $('#searchedId').val(data);
+                $('#content1').hide();
+                $('#content2').show();
             } else {
                 alert("아이디 찾기에 실패하셨습니다");
             }
@@ -95,7 +95,8 @@ function smsCheck(){
         "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
 
     window.open(popUpUrl, "", popUpOption);
+}
 
-
-
+function exit() {
+    window.close();
 }

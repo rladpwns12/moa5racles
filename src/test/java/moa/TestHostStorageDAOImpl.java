@@ -71,24 +71,25 @@ public class TestHostStorageDAOImpl {
 
         assertTrue(res == true);
     }*/
-    @Test
-    public void test_가져오기(){
-        List<String> ary = new ArrayList<>();
-        ary.add("1");
-        List<Object> entrustAry = storeBoard.search((new DetailOptionVO(ary,100,"거리 가까운 순","%","%","%","%","0",37.484334,126.955)));
-        assertEquals(1,entrustAry);
+//    @Test
+//    public void test_가져오기(){
+//        List<String> ary = new ArrayList<>();
+//        ary.add("1");
+//        List<Object> entrustAry = storeBoard.search((new DetailOptionVO(ary,100,"거리 가까운 순","%","%","%","%","0",37.484334,126.955)));
+//        assertEquals(1,entrustAry);
+//
+//    }
+//    @Test
+//    public void test_요청목록(){
+////        storeRequestDAO.searchList(28);
+//    }
+//    @Test
+//    public void 짐보관글가져오기(){
+//        int articleNum=2;
+//        StoreBoardVO map= storeBoardDAO.searchOne(articleNum);
+//        System.out.println(map);
+//        assertNotNull("짐보관글 가져오기 실패",map);
+//    }
 
-    }
-    @Test
-    public void test_요청목록(){
-//        storeRequestDAO.searchList(28);
-    }
-    @Test
-    public void 짐보관글가져오기(){
-/*        int articleNum=2;
-        StoreBoardVO map= storeBoardDAO.searchOne(articleNum);
-        System.out.println(map);
-        assertNotNull("짐보관글 가져오기 실패",map);*/
-    }
 
 }
