@@ -151,4 +151,10 @@ public class LoginController {
         boolean result = true;
         return result;
     }
+
+    @RequestMapping(value = "/termsOfService", method = RequestMethod.GET)
+    public String termsOfService() {
+        return "termsOfService";
+    }
+
 }

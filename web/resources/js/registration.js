@@ -247,12 +247,12 @@ function isEmailValid(input) {
         alert("이메일이 너무 깁니다");
         return false;
     }
-    if ($('#email').val() == "이메일이 중복됩니다") {
+    /*if ($('#email').val() == "이메일이 중복됩니다") {
         alert("새로운 이메일을 입력해주세요");
         $('#email').val("");
         return false;
-    }
-    let emailValid = /^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-_.]?[0-9a-z])*.[a-z]{2,3}$/i;//이메일 정규식
+    }*/
+    let emailValid = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
     if (!emailValid.test(input)) {
         alert("이메일 형식이 올바르지 않습니다.");
         $("email").focus();
@@ -385,7 +385,6 @@ $('#nickname').focusout(function () {
         },
         success(data) {
             if (data != null) {
-
                 $('#nickname').css('border', 'solid 0.2px green');
             } else {
                 $('#nickname').css('border', 'solid 0.2px red');
@@ -414,7 +413,6 @@ $('#email').focusout(function () {
         },
         success(data) {
             if (data != null) {
-
                 $('#email').css('border', 'solid 0.2px green');
             } else {
                 $('#email').css('border', 'solid 0.2px red');

@@ -142,12 +142,12 @@
                 <div class="add_m_t row row-space">
                     <input type="checkbox" id="confirm1"/>
                     <label for="confirm1" class="confirm">&nbsp;&nbsp;MOA 이용약관 동의</label>
-                    <a href="#" class="agree"> [이용약관 보기] </a>
+                    <a href="/termsOfService" class="agree"> [이용약관 보기] </a>
                 </div>
                 <div class="add_m_t row row-space">
                     <input type="checkbox" id="confirm2"/>
                     <label for="confirm2" class="confirm">&nbsp;&nbsp;위치정보 이용약관 동의</label>
-                    <a href="#" class="agree"> [이용약관 보기] </a>
+                    <a href="termsOfService" class="agree"> [이용약관 보기] </a>
                 </div>
                 <div class="p-t-15">
                     <button class="btn btn--radius-2 btn--purple" type="button" onclick="submit()">회원가입</button>
