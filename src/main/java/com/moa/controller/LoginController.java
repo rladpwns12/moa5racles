@@ -1,11 +1,17 @@
 package com.moa.controller;
 
 import com.moa.model.service.MemberInfoService;
+import com.moa.model.service.MemberRegisterService;
+import com.moa.model.service.MemberRegisterServiceImpl;
+import com.moa.model.vo.AddressVO;
+import com.moa.model.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Member;
 
 @Controller
 public class LoginController {
@@ -38,18 +44,16 @@ public class LoginController {
             @RequestParam String postcode,
             @RequestParam String address,
             @RequestParam String detailAddress,
-            @RequestParam String latitude,
-            @RequestParam String longitude) {
-//        System.out.println(name);
-//        System.out.println(nickname);
-//        System.out.println(email);
-//        System.out.println(password);
-//        System.out.println(phone);
-//        System.out.println(postcode);
-//        System.out.println(address);
-//        System.out.println(detailAddress);
-//        System.out.println(latitude);
-//        System.out.println(longitude);
+            @RequestParam double latitude,
+            @RequestParam double longitude) {
+
+        UserVO user = new UserVO(email, password, phone, nickname, name, null);
+        AddressVO addr = new AddressVO(address, detailAddress, postcode, latitude, longitude);
+
+
+
+        MemberRegisterService memberRegisterService = new MemberRegisterServiceImpl();
+
         return true;
     }
 
@@ -92,7 +96,7 @@ public class LoginController {
 
     @RequestMapping(value = "/searchPassword", method = RequestMethod.POST)
     public @ResponseBody
-    String isPasswordSearched(
+    boolean isPasswordSearched(
             @RequestParam String name,
             @RequestParam String email,
             @RequestParam String phone) {
@@ -100,6 +104,12 @@ public class LoginController {
         System.out.println("email: " + email);
         System.out.println("phone: " + phone);
 
-        return "failed";
+        return true;
+    }
+
+    @RequestMapping(value="/updatePassword", method = RequestMethod.POST)
+    public @ResponseBody boolean updatePassword(@RequestParam String password) {
+        System.out.println("password: " + password);
+        return true;
     }
 }

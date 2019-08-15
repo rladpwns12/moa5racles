@@ -107,7 +107,7 @@ function searchLocation(addr) {
     geocoder.addressSearch(addr, callback);
 }
 
-function smsCheck(){
+function smsCheck() {
 
     let width = 500;
     let height = 600;
@@ -119,6 +119,7 @@ function smsCheck(){
 
     window.open(popUpUrl, "", popUpOption);
 }
+
 function submit() {
     let name = $('#name').val();
     let nickname = $('#nickname').val();
@@ -143,7 +144,7 @@ function submit() {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "registerationForm",
+        url: "registration",
         data: {
             name, nickname, email, password, phone, postcode, address, detailAddress, latitude, longitude
         },
@@ -155,7 +156,6 @@ function submit() {
         success(data) {
             if (data) {
                 alert("회원가입에 성공하셨습니다.");
-                $('#regForm')[0].reset();
                 location.href = "/login";
             } else {
                 alert("회원가입에 실패하셨습니다.");
@@ -382,7 +382,7 @@ $('#nickname').focusout(function () {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            if (data) {
+            if (data != null) {
                 $('#nickname').css('border', 'solid 0.2px green');
             } else {
                 $('#nickname').css('border', 'solid 0.2px red');
@@ -410,7 +410,7 @@ $('#email').focusout(function () {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            if (data) {
+            if (data != null) {
                 $('#email').css('border', 'solid 0.2px green');
             } else {
                 $('#email').css('border', 'solid 0.2px red');

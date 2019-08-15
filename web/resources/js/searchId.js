@@ -17,12 +17,12 @@ function submit() {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            alert(data);
             if (data != null) {
-                alert("회원님의 아이디는: " + data + " 입니다");
-                window.close();
+                $('#searchedId').val(data);
+                $('#content1').hide();
+                $('#content2').show();
             } else {
-                alert("아이디 찾기에 실패하셨습니다");
+                alert("회원정보를 잘못 입력하셨습니다");
             }
         }, error: function (request, status, error) {
             console.log("전송 오류");
@@ -93,7 +93,8 @@ function smsCheck(){
         "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
 
     window.open(popUpUrl, "", popUpOption);
+}
 
-
-
+function exit() {
+    window.close();
 }
