@@ -13,6 +13,7 @@ public interface UserMapper {
     void signUpUser(Map<String,Object> userInfo);
     int duplicationCheck(Map<String,Object> duplicationInfo);
     LoginVO checkLogin(String email);
+    String findPassword(Map<String, Object> fincPasswordInfo);
     String findEmail(Map<String,Object> findEmailInfo );
     int updatePassword(Map<String,Object> updatePasswordInfo);
     void updateUser(Map<String,Object> updateUserInfo);

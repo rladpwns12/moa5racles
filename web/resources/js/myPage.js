@@ -8,8 +8,7 @@ var moveToInfo = function(){
 	alert("일시적으로 서비스가 중단되었습니다.");
 }
 var moveToMessage = function(){
-//	location.href = ""
-	alert("일시적으로 서비스가 중단되었습니다.");
+	location.href = "/mypage/message"
 }
 var moveToTransaction = function(){
 //	location.href = ""

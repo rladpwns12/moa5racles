@@ -70,7 +70,7 @@
               </div>
               <div class="right_context">
                 <div class="not_read_message" onclick="moveToMessage();">
-                  <h3>안읽은 쪽지 ></h3>
+                  <h3>안읽은 메세지 ></h3>
                   <h3 id="not_read_message_cnt">${notReadMessageCnt}개</h3>
                 </div>
                 <div class="using_storage" onclick="usingStorage();">

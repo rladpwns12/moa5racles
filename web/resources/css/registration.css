@@ -541,7 +541,7 @@ input {
     width: 510px;
 }
 
-#address, #detailAddress {
+#address, #detailAddress_fake {
     width: 510px;
     margin-bottom: 5px;
 }

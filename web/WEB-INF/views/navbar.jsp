@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
@@ -22,11 +22,14 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button id="loginout_btn">로그아웃</button>
             </form>
+            <a href="javascript:void(0)">|</a>
         </sec:authorize>
-        <sec:authorize access="isAnonymous()">
+        <sec:authorize access="!isAuthenticated()">
             <a href="/login">로그인</a>
+            <a href="javascript:void(0)">|</a>
         </sec:authorize>
-        <a href="javascript:void(0)">|</a>
+
+
         <a href="/mypage" id="signup_mypage_btn">마이페이지</a>
         <a class="fas fa-align-justify hide" id="sidebar_btn"></a>
     </div>

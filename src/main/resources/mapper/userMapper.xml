@@ -65,7 +65,10 @@
         CALL PI_INSERT_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
         #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.nick},#{UserVO.name},'profile.png',#{res, mode=OUT, jdbcType=INTEGER })
     </select>
-    
+    <select id="findPassword" parameterType="hashMap" resultType="String">
+        SELECT email FROM login_view WHERE auth='ROLE_USER'
+        AND PHONENUMBER LIKE #{phoneNumber}||'%' AND name = #{name} AND email = #{email}
+    </select>
     <select id="findEmail" parameterType="hashMap" resultType="String">
         SELECT email FROM login_view WHERE auth='ROLE_USER'
         AND PHONENUMBER LIKE #{phoneNumber}||'%' AND name = #{name}

@@ -11,7 +11,7 @@ function submit() {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "searchPassword",
+        url: "/searchPassword",
         data: {name, email, phone},
         cache: false,
         beforeSend: function (xhr) {
@@ -19,11 +19,11 @@ function submit() {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            alert(data);
-            if (data != null) {
-                alert("Password found");
+            if (data == true) {
+                $('#content1').hide();
+                $('#content2').show();
             } else {
-                alert("비밀번호 찾기에 실패하셨습니다");
+                alert("입력한 정보를 찾을 수 없습니다.");
             }
         }, error() {
             console.log("전송 오류");
@@ -32,6 +32,47 @@ function submit() {
     })
 
     //전송 구현 필요
+}
+
+function submitPassword() {
+    if(!isPasswordValid()) {
+        return;
+    }
+    if(!isPassword2Valid()) {
+        return;
+    }
+
+    let password = $('#password').val();
+    let password2 = $('#password2').val();
+
+    if(password!=password2) {
+        window.alert("비밀번호가 일치하지 않습니다");
+        return;
+    }
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $.ajax({
+        type: "POST",
+        url: "/updatePassword",
+        data: {password},
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
+        success(data) {
+            if (data) {
+                window.alert("비밀번호가 변경되었습니다");
+                window.close();
+            } else {
+                alert("비밀번호 수정에 실패하였습니다");
+            }
+        }, error: function (request, status, error) {
+            console.log("전송 오류");
+        }
+
+    });
 }
 
 function isValid() {
@@ -107,6 +148,36 @@ function emptyPhone() {
         $('#phone').val("");
         $('#phone').css("color", "#555555");
         $('#phone').css("font-size", "14pt");
+    }
+}
+
+function isPasswordValid() {
+    let password = $('#password').val();
+    if(password==null || password.trim()=="") {
+        $('#password').css("border", "solid 0.2px red");
+        return false;
+    }
+    return true;
+}
+
+function isPassword2Valid() {
+    let password2 = $('#password2').val();
+    if(password2==null || password2.trim()=="") {
+        $('#password2').css("border", "solid 0.2px red");
+        return false;
+    }
+    return true;
+}
+
+function emptyPassword() {
+    if(!isPasswordValid()) {
+        $('#password').css("border", "none");
+    }
+}
+
+function emptyPassword2() {
+    if(!isPassword2Valid()) {
+        $('#password2').css("border", "none");
     }
 }
 
