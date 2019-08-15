@@ -1,5 +1,7 @@
 
 $(document).ready(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $('#selectAll').click(function () {
         if($('#selectAll').prop("checked")){
             $("input[name=chk]").prop("checked",true);
@@ -22,6 +24,10 @@ $(document).ready(function () {
                 contentType:"application/json",
                 dataType:"json",
                 data :JSON.stringify(checkArray),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("AJAX", true);
+                    xhr.setRequestHeader(header, token);
+                },
                 success:function(result){
                     if(result == true){
                         alert("삭제가 완료되었습니다.");
