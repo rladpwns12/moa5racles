@@ -29,6 +29,11 @@ public class LoginController {
         System.out.println("loginPage()...");
         return "login";
     }
+    @RequestMapping(value="/exit")
+    public String exitRedirect(String error, String logout, Model model){
+        System.out.println("exitRedirect()...");
+        return "exitRedirect";
+    }
 
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
     @ResponseBody

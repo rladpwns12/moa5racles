@@ -86,7 +86,9 @@ function smsCheck(){
 
     let width = 500;
     let height = 600;
-    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fregistration&state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
+    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/" +
+        "?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fexit&" +
+        "state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +

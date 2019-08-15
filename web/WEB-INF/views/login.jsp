@@ -1,5 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,9 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/login_util.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
     <sec:csrfMetaTags/>
+
 </head>
+
 <body>
 <%@ include file="navbar.jsp" %>
 <div class="limiter">
@@ -66,7 +70,6 @@
                 </c:if>
                 <div class="container-login100-form-btn">
                     <input type="submit" class="l_b login100-form-btn" value="로그인" />
-
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
@@ -74,6 +77,7 @@
     </div>
 </div>
 <div id="dropDownSelect1"></div>
+
 <script src="/resources/js/login.js"></script>
 </body>
 <%@ include file="footer.jsp" %>
