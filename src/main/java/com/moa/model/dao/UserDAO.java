@@ -16,4 +16,6 @@ public interface UserDAO {
     int updateUser(Map<String,Object> updateUserInfo);
     LoginVO checkLogin(String email);
     AddressVO searchAddress(int userId);
+    int withdrawalUser(int userId);
+
 }
