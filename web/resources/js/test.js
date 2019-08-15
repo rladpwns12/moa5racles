@@ -1,0 +1,1 @@
+var defaultAuth = firebase.auth();
