@@ -72,10 +72,10 @@
 
         <div class="card_t card-4">
             <div id="content2" class="add_margin card-body" style="display: none">
-                <h2 class="title">비밀번호 찾기</h2>
+                <h2 class="title">비밀번호 변경</h2>
                 <div class="row row-space">
                     <div class="col-2">
-                        <label class="label">비밀번호를 입력해주세요</label>
+                        <label class="label">변경할 비밀번호를 입력해주세요</label>
                         <div class="input-group">
                             <input id="password" class="short2 input100 input--style-4" type="password" name="password" onfocus="emptyPassword()">
                             <span class="focus-input100"></span>
