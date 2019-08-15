@@ -85,10 +85,10 @@ public class TestHostStorageDAOImpl {
     }
     @Test
     public void 짐보관글가져오기(){
-        int articleNum=2;
-//        //StoreBoardVO map= storeBoardDAO.searchOne(articleNum);
-//        System.out.println(map);
-//        assertNotNull("짐보관글 가져오기 실패",map);
+/*        int articleNum=2;
+        StoreBoardVO map= storeBoardDAO.searchOne(articleNum);
+        System.out.println(map);
+        assertNotNull("짐보관글 가져오기 실패",map);*/
     }
 
 }
