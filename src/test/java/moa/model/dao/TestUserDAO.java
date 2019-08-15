@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -201,5 +202,11 @@ public class TestUserDAO {
     public void TEST_개인주소_불러오기(){
         System.out.println(dao.searchAddress(91));
     }
+
+    @Test
+    public void TEST_회월탈퇴(){
+        assertEquals(1,dao.withdrawalUser(69));
+    }
+
  }
 

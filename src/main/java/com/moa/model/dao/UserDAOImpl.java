@@ -106,4 +106,11 @@ public class UserDAOImpl implements UserDAO {
         AddressVO addressVO = mapper.searchAddress(userId);
         return addressVO;
     }
+  
+    @Override
+    public int withdrawalUser(int userId) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int result = mapper.withdrawalUser(userId);
+        return result;
+    }
 }
