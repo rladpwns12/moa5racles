@@ -28,10 +28,10 @@
             </div>
             <div class="menubar_list">
                 <ul>
-                    <li onclick="moveToInfo();">개인정보</li>
-                    <li onclick="moveToMessage();">메세지함</li>
+                    <li onclick="location.href='/mypage/myinfo'">개인정보</li>
+                    <li onclick="location.href='/mypage/message'">메세지함</li>
                     <li onclick="moveToTransaction();">거래내역</li>
-                    <li onclick="moveToRequest();">보관해주세요 신청 목록</li>
+                    <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
                     <li onclick="moveToLatest();">최근 본 보관소</li>
                     <li onclick="moveToFavorite();">즐겨찾는 보관소</li>
                 </ul>
@@ -49,8 +49,7 @@
                                     onclick="sendPopup()">
                                 메세지 작성
                             </button>
-                            <button id="delete_btn"type="button" name="button"
-                                    onclick="location.href='${contextPath}/moa/keep'">
+                            <button id="delete_btn"type="button" name="button">
                                 삭제
                             </button>
                         </th>
@@ -83,7 +82,7 @@
                             <c:forEach var="i" begin="0" end="${pagination.curListCnt}" step="1" items="${messageVOList}">
                                 <c:if test="${i.readState == 0}">
                                     <tr>
-                                        <td><input type="checkbox" value="${i.messageId}"></td>
+                                        <td><input type="checkbox" name="chk" value="${i.messageId}"></td>
                                         <td style="font-weight: bold;"><i class="far fa-envelope"></i></td>
                                         <td style="font-weight: bold;">${i.senderNick}</td>
                                         <c:if test="${fn:length(i.content) > 35}">
@@ -98,7 +97,7 @@
                                 </c:if>
                                 <c:if test="${i.readState == 1}">
                                     <tr>
-                                        <td><input type="checkbox" value="${i.messageId}"></td>
+                                        <td><input type="checkbox" name="chk"  value="${i.messageId}"></td>
                                         <td><i class="far fa-envelope-open"></i></td>
                                         <td>${i.senderNick}</td>
                                         <c:if test="${fn:length(i.content) > 30}">

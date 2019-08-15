@@ -6,17 +6,17 @@
 <mapper namespace="com.moa.mybatis.AddressMapper">
 
     <resultMap id="address_map" type="com.moa.model.vo.SimpleAddressVO">
-        <id property="addressId" column="ADDRESS_ID"  />
-        <id property="baseAddress" column="BASE_ADDRESS"  />
-        <id property="detailAddress" column="DETAIL_ADDRESS"  />
+        <id property="addressId" column="ADDRESSID"  />
+        <id property="baseAddress" column="BASEADDRESS"  />
+        <id property="detailAddress" column="DETAILADDRESS"  />
     </resultMap>
 
     <sql id="address_columns">
-        ADDRESS_ID, BASE_ADDRESS, DETAIL_ADDRESS
+        ADDRESSID, BASEADDRESS, DETAILADDRESS
     </sql>
 
     <select id="searchUserAddress" resultMap="address_map" parameterType="java.lang.Integer">
-        select <include refid="address_columns" /> FROM ADDRESS_VIEW WHERE USER_ID = #{userId}
+        select <include refid="address_columns" /> FROM ADDRESS_VIEW WHERE USERID = #{userId}
     </select>
 
 </mapper>

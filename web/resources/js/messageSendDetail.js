@@ -26,8 +26,6 @@ $(document).ready(function () {
                    else{
                        alert("전송에 실패하였습니다.\n받는 사람 닉네임을 다시 한번 확인해주세요.");
                    }
-
-
                },
                error:function(error){
                    alert("전송에 실패하였습니다.");

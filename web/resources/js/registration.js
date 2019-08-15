@@ -111,7 +111,9 @@ function smsCheck() {
 
     let width = 500;
     let height = 600;
-    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fregistration&state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
+    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/" +
+        "?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fexit&" +
+        "state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +
@@ -250,7 +252,7 @@ function isEmailValid(input) {
         $('#email').val("");
         return false;
     }
-    let emailValid = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
+    let emailValid = /^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-_.]?[0-9a-z])*.[a-z]{2,3}$/i;//이메일 정규식
     if (!emailValid.test(input)) {
         alert("이메일 형식이 올바르지 않습니다.");
         $("email").focus();
@@ -374,8 +376,8 @@ $('#nickname').focusout(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "checkNickname",
-        data: {nickname},
+        url: "/checkNick",
+        data: {nick:nickname},
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
@@ -383,6 +385,7 @@ $('#nickname').focusout(function () {
         },
         success(data) {
             if (data != null) {
+
                 $('#nickname').css('border', 'solid 0.2px green');
             } else {
                 $('#nickname').css('border', 'solid 0.2px red');
@@ -402,7 +405,7 @@ $('#email').focusout(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "checkEmail",
+        url: "/checkEmail",
         data: {email},
         cache: false,
         beforeSend: function (xhr) {
@@ -411,6 +414,7 @@ $('#email').focusout(function () {
         },
         success(data) {
             if (data != null) {
+
                 $('#email').css('border', 'solid 0.2px green');
             } else {
                 $('#email').css('border', 'solid 0.2px red');

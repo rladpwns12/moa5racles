@@ -1,5 +1,6 @@
 package com.moa.controller;
 
+import com.moa.model.service.FindUserInfoService;
 import com.moa.model.service.MemberInfoService;
 import com.moa.model.service.MemberRegistService;
 import com.moa.model.vo.AddressVO;
@@ -8,7 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,13 +29,48 @@ public class LoginController {
     private MemberInfoService memberInfoService;
     @Autowired
     private MemberRegistService memberRegistService;
+    @Autowired
+    private FindUserInfoService findUserInfoService;
+
 
     @RequestMapping(value="/login")
     public String loginPage(String error, String logout, Model model){
         System.out.println("loginPage()...");
         return "login";
     }
+    @RequestMapping(value="/exit")
+    public String exitRedirect(String error, String logout, Model model){
+        System.out.println("exitRedirect()...");
+        return "exitRedirect";
+    }
 
+    @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+    @ResponseBody
+    public String checkEmail(@RequestParam(value = "email") String email){
+        Map<String, Object> duplicationInfo = new HashMap<>();
+
+        duplicationInfo.put("email", email);
+
+        //이메일 중복이 있는 경우 true 반환
+        if (memberInfoService.signUpDuplicationCheck(duplicationInfo))
+            return FAIL;
+        else
+            return SUCCESS;
+    }
+
+    @RequestMapping(value = "/checkNick", method = RequestMethod.POST)
+    @ResponseBody
+    public String checkNick(@RequestParam(value = "nick") String nick) {
+        Map<String, Object> duplicationInfo = new HashMap<>();
+
+        duplicationInfo.put("nick", nick);
+
+        //닉네임 중복이 있는 경우 true 반환
+        if (memberInfoService.signUpDuplicationCheck(duplicationInfo))
+            return FAIL;
+        else
+            return SUCCESS;
+    }
     // 회원가입
     @RequestMapping(value="/registration", method=RequestMethod.GET)
     public String registeration() {
@@ -63,23 +105,6 @@ public class LoginController {
         return memberRegistService.addMember(userInfo, duplicationInfo);
     }
 
-    //회원가입 중복 검사
-    @RequestMapping(value = "/checkNickname", method = RequestMethod.POST)
-    public @ResponseBody
-    boolean checkNickname(@RequestParam String nickname) {
-
-
-        return true;
-    }
-
-    @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
-    public @ResponseBody
-    boolean checkEmail(@RequestParam String email) {
-
-
-        return false;
-    }
-
     // 아이디, 비밀번호 찾기
     @RequestMapping(value = "/searchId", method = RequestMethod.GET)
     public String searchId() {
@@ -90,9 +115,12 @@ public class LoginController {
     public @ResponseBody String isIdSearched(
             @RequestParam String name,
             @RequestParam String phone) {
-        System.out.println("name: " + name);
-        System.out.println("phone: " + phone);
-        return "success";
+        Map<String, Object> findEmailInfo = new HashMap<String, Object>();
+
+        findEmailInfo.put("name", name);
+        findEmailInfo.put("phoneNumber", phone);
+
+        return findUserInfoService.findEmail(findEmailInfo);
     }
 
     @RequestMapping(value = "/searchPassword", method = RequestMethod.GET)
@@ -106,16 +134,21 @@ public class LoginController {
             @RequestParam String name,
             @RequestParam String email,
             @RequestParam String phone) {
-        System.out.println("name: " + name);
-        System.out.println("email: " + email);
-        System.out.println("phone: " + phone);
+        Map<String, Object> findPasswordInfo = new HashMap<String, Object>();
 
-        return true;
+        findPasswordInfo.put("name", name);
+        findPasswordInfo.put("phoneNumber", phone);
+        findPasswordInfo.put("email", email);
+
+        return findUserInfoService.findPassword(findPasswordInfo);
     }
 
-    @RequestMapping(value="/updatePassword", method = RequestMethod.POST)
-    public @ResponseBody boolean updatePassword(@RequestParam String password) {
-        System.out.println("password: " + password);
-        return true;
+    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean updatePassword(
+            @RequestParam String email,
+            @RequestParam String password) {
+        boolean result = true;
+        return result;
     }
 }

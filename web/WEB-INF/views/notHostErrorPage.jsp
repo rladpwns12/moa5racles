@@ -42,10 +42,11 @@
         <div class="box__description">
             <div class="box__description-container">
                 <div class="box__description-title">접근 권한이 없습니다.</div>
-                <div class="box__description-text">호스트 전용 페이지에 <br/>접근하기 위해서는 호스트 신청을<br/> 하여야 합니다.</div>
+                <div class="box__description-text">호스트 신청이 필요한 <br/>페이지 입니다.</div>
             </div>
 
-            <a href="/main" target="_blank" class="box__button">모아 홈으로 가기</a>
+            <a href="/main" class="box__button">모아 홈으로 가기</a>
+            <a href="/registhost" class="box__button">호스트 신청하기</a>
         </div>
     </div>
 </div>

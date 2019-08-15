@@ -36,9 +36,10 @@ html {
 }
 
 body,
-h1, h2, h3, h4, h5, h6,
+ h2,  h4, h5, h6,
 blockquote, p, pre,
-dl, dd, ol, ul,
+dl, dd, ol,
+
 figure,
 hr,
 fieldset, legend {
@@ -72,21 +73,14 @@ button {
     min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-}
 
-h1 {
-    font-size: 36px;
-}
+
+
 
 h2 {
     font-size: 30px;
 }
 
-h3 {
-    font-size: 24px;
-}
 
 h4 {
     font-size: 18px;
@@ -541,7 +535,7 @@ input {
     width: 510px;
 }
 
-#address, #detailAddress {
+#address, #detailAddress_fake {
     width: 510px;
     margin-bottom: 5px;
 }
