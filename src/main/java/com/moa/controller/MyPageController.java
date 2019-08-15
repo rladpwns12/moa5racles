@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.moa.message.MessengerStateMessage;
 import com.moa.model.dao.UserDAO;
 import com.moa.model.dao.UserDAOImpl;
-import com.moa.model.service.LuggageRequestInfoService;
-import com.moa.model.service.LuggageRequestRecordService;
-import com.moa.model.service.MemberInfoServiceImpl;
-import com.moa.model.service.MessengerListServiceImpl;
+import com.moa.model.service.*;
 import com.moa.model.vo.*;
 import com.moa.paging.Pagination;
 import org.json.JSONArray;
@@ -46,13 +43,14 @@ public class MyPageController {
     @Autowired
     @Qualifier("memberService")
     private MemberInfoServiceImpl memberInfoService;
-
+    @Autowired
+    private UserInformationService userInformationService;
+    @Autowired
+    private UserUpdateService userUpdateService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //test dao
-    @Autowired
-    private UserDAO userDAO;
+
 
     @RequestMapping(value="", method= RequestMethod.GET)
     public ModelAndView myPage(Authentication auth) {
@@ -265,6 +263,7 @@ public class MyPageController {
         if(memberInfoService.checkExistUser((String)messageSendInfo.get("receiverNick"))==false){
             return false;
         }
+        System.out.println(messageSendInfo);
         return messengerListService.messageSend(messageSendInfo);
     }
     @RequestMapping(value = {"/message/submit/{receiverNick}"}, method = RequestMethod.GET)
@@ -324,6 +323,7 @@ public class MyPageController {
         return result;
     }
 
+
     @RequestMapping("myinfo")
     public ModelAndView myInfo(Authentication auth){
         // USER ID
@@ -332,8 +332,8 @@ public class MyPageController {
         //MODELANDVIEW SETTING
         ModelAndView mav = new ModelAndView();
         mav.setViewName("myInfo");
-        //test dao
-        AddressVO addressVO = userDAO.searchAddress(userId);
+
+        AddressVO addressVO = userInformationService.findUserAddress(userId);
         mav.addObject("address",addressVO);
 
         return mav;
@@ -373,10 +373,8 @@ public class MyPageController {
         updateInfo.put("userId",userId);
         updateInfo.put("res",1);
 
-        if(userDAO.updateUser(updateInfo)==1){
-            return true;
-        }
-        return false;
+        boolean result = userUpdateService.updateUserInformation(updateInfo);
+        return result;
     }
     @RequestMapping(value = "myinfo/changepassword",method = RequestMethod.GET)
     public String goToChangePassword(){
@@ -389,20 +387,18 @@ public class MyPageController {
         String userPassword = customUser.getLoginVO().getPassword();
         int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
-
+        boolean result = false;
         if(passwordEncoder.matches(password,userPassword)){
             //업데이트 로직 추가 -- 서비스에서 해싱
-            Map<String,Object> testMap = new HashMap<String, Object>();
-            testMap.put("userId",userId);
-            testMap.put("password",passwordEncoder.encode(newPassword));
+            Map<String,Object> newPasswordInformation = new HashMap<String, Object>();
+            newPasswordInformation.put("userId",userId);
+            newPasswordInformation.put("password",passwordEncoder.encode(newPassword));
 
-            if(userDAO.updatePassword(testMap)==1){
-                return true;
-            }
-            return false;
+            result = userUpdateService.updateUserPassword(newPasswordInformation);
+            return result;
         }
 
-        return false;
+        return result;
     }
 
     @RequestMapping(value = "myinfo/withdrawal",method = RequestMethod.GET)
@@ -413,21 +409,18 @@ public class MyPageController {
     public @ResponseBody boolean withdrawal(Authentication auth, String password,
                                             HttpServletRequest request,
                                             HttpServletResponse response){
-        System.out.println(password);
+
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         String userPassword = customUser.getLoginVO().getPassword();
         int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
+        //탈퇴 후 로그아웃 처리
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         new SecurityContextLogoutHandler().logout(request,response, authentication);
-
+        boolean result = false;
         if(passwordEncoder.matches(password,userPassword)){
-            if(userDAO.withdrawalUser(userId) == 1){
-                return true;
-            }
-
-            return false;
+            result = userUpdateService.withdrawalUser(userId);
         }
-        return false;
+        return result;
     }
 }
