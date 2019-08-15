@@ -176,9 +176,9 @@ public class TestUserDAO {
     @Test
     public void TEST_이메일_닉네임_중복체크_성공(){
         Map<String,Object> testMap = new HashMap<String, Object>();
-        testMap.put("email","tt1@naver.com");
-        testMap.put("nick","테스트닉1");
-
+        testMap.put("email","temp@naver.com");
+        testMap.put("nick","nicko");
+        System.out.println(dao.signUpDuplicationCheck(testMap));
         assertTrue(dao.signUpDuplicationCheck(testMap));
     }
     @Test

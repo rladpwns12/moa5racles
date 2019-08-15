@@ -1,8 +1,7 @@
 package com.moa.controller;
 
 import com.moa.model.service.MemberInfoService;
-import com.moa.model.service.MemberRegisterService;
-import com.moa.model.service.MemberRegisterServiceImpl;
+import com.moa.model.service.MemberRegistService;
 import com.moa.model.vo.AddressVO;
 import com.moa.model.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Member;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -20,6 +20,8 @@ public class LoginController {
     @Qualifier("memberService")
     @Autowired
     private MemberInfoService memberInfoService;
+    @Autowired
+    private MemberRegistService memberRegistService;
 
     @RequestMapping(value="/login")
     public String loginPage(String error, String logout, Model model){
@@ -46,15 +48,19 @@ public class LoginController {
             @RequestParam String detailAddress,
             @RequestParam double latitude,
             @RequestParam double longitude) {
+        UserVO userVO = new UserVO(email, password, phone, nickname, name, null);
+        AddressVO addressVO = new AddressVO(address, detailAddress, postcode, latitude, longitude);
 
-        UserVO user = new UserVO(email, password, phone, nickname, name, null);
-        AddressVO addr = new AddressVO(address, detailAddress, postcode, latitude, longitude);
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("UserVO", userVO);
+        userInfo.put("AddressVO", addressVO);
+        userInfo.put("res", 0);
 
+        Map<String, Object> duplicationInfo = new HashMap<>();
+        duplicationInfo.put("email", email);
+        duplicationInfo.put("nick", nickname);
 
-
-        MemberRegisterService memberRegisterService = new MemberRegisterServiceImpl();
-
-        return true;
+        return memberRegistService.addMember(userInfo, duplicationInfo);
     }
 
     //회원가입 중복 검사
