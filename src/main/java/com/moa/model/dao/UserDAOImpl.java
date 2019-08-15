@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
         boolean result;
 
         mapper = sqlSession.getMapper(UserMapper.class);
-        result = (mapper.duplicationCheck(duplicationInfo) == 1) ? true : false;
+        result = (mapper.duplicationCheck(duplicationInfo) >= 1) ? true : false;
 
         return result;
     }
@@ -105,5 +105,12 @@ public class UserDAOImpl implements UserDAO {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         AddressVO addressVO = mapper.searchAddress(userId);
         return addressVO;
+    }
+  
+    @Override
+    public int withdrawalUser(int userId) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int result = mapper.withdrawalUser(userId);
+        return result;
     }
 }

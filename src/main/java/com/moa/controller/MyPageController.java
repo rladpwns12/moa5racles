@@ -1,6 +1,7 @@
 package com.moa.controller;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.moa.message.MessengerStateMessage;
 import com.moa.model.dao.UserDAO;
 import com.moa.model.dao.UserDAOImpl;
@@ -10,14 +11,28 @@ import com.moa.model.service.MemberInfoServiceImpl;
 import com.moa.model.service.MessengerListServiceImpl;
 import com.moa.model.vo.*;
 import com.moa.paging.Pagination;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+
 import java.util.*;
+
 
 @Controller
 @RequestMapping(value="/mypage")
@@ -31,6 +46,10 @@ public class MyPageController {
     @Autowired
     @Qualifier("memberService")
     private MemberInfoServiceImpl memberInfoService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     //test dao
     @Autowired
     private UserDAO userDAO;
@@ -208,8 +227,6 @@ public class MyPageController {
         mav.addObject(list);
         mav.addObject(pagination);
 
-
-
         return mav;
     }
     //메시지 상세보기
@@ -284,12 +301,14 @@ public class MyPageController {
         deleteInfo.put("messageType","receive");
         deleteInfo.put("list",deleteNum);
 
+
         boolean result = messengerListService.messageDelete(deleteInfo);
         return result;
     }
     @ResponseBody
     @RequestMapping(value = {"/message/send/delete"}, method = RequestMethod.POST)
     public boolean messageSendDelete(@RequestBody List<String> deleteList){
+
 
         int size = deleteList.size();
         List<Integer> deleteNum = new ArrayList<Integer>();
@@ -300,16 +319,16 @@ public class MyPageController {
         Map<String,Object> deleteInfo = new HashMap<String, Object>();
         deleteInfo.put("messageType","send");
         deleteInfo.put("list",deleteNum);
-
+        
         boolean result = messengerListService.messageDelete(deleteInfo);
         return result;
     }
+
     @RequestMapping("myinfo")
     public ModelAndView myInfo(Authentication auth){
         // USER ID
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
-        System.out.println("userId:"+userId);
         //MODELANDVIEW SETTING
         ModelAndView mav = new ModelAndView();
         mav.setViewName("myInfo");
@@ -319,5 +338,96 @@ public class MyPageController {
 
         return mav;
     }
+    @RequestMapping(value = "myinfo/check", method = RequestMethod.POST)
+    public @ResponseBody boolean myInfoPasswordCheck(Authentication auth,
+                                                     @RequestBody String password) throws NoSuchAlgorithmException {
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        String userPassword = customUser.getLoginVO().getPassword();
+        String[] splitPass = password.split("\"");
+        password = splitPass[1];
 
+        if(passwordEncoder.matches(password,userPassword)){
+            return true;
+        }
+        return false;
+    }
+    @RequestMapping(value = "myinfo/update",method = RequestMethod.POST)
+    public @ResponseBody boolean updateMyInfo(Authentication auth,
+                                              String phoneNumber, String profile,
+                                              AddressVO addressVO){
+        //user
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
+        //validation
+        if(phoneNumber == null || phoneNumber.equals("")){
+            phoneNumber = customUser.getLoginVO().getPhoneNumber();
+        }
+        if(profile == null || profile.equals("")){
+            profile = customUser.getLoginVO().getProfile();
+        }
+        //setting
+        Map<String,Object> updateInfo = new HashMap<String, Object>();
+        updateInfo.put("AddressVO",addressVO);// -- 1
+        updateInfo.put("phoneNumber",phoneNumber);// -- 2
+        updateInfo.put("profile",profile);// -- 3
+        updateInfo.put("userId",userId);
+        updateInfo.put("res",1);
+
+        if(userDAO.updateUser(updateInfo)==1){
+            return true;
+        }
+        return false;
+    }
+    @RequestMapping(value = "myinfo/changepassword",method = RequestMethod.GET)
+    public String goToChangePassword(){
+        return "changePassword";
+    }
+    @RequestMapping(value = "myinfo/changepassword",method = RequestMethod.POST)
+    public @ResponseBody boolean changePassword(Authentication auth,String password,String newPassword){
+        System.out.println(password);
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        String userPassword = customUser.getLoginVO().getPassword();
+        int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
+
+
+        if(passwordEncoder.matches(password,userPassword)){
+            //업데이트 로직 추가 -- 서비스에서 해싱
+            Map<String,Object> testMap = new HashMap<String, Object>();
+            testMap.put("userId",userId);
+            testMap.put("password",passwordEncoder.encode(newPassword));
+
+            if(userDAO.updatePassword(testMap)==1){
+                return true;
+            }
+            return false;
+        }
+
+        return false;
+    }
+
+    @RequestMapping(value = "myinfo/withdrawal",method = RequestMethod.GET)
+    public String goToWithdrawal(){
+        return "withdrawal";
+    }
+    @RequestMapping(value = "myinfo/withdrawal", method = RequestMethod.POST)
+    public @ResponseBody boolean withdrawal(Authentication auth, String password,
+                                            HttpServletRequest request,
+                                            HttpServletResponse response){
+        System.out.println(password);
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        String userPassword = customUser.getLoginVO().getPassword();
+        int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        new SecurityContextLogoutHandler().logout(request,response, authentication);
+
+        if(passwordEncoder.matches(password,userPassword)){
+            if(userDAO.withdrawalUser(userId) == 1){
+                return true;
+            }
+
+            return false;
+        }
+        return false;
+    }
 }

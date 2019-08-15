@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -145,7 +146,7 @@ public class TestUserDAO {
     @Test
     public void TEST_닉네임_중복체크_중복있음(){
         Map<String,Object> testMap = new HashMap<String, Object>();
-        testMap.put("nick","테스트닉5");
+        testMap.put("nick","용용희");
 
         assertTrue(dao.signUpDuplicationCheck(testMap));
     }
@@ -153,7 +154,7 @@ public class TestUserDAO {
     @Test
     public void TEST_닉네임_중복체크_중복없음(){
         Map<String,Object> testMap = new HashMap<String, Object>();
-        testMap.put("nick","테스트닉500");
+        testMap.put("nick","용용희");
 
         assertFalse(dao.signUpDuplicationCheck(testMap));
     }
@@ -201,5 +202,11 @@ public class TestUserDAO {
     public void TEST_개인주소_불러오기(){
         System.out.println(dao.searchAddress(91));
     }
+
+    @Test
+    public void TEST_회월탈퇴(){
+        assertEquals(1,dao.withdrawalUser(69));
+    }
+
  }
 
