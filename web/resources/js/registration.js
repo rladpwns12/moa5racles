@@ -382,7 +382,6 @@ $('#nickname').focusout(function () {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            console.log(data);
             if (data == "success") {
                 $('#nickname').css('border', 'solid 0.2px green');
             } else {
@@ -411,7 +410,6 @@ $('#email').focusout(function () {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            console.log(data);
             if (data == "success") {
                 $('#email').css('border', 'solid 0.2px green');
             } else {
