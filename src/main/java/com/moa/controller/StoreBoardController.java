@@ -5,8 +5,10 @@ import com.moa.message.PathMessage;
 import com.moa.model.service.LuggageWelcomeService;
 import com.moa.model.service.StoreBoardSearchService;
 import com.moa.model.service.StoreBoardService;
+import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.DetailOptionVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,28 +35,37 @@ public class StoreBoardController {
     @RequestMapping(value="/Search" , method=  RequestMethod.POST)
     public @ResponseBody
     List<Object> hostSearch2(DetailOptionVO detail){
-        System.out.println("전송중....");
+
+
         List<Object> documents = storeBoard.search(detail);
-        System.out.println(documents.get(1));
+        System.out.println(documents.get(0));
 
         return documents;
     }
 
-    @RequestMapping("/keep")
-    public ModelAndView registerStoreBoard(HttpServletRequest request) {
+    @RequestMapping(value = "/keep", method = RequestMethod.GET)
+    public ModelAndView registerStoreBoard(Authentication auth) {
         ModelAndView mav = new ModelAndView();
+        String hostId;
         mav.setViewName("keep");
 
-        String hostId = "3"; //String hostId = (String)request.getAttribute("hostId");
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        hostId = customUser.getLoginVO().getUserId();
+
         mav.addObject("hostId", hostId);
         Map<String, Object> map = luggageWelcomeService.initBoard(hostId);
         mav.addObject("map", map);
         return mav;
     }
 
-    @RequestMapping("/keepregister")
-    public @ResponseBody void keepRegisterStoreBoard(HttpServletRequest request) {
+    @RequestMapping(value = "/keep", method = RequestMethod.POST)
+    public @ResponseBody void keepRegisterStoreBoard(HttpServletRequest request, Authentication auth) {
+        String hostId;
+
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        hostId = customUser.getLoginVO().getUserId();
         Map<String, Object> articleMap = FileUpload.keepUpload(request);
+        articleMap.put("hostId", hostId);
         System.out.println("Result: " + luggageWelcomeService.noticeStorage(articleMap));
     }
 
@@ -69,6 +80,7 @@ public class StoreBoardController {
     @ExceptionHandler(Exception.class)
     public ModelAndView handleException(Exception e){
         ModelAndView mav=new ModelAndView();
+        e.printStackTrace();
         mav.setViewName("/error/page");
         mav.addObject("message","존재하지 않는 페이지 입니다.");
         return mav;

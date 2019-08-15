@@ -69,7 +69,16 @@
                     </tr>
                     <c:choose>
                         <c:when test="${pagination.listCnt == 0}">
-                            보낸 메시지가 없습니다.
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>받은 메시지가 없습니다.</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
                         </c:when>
                         <c:when test="${pagination.listCnt != 0}">
                             <c:forEach var="i" begin="0" end="${pagination.curListCnt}" step="1" items="${messageVOList}">

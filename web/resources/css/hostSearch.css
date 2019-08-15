@@ -469,7 +469,7 @@ margin:0;
     top: 140px;
     left: 400px;
 }
-#category2{    height: 25px;
+.category2{    height: 25px;
     color: #423257;
     font-size: 17px;
     font-family: 'Nanum Gothic', sans-serif;
@@ -482,12 +482,12 @@ margin:0;
     transition:275ms;
     font-weight: 600;
 }
-#category2>label{
+.category2>label{
     display: block;
     height: 30px;
     cursor: pointer;
 }
-#category2:hover{
+.category2:hover{
     background:#423257;
     color:white;
 }

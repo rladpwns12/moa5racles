@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
+
+    <bean id="userAccessDenied" class="com.moa.security.MemberDeniedHandler" />
+    <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+    <bean id="MemberInfoServiceImpl" class="com.moa.model.service.MemberInfoServiceImpl"></bean>
+    <bean id="rememberMeServices"       class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+        <constructor-arg name="key" value="moa"/>
+        <constructor-arg name="tokenRepository" ref="customTokenRepository"/>
+        <constructor-arg name="userDetailsService" ref="MemberInfoServiceImpl"/>
+        <property name="tokenValiditySeconds" value="604800" />
+    </bean>
+    <bean id="loginFailureHandler" class="com.moa.security.LoginFailureHandler">
+        <property name="username" value="username"/>
+        <property name="password" value="password"/>
+        <property name="errorMessage" value="ERRORMSG"/>
+        <property name="defaultFailureUrl" value="/login?error"/>
+    </bean>
+
+    <security:http>
+        <security:intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')" />
+        <security:intercept-url pattern="/entrust/**" access="hasRole('ROLE_USER')" />
+        <security:intercept-url pattern="/hostpage/**" access="hasRole('ROLE_HOST')" />
+        <security:intercept-url pattern="/storeboard/keep" access="hasRole('ROLE_HOST')" />
+        <security:intercept-url pattern="/registhost" access="hasRole('ROLE_USER')" />
+
+        <security:form-login
+                login-page="/login"
+                authentication-failure-handler-ref = "loginFailureHandler"
+        />
+        <security:access-denied-handler error-page="/notHostErrorPage" />
+        <security:logout logout-url="/logout" logout-success-url="/main" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
+        <security:remember-me services-ref="rememberMeServices" key="moa"  />
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="MemberInfoServiceImpl">
+            <security:password-encoder ref="bcryptPasswordEncoder" />
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+</beans>
