@@ -15,11 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -62,7 +60,24 @@ public class TestUserDAO {
 
         System.out.println(dao.signUpUser(testMap));
     }
+    @Test
+    public void TEST_비밀번호_찾기_성공(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("phoneNumber","010-1234-5678");
+        testMap.put("name","김지호");
+        testMap.put("email", "jiho9478@naver.com");
 
+        assertEquals("jiho9478@naver.com",dao.findPassword(testMap));
+    }
+    @Test
+    public void TEST_비밀번호_찾기_실패(){
+        Map<String,Object> testMap = new HashMap<String, Object>();
+        testMap.put("phoneNumber","111-1234-5678");
+        testMap.put("name","김지호");
+        testMap.put("email", "jiho9478@naver.com");
+
+        assertNotEquals("jiho9478@naver.com",dao.findPassword(testMap));
+    }
     @Test
     public void TEST_이메일_찾기_성공(){
         Map<String,Object> testMap = new HashMap<String, Object>();

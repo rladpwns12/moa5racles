@@ -23,6 +23,9 @@
     </bean>
 
     <security:http>
+        <security:session-management invalid-session-url="/main" >
+            <security:concurrency-control max-sessions="1" expired-url="/main" />
+        </security:session-management>
         <security:intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')" />
         <security:intercept-url pattern="/entrust/**" access="hasRole('ROLE_USER')" />
         <security:intercept-url pattern="/hostpage/**" access="hasRole('ROLE_HOST')" />
