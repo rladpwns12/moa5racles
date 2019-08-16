@@ -21,4 +21,5 @@ public class StoreBoardVO {
     private String pet;
     private List<String> pictureName;
     private Map<String,Integer> detailPrice;
+    private List<StoreBoardAttachFileVO> attachVOList;
 }

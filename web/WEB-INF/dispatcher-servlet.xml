@@ -12,5 +12,6 @@
     </bean>
 
     <import resource="mybatis-config.xml"/>
+    <import resource="multipart-config.xml"/>
     <aop:aspectj-autoproxy/>
 </beans>
