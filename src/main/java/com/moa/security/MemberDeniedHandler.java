@@ -1,8 +1,6 @@
 package com.moa.security;
 
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import javax.servlet.ServletException;
@@ -11,9 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class MemberDeniedHandler implements AccessDeniedHandler {
-    private static final String DENY_MESSAGE = "member";
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
-        response.sendRedirect("/notHostErrorPage");
+        response.sendRedirect("/accessdenied");
     }
 }
