@@ -1,4 +1,5 @@
-
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
 $(document).ready(function() {
 	$.confirmDone(1);
 	
@@ -61,9 +62,7 @@ $.confirmDone = function(curPage){
 		},
 		success:function(result){
 			//test console -- 추후 삭제
-			console.log(result.list);
-			console.log(result.list[0].articleNum);
-			console.log(result.pagination);
+
 
 			//리스트
 			$('.main_content>table>tbody>tr').remove('tr');

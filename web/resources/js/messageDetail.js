@@ -1,5 +1,5 @@
 
-function deleteMsg(messageNumber) {
+function deleteMsg(messageNumber,type) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     if(confirm("정말로 삭제하시겠습니가?")){
@@ -7,7 +7,7 @@ function deleteMsg(messageNumber) {
 
         checkArray.push(messageNumber);
         $.ajax({
-            url:"/mypage/message/receive/delete",
+            url:"/mypage/message/"+type+"/delete",
             type:"POST",
             contentType:"application/json",
             dataType:"json",
