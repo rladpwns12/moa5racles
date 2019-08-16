@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -49,18 +50,28 @@ public class AttachDAOImpl implements AttachDAO {
     }
 
     @Override
-    public List<StoreBoardAttachFileVO> searchByArticleSB(Long articleNum) {
+    public List<AttachFileVO> searchByArticleSB(Long articleNum) {
         AttachMapper mapper = sqlSession_oracle.getMapper(AttachMapper.class);
         return  mapper.findByArticleNumSB(articleNum);
     }
     @Override
-    public List<StoreRequestAttachFileVO> searchByArticleSR(Long articleNum) {
+    public List<AttachFileVO> searchByArticleSR(Long articleNum) {
         AttachMapper mapper = sqlSession_oracle.getMapper(AttachMapper.class);
         return  mapper.findByArticleNumSR(articleNum);
     }
     @Override
-    public UserAttachFileVO searchByUserId(Long userId) {
+    public AttachFileVO searchByUserId(Long userId) {
         AttachMapper mapper = sqlSession_oracle.getMapper(AttachMapper.class);
         return  mapper.findByUserId(userId);
+    }
+
+    @Override
+    public List<AttachFileVO> getOldFiles() {
+        AttachMapper mapper = sqlSession_oracle.getMapper(AttachMapper.class);
+        List<AttachFileVO> attachFileVOList=new ArrayList<AttachFileVO>();
+        attachFileVOList.addAll(mapper.getOldFilesUser());
+        attachFileVOList.addAll(mapper.getOldFilesSB());
+        attachFileVOList.addAll(mapper.getOldFilesSR());
+        return attachFileVOList;
     }
 }

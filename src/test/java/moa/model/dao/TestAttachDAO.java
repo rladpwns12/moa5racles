@@ -4,6 +4,8 @@ import com.moa.model.dao.AttachDAO;
 import com.moa.model.dao.CategoryDAO;
 import com.moa.model.vo.AttachFileVO;
 import com.moa.model.vo.StoreBoardAttachFileVO;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +27,7 @@ import static org.junit.Assert.assertTrue;
 })
 @WebAppConfiguration
 public class TestAttachDAO {
+    private Log log= LogFactory.getLog(TestAttachDAO.class);
     @Autowired
     private AttachDAO attachDAO;
     @Autowired
@@ -37,7 +40,7 @@ public class TestAttachDAO {
     }
     @Test
     public void 첨부파일가져오기(){
-        List<StoreBoardAttachFileVO> storeBoardAttachFileVOList = attachDAO.searchByArticleSB(new Long(3));
+        List<AttachFileVO> storeBoardAttachFileVOList = attachDAO.searchByArticleSB(new Long(3));
         System.out.println(storeBoardAttachFileVOList);
     }
     @Test
@@ -45,5 +48,11 @@ public class TestAttachDAO {
         List<String> categoryList=categoryDAO.getCategoryList();
         System.out.println(categoryList);
         assertNotNull("카테고리 가져오기 실패",categoryList);
+    }
+    @Test
+    public void 오래된파일가져오기(){
+        List<AttachFileVO> attachFileList=attachDAO.getOldFiles();
+        log.info(attachFileList);
+        assertNotNull("오래된 파일 가져오기 실패",attachFileList);
     }
 }

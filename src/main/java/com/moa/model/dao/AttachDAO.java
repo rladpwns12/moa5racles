@@ -12,7 +12,8 @@ public interface AttachDAO {
     boolean deleteAttachSB(String uuid);
     boolean deleteAttachSR(String uuid);
     boolean deleteAttachUSER(String uuid);
-    List<StoreBoardAttachFileVO> searchByArticleSB(Long articleNum);
-    List<StoreRequestAttachFileVO> searchByArticleSR(Long articleNum);
-    UserAttachFileVO searchByUserId(Long userId);
+    List<AttachFileVO> searchByArticleSB(Long articleNum);
+    List<AttachFileVO> searchByArticleSR(Long articleNum);
+    AttachFileVO searchByUserId(Long userId);
+    List<AttachFileVO> getOldFiles();
 }
