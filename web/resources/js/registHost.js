@@ -93,6 +93,9 @@ $(document).ready(function () {
         var company_registration_name = $('#company_registration_name').val();
         var company_representative_name = $('#company_representative_name').val();
 
+
+        if(!isValid()) return;
+
         $.ajax({
             type: "POST",
             url: getContextPath() + "/registhost",
@@ -134,5 +137,93 @@ $(document).ready(function () {
         var hostIndex = location.href.indexOf(location.host) + location.host.length;
         var contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
         return contextPath;
+    }
+
+    function isValid(){
+        if (!isStorageTypeValid()) {
+            return false;
+        }
+        if (!isOriginOrNewValid()) {
+            return false;
+        }
+        if (!isNewAddressValid()){
+            return false;
+        }
+        if (!isCompanyInfoValid()){
+            return false;
+        }
+
+        return true;
+    }
+
+    function isStorageTypeValid(){
+        if(!$('input:radio[name=storage_type_answer]').is(':checked')){
+            alert("보관 형태를 선택해 주세요.");
+            return false;
+        }
+        else{
+            if($('input:radio[name=storage_type_answer]:checked').val() == 'other'){
+                if($('#other_text').val() == ''){
+                    alert("보관 형태를 입력해 주세요.");
+                    $('#other_text').focus();
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function isOriginOrNewValid(){
+        if(!$('input:radio[name=origin_or_new]').is(':checked')){
+            alert('주소 형태를 선택해 주세요.');
+            return false;
+        }
+        return true;
+    }
+
+    function isNewAddressValid(){
+        if($('input:radio[name=origin_or_new]:checked').val() == 'new') {
+            if ($('#postcode').val() == '' || $('#postcode').val() == null) {
+                alert("주소를 입력해 주세요.");
+                return false;
+            }
+            if ($('#address').val() == '' || $('#address').val() == null) {
+                alert("주소를 입력해 주세요.");
+                return false;
+            }
+            if ($('#detailAddress').val() == '' || $('#detailAddress').val() == null) {
+                alert("상세주소를 입력해 주세요.");
+                $('#detailAddress').focus();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function isCompanyInfoValid(){
+        var storage_type_answer = $('input:radio[name=storage_type_answer]:checked').val();
+
+        if(storage_type_answer == 'company' || storage_type_answer == 'store') {
+            var company_name = $('#company_name').val();
+            var company_registration_name = $('#company_registration_name').val();
+            var company_representative_name = $('#company_representative_name').val();
+
+            if(company_name == '' || company_name == null){
+                alert("상호명을 입력해 주세요.");
+                $('#company_name').focus();
+                return false;
+            }
+            if(company_registration_name == '' || company_registration_name == null){
+                alert("사업자등록번호를 입력해 주세요.");
+                $('#company_registration_name').focus();
+                return false;
+            }
+            if(company_representative_name == '' || company_representative_name == null){
+                alert("대표자명을 입력해 주세요.");
+                $('#company_representative_name').focus();
+                return false;
+            }
+        }
+        return true;
     }
 });
