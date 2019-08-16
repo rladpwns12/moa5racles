@@ -6,7 +6,7 @@
     <div class="footer">
       <div class="category">
         <ul>
-          <li onclick="move();">개인정보 처리방침</li>
+          <li onclick="privacyPolicy();">개인정보 처리방침</li>
           <li onclick="move();">이용약관</li>
           <li onclick="move();">서비스 가이드</li>
           <li onclick="move();">공지사항</li>
