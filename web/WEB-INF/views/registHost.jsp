@@ -36,7 +36,7 @@
         <div class="main">
             <form class="form" method="post" action="/registhost">
                 <div class="storage_type">
-                    <h4>보관형태</h4>
+                    <h4>보관 형태</h4>
                     <div class="storage_type_contents">
                         <ul>
                             <li>
@@ -80,12 +80,10 @@
                         </select>
                     </div>
                     <div class="search_address_btn">
-                        <input type="text" id="postcode" name="postcode" placeholder="우편번호를 입력하세요.">
-                        <input type="button" id="search_address_btn" value="우편번호 찾기">
-                        <input type="text" id="address" name="address" placeholder="주소를 입력하세요.">
+                        <input type="text" id="postcode" name="postcode" placeholder="우편번호를 입력하세요." disabled />
+                        <input type="button" id="search_address_btn" value="우편번호 찾기"  />
+                        <input type="text" id="address" name="address" placeholder="주소를 입력하세요." disabled />
                         <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소를 입력하세요.">
-                        <input type="hidden" id="latitude" name="latitude">
-                        <input type="hidden" id="longitude" name="longitude">
                     </div>
                 </div>
                 <div class="company_info">
