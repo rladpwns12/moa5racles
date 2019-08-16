@@ -18,75 +18,86 @@
 <body>
 <%@ include file="mNavbar.jsp" %>
 <div class="container">
+    <h2>호스트 신청 목록</h2>
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">아이디</th>
-            <th scope="col">전화번호</th>
-            <th scope="col">ㅅ</th>
+            <th scope="col">닉네임</th>
+            <th scope="col">신청날짜</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="table-active">
-            <th scope="row">Active</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
         <tr>
-            <th scope="row">Default</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
-        <tr class="table-primary">
-            <th scope="row">Primary</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
-        <tr class="table-secondary">
-            <th scope="row">Secondary</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
-        <tr class="table-success">
-            <th scope="row">Success</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
-        <tr class="table-danger">
-            <th scope="row">Danger</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
-        <tr class="table-warning">
-            <th scope="row">Warning</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
-        <tr class="table-info">
-            <th scope="row">Info</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
-        <tr class="table-light">
-            <th scope="row">Light</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
-        <tr class="table-dark">
-            <th scope="row">Dark</th>
-            <td>Column content</td>
-            <td>Column content</td>
-
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
+        </tr><tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
         </tr>
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
+        </tr>
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
+        </tr>
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
+        </tr>
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
+        </tr>
+        <tr>
+            <td>테스트계정</td>
+            <td>19-08-16</td>
+        </tr>
+
+        <tr>
+            <td>ABCDEFGHIJKLMNOPQRST</td>
+            <td>19-08-16</td>
+        </tr>
+
+
+
         </tbody>
     </table>
 </div>

@@ -16,9 +16,15 @@ public class MainController {
 
         return "mMain";
     }
+
     @RequestMapping(value = "admin/hostapprove")
     public String mobileHostApprove(){
 
         return "mHostApprove";
+    }
+    @RequestMapping(value = "admin/approveinformation")
+    public String mobileApproveInformation(){
+
+        return "mApproveInformation";
     }
 }

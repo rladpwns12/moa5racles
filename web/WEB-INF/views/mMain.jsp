@@ -32,8 +32,8 @@
             </div>
 
             </fieldset>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </fieldset>
+            <button type="submit" class="btn btn-primary">로그인</button>
+
     </form>
 </div>
 <%--<%@ include file="footer.jsp" %>--%>
