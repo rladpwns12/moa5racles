@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/confirmyet.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/requestStoreInfo.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-<title>MOA</title>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <title>MOA</title>
 </head>
 <body>
 	<%@ include file="navbar.jsp" %>
@@ -26,7 +28,7 @@
           </div>
           <div class="menubar_list">
             <ul>
-              <li id="request_btn">요청목록</li>
+              <li class="current_menu"  id="request_btn">요청목록</li>
               <li id="my_storage_btn">나의 보관소</li>
             </ul>
           </div>
