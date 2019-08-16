@@ -1,5 +1,6 @@
 package com.moa.security;
 
+import lombok.extern.log4j.Log4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Enumeration;
 
+@Log4j
 public class UserSuccessHandler implements AuthenticationSuccessHandler {
 
     //session add from db
@@ -27,7 +29,7 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler {
 //                System.out.println("role memnner 아님");
 //            }
 //        }
-        System.out.println("UserSuccessHnadler...");
+        log.info("UserSuccessHnadler...");
 
     }
 }
