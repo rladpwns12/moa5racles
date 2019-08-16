@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
     <script src="${pageContext.request.contextPath}/resources/js/myStorage.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myStorage.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
@@ -29,7 +30,7 @@
           <div class="menubar_list">
             <ul>
               <li id="request_btn">요청목록</li>
-              <li id="my_storage_btn">나의 보관소</li>
+              <li class="current_menu"  id="my_storage_btn">나의 보관소</li>
             </ul>
           </div>
         </div>
