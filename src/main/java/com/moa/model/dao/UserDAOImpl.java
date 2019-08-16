@@ -97,6 +97,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public int updatePasswordByEmailAndName(Map<String, Object> updatePasswordInfo) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int result = mapper.updatePasswordByEmailAndName(updatePasswordInfo);
+        return result;
+    }
+
+    @Override
     public int updateUser(Map<String, Object> updateUserInfo) {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         mapper.updateUser(updateUserInfo);

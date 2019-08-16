@@ -41,47 +41,8 @@ function submitPassword() {
 
     let password = $('#password').val();
     let password2 = $('#password2').val();
-
-    if(password!=password2) {
-        window.alert("비밀번호가 일치하지 않습니다");
-        return;
-    }
-
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    $.ajax({
-        type: "POST",
-        url: "updatePassword",
-        data: {password},
-        cache: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("AJAX", true);
-            xhr.setRequestHeader(header, token);
-        },
-        success(data) {
-            if (data) {
-                window.alert("비밀번호가 변경되었습니다");
-                window.close();
-            } else {
-                alert("비밀번호 수정에 실패하였습니다");
-            }
-        }, error: function (request, status, error) {
-            console.log("전송 오류");
-        }
-
-    });
-}
-
-function submitPassword() {
-    if(!isPasswordValid()) {
-        return;
-    }
-    if(!isPassword2Valid()) {
-        return;
-    }
-
-    let password = $('#password').val();
-    let password2 = $('#password2').val();
+    let email = $('#email').val();
+    let name = $('#name').val();
 
     if(password!=password2) {
         window.alert("비밀번호가 일치하지 않습니다");
@@ -93,7 +54,7 @@ function submitPassword() {
     $.ajax({
         type: "POST",
         url: "/updatePassword",
-        data: {password},
+        data: {email, name, password},
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
