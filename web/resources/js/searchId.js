@@ -17,7 +17,7 @@ function submit() {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            if (data != null) {
+            if (data != "") {
                 $('#searchedId').val(data);
                 $('#content1').hide();
                 $('#content2').show();
@@ -63,6 +63,11 @@ function isPhoneValid() {
     }
     if (phone == "휴대폰 인증 버튼을 눌러주세요")
         return false;
+    /*let phoneValid = /^\d{3}-\d{3,4}-\d{4}$/;
+    if (!phoneValid.test(phone)) {
+        alert("01X-XXXX-XXXX 형식으로 입력해주세요");
+        return false;
+    }*/
     return true;
 }
 
@@ -82,7 +87,7 @@ function emptyPhone() {
     }
 }
 
-function smsCheck(){
+function smsCheck() {
 
     let width = 500;
     let height = 600;
