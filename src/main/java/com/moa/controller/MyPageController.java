@@ -318,7 +318,7 @@ public class MyPageController {
         Map<String,Object> deleteInfo = new HashMap<String, Object>();
         deleteInfo.put("messageType","send");
         deleteInfo.put("list",deleteNum);
-        
+
         boolean result = messengerListService.messageDelete(deleteInfo);
         return result;
     }
