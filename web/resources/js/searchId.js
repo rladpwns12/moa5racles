@@ -31,10 +31,14 @@ function submit() {
 }
 
 function isValid() {
+    let result;
     if (!isNameValid()) {
-        return false;
+        result =  false;
     }
     if (!isPhoneValid()) {
+        result = false;
+    }
+    if(result == false) {
         return false;
     }
     return true;
@@ -42,7 +46,7 @@ function isValid() {
 
 function isNameValid() {
     let name = $('#name').val();
-    if (name == null || name == "") {
+    if (name == null || name.trim() == "") {
         $('#name').css("color", "#DD0000");
         $('#name').css("font-size", "11pt");
         $('#name').val("이름을 입력해주세요");
@@ -55,7 +59,7 @@ function isNameValid() {
 
 function isPhoneValid() {
     let phone = $('#phone').val();
-    if (phone == null || phone == "") {
+    if (phone == null || phone.trim() == "") {
         $('#phone').css("color", "#DD0000");
         $('#phone').css("font-size", "11pt");
         $('#phone').val('휴대폰 인증 버튼을 눌러주세요');
