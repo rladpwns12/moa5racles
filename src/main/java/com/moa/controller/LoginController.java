@@ -6,6 +6,7 @@ import com.moa.model.service.MemberRegistService;
 import com.moa.model.service.UserUpdateService;
 import com.moa.model.vo.AddressVO;
 import com.moa.model.vo.UserVO;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@Log4j
 public class LoginController {
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
@@ -35,12 +37,12 @@ public class LoginController {
 
     @RequestMapping(value="/login")
     public String loginPage(String error, String logout, Model model){
-        System.out.println("loginPage()...");
+        log.info("loginPage()...");
         return "login";
     }
     @RequestMapping(value="/exit")
     public String exitRedirect(String error, String logout, Model model){
-        System.out.println("exitRedirect()...");
+        log.info("exitRedirect()...");
         return "exitRedirect";
     }
 

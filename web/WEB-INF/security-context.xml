@@ -9,7 +9,7 @@
     <bean id="memberAccessDenied" class="com.moa.security.MemberDeniedHandler" />
     <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
     <bean id="MemberInfoServiceImpl" class="com.moa.model.service.MemberInfoServiceImpl"></bean>
-    <bean id="rememberMeServices"       class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+    <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
         <constructor-arg name="key" value="moa"/>
         <constructor-arg name="tokenRepository" ref="customTokenRepository"/>
         <constructor-arg name="userDetailsService" ref="MemberInfoServiceImpl"/>
@@ -21,8 +21,7 @@
         <property name="errorMessage" value="ERRORMSG"/>
         <property name="defaultFailureUrl" value="/login?error"/>
     </bean>
-
-    <security:http>
+    <security:http pattern="/**" auto-config="true" disable-url-rewriting="true" use-expressions="true" >
         <security:session-management invalid-session-url="/main" >
             <security:concurrency-control max-sessions="1" expired-url="/main" />
         </security:session-management>
@@ -30,7 +29,8 @@
         <security:intercept-url pattern="/entrust/**" access="hasRole('ROLE_USER')" />
         <security:intercept-url pattern="/hostpage/**" access="hasRole('ROLE_HOST')" />
         <security:intercept-url pattern="/storeboard/keep" access="hasRole('ROLE_HOST')" />
-        <security:intercept-url pattern="/registhost" access="!hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')" />
+            <security:intercept-url pattern="/registhost" access="!hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')" />
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 
         <security:form-login
                 login-page="/login"
