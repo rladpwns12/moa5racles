@@ -1,7 +1,6 @@
 package com.moa.model.service;
 
 import com.moa.model.dao.UserDAO;
-import com.moa.model.vo.AddressVO;
 import com.moa.model.vo.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,6 +35,13 @@ public class UserUpdateServiceImpl implements UserUpdateService {
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public boolean updateUserPasswordByEmailAndName(Map<String, Object> newPasswordInfo) {
+        newPasswordInfo.put("password",passwordEncoder.encode(newPasswordInfo.get("password").toString()));
+
+        return userDAO.updatePasswordByEmailAndName(newPasswordInfo) >= 1 ? true : false;
     }
 
     @Override
