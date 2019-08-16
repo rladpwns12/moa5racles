@@ -33,7 +33,7 @@
 
             </fieldset>
             <button type="submit" class="btn btn-primary">로그인</button>
-        </fieldset>
+
     </form>
 </div>
 <%--<%@ include file="footer.jsp" %>--%>

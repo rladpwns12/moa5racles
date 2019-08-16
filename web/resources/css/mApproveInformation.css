@@ -5,7 +5,17 @@ body {
 .container{
     margin-top : 50px;
     margin-left: auto;
+    margin-bottom: 50px;
 }
 .login button{
     width: 100%;
+}
+.btn-position{
+    text-align: center;
+}
+.btn-position button{
+    width: 45%;
+}
+.top-btn{
+    margin-bottom: 30px;
 }
