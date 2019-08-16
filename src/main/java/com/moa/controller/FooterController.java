@@ -11,4 +11,9 @@ public class FooterController {
     public String privacyPolicy() {
         return "privacyPolicy";
     }
+
+    @RequestMapping(value="/termsOfUsePolicy", method = RequestMethod.GET)
+    public String termsOfUsePolicy() {
+        return "termsOfUsePolicy";
+    }
 }
