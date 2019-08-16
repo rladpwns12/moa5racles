@@ -20,9 +20,7 @@ $(document).ready(function () {
         var password = $('#password').val();
         var newPassword1 = $('#new_password1').val();
         var newPassword2 = $('#new_password2').val();
-        console.log(password);
-        console.log(newPassword1);
-        console.log(newPassword2);
+
         //유효성
         //1.빈칸
         if(password ==='' || password ==null){
@@ -67,6 +65,7 @@ $(document).ready(function () {
                 success:function(result) {
                     if (result == true) {
                         alert("비밀번호 변경이 완료되었습니다.");
+                        location.reload();
                     }
                     else{
                         alert("현재 비밀번호가 올바르지 않습니다.");

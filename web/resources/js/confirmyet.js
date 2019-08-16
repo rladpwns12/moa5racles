@@ -1,3 +1,5 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
 function getContextPath(){
 	   var hostIndex = location.href.indexOf(location.host) + location.host.length;
 	   var contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
@@ -27,6 +29,10 @@ $("#my_storage_btn").on('click',function(){
 			url: getContextPath() + "/moa/mypage/requestinfo",
 			data:{requestId:id},
 			dataType:"JSON",
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("AJAX", true);
+				xhr.setRequestHeader(header, token);
+			},
 			success : function(data){
 
 				var str = '';
@@ -186,6 +192,10 @@ $(document).on('click','#approve_btn, #confirm_btn',function(){
 			data:{
 				articleNum:aNum,
 				state:'approve'
+			},
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("AJAX", true);
+				xhr.setRequestHeader(header, token);
 			},
 			success:function(data){
 				alert("승인이 완료되었습니다.");

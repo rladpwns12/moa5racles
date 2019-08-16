@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -12,6 +13,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/messageSend.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/requestStoreInfo.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <sec:csrfMetaTags/>
     <title>MOA</title>
 </head>
 <body>
@@ -29,7 +32,7 @@
             <div class="menubar_list">
                 <ul>
                     <li onclick="location.href='/mypage/myinfo'">개인정보</li>
-                    <li onclick="location.href='/mypage/message'">메세지함</li>
+                    <li class="current_menu" onclick="location.href='/mypage/message'">메세지함</li>
                     <li onclick="moveToTransaction();">거래내역</li>
                     <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
                     <li onclick="moveToLatest();">최근 본 보관소</li>
@@ -46,7 +49,7 @@
                         <th id="table_title2" onclick="location.href='/mypage/message/send'">보낸 메세지</th>
                         <th id="table_space">
                             <button id="add_btn"type="button" name="button"
-                                    onclick="location.href='${contextPath}/moa/keep'">
+                                    onclick="sendPopup()">
                                 메세지 작성
                             </button>
                             <button id="delete_btn"type="button" name="button">
@@ -74,7 +77,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>받은 메시지가 없습니다.</td>
+                                <td>보낸 메시지가 없습니다.</td>
                                 <td></td>
                                 <td></td>
                             </tr>

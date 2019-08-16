@@ -53,28 +53,11 @@ $(document).ready(function () {
 
 
     $('#identification').click(function () {
-        console.log("휴대폰 인증 서비스 수리중");
+        alert("휴대폰 인증 서비스 수리중");
     });
 
     //-- start of update user information
     $('#submit_btn').click(function () {
-        var userVO = {
-            name :$('#name').val(),
-            nick :$('#nickname').val(),
-            email : $('#email').val(),
-            password : $('#password').val(),
-            phoneNumber : $('#phone').val(),
-            profile : 'profile.png'
-
-        };
-        var addressVO = {
-            postCode :$('#postcode').val(),
-            baseAddress:$('#address').val(),
-            detailAddress:$('#detailAddress').val(),
-            lat : addrLat ,
-            lng : addrLng
-        };
-
         //-- start of validation
         //1. 빈칸 검사
         if(userVO.password === '' || userVO.password === null){
@@ -126,6 +109,7 @@ $(document).ready(function () {
                         success:function(result) {
                             if (result == true) {
                                 alert("수정이 완료되었습니다.");
+                                location.reload();
                             }
                             else{
                                 alert("비정상적으로 수정이 완료되었습니다.");

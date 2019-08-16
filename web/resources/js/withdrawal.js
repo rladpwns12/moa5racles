@@ -17,7 +17,7 @@ $(document).ready(function () {
     });
     $('#withdrawal_btn').on('click', function () {
         var password = $('#password').val();
-        console.log(password);
+
         //유효성
         if(password ==='' || password ==null){
             alert("현재 비밀번호를 입력해주세요.");

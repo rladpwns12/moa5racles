@@ -107,11 +107,13 @@ function searchLocation(addr) {
     geocoder.addressSearch(addr, callback);
 }
 
-function smsCheck(){
+function smsCheck() {
 
     let width = 500;
     let height = 600;
-    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fregistration&state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
+    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/" +
+        "?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fexit&" +
+        "state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +
@@ -119,6 +121,7 @@ function smsCheck(){
 
     window.open(popUpUrl, "", popUpOption);
 }
+
 function submit() {
     let name = $('#name').val();
     let nickname = $('#nickname').val();
@@ -143,7 +146,7 @@ function submit() {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "registerationForm",
+        url: "registration",
         data: {
             name, nickname, email, password, phone, postcode, address, detailAddress, latitude, longitude
         },
@@ -155,7 +158,6 @@ function submit() {
         success(data) {
             if (data) {
                 alert("회원가입에 성공하셨습니다.");
-                $('#regForm')[0].reset();
                 location.href = "/login";
             } else {
                 alert("회원가입에 실패하셨습니다.");
@@ -245,11 +247,11 @@ function isEmailValid(input) {
         alert("이메일이 너무 깁니다");
         return false;
     }
-    if ($('#email').val() == "이메일이 중복됩니다") {
+    /*if ($('#email').val() == "이메일이 중복됩니다") {
         alert("새로운 이메일을 입력해주세요");
         $('#email').val("");
         return false;
-    }
+    }*/
     let emailValid = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
     if (!emailValid.test(input)) {
         alert("이메일 형식이 올바르지 않습니다.");
@@ -374,15 +376,15 @@ $('#nickname').focusout(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "checkNickname",
-        data: {nickname},
+        url: "/checkNick",
+        data: {nick:nickname},
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            if (data) {
+            if (data != null) {
                 $('#nickname').css('border', 'solid 0.2px green');
             } else {
                 $('#nickname').css('border', 'solid 0.2px red');
@@ -402,7 +404,7 @@ $('#email').focusout(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "checkEmail",
+        url: "/checkEmail",
         data: {email},
         cache: false,
         beforeSend: function (xhr) {
@@ -410,7 +412,7 @@ $('#email').focusout(function () {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            if (data) {
+            if (data != null) {
                 $('#email').css('border', 'solid 0.2px green');
             } else {
                 $('#email').css('border', 'solid 0.2px red');

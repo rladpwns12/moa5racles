@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -11,7 +12,9 @@
     <script src="${pageContext.request.contextPath}/resources/js/messageReceive.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/message.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/requestStoreInfo.css">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <sec:csrfMetaTags/>
     <title>MOA</title>
 </head>
 <body>
@@ -29,7 +32,7 @@
             <div class="menubar_list">
                 <ul>
                     <li onclick="location.href='/mypage/myinfo'">개인정보</li>
-                    <li onclick="location.href='/mypage/message'">메세지함</li>
+                    <li class="current_menu" onclick="location.href='/mypage/message'">메세지함</li>
                     <li onclick="moveToTransaction();">거래내역</li>
                     <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
                     <li onclick="moveToLatest();">최근 본 보관소</li>

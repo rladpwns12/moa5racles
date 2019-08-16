@@ -65,19 +65,27 @@
         CALL PI_INSERT_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
         #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.nick},#{UserVO.name},'profile.png',#{res, mode=OUT, jdbcType=INTEGER })
     </select>
-    
+    <select id="findPassword" parameterType="hashMap" resultType="String">
+        SELECT email FROM login_view WHERE auth='ROLE_USER'
+        AND PHONENUMBER LIKE #{phoneNumber} AND name = #{name} AND email = #{email}
+    </select>
     <select id="findEmail" parameterType="hashMap" resultType="String">
         SELECT email FROM login_view WHERE auth='ROLE_USER'
-        AND PHONENUMBER LIKE #{phoneNumber}||'%' AND name = #{name}
+        AND PHONENUMBER LIKE #{phoneNumber} AND name = #{name}
     </select>
     <update id="updatePassword" parameterType="hashMap">
         UPDATE user_tb SET user_pw = #{password} WHERE user_id = #{userId}
     </update>
 
+    <update id="updatePasswordByEmailAndName" parameterType="hashMap">
+        UPDATE user_tb SET user_pw = #{password} WHERE email = #{email} AND name = #{name}
+    </update>
+
     <select id="updateUser" statementType="CALLABLE" parameterType="hashMap">
         CALL PI_UPDATE_MY_INFO(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
-        #{userId},#{phoneNumber},#{profile},#{res, mode=OUT, jdbcType=INTEGER })
+        #{userId},#{phoneNumber},#{profile},'DEFAULT',#{res, mode=OUT, jdbcType=INTEGER })
     </select>
+
     <select id="searchAddress" parameterType="int" resultType="com.moa.model.vo.AddressVO">
         select postcode,baseaddress,detailaddress,latitude lat,longitude lng
         from address_view where userid = #{userId}

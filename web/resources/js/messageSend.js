@@ -1,5 +1,7 @@
 
 $(document).ready(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $('#selectAll').click(function () {
         if($('#selectAll').prop("checked")){
             $("input[name=chk]").prop("checked",true);
@@ -10,18 +12,25 @@ $(document).ready(function () {
     });
 
     $('#delete_btn').click(function () {
+        var checkArray = new Array();
+        $('input[name=chk]:checked').each(function (i) {
+            checkArray.push($(this).val());
+        })
+        if(checkArray.length === 0){
+            alert("선택된 메시지가 없습니다.");
+            return;
+        }
         if(confirm("정말로 삭제하시겠습니가?")){
-            var checkArray = new Array();
-            $('input[name=chk]:checked').each(function (i) {
-                checkArray.push($(this).val());
-            })
-            console.log(checkArray);
             $.ajax({
                 url:"/mypage/message/send/delete",
                 type:"POST",
                 contentType:"application/json",
                 dataType:"json",
                 data :JSON.stringify(checkArray),
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("AJAX", true);
+                    xhr.setRequestHeader(header, token);
+                },
                 success:function(result){
                     if(result == true){
                         alert("삭제가 완료되었습니다.");

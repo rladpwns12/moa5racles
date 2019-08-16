@@ -6,7 +6,7 @@
        http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
 
-    <bean id="userAccessDenied" class="com.moa.security.MemberDeniedHandler" />
+    <bean id="memberAccessDenied" class="com.moa.security.MemberDeniedHandler" />
     <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
     <bean id="MemberInfoServiceImpl" class="com.moa.model.service.MemberInfoServiceImpl"></bean>
     <bean id="rememberMeServices"       class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
@@ -23,17 +23,20 @@
     </bean>
 
     <security:http>
+        <security:session-management invalid-session-url="/main" >
+            <security:concurrency-control max-sessions="1" expired-url="/main" />
+        </security:session-management>
         <security:intercept-url pattern="/mypage/**" access="hasRole('ROLE_USER')" />
         <security:intercept-url pattern="/entrust/**" access="hasRole('ROLE_USER')" />
         <security:intercept-url pattern="/hostpage/**" access="hasRole('ROLE_HOST')" />
         <security:intercept-url pattern="/storeboard/keep" access="hasRole('ROLE_HOST')" />
-        <security:intercept-url pattern="/registhost" access="hasRole('ROLE_USER')" />
+        <security:intercept-url pattern="/registhost" access="!hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')" />
 
         <security:form-login
                 login-page="/login"
                 authentication-failure-handler-ref = "loginFailureHandler"
         />
-        <security:access-denied-handler error-page="/notHostErrorPage" />
+        <security:access-denied-handler ref="memberAccessDenied"/>
         <security:logout logout-url="/logout" logout-success-url="/main" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
         <security:remember-me services-ref="rememberMeServices" key="moa"  />
     </security:http>

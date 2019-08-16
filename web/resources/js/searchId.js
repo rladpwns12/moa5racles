@@ -9,7 +9,7 @@ function submit() {
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
         type: "POST",
-        url: "searchId",
+        url: "/searchId",
         data: {name, phone},
         cache: false,
         beforeSend: function (xhr) {
@@ -17,12 +17,12 @@ function submit() {
             xhr.setRequestHeader(header, token);
         },
         success(data) {
-            alert(data);
             if (data != null) {
-                alert("회원님의 아이디는: " + data + " 입니다");
-                window.close();
+                $('#searchedId').val(data);
+                $('#content1').hide();
+                $('#content2').show();
             } else {
-                alert("아이디 찾기에 실패하셨습니다");
+                alert("회원정보를 잘못 입력하셨습니다");
             }
         }, error: function (request, status, error) {
             console.log("전송 오류");
@@ -86,14 +86,17 @@ function smsCheck(){
 
     let width = 500;
     let height = 600;
-    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fregistration&state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
+    let popUpUrl = "https://www.accountkit.com/v1.0/basic/dialog/sms_login/" +
+        "?app_id=2291269470991007&redirect=http%3A%2F%2Flocalhost%3A8089%2Fexit&" +
+        "state=112133&fbAppEventsEnabled=true&debug=true";	//팝업창에 출력될 페이지 URL
     let popUpX = (window.screen.width / 2) - (width / 2);
     let popUpY = (window.screen.height / 2) - (height / 2);
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +
         "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
 
     window.open(popUpUrl, "", popUpOption);
+}
 
-
-
+function exit() {
+    window.close();
 }

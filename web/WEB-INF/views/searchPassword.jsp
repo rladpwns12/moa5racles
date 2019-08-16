@@ -20,7 +20,7 @@
 <div class="page-wrapper bg-gra-02 font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card_t card-4">
-            <div class="add_margin card-body">
+            <div id="content1" class="add_margin card-body">
                 <h2 class="title">비밀번호 찾기</h2>
                     <div class="row row-space">
                         <div class="col-2">
@@ -66,6 +66,33 @@
                 </div>
                 <div class="p-t-15">
                     <button class="short btn btn--radius-2 btn--purple" type="button" onclick="submit()">확인</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card_t card-4">
+            <div id="content2" class="add_margin card-body" style="display: none">
+                <h2 class="title">비밀번호 변경</h2>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <label class="label">변경할 비밀번호를 입력해주세요</label>
+                        <div class="input-group">
+                            <input id="password" class="short2 input100 input--style-4" type="password" name="password" onfocus="emptyPassword()">
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <label class="label">비밀번호를 다시 한번 입력해주세요</label>
+                        <div class="input-group">
+                            <input id="password2" class="short2 input100 input--style-4" type="password" name="password2" onfocus="emptyPassword2()">
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-t-15">
+                    <button class="short btn btn--radius-2 btn--purple" type="password" onclick="submitPassword()">확인</button>
                 </div>
             </div>
         </div>

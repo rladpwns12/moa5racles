@@ -36,7 +36,7 @@
                 <li onclick="location.href='/mypage/myinfo'">개인정보</li>
                 <li onclick="location.href='/mypage/message'">메세지함</li>
                 <li onclick="moveToTransaction();">거래내역</li>
-                <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
+                <li class="current_menu" onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
                 <li onclick="moveToLatest();">최근 본 보관소</li>
                 <li onclick="moveToFavorite();">즐겨찾는 보관소</li>
             </ul>

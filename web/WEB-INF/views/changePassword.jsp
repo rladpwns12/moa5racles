@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/login_util.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <sec:csrfMetaTags/>
     <title>MOA</title>
 </head>
@@ -36,7 +37,7 @@
             </div>
             <div class="menubar_list">
                 <ul>
-                    <li onclick="location.href='/mypage/myinfo'">개인정보</li>
+                    <li class="current_menu" onclick="location.href='/mypage/myinfo'">개인정보</li>
                     <li onclick="location.href='/mypage/message'">메세지함</li>
                     <li onclick="moveToTransaction();">거래내역</li>
                     <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
