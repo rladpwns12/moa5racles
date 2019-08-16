@@ -32,6 +32,7 @@ function submit() {
 }
 
 function submitPassword() {
+    let name = $('#name').val();
     let email = $('#email').val();
     let password = $('#password').val();
     let password2 = $('#password2').val();
