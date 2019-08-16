@@ -16,7 +16,11 @@ public interface AttachMapper {
     public int deleteStoreRequest(String uuid);
     public int deleteUser(String uuid);
 
-    public List<StoreBoardAttachFileVO> findByArticleNumSB(Long articleNum);
-    public List<StoreRequestAttachFileVO> findByArticleNumSR(Long articleNum);
-    public UserAttachFileVO findByUserId(Long userId);
+    public List<AttachFileVO> findByArticleNumSB(Long articleNum);
+    public List<AttachFileVO> findByArticleNumSR(Long articleNum);
+    public AttachFileVO findByUserId(Long userId);
+
+    public List<AttachFileVO> getOldFilesSB();
+    public List<AttachFileVO> getOldFilesSR();
+    public List<AttachFileVO> getOldFilesUser();
 }
