@@ -10,32 +10,16 @@
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <link rel="stylesheet" href="/resources/css/mMain.css">
+    <link rel="stylesheet" href="/resources/css/mApproveInformation.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <title>MOA</title>
 </head>
 <body>
 <%@ include file="mNavbar.jsp" %>
 <div class="container">
-    <form class="login">
-        <fieldset>
-            <legend>로그인</legend>
+    <h2>테스트님의 신청 목록</h2>
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">아이디</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="관리자 아이디">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">비밀번호</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호">
-            </div>
-
-            </fieldset>
-            <button type="submit" class="btn btn-primary">로그인</button>
-        </fieldset>
-    </form>
 </div>
-<%--<%@ include file="footer.jsp" %>--%>
+
 </body>
 </html>
