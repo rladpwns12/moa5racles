@@ -16,6 +16,7 @@ public interface UserMapper {
     String findPassword(Map<String, Object> findPasswordInfo);
     String findEmail(Map<String,Object> findEmailInfo );
     int updatePassword(Map<String,Object> updatePasswordInfo);
+    int updatePasswordByEmailAndName(Map<String, Object> updatePasswordInfo);
     void updateUser(Map<String,Object> updateUserInfo);
     AddressVO searchAddress(int userId);
     int withdrawalUser(int userId);

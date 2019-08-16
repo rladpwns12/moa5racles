@@ -1,8 +1,10 @@
 package com.moa.message;
 
 public class PathMessage {
-    public static String IMG_REPO="C:/MOA/temp";
-    public static String STORE_BOARD_ONE="/moreInformation";
-    public static String KEEP = "/keep";
-    public static String KEEPREGISTER = "/keepregister";
+    public static final String UPLOAD_FOLDER = "c:\\upload";
+    public static final String THUMBNAIL="thumbnail_";
+    public static final String IMG_REPO="C:/MOA/temp";
+    public static final String STORE_BOARD_ONE="/moreInformation";
+    public static final String KEEP = "/keep";
+    public static final String KEEPREGISTER = "/keepregister";
 }

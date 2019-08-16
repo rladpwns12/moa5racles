@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
-public class LuggageRequestApproveServiceImpl {
+public class LuggageRequestApproveServiceImpl implements LuggageRequestApproveService{
 	@Autowired
 	private TransactionDAOImpl transactionDAO;
 

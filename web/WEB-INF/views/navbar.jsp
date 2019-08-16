@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/navbar.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navbar.css">
 <div class="navbar">
@@ -74,7 +75,7 @@
         <div class="main_menu">
             <ul>
 
-                <sec:authorize access="!hasRole('ROLE_HOST')">
+                <sec:authorize access="!hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')">
                     <li><a href="/registhost">호스트 신청하기</a></li>
                 </sec:authorize>
                 <li><a href="/main">홈으로</a></li>

@@ -19,6 +19,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="${pageContext.request.contextPath}/resources/js/myInfo.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myInfo.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/requestStoreInfo.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
@@ -40,7 +41,7 @@
             </div>
             <div class="menubar_list">
                 <ul>
-                    <li onclick="location.href='/mypage/myinfo'">개인정보</li>
+                    <li class="current_menu" onclick="location.href='/mypage/myinfo'">개인정보</li>
                     <li onclick="location.href='/mypage/message'">메세지함</li>
                     <li onclick="moveToTransaction();">거래내역</li>
                     <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>

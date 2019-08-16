@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>호스트 신청 페이지</title>
+    <script src="/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="/resources/js/registHost.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <link rel="stylesheet" href="/resources/css/registHost.css">
-    <script src="/resources/js/jquery-3.4.1.min.js"></script>
-    <script src="/resources/js/registHost.js"></script>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+    <sec:csrfMetaTags/>
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
@@ -30,7 +36,7 @@
         <div class="main">
             <form class="form" method="post" action="/registhost">
                 <div class="storage_type">
-                    <h4>보관형태</h4>
+                    <h4>보관 형태</h4>
                     <div class="storage_type_contents">
                         <ul>
                             <li>
@@ -74,12 +80,10 @@
                         </select>
                     </div>
                     <div class="search_address_btn">
-                        <input type="text" id="postcode" name="postcode" placeholder="우편번호를 입력하세요.">
-                        <input type="button" id="search_address_btn" onclick="execDaumPostcode()" value="우편번호 찾기">
-                        <input type="text" id="address" name="address" placeholder="주소를 입력하세요.">
+                        <input type="text" id="postcode" name="postcode" placeholder="우편번호를 입력하세요." disabled />
+                        <input type="button" id="search_address_btn" value="우편번호 찾기"  />
+                        <input type="text" id="address" name="address" placeholder="주소를 입력하세요." disabled />
                         <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소를 입력하세요.">
-                        <input type="hidden" id="latitude" name="latitude">
-                        <input type="hidden" id="longitude" name="longitude">
                     </div>
                 </div>
                 <div class="company_info">
@@ -108,7 +112,7 @@
                 </div> -->
             </form>
             <div class="apply_btn">
-                <input type="button" id="host_apply_btn" onclick="submit()" value="호스트 신청하기">
+                <input type="button" id="host_apply_btn" value="호스트 신청하기" />
             </div>
         </div>
     </div>

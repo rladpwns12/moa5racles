@@ -35,7 +35,6 @@ function submitPassword() {
     let email = $('#email').val();
     let password = $('#password').val();
     let password2 = $('#password2').val();
-
     if (!isPasswordValid(password)) {
         return;
     }
@@ -48,7 +47,7 @@ function submitPassword() {
     $.ajax({
         type: "POST",
         url: "/updatePassword",
-        data: {email, password},
+        data: {email, name, password},
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);

@@ -42,7 +42,14 @@
             <button onclick="sendPopup('${messageInfo.senderNick}')">답장</button>
         </c:if>
         <button class="confirm_btn">확인</button>
-        <button onclick="deleteMsg(${messageInfo.messageId})">삭제</button>
+        <c:choose>
+            <c:when test="${messageType == 'receive'}">
+                <button onclick="deleteMsg(${messageInfo.messageId},'receive')">삭제</button>
+            </c:when>
+            <c:when test="${messageType == 'send'}">
+                <button onclick="deleteMsg(${messageInfo.messageId},'send')">삭제</button>
+            </c:when>
+        </c:choose>}"
     </div>
 </body>
 </html>

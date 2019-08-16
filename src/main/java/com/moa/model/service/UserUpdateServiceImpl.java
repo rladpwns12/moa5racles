@@ -1,8 +1,9 @@
 package com.moa.model.service;
 
 import com.moa.model.dao.UserDAO;
-import com.moa.model.vo.AddressVO;
+import com.moa.model.vo.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -11,10 +12,12 @@ import java.util.Map;
 public class UserUpdateServiceImpl implements UserUpdateService {
     @Autowired
     private UserDAO userDAO;
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Override
-    public boolean updateUserInformation(Map<String, Object> newUserInfo) {
+    public boolean updateUserInformation(Map<String, Object> newUserInfo,CustomUser customUser) {
         boolean result = false;
+        //customer는 추후에 session에 저장되어있는 loginVO정보를 수정하는 데 사용됩니다.
         if(userDAO.updateUser(newUserInfo)>=1){
             result = true;
         }
@@ -22,12 +25,23 @@ public class UserUpdateServiceImpl implements UserUpdateService {
     }
 
     @Override
-    public boolean updateUserPassword(Map<String, Object> newPasswordInfo) {
+    public boolean updateUserPassword(Map<String, Object> newPasswordInfo, CustomUser customUser) {
         boolean result = false;
+        CustomUser cu = customUser;
+        newPasswordInfo.put("password",passwordEncoder.encode(newPasswordInfo.get("password").toString()));
+
         if(userDAO.updatePassword(newPasswordInfo) >= 1){
+            cu.getLoginVO().setPassword(newPasswordInfo.get("password").toString());
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public boolean updateUserPasswordByEmailAndName(Map<String, Object> newPasswordInfo) {
+        newPasswordInfo.put("password",passwordEncoder.encode(newPasswordInfo.get("password").toString()));
+
+        return userDAO.updatePasswordByEmailAndName(newPasswordInfo) >= 1 ? true : false;
     }
 
     @Override

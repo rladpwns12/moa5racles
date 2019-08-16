@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class LuggageReceiveRecordServiceImpl {
+public class LuggageReceiveRecordServiceImpl implements LuggageReceiveRecordService {
 	@Autowired
 	private StoreRequestDAOImpl storeRequestDAO;
 

@@ -12,12 +12,15 @@ $(document).ready(function () {
     });
 
     $('#delete_btn').click(function () {
+        var checkArray = new Array();
+        $('input[name=chk]:checked').each(function (i) {
+            checkArray.push($(this).val());
+        })
+        if(checkArray.length === 0){
+            alert("선택된 메시지가 없습니다.");
+            return;
+        }
         if(confirm("정말로 삭제하시겠습니가?")){
-            var checkArray = new Array();
-            $('input[name=chk]:checked').each(function (i) {
-                checkArray.push($(this).val());
-            })
-            console.log(checkArray);
             $.ajax({
                 url:"/mypage/message/receive/delete",
                 type:"POST",

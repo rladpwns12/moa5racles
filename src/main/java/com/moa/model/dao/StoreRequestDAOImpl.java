@@ -22,7 +22,31 @@ public class StoreRequestDAOImpl implements StoreRequestDAO {
     @Override
     public int insert(StoreRequestVO storeRequestVO) {
         CheckLuggageMapper mapper=sqlSession.getMapper(CheckLuggageMapper.class);
-        mapper.insert(storeRequestVO);
+
+        Map<String,Object> map=new HashMap<String, Object>();
+        map.put("storeRequestVO",storeRequestVO);
+
+        List<ProductVO> productsList=storeRequestVO.getProductList();
+        StringBuffer categoryList = new StringBuffer();
+        StringBuffer productCntList = new StringBuffer();
+        StringBuffer productList = new StringBuffer();
+
+       for(ProductVO p : productsList) {
+           categoryList.append("," + p.getCategory());
+           productList.append("," + p.getProduct());
+           productCntList.append("," + p.getProductCnt());
+       }
+
+        map.put("categoryList",categoryList.substring(1));
+        map.put("productList",productList.substring(1));
+        map.put("productCntList",productCntList.substring(1));
+
+        String productSizeList = storeRequestVO.getProductSize().toString();
+        productSizeList=productSizeList.substring(1,productSizeList.length()-1);
+
+        map.put("productSizeList",productSizeList);
+        map.forEach((k,v)-> System.out.println(k+" / "+v));
+        mapper.insert(map);
         return storeRequestVO.getStoreRequestNum();
     }
     public ReadStoreRequestVO search(int requestId){

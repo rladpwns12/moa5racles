@@ -3,6 +3,7 @@ package com.moa.controller;
 import com.moa.model.service.FindUserInfoService;
 import com.moa.model.service.MemberInfoService;
 import com.moa.model.service.MemberRegistService;
+import com.moa.model.service.UserUpdateService;
 import com.moa.model.vo.AddressVO;
 import com.moa.model.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +29,8 @@ public class LoginController {
     private MemberRegistService memberRegistService;
     @Autowired
     private FindUserInfoService findUserInfoService;
+    @Autowired
+    private UserUpdateService userUpdateService;
 
 
     @RequestMapping(value="/login")
@@ -144,12 +144,19 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
-    public @ResponseBody
-    boolean updatePassword(
+    @ResponseBody
+    public boolean updatePassword(
             @RequestParam String email,
+            @RequestParam String name,
             @RequestParam String password) {
-        boolean result = true;
-        return result;
+        Map<String, Object> newPasswordInformation = new HashMap<>();
+        boolean result = false;
+
+        newPasswordInformation.put("email", email);
+        newPasswordInformation.put("name", name);
+        newPasswordInformation.put("password", password);
+
+        return userUpdateService.updateUserPasswordByEmailAndName(newPasswordInformation);
     }
 
     @RequestMapping(value = "/termsOfService", method = RequestMethod.GET)

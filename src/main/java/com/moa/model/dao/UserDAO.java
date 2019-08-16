@@ -14,6 +14,7 @@ public interface UserDAO {
     String findEmail(Map<String,Object> findEmailInfo );
     boolean findPassword(Map<String, Object> findPasswordInfo);
     int updatePassword(Map<String,Object> updatePasswordInfo);
+    int updatePasswordByEmailAndName(Map<String, Object> updatePasswordInfo);
     int updateUser(Map<String,Object> updateUserInfo);
     LoginVO checkLogin(String email);
     AddressVO searchAddress(int userId);

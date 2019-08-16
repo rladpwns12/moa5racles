@@ -30,7 +30,6 @@ import static org.junit.Assert.*;
 public class TestUserDAO {
     @Autowired
     UserDAO dao;
-
     @Test
     public void TEST_로그인(){
         System.out.println(dao.checkLogin("jiho9478@naver.com"));
