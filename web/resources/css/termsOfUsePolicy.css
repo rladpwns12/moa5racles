@@ -1,0 +1,98 @@
+body {
+    background: #f1f3f5;
+}
+
+.space {
+    margin-top: 100px;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.page {
+    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 60px;
+}
+
+.header {
+    padding: 4rem;
+    border-bottom: 1px solid #423257;
+    color: #423257;
+    text-align: center;
+    font-size: 26pt;
+    font-weight: bold;
+}
+
+.tab {
+    position: absolute;
+    display: block;
+    color: #423257;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+}
+
+.tab ul {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.tab ul li.on {
+    background: #423257;
+    color: #ffffff;
+}
+
+.tab ul li {
+    display: table-cell;
+    border-bottom: 1px solid #423257;
+    cursor: pointer;
+}
+
+.page-body {
+    padding: 4rem;
+}
+
+.depth-1 {
+    margin-bottom: 1rem;
+    color: #423257;
+    font-size: 18pt;
+    font-weight: 600;
+}
+
+* + .depth-1 {
+    margin-top: 3rem;
+}
+
+.depth-2 {
+    font-size: 14pt;
+    margin: 3px 0;
+}
+
+.depth-3 {
+    padding-left: 1rem;
+    color: #adb5bd;
+    font-size: 14pt;
+    font-weight: 600;
+    margin: 3px 0;
+}
+
+.depth-4 {
+    padding-left: 2rem;
+    color: #adb5bd;
+    font-size: 12pt;
+    margin: 3px 0;
+}
+
+.foot {
+    width: 100%;
+    background: #ffffff;
+}
