@@ -74,7 +74,7 @@
         <div class="main_menu">
             <ul>
 
-                <sec:authorize access="!hasRole('ROLE_HOST')">
+                <sec:authorize access="!hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')">
                     <li><a href="/registhost">호스트 신청하기</a></li>
                 </sec:authorize>
                 <li><a href="/main">홈으로</a></li>
