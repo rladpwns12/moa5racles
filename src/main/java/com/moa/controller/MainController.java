@@ -11,9 +11,14 @@ public class MainController {
         return "main";
     }
 
-    @RequestMapping(value = "test")
-    public String test(){
+    @RequestMapping(value = "admin")
+    public String mobileMain(){
 
-        return "test";
+        return "mMain";
+    }
+    @RequestMapping(value = "admin/hostapprove")
+    public String mobileHostApprove(){
+
+        return "mHostApprove";
     }
 }
