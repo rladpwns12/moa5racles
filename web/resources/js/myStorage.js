@@ -1,3 +1,6 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
 $(document).ready(function() {
 	$.storageList(1);
 	 $("#request_btn").on('click',function(){
@@ -67,7 +70,7 @@ $.storageList = function(curPage){
 			$('.main_paging>img').remove('img');
 
 			if(result.pagination.endPage == 0){
-				$('<span/>',{text : "승인완료된 요청이 없습니다.",style:'font-weight:bold;'}).appendTo('.main_paging');
+				$('<span/>',{text : "등록된 보관소가 없습니다.",style:'font-weight:bold;'}).appendTo('.main_paging');
 				return;
 			}
 			if(curPage == 1){

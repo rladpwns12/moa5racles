@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class MyStorageServiceImpl {
+public class MyStorageServiceImpl implements MyStorageService{
 	@Autowired
 	private StoreBoardDAOImpl storeBaordDAO;
 
