@@ -18,7 +18,13 @@
 <script>
 
 	function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
-	alert(articleNum);
+		var form = document.createElement("form");
+		form.setAttribute("charset", "UTF-8");
+		form.setAttribute("method", "GET"); // Get 또는 Post 입력
+		form.setAttribute("action", "/storeboard/"+articleNum);
+
+		document.body.appendChild(form);
+		form.submit();
 	}
 
 
