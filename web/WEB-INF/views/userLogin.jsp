@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -9,14 +8,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/resources/css/login_util.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
     <sec:csrfMetaTags/>
-
 </head>
 
 <body>
-<%@ include file="navbar.jsp" %>
+<div>
+    <%@ include file="navbar.jsp" %>
+</div>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
@@ -24,14 +25,14 @@
 					<span class="login100-form-title p-b-32">
 						로그인
 					</span>
-                <span class="txt1 p-b-11">
+                <span class="txt1">
 						이메일
 					</span>
-                <div class="wrap-input100 validate-input m-b-36" data-validate="이메일을 입력하세요">
+                <div class="wrap-input100 validate-input" data-validate="이메일을 입력하세요">
                     <input type="text" id="email" class="l_i input100" name="username" value="${username}">
                     <span class="focus-input100"></span>
                 </div>
-                <span class="txt1 p-b-11">
+                <span class="txt1">
 						비밀번호
 					</span>
                 <div class="wrap-input100 validate-input space" data-validate="비밀번호를 입력하세요">
@@ -69,16 +70,16 @@
                     </div>
                 </c:if>
                 <div class="container-login100-form-btn">
-                    <input type="submit" class="l_b login100-form-btn" value="로그인" />
+                    <input type="submit" class="l_b login100-form-btn" value="로그인"/>
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
     </div>
 </div>
-<div id="dropDownSelect1"></div>
-
+<div class="bottom">
+    <%@ include file="footer.jsp" %>
+</div>
 <script src="/resources/js/login.js"></script>
 </body>
-<%@ include file="footer.jsp" %>
 </html>
