@@ -35,6 +35,12 @@ public class LoginController {
     private UserUpdateService userUpdateService;
 
 
+    @RequestMapping(value="/admin/login")
+    public String adminLogin(String error, String logout, Model model){
+        log.info("adminLoginPage()...");
+        return "mLogin";
+    }
+
     @RequestMapping(value="/login")
     public String loginPage(String error, String logout, Model model){
         log.info("loginPage()...");

@@ -21,6 +21,30 @@
         <property name="errorMessage" value="ERRORMSG"/>
         <property name="defaultFailureUrl" value="/login?error"/>
     </bean>
+
+    <bean id="adminLoginFailureHandler" class="com.moa.security.LoginFailureHandler">
+        <property name="username" value="username"/>
+        <property name="password" value="password"/>
+        <property name="errorMessage" value="ERRORMSG"/>
+        <property name="defaultFailureUrl" value="/admin/login?error"/>
+    </bean>
+
+
+    <security:http pattern="/admin/**"  auto-config="true" disable-url-rewriting="true" use-expressions="true" >
+        <security:session-management invalid-session-url="/admin" >
+            <security:concurrency-control max-sessions="1" expired-url="/admin" />
+        </security:session-management>
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+
+        <security:form-login
+                login-page="/admin/login"
+                authentication-failure-handler-ref = "adminLoginFailureHandler"
+        />
+        <security:logout logout-url="/admin" logout-success-url="/admin" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
+        <security:remember-me services-ref="rememberMeServices" key="moa"  />
+    </security:http>
+
+
     <security:http pattern="/**" auto-config="true" disable-url-rewriting="true" use-expressions="true" >
         <security:session-management invalid-session-url="/main" >
             <security:concurrency-control max-sessions="1" expired-url="/main" />
