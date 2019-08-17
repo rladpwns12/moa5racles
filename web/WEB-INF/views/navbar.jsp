@@ -26,7 +26,7 @@
             <a href="javascript:void(0)">|</a>
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">
-            <a href="/login">로그인</a>
+            <a href="/userLogin">로그인</a>
             <a href="javascript:void(0)">|</a>
         </sec:authorize>
 
@@ -59,7 +59,7 @@
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
                 <li>
-                    <a href="/login">
+                    <a href="/userLogin">
                         <div class="author_profile">
                             <img src="/resources/image/navbar/profile.png" alt="">
                         </div>

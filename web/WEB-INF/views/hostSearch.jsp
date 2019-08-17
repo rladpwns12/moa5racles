@@ -490,6 +490,7 @@ window.onload = function(){
 				<option value="리뷰 많은 순">리뷰 많은 순</option>
 				<option value="가격 낮은 순" >가격 낮은 순</option>
 				<option value="가격 높은 순" >가격 높은 순</option>
+				<option value="별점 높은 순" >가격 높은 순</option>
 				</select>
 				<p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" ><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 				    <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
