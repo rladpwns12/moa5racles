@@ -134,6 +134,23 @@
         <foreach collection="category" item="type" open="(" close=")" separator=","> #{type}</foreach>
         )SB
         USING (ARTICLE_NUM)
+        <choose>
+            <when test="filter == '거리 가까운 순'">
+                ORDER BY calc_distance(LATITUDE,LONGITUDE,#{latitude},#{longitude});
+            </when>
+            <when test="messageType == '리뷰 많은 순'">
+                ORDER BY TOT_REVIEW_CNT DESC
+            </when>
+            <when test="messageType == '가격 낮은 순'">
+                ORDER BY DETAIL_PRICE
+            </when>
+            <when test="messageType == '가격 높은 순'">
+                ORDER BY DETAIL_PRICE DESC
+            </when>
+            <when test="messageType == '별점 높은 순'">
+                ORDER BY SBV.STAR_POINT_AVG DESC
+            </when>
+        </choose>
        /* SELECT * FROM SEARCH_BOARD_VIEW SBV*/
     </select>
 
