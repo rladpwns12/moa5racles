@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 <link rel="stylesheet" href="/resources/css/hostSearch.css">
-
+	<sec:csrfMetaTags/>
 <script>
 
 	function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
@@ -155,6 +155,7 @@ $(document).ready(function() {			//실행시
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader("AJAX", true);
 				xhr.setRequestHeader(header, token);
+				xhr.setRequestHeader("Accept", "application/json; odata=verbose");
 			}
 		}).done(function(data)
 			{
@@ -212,9 +213,12 @@ $(document).ready(function() {			//실행시
 			 beforeSend: function (xhr) {
 				 xhr.setRequestHeader("AJAX", true);
 				 xhr.setRequestHeader(header, token);
+				 xhr.setRequestHeader("Accept", "application/json; odata=verbose");
 			 }
 
 		 }).then(function(data,status){
+		 	console.log(data	);
+		 	console.log(status);
 		if(status=="success"){
 			var positions = new Array();
 			 for(let i=0;i<data.length;i++){
@@ -242,6 +246,7 @@ $(document).ready(function() {			//실행시
 				$('<span/>',{text:" "+data[i].nickName}).appendTo(div);
 				positions[i] ={ title:'카카오',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
 			}
+
 			// 마커 이미지의 이미지 주소입니다
 			var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 			for (var i = 0; i < positions.length; i ++) {
@@ -257,10 +262,9 @@ $(document).ready(function() {			//실행시
 			        image : markerImage // 마커 이미지 
 			    });
 			}
-			 
-			 
-			 
-			 
+		}
+		else{
+			alert("지도 오류가 발생했습니다.");
 		}
 	});
 	}

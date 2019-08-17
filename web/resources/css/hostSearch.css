@@ -272,11 +272,12 @@ margin:0;
     font-family: '나눔고딕', sans-serif;
     border-radius: 8px;
     padding: 5px;
-	
+
 }
 .room_select:hover{
     background-color: #e3e3e3;
 }
+
 .room_select img{
 	width:273px;
 	height:200px;
