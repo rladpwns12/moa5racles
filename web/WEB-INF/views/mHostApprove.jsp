@@ -6,12 +6,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="/resource" />
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <link rel="stylesheet" href="/resources/css/mMain.css">
+    <link rel="stylesheet" href="/resources/css/mLogin.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <title>MOA</title>
 </head>
@@ -27,71 +28,81 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+<%--        <c:if test="${list.length == 0}">--%>
+<%--            호스트 신청이 존재하지 않습니다.--%>
+<%--        </c:if>--%>
+<%--        <c:forEach var="${AdminHostSimpleVO}" begin="0" end="${list.length}" step="1" items="${list}">--%>
+<%--            <tr onclick="goToInformation(${AdminHostSimpleVO.userId},${AdminHostSimpleVO.storageType})">--%>
+<%--                <td>${AdminHostSimpleVO.nick}</td>--%>
+<%--                <td>${AdminHostSimpleVO.applicationDate}<br>${AdminHostSimpleVO.applicationTime}</td>--%>
+<%--            </tr>--%>
+<%--        </c:forEach>--%>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
+            <td>테스트계정</td>
+            <td>19-08-16<br>13:00:01</td>
+        </tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr><tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>테스트계정</td>
             <td>19-08-16</td>
         </tr>
 
-        <tr>
+        <tr onclick="location.href='/admin/hostapprove/info'">
             <td>ABCDEFGHIJKLMNOPQRST</td>
             <td>19-08-16</td>
         </tr>

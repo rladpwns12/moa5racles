@@ -18,41 +18,41 @@
 <body>
 <%@ include file="mNavbar.jsp" %>
 <div class="container">
-    <button type="button" class="btn btn-primary btn-sm top-btn"><i class="fas fa-angle-left"></i> 목록으로</button>
+    <button type="button" onclick="location.href='/admin/hostapprove/list'" class="btn btn-primary btn-sm top-btn"><i class="fas fa-angle-left"></i> 목록으로</button>
     <h2>호스트 승인요청 상세보기</h2>
     <fieldset>
-        <legend>호스트민서니님의 신청 내용</legend>
+        <legend>${nick}의 신청 내용</legend>
 
         <div class="form-group">
-            <label for="exampleInputEmail1">이메일</label>
-            <input readonly disabled  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="cms3136@gmail.com">
+            <label for="email">이메일</label>
+            <input readonly disabled  name="email"type="text" class="form-control" id="email" aria-describedby="emailHelp" value="${email}">
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">닉네임</label>
-            <input readonly disabled  type="text" class="form-control input-my-width" id="exampleInputEmail12" aria-describedby="emailHelp" value="호스트민서니">
+            <label for="nick">닉네임</label>
+            <input readonly disabled  type="text" name="nick"class="form-control input-my-width" id="nick" aria-describedby="emailHelp" value="${nick}">
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">이름</label>
-            <input readonly disabled  type="text" class="form-control input-my-width" id="exampleInputEmail13" aria-describedby="emailHelp" value="최민성">
+            <label for="name">이름</label>
+            <input readonly disabled  type="text" name="name"class="form-control input-my-width" id="name" aria-describedby="emailHelp" value="${name}">
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">휴대폰번호</label>
-            <input readonly disabled type="text" class="form-control" id="exampleInputEmail14" aria-describedby="emailHelp" value="010-8757-1048">
+            <label for="phoneNumber">휴대폰번호</label>
+            <input readonly disabled type="text" name="phoneNumber"class="form-control" id="phoneNumber" aria-describedby="emailHelp" value="${phoneNumber}">
         </div>
         <div class="form-group">
-            <label for="exampleTextarea">주소지(회사)</label>
-            <textarea class="form-control" id="exampleTextarea2" rows="3" placeholder="" readonly disabled>경기 성남시 분당구 불정로 6 서버개발팀</textarea>
+            <label for="address">주소지(${type})</label>
+            <textarea class="form-control" name="address" id="address" rows="3" placeholder="" readonly disabled>${baseAddress} ${detailAddress}</textarea>
         </div>
 
         <div class="form-group">
-            <label for="exampleTextarea">승인/거절 사유</label>
-            <textarea class="form-control" id="exampleTextarea" rows="10" placeholder="승인 혹은 거절 사유를 적어주세요."></textarea>
+            <label for="content">승인/거절 사유</label>
+            <textarea class="form-control" name="content" id="content" rows="10" placeholder="승인 혹은 거절 사유를 적어주세요."></textarea>
         </div>
 
     </fieldset>
     <div class="btn-position">
-        <button type="submit" class="btn btn-primary">거절</button>
-        <button type="submit" class="btn btn-primary">승인</button>
+        <button type="submit" name="btnType" value="reject" class="btn btn-primary">거절</button>
+        <button type="submit" name="btnType" value="approve" class="btn btn-primary">승인</button>
     </div>
 </div>
 
