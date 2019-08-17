@@ -63,7 +63,7 @@
                         </a>
                     </div>
                 </div>
-                <c:if test="${not empty ERRORMSG}">
+                <c:if test="${!empty ERRORMSG}">
                     <div style="color:red">
                         <p> ${ERRORMSG }</p>
                     </div>

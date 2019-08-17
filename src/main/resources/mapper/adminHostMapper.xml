@@ -35,7 +35,7 @@
                 ,BT.BUSINESS_NAME,BT.BUSINESS_LICENSE_NUM,BT.BUSINESS_REPRESENTATIVE
             </when>
             <when test="storageType == '기타'">
-                ,SOT.CONTENTS
+                ,SOT.CONTENTS OTEHR_CONTENT
             </when>
         </choose>
         FROM LOGIN_VIEW LV

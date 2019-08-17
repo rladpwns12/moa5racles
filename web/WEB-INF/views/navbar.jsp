@@ -25,7 +25,7 @@
             </form>
             <a href="javascript:void(0)">|</a>
         </sec:authorize>
-        <sec:authorize access="!isAuthenticated()">
+        <sec:authorize access="isAnonymous()">
             <a href="/login">로그인</a>
             <a href="javascript:void(0)">|</a>
         </sec:authorize>
@@ -36,12 +36,13 @@
     </div>
 </div>
 <div class="doc">
+
     <div class="sidebar">
         <div class="sidehide">
             <i class="fa fa-times" aria-hidden="true"></i>
         </div>
         <div class="author">
-            <sec:authorize access="isAuthenticated()">
+            <sec:authorize access="hasRole('ROLE_USER')">
                 <li>
                     <a href="/mypage">
                         <div class="author_profile">
@@ -49,14 +50,14 @@
                         </div>
                         <div class="author_name">
                             <sec:authentication property="principal.loginVO.name"/> <br/>
-                            <span>
+                            <span class="author_email">
                                 <sec:authentication property="principal.loginVO.email"/>
                             </span>
                         </div>
                     </a>
                 </li>
             </sec:authorize>
-            <sec:authorize access="isAnonymous()">
+            <sec:authorize access="!hasRole('ROLE_USER')">
                 <li>
                     <a href="/login">
                         <div class="author_profile">
@@ -64,7 +65,7 @@
                         </div>
                         <div class="author_name">
                             로그인<br/>
-                            <span>아이디가 없으시다면 회원가입을 해주세요.</span>
+                            <span class="author_email">아이디가 없으시다면 회원가입을 해주세요.</span>
                         </div>
                     </a>
                 </li>
