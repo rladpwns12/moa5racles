@@ -14,17 +14,17 @@ public class MainController {
     @RequestMapping(value = "admin/login")
     public String mobileMain(){
 
-        return "mLogin";
+        return "admin/mLogin";
     }
 
     @RequestMapping(value = "admin/hostapprove/list")
     public String mobileHostApprove(){
 
-        return "mHostApprove";
+        return "admin/mHostApprove";
     }
     @RequestMapping(value = "admin/hostapprove/info")
     public String mobileApproveInformation(){
 
-        return "mApproveInformation";
+        return "admin/mApproveInformation";
     }
 }

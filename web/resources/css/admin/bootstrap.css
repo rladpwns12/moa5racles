@@ -10438,7 +10438,7 @@ th {
   color: inherit;
 }
 .logo_img {
-  background: url(../image/navbar/logo.png) no-repeat 50% 50%;
+  background: url(../../image/navbar/logo.png) no-repeat 50% 50%;
   background-size: contain;
   width: 120px;
   height: 30px;
