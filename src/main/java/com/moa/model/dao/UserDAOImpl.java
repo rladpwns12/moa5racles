@@ -46,30 +46,23 @@ public class UserDAOImpl implements UserDAO {
         String password = userVO.getPassword();
         password = passwordEncoder.encode(password);
         userVO.setPassword(password);
-
-        System.out.println(password);
         userInfo.put("UserVO", userVO);
-
         mapper = sqlSession.getMapper(UserMapper.class);
         mapper.signUpUser(userInfo);
         result = ((int)userInfo.get("res") == 1) ? true : false;
-
         return result;
     }
 
     @Override
     public boolean signUpDuplicationCheck(Map<String, Object> duplicationInfo) {
         UserMapper mapper;
-
         mapper = sqlSession.getMapper(UserMapper.class);
-
         return (mapper.duplicationCheck(duplicationInfo) >= 1) ? true : false;
     }
 
     @Override
     public LoginVO checkLogin(String email) {
         UserMapper mapper;
-        LoginVO result;
 
         mapper = sqlSession.getMapper(UserMapper.class);
 
