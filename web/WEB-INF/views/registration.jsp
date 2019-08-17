@@ -38,7 +38,7 @@
                         <label class="label">닉네임을 입력해주세요</label>
                         <div class="input-group">
                             <input id="nickname" class="input100 input--style-4" type="text" name="nickname"
-                                   onfocus="emptyNickname()">
+                                   onfocus="resetNickname()">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
