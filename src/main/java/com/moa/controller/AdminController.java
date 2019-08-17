@@ -18,12 +18,6 @@ public class AdminController {
     @Autowired
     private HostConfirmService hostConfirmService;
 
-    @RequestMapping(value = "/login")
-    public String mobileMain() {
-
-        return "mLogin";
-    }
-
     @RequestMapping(value = "/hostapprove/list", method = RequestMethod.GET)
     public ModelAndView confirmList() {
         ModelAndView mav = new ModelAndView();
