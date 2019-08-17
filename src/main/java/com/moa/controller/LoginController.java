@@ -52,31 +52,19 @@ public class LoginController {
         return "exitRedirect";
     }
 
-    @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkEmail", method = RequestMethod.GET)
     @ResponseBody
     public boolean checkEmail(@RequestParam(value = "email") String email){
         Map<String, Object> duplicationInfo = new HashMap<>();
         duplicationInfo.put("email", email);
-
-        /*//이메일 중복이 있는 경우 true 반환
-        if (memberInfoService.signUpDuplicationCheck(duplicationInfo))
-            return FAIL;
-        else
-            return SUCCESS;*/
         return !memberInfoService.signUpDuplicationCheck(duplicationInfo);
     }
 
-    @RequestMapping(value = "/checkNick", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkNick", method = RequestMethod.GET)
     @ResponseBody
     public boolean checkNick(@RequestParam(value = "nick") String nick) {
         Map<String, Object> duplicationInfo = new HashMap<>();
         duplicationInfo.put("nick", nick);
-
-        /*//닉네임 중복이 있는 경우 true 반환
-        if (memberInfoService.signUpDuplicationCheck(duplicationInfo))
-            return FAIL;
-        else
-            return SUCCESS;*/
         return !(memberInfoService.signUpDuplicationCheck(duplicationInfo));
     }
     // 회원가입
