@@ -51,6 +51,7 @@ body {
     margin-left: 10px;
     transition: color 0.3s;
     padding-top: 1px;
+    background-color: white;
 }
 
 #sidebar_btn {
@@ -205,12 +206,20 @@ body {
     border: none;
     text-align: inherit;
     align-items: inherit;
+    color: #423257;
     padding: 0;
     font-size: 15px;
     margin: 0 0 0 10px;
     font-family: "Nanum Gothic";
     outline: none;
     cursor: pointer;
+}
+*, *:before, *:after{
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+}
+.sideBtn{
+    display: block!important;
 }
 
 

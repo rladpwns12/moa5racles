@@ -1,10 +1,10 @@
 $(document).ready(function () {
     var addrLat = 0;
     var addrLng = 0;
+    var passwordText = document.getElementById("password");
     var addr = $('#address').val();
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
-
     //start of find lat&lng
     function searchLocation(adr){
         var geocoder = new kakao.maps.services.Geocoder();
@@ -60,9 +60,10 @@ $(document).ready(function () {
     $('#submit_btn').click(function () {
         //-- start of validation
         //1. 빈칸 검사
-        if(userVO.password === '' || userVO.password === null){
+        console.log(passwordText.value);
+        if(passwordText.value == '' || passwordText.value == null){
             alert("비밀번호를 입력해주세요.");
-            document.getElementById("password").focus();
+            passwordText.focus();
             return;
         }
         if(userVO.detailAddress === '' || userVO.detailAddress === null){

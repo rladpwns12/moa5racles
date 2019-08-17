@@ -61,7 +61,7 @@
                 <div class="limiter">
                     <div class="container-login100">
                         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-                            <class class="login100-form validate-form flex-sb flex-w" method="post" action="/login">
+                            <class class=" validate-form flex-sb flex-w" method="post" action="/login">
 
                                 <span class="txt1 p-b-11">현재 비밀번호</span>
                                 <div class="wrap-input100 validate-input space" data-validate="비밀번호를 입력하세요">
