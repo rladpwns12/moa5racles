@@ -4,25 +4,52 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" >
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="memberAccessDenied" class="com.moa.security.MemberDeniedHandler" />
     <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
     <bean id="MemberInfoServiceImpl" class="com.moa.model.service.MemberInfoServiceImpl"></bean>
-    <bean id="rememberMeServices"       class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+    <bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
         <constructor-arg name="key" value="moa"/>
         <constructor-arg name="tokenRepository" ref="customTokenRepository"/>
         <constructor-arg name="userDetailsService" ref="MemberInfoServiceImpl"/>
         <property name="tokenValiditySeconds" value="604800" />
     </bean>
+
     <bean id="loginFailureHandler" class="com.moa.security.LoginFailureHandler">
         <property name="username" value="username"/>
         <property name="password" value="password"/>
         <property name="errorMessage" value="ERRORMSG"/>
-        <property name="defaultFailureUrl" value="/login?error"/>
+        <property name="defaultFailureUrl" value="/userLogin?error"/>
     </bean>
 
-    <security:http>
+    <bean id="adminLoginFailureHandler" class="com.moa.security.LoginFailureHandler">
+        <property name="username" value="username"/>
+        <property name="password" value="password"/>
+        <property name="errorMessage" value="ERRORMSG"/>
+        <property name="defaultFailureUrl" value="/admin/login?error"/>
+    </bean>
+
+    <security:http pattern="/admin/**">
+        <security:session-management invalid-session-url="/admin" >
+            <security:concurrency-control max-sessions="1" expired-url="/admin" />
+        </security:session-management>
+        <security:intercept-url pattern="/admin/login" access="permitAll()" />
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+
+        <security:form-login
+                login-page="/admin/login"
+                login-processing-url="/admin/admin-login"
+                default-target-url="/admin/hostapprove/list"
+                always-use-default-target="true"
+                authentication-failure-handler-ref = "adminLoginFailureHandler"
+        />
+        <security:logout logout-url="/admin" logout-success-url="/admin" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
+        <security:remember-me services-ref="rememberMeServices" key="moa"  />
+    </security:http>
+
+
+    <security:http  pattern="/**">
         <security:session-management invalid-session-url="/main" >
             <security:concurrency-control max-sessions="1" expired-url="/main" />
         </security:session-management>
@@ -30,10 +57,11 @@
         <security:intercept-url pattern="/entrust/**" access="hasRole('ROLE_USER')" />
         <security:intercept-url pattern="/hostpage/**" access="hasRole('ROLE_HOST')" />
         <security:intercept-url pattern="/storeboard/keep" access="hasRole('ROLE_HOST')" />
-        <security:intercept-url pattern="/registhost" access="!hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')" />
+            <security:intercept-url pattern="/registhost" access="!hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')" />
 
         <security:form-login
-                login-page="/login"
+                login-page="/userLogin"
+                login-processing-url="/user-login"
                 authentication-failure-handler-ref = "loginFailureHandler"
         />
         <security:access-denied-handler ref="memberAccessDenied"/>

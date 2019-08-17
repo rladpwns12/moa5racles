@@ -32,7 +32,7 @@ public class ApplicationConfig  extends WebMvcConfigurerAdapter {
     public ReloadableResourceBundleMessageSource messageSource(){
         ReloadableResourceBundleMessageSource messageSource=
                 new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:message/messages");
+        messageSource.setBasename("classpath:message/message");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
