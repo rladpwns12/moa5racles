@@ -260,21 +260,27 @@ margin:0;
 	
 }
 .room_select{
-	width:273px;
-	height:403px;
-	background-color:white;
-	margin-right:25px;
-	float:left;
-	font-size:20px;
-	font-weight:300px;
-	line-height:30px;
-	font-family: 'Nanum Gothic', sans-serif;
+    width: 273px;
+    height: 393px;
+    background-color: white;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    float: left;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 30px;
+    font-family: '나눔고딕', sans-serif;
+    border-radius: 8px;
+    padding: 5px;
 	
+}
+.room_select:hover{
+    background-color: #e3e3e3;
 }
 .room_select img{
 	width:273px;
 	height:200px;
-	border-radius:4px;
+	border-radius:5px;
 }
 #title{
 	margin-top:0px;
