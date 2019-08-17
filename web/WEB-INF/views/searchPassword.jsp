@@ -87,7 +87,7 @@
                         <label class="label">비밀번호를 다시 한번 입력해주세요</label>
                         <div class="input-group">
                             <%--<input id="password2" class="short2 input100 input--style-4" type="password" name="password2" onfocus="emptyPassword2()">--%>
-                                <input id="password2" class="short2 input100 input--style-4" type="password" name="password2" readonly>
+                                <input id="password2" class="short2 input100 input--style-4" type="password" name="password2">
                             <span class="focus-input100"></span>
                         </div>
                     </div>

@@ -35,7 +35,6 @@ public class LoginController {
 
     @RequestMapping(value="/login")
     public String loginPage(String error, String logout, Model model){
-        System.out.println("loginPage()...");
         return "login";
     }
     @RequestMapping(value="/exit")
@@ -46,30 +45,30 @@ public class LoginController {
 
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
     @ResponseBody
-    public String checkEmail(@RequestParam(value = "email") String email){
+    public boolean checkEmail(@RequestParam(value = "email") String email){
         Map<String, Object> duplicationInfo = new HashMap<>();
-
         duplicationInfo.put("email", email);
 
-        //이메일 중복이 있는 경우 true 반환
+        /*//이메일 중복이 있는 경우 true 반환
         if (memberInfoService.signUpDuplicationCheck(duplicationInfo))
             return FAIL;
         else
-            return SUCCESS;
+            return SUCCESS;*/
+        return !memberInfoService.signUpDuplicationCheck(duplicationInfo);
     }
 
     @RequestMapping(value = "/checkNick", method = RequestMethod.POST)
     @ResponseBody
-    public String checkNick(@RequestParam(value = "nick") String nick) {
+    public boolean checkNick(@RequestParam(value = "nick") String nick) {
         Map<String, Object> duplicationInfo = new HashMap<>();
-
         duplicationInfo.put("nick", nick);
 
-        //닉네임 중복이 있는 경우 true 반환
+        /*//닉네임 중복이 있는 경우 true 반환
         if (memberInfoService.signUpDuplicationCheck(duplicationInfo))
             return FAIL;
         else
-            return SUCCESS;
+            return SUCCESS;*/
+        return !(memberInfoService.signUpDuplicationCheck(duplicationInfo));
     }
     // 회원가입
     @RequestMapping(value="/registration", method=RequestMethod.GET)
@@ -150,7 +149,6 @@ public class LoginController {
             @RequestParam String name,
             @RequestParam String password) {
         Map<String, Object> newPasswordInformation = new HashMap<>();
-        boolean result = false;
 
         newPasswordInformation.put("email", email);
         newPasswordInformation.put("name", name);

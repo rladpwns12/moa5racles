@@ -6,12 +6,12 @@
 <mapper namespace="com.moa.mybatis.UserMapper">
 
     <resultMap id="userInfo_map" type="com.moa.model.vo.SimpleUserInfoVO">
-        <id property="profileName" column="PICTURE_NAME"  />
-        <id property="name" column="NAME"  />
-        <id property="email" column="EMAIL"  />
-        <id property="requestCnt" column="STORE_REQUEST_CNT"  />
-        <id property="notReadMessageCnt" column="UNREAD_CNT"  />
-        <id property="usingStorageCnt" column="STORAGE_CNT"  />
+        <id property="profileName" column="PICTURE_NAME"/>
+        <id property="name" column="NAME"/>
+        <id property="email" column="EMAIL"/>
+        <id property="requestCnt" column="STORE_REQUEST_CNT"/>
+        <id property="notReadMessageCnt" column="UNREAD_CNT"/>
+        <id property="usingStorageCnt" column="STORAGE_CNT"/>
     </resultMap>
 
     <select id="selectUserInfo" parameterType="java.lang.Integer" resultMap="userInfo_map">
@@ -24,21 +24,21 @@
     </select>
 
     <resultMap id="checkLoginMap" type="com.moa.model.vo.LoginVO">
-        <id property="userId" column="USERID"  />
-        <result property="userId" column="USERID"  />
-        <result property="password" column="password"  />
-        <result property="nick" column="nick"  />
-        <result property="name" column="name"  />
-        <result property="email" column="email"  />
-        <result property="phoneNumber" column="phoneNumber"  />
-        <result property="profile" column="profile"  />
-        <result property="flag" column="flag" />
-        <collection property="authVOList" resultMap="authMap"  />
+        <id property="userId" column="USERID"/>
+        <result property="userId" column="USERID"/>
+        <result property="password" column="password"/>
+        <result property="nick" column="nick"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phoneNumber"/>
+        <result property="profile" column="profile"/>
+        <result property="flag" column="flag"/>
+        <collection property="authVOList" resultMap="authMap"/>
     </resultMap>
 
     <resultMap id="authMap" type="com.moa.model.vo.AuthVO">
-        <result property="userId" column="userid" />
-        <result property="auth" column="auth"  />
+        <result property="userId" column="userid"/>
+        <result property="auth" column="auth"/>
     </resultMap>
 
     <select id="checkLogin" parameterType="java.lang.String" resultMap="checkLoginMap">
@@ -62,8 +62,10 @@
         </choose>
     </select>
     <select id="signUpUser" statementType="CALLABLE" parameterType="hashMap">
+
         CALL PI_INSERT_USER(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
-        #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.nick},#{UserVO.name},'profile.png',#{res, mode=OUT, jdbcType=INTEGER })
+        #{UserVO.email},#{UserVO.password},#{UserVO.phoneNumber},#{UserVO.nick},#{UserVO.name},#{res, mode=OUT, jdbcType=INTEGER })
+
     </select>
     <select id="findPassword" parameterType="hashMap" resultType="String">
         SELECT email FROM login_view WHERE auth='ROLE_USER'

@@ -17,7 +17,7 @@ public class UserVO {
     @Email
     private String email;
     @NotBlank
-    @Size(min = 5, max = 20)
+    @Min(5)
     private String password;
     @NotBlank
     @Pattern(regexp = "/^\\d{3}-\\d{3,4}-\\d{4}$/")

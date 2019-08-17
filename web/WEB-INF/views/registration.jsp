@@ -30,7 +30,7 @@
                     <div class="col-2">
                         <label class="label">이름을 입력해주세요</label>
                         <div class="input-group">
-                            <input id="name" class="input100 input--style-4" type="text" name="name">
+                            <input id="name" class="input100 input--style-4" type="text" name="name" onfocus="resetName()">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             <label class="label">이메일을 입력해주세요</label>
                             <div class="input-group-icon">
                                 <input type="text" id="email" class="email input100 input--style-4"
-                                       name="email" onfocus="emptyEmail()"  style="text-transform:lowercase;">
+                                       name="email" onfocus="resetEmail()"  style="text-transform:lowercase;">
                                 <span class="long focus-input100"></span>
                                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                             </div>
@@ -61,16 +61,16 @@
                         <label class="label">비밀번호를 입력해주세요</label>
                         <div class="input-group">
                             <input id="password_fake" class="input100 input--style-4" type="password"
-                                   onfocus="emptyEmail()" style="display: block; width:0px; height:0px; border: 0;">
+                                   onfocus="resetEmail()" style="display: none">
                             <input id="password" class="input100 input--style-4" type="password"
-                                   onfocus="emptyEmail()" >
+                                   onfocus="resetPassword()" >
                             <span class="focus-input100"></span>
                         </div>
                     </div>
                     <div class="col-2">
                         <label class="label">비밀번호를 다시 한번 입력해주세요</label>
                         <div class="input-group">
-                            <input id="password2" class="input100 input--style-4" type="password" name="password">
+                            <input id="password2" class="input100 input--style-4" type="password" name="password2" onfocus="resetPassword2()">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -129,9 +129,9 @@
                             <label class="label">상세 주소를 입력해주세요</label>
                             <div class="input-group-icon">
                                 <input type="text" id="detailAddress" class="detailAddress input100 input--style-4"
-                                       name="detailAddress" placeholder="상세주소를 입력하세요" style="display: block; width:0px; height:0px; border: 0;">
+                                       name="detailAddress" placeholder="상세주소를 입력하세요" style="display: none">
                                 <input type="text" id="detailAddress_fake" class="detailAddress input100 input--style-4"
-                                       name="detailAddress" placeholder="상세주소를 입력하세요" autocomplete="off">
+                                       name="detailAddress" placeholder="상세주소를 입력하세요" autocomplete="off" onfocus="resetDetailAddress()">
                                 <span class="long focus-input100"></span>
                             </div>
                             <input type="hidden" id="lat" class="input--style-4" name="latitude">
