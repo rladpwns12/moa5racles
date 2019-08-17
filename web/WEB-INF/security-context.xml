@@ -6,6 +6,7 @@
        http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="adminSuccessHandler" class="com.moa.security.AdminSuccessHandler"/>
     <bean id="memberAccessDenied" class="com.moa.security.MemberDeniedHandler" />
     <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
     <bean id="MemberInfoServiceImpl" class="com.moa.model.service.MemberInfoServiceImpl"></bean>
@@ -42,8 +43,10 @@
                 login-processing-url="/admin/admin-login"
                 default-target-url="/admin/hostapprove/list"
                 always-use-default-target="true"
+                authentication-success-handler-ref="adminSuccessHandler"
                 authentication-failure-handler-ref = "adminLoginFailureHandler"
         />
+        <security:access-denied-handler ref="memberAccessDenied"/>
         <security:logout logout-url="/admin" logout-success-url="/admin" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
         <security:remember-me services-ref="rememberMeServices" key="moa"  />
     </security:http>
