@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.mybatis.AdminHostMapper">
+    <resultMap id="selectHostReputationMap" type="com.moa.model.vo.AdminHostSimpleVO">
+        <id property="userId" column="userId" />
+        <id property="nick" column="nick" />
+        <id property="storageType" column="storageType" />
+        <id property="applicationDate" column="applicationDate" />
+        <id property="applicationTime" column="applicationTime" />
+    </resultMap>
+    <select id="selectHostConfirmList" resultMap="selectHostReputationMap">
+        select
+        PROCESS_TIME,
+        HATT.HOST_APPLICATION_TIME_ID APPLICATION_TIME_ID,
+        LV.USERID userId,
+        LV.NICK nick,
+        ST.STORAGE_TYPE storageType,
+        HATT.APPLICATION_TIME applicationDate,
+        HATT.APPLICATION_TIME applicationTime
+        from LOGIN_VIEW LV
+        LEFT OUTER JOIN HOST_TB HT ON HT.HOST_ID=LV.USERID
+        LEFT OUTER JOIN STORAGE_TB ST ON HT.HOST_ID = ST.HOST_ID
+        LEFT OUTER JOIN HOST_APPLICATION_TIME_TB HATT ON HT.HOST_ID = HATT.HOST_ID
+        WHERE  PROCESS_TIME IS NULL AND AUTH='ROLE_PRE_HOST'
+        ORDER BY applicationDate ASC
+    </select>
+
+    <select id="selectConfirmDetail" parameterType="hashMap"  resultType="hashMap">
+        select LV.USERID, LV.EMAIL,LV.NICK,LV.NAME,LV.PHONENUMBER,ST.STORAGE_TYPE ,AV.POSTCODE,AV.BASEADDRESS,AV.DETAILADDRESS
+        <choose>
+            <when test="storageType == '상가' or storageType == '회사'">
+                ,BT.BUSINESS_NAME,BT.BUSINESS_LICENSE_NUM,BT.BUSINESS_REPRESENTATIVE
+            </when>
+            <when test="storageType == '기타'">
+                ,SOT.CONTENTS
+            </when>
+        </choose>
+        FROM LOGIN_VIEW LV
+        LEFT OUTER JOIN HOST_TB HT ON HT.HOST_ID=LV.USERID
+        LEFT OUTER JOIN STORAGE_TB ST ON HT.HOST_ID = ST.HOST_ID
+        LEFT OUTER JOIN ADDRESS_VIEW AV ON HT.HOST_ID = AV.USERID
+        <choose>
+            <when test="storageType == '상가' or storageType == '회사'">
+                JOIN BUSINESS_TB BT ON ST.STORAGE_ID = BT.STORAGE_ID
+            </when>
+            <when test="storageType == '기타'">
+                JOIN STORAGE_OTHER_TB SOT ON ST.STORAGE_ID=SOT.STORAGE_ID
+            </when>
+        </choose>
+        WHERE CONFIRM_FLAG ='N' AND AUTH='ROLE_PRE_HOST' AND LV.USERID= #{userId}
+    </select>
+
+    <insert id="processConfirm" parameterType="hashMap" statementType="CALLABLE">
+        {
+            CALL PI_HOST_CONFIRM(
+                #{userId},
+                #{context}
+            )
+        }
+    </insert>
+
+    <insert id="processRefuse" parameterType="hashMap" statementType="CALLABLE">
+        {
+            CALL PI_HOST_REFUSE(
+                #{userId},
+                #{context}
+            )
+        }
+    </insert>
+
+</mapper>

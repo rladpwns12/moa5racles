@@ -2,14 +2,13 @@ package com.moa.model.dao;
 
 import com.moa.model.vo.AdminHostSimpleVO;
 
+
 import java.util.List;
+import java.util.Map;
 
 public interface AdminHostDAO {
     List<AdminHostSimpleVO> searchAdminHost();
-
-//    AdminHostDetailVO searchAdminHostDetail(int articleNum);
-//
-//    AdminHostStoreVO searchAdminHostStore(int articleNum);
-//
-//    AdminHostEtcVO searchAdminHostEtc(int articleNum);
+    Map<String,Object> searchAdminHostDetail(int userId, String storageType);
+    boolean processConfirm(Map<String, Object> info);
+    boolean processRefuse(Map<String, Object> info);
 }

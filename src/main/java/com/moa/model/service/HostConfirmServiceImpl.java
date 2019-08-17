@@ -2,12 +2,12 @@ package com.moa.model.service;
 
 import com.moa.model.dao.AdminHostDAO;
 import com.moa.model.vo.AdminHostSimpleVO;
-import com.moa.model.vo.HostRequestInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class HostConfirmServiceImpl implements HostConfirmService {
@@ -18,7 +18,21 @@ public class HostConfirmServiceImpl implements HostConfirmService {
         return adminHostDAO.searchAdminHost();
     }
 
-    public HostRequestInfoVO searchRequestInfo(String email){
-        return new HostRequestInfoVO();
+    public Map<String, Object> searchRequestInfo(int userId, String storageType){
+        return adminHostDAO.searchAdminHostDetail(userId, storageType);
+    }
+
+    public boolean processConfirm(int userId, String context){
+        Map<String, Object> info = new HashMap<>();
+        info.put("userId", userId);
+        info.put("context", context);
+        return adminHostDAO.processConfirm(info);
+    }
+
+    public boolean processRefuse(int userId, String context){
+        Map<String, Object> info = new HashMap<>();
+        info.put("userId", userId);
+        info.put("context", context);
+        return adminHostDAO.processRefuse(info);
     }
 }
