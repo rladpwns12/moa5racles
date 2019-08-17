@@ -4,6 +4,7 @@ package com.moa.controller;
 import com.moa.model.service.AddressSearchService;
 import com.moa.model.service.HostRegistrationService;
 import com.moa.model.vo.CustomUser;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 
 @Controller
+@Log4j
 public class RegistHostController {
     @Autowired
     private HostRegistrationService hostRegistrationService;
@@ -32,13 +34,13 @@ public class RegistHostController {
         int userId;
         CustomUser customUser = (CustomUser) auth.getPrincipal();
 
-        System.out.println("들어옴");
+       log.info("들어옴");
         Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
         Iterator<? extends GrantedAuthority> iter = authorities.iterator();
         while(iter.hasNext()){
-            System.out.println("for문 들어옴");
+           log.info("for문 들어옴");
             GrantedAuthority authority = iter.next();
-            System.out.println(authority.getAuthority());
+            log.info(authority.getAuthority());
         }
 
         if(customUser.getLoginVO().getFlag() == null){

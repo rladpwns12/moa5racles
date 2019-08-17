@@ -32,7 +32,7 @@
 
 
         <a href="/mypage" id="signup_mypage_btn">마이페이지</a>
-        <a class="fas fa-align-justify hide" id="sidebar_btn"></a>
+        <a class="fas fa-align-justify hide sideBtn" id="sidebar_btn"></a>
     </div>
 </div>
 <div class="doc">
@@ -64,8 +64,7 @@
                             <img src="/resources/image/navbar/profile.png" alt="">
                         </div>
                         <div class="author_name">
-                            로그인<br/>
-                            <span>아이디가 없으시다면 회원가입을 해주세요.</span>
+                            로그인
                         </div>
                     </a>
                 </li>
@@ -81,8 +80,8 @@
                 <li><a href="/main">홈으로</a></li>
                 <li><a href="/storeboard">보관소 찾기</a></li>
                 <li><a href="/mypage">마이페이지</a></li>
-                <li><a href="">즐겨찾기</a></li>
-                <li><a href="">최근 본 장소</a></li>
+                <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">즐겨찾기</a></li>
+                <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">최근 본 장소</a></li>
             </ul>
         </div>
         <div class="sub_menu">
@@ -90,9 +89,9 @@
                 <sec:authorize access="hasRole('ROLE_HOST')">
                     <li><a href="/hostpage">호스트 페이지</a></li>
                 </sec:authorize>
-                <li><a href="">서비스 가이드</a></li>
-                <li><a href="">공지사항</a></li>
-                <li><a href="">고객센터</a></li>
+                <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">서비스 가이드</a></li>
+                <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">공지사항</a></li>
+                <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">고객센터</a></li>
             </ul>
         </div>
     </div>

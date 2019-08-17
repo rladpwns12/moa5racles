@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 <link rel="stylesheet" href="/resources/css/hostSearch.css">
-
+	<sec:csrfMetaTags/>
 <script>
 
 	function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트

@@ -58,6 +58,7 @@
     </filter-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
+        <tracking-mode>COOKIE</tracking-mode>
     </session-config>
     <error-page>
         <error-code>500</error-code>

@@ -11,7 +11,6 @@ $.replyReview = function(){
     rating : rating
   }
   var jsonData=JSON.stringify(formData);
-  console.log(jsonData);
   $.ajax({
     type: "POST",
     url : "/review/"+articleNum,
@@ -62,7 +61,6 @@ $.reviewList = function(section,pageNum){
     },
     dataType: "JSON",
     success: function (data) {
-      console.log(data);
       $('.review_list').remove();
       var str= '<div class="review_list">'
           +'<table  class="review_table">';
@@ -95,11 +93,6 @@ $.reviewList = function(section,pageNum){
       $('.review_host').after(str);
       $('.review_paging').remove();
       var strf='<div class="review_paging">';
-      console.log(section==1&&pageNum!=1);
-      console.log(parseInt(data.totReviews/50) > section-1);
-      console.log(pageNum==1);
-      console.log(parseInt((data.totReviews%50)/5));
-      console.log(parseInt((data.totReviews%50)/5)+1);
       if(section == 1 &&pageNum!= 1){
         strf+='<i class="fas fa-angle-left no-uline" onclick="$.reviewList(1,1);">&nbsp;</i>';
       }
