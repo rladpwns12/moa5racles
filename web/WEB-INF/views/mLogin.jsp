@@ -10,7 +10,7 @@
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    <sec:csrfMetaTags/>
     <link rel="stylesheet" href="/resources/css/mLogin.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <title>MOA</title>
@@ -18,22 +18,26 @@
 <body>
 <%@ include file="mNavbar.jsp" %>
 <div class="container">
-    <form class="login" action="/login" method="post">
+    <form class="login" action="/admin/admin-login" method="post">
         <fieldset>
             <legend>로그인</legend>
 
             <div class="form-group">
                 <label for="exampleInputEmail1">아이디</label>
-                <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="관리자 아이디">
+                <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="관리자 아이디" value="${username}">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">비밀번호</label>
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호">
             </div>
-
+            <c:if test="${not empty ERRORMSG}">
+                <div style="color:red">
+                    <p> ${ERRORMSG }</p>
+                </div>
+            </c:if>
             </fieldset>
             <button type="submit" class="btn btn-primary">로그인</button>
-
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
 </div>
 <%--<%@ include file="footer.jsp" %>--%>

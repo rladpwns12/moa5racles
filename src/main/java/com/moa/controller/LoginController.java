@@ -41,10 +41,10 @@ public class LoginController {
         return "mLogin";
     }
 
-    @RequestMapping(value="/login")
+    @RequestMapping(value="/userLogin")
     public String loginPage(String error, String logout, Model model){
         log.info("loginPage()...");
-        return "login";
+        return "userLogin";
     }
     @RequestMapping(value="/exit")
     public String exitRedirect(String error, String logout, Model model){
