@@ -48,11 +48,10 @@
                             <img src="/resources/image/navbar/profile.png" alt="">
                         </div>
                         <div class="author_name">
-
                             <sec:authentication property="principal.loginVO.name"/> <br/>
-                            <span>
-                    <sec:authentication property="principal.loginVO.email"/>
-              </span>
+                            <span class="author_email">
+                                <sec:authentication property="principal.loginVO.email"/>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -65,7 +64,7 @@
                         </div>
                         <div class="author_name">
                             로그인<br/>
-                            <span>아이디가 없으시다면 회원가입을 해주세요.</span>
+                            <span class="author_email">아이디가 없으시다면 회원가입을 해주세요.</span>
                         </div>
                     </a>
                 </li>

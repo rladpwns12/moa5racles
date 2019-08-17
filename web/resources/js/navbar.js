@@ -9,8 +9,7 @@ $(document).ready(function() {
   });
   $(".logo_img").on('click',function(){
 	  location.href="/main";
-	  });
-
+  });
   
   function getContextPath(){
 	   var hostIndex = location.href.indexOf(location.host) + location.host.length;
