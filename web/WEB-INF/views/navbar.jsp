@@ -34,6 +34,7 @@
         <a href="/mypage" id="signup_mypage_btn">마이페이지</a>
         <a class="fas fa-align-justify hide" id="sidebar_btn"></a>
     </div>
+    
 </div>
 <div class="doc">
 
