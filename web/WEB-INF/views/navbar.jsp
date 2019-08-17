@@ -48,11 +48,10 @@
                             <img src="/resources/image/navbar/profile.png" alt="">
                         </div>
                         <div class="author_name">
-
                             <sec:authentication property="principal.loginVO.name"/> <br/>
-                            <span>
-                    <sec:authentication property="principal.loginVO.email"/>
-              </span>
+                            <span class="author_email">
+                                <sec:authentication property="principal.loginVO.email"/>
+                            </span>
                         </div>
                     </a>
                 </li>

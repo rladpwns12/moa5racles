@@ -72,8 +72,9 @@ $(document).ready(function() {			//실행시
 	rangeSlider();
 
 	$('.mapBtn').click(function() {						//맵 화면 크기 조정 이벤트
-		
+
 		let map = $('.selection_wrapper');
+		console.log(map.style);
 		map.width('730px');
 		$(".map_wrapper").css("left", "730px");
 		$('#map').width('1174px');
@@ -154,6 +155,7 @@ $(document).ready(function() {			//실행시
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader("AJAX", true);
 				xhr.setRequestHeader(header, token);
+				xhr.setRequestHeader("Accept", "application/json; odata=verbose");
 			}
 		}).done(function(data)
 			{
@@ -211,17 +213,22 @@ $(document).ready(function() {			//실행시
 			 beforeSend: function (xhr) {
 				 xhr.setRequestHeader("AJAX", true);
 				 xhr.setRequestHeader(header, token);
+				 xhr.setRequestHeader("Accept", "application/json; odata=verbose");
 			 }
 
 		 }).then(function(data,status){
+		 	console.log(data	);
+		 	console.log(status);
 		if(status=="success"){
 			var positions = new Array();
 			 for(let i=0;i<data.length;i++){
 				let div = $('<div />', {id:"article"+data[i].articleNum,class : 'room_select',onclick:"roomSelect("+data[i].articleNum+");"}).appendTo($('#selection_content_id1'));
 				$('<img/>',{src:"/resources/image/hostSearch/"+data[i].pictureName}).appendTo(div);
 				$('<span/>',{id:'title',text:"보관지 : "+data[i].storageType+"        "}).appendTo(div);
-				$('<i/>',{class:'fas fa-star',style:'font-size:15px;'}).appendTo(div);
-				$('<span/>',{text:" : "+data[i].starPointAvg+" 개"}).appendTo(div);
+				for(let j=0;j<parseInt(data[i].starPointAvg.toFixed(0));j++) {
+					$('<i/>', {class: 'fas fa-star', style: 'font-size:15px;'}).appendTo(div);
+				}
+				$('<span/>',{text:" : "+parseInt(data[i].starPointAvg.toFixed(0))+" 개"}).appendTo(div);
 				$('<br>').appendTo(div);
 				$('<i/>',{class:'fas fa-coins',style:'color:#423257;'}).appendTo(div);
 				$('<span/>',{id:'title',text:" "+data[i].detailPrice+"원"}).appendTo(div);
@@ -239,6 +246,7 @@ $(document).ready(function() {			//실행시
 				$('<span/>',{text:" "+data[i].nickName}).appendTo(div);
 				positions[i] ={ title:'카카오',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
 			}
+
 			// 마커 이미지의 이미지 주소입니다
 			var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 			for (var i = 0; i < positions.length; i ++) {
@@ -254,10 +262,9 @@ $(document).ready(function() {			//실행시
 			        image : markerImage // 마커 이미지 
 			    });
 			}
-			 
-			 
-			 
-			 
+		}
+		else{
+			alert("지도 오류가 발생했습니다.");
 		}
 	});
 	}
@@ -462,27 +469,6 @@ window.onload = function(){
 					<input id="range-slider__range" type="range" value="30" min="1" max="50">
 					<span id="range-slider__value">30km</span>
 				</div>
-			<%--<div class="select_mate" data-mate-select="active" >
-				<select name="" onchange="" onclick="return false;" id="distance">
-				<option value="100">1km </option>
-				<option value="3">3km</option>
-				<option value="5" >5km</option>
-				<option value="10" >10km</option>
-				<option value="15" >15km</option>
-				<option value="20" >20km</option>
-				<option value="25" >25km</option>
-				</select>
-				<p class="selecionado_opcion"  onclick="open_select(this)" ></p>
-				<span onclick="open_select(this)" class="icon_select_mate" >
-				<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-				    <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
-				    <path d="M0-.75h24v24H0z" fill="none"/>
-				</svg></span>
-				<div class="cont_list_select_mate">
-				  <ul class="cont_select_int">  </ul> 
-				</div>
-			</div> --%>
-			<!-- 거리조건 끝 --> 
 		  	<!-- 검색조건 --> 
 			<div class="select_mate" data-mate-select="active" >
 				<select name="" onchange="" onclick="return false;" id="filter">
@@ -490,7 +476,7 @@ window.onload = function(){
 				<option value="리뷰 많은 순">리뷰 많은 순</option>
 				<option value="가격 낮은 순" >가격 낮은 순</option>
 				<option value="가격 높은 순" >가격 높은 순</option>
-				<option value="별점 높은 순" >가격 높은 순</option>
+				<option value="별점 높은 순" >별점 높은 순</option>
 				</select>
 				<p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" ><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 				    <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
@@ -594,7 +580,7 @@ window.onload = function(){
 		</div>
 		
 		<div class=content>
-			<div class="selection_wrapper" >
+			<div class="selection_wrapper" style="width:1230px" >
 				<div class="selection_content" id="selection_content_id1"<%-- onclick="location.href='${pageContext.request.contextPath}/moa/search/1'"--%>>
 				</div>
 			

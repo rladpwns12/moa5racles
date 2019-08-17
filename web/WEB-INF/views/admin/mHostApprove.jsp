@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <link rel="stylesheet" href="/resources/css/mLogin.css">
+    <link rel="stylesheet" href="/resources/css/admin/mLogin.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <title>MOA</title>
 </head>
