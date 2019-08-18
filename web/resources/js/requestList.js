@@ -121,7 +121,7 @@ $(document).ready(function(){
 				str +='</div>'
 				str +='</div>'
 				str +='<div class="rs_exit_btn">'
-				str +='<i class="fas fa-times fos"></i>'
+				str +='<i class="fas fa-times fos exit_btn"></i>'
 				str += '</div>';
 				str += '</div>';
 				str += '</div>';

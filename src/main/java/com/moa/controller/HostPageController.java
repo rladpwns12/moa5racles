@@ -3,18 +3,17 @@ package com.moa.controller;
 import com.moa.message.TransactionStateMessaage;
 import com.moa.model.service.LuggageReceiveRecordServiceImpl;
 import com.moa.model.service.LuggageRequestApproveServiceImpl;
+import com.moa.model.service.LuggageRequestInfoService;
 import com.moa.model.service.MyStorageServiceImpl;
 import com.moa.model.vo.CustomUser;
+import com.moa.model.vo.ReadStoreRequestVO;
 import com.moa.model.vo.SimpleHostRequestVO;
 import com.moa.model.vo.SimpleStorageBoardVO;
 import com.moa.paging.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,6 +28,8 @@ public class HostPageController {
     private LuggageReceiveRecordServiceImpl receiveService;
     @Autowired
     private LuggageRequestApproveServiceImpl requestService;
+    @Autowired
+    private LuggageRequestInfoService luggageRequestInfoService;
     @Autowired
     private MyStorageServiceImpl myStorageService;
 
@@ -76,6 +77,16 @@ public class HostPageController {
         result.put("pagination",pagination);
 
         return result;
+    }
+
+    @RequestMapping(value="/requestlist/info/{requestNum}", method = RequestMethod.GET)
+    @ResponseBody
+    public ReadStoreRequestVO myPageRequestInfo(@PathVariable("requestNum") int requestId){
+        System.out.println(requestId);
+        ReadStoreRequestVO requestVO = luggageRequestInfoService.selectLuggageRequestInfo(requestId);
+        System.out.println(requestVO);
+        requestVO.setApplicationDate(requestVO.getApplicationDate());
+        return requestVO;
     }
 
     @RequestMapping(value = "/confirmyet/confirm", method= RequestMethod.GET)
