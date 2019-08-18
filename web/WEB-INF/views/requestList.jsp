@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 <link rel="stylesheet" href="/resources/css/requestStoreList.css">
 <link rel="stylesheet" href="/resources/css/requestStoreInfo.css">
+    <link rel="stylesheet" href="/resources/css/upload.css">
 <script src="/resources/js/jquery-3.4.1.min.js"></script>
 <script src="/resources/js/requestList.js"></script>
 </head>

@@ -1,5 +1,25 @@
+function showImage(fileCallPath){
+	$(".bigPictureWrapper").css("display","flex").show();
+	$(".bigPicture").html("<img src ='/display?fileName=/" + encodeURI(fileCallPath) + "'>")
+		.animate({width:'100%', height: '100%'}, 1000);
+}
 
 $(document).ready(function(){
+
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880; // 5MB
+	var cloneObj = $(".uploadDiv").clone(); // input type = file 은 readonly라서 div를 clone
+	var uploadResult= $(".uploadResult ul");
+	var attachImg = 'resources/image/cookie.png';
+	var thumbnail = 'thumbnail_';
+
+	$(".bigPictureWrapper").on("click",function (e) {
+		$(".bigPicture").animate({width:'0%', height:'0%'}, 1000);
+		setTimeout(function(){
+			$(".bigPictureWrapper").hide();
+		},1000);
+	});
+
 	$("#load").hide();
 
 	function clickList(tr){
@@ -16,7 +36,6 @@ $(document).ready(function(){
 			dataType:"JSON",
 			success : function(data){
 				console.log(data);
-	
 				var str = '';
 				str += '<div class="popup">';
 				str +=   '<div class="rs_background"></div>'
@@ -109,6 +128,42 @@ $(document).ready(function(){
 				str +=      '</div>'
 				str +=    '</div>'
 				str +=  '</div>'
+
+
+				str += '<div class="uploadResult">';
+				$(data.attachFileList).each(function(i,obj) {
+					var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + thumbnail
+						+ obj.uuid + "_" + obj.fileName);
+
+					str += "<li data-path='" + obj.uploadPath + "'";
+					str += "data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType + "'";
+					str += "><div>";
+					if (obj.fileType) {
+						//GET 방식 첨부파일 이름 사용시 공백, 한글이름이 문제 되므로 encodeURIComponent() 이용
+						var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + thumbnail
+							+ obj.uuid +"_"+obj.fileName);
+
+						//이미지 파일 원본 보여주기
+						var originPath = obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName;
+						originPath = originPath.replace(new RegExp(/\\/g),"/");
+
+						str += "<li><a href=\"javascript:showImage('"+ originPath +"');\">" +
+							"<img src='/display?fileName=/" + fileCallPath + "'></a>" +
+							"</li>";
+					} else {
+						var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName);
+						str += "<li><div><a href='/download?fileName=" + fileCallPath + "'>"
+							+ "<img src='/" + attachImg + "'>" + obj.fileName + "</a>" +
+							"</div></li>";
+					}
+				});
+				str += '</div>';
+				str += '<div class="bigPictureWrapper">'
+					+ '<div class="bigPicture">'
+					+ '</div>'
+					+ '</div>';
+
+
 				str +='</div>'
 //				str +='<div class="rs_button">'
 //				str +=  '<div class="rs_confirm_button">'
@@ -125,7 +180,9 @@ $(document).ready(function(){
 				str += '</div>';
 				str += '</div>';
 				str += '</div>';
-				
+
+
+
 				$('.popup_wrapper').append(str);
 				console.log('ok');
 				$('.fas').click(function(){
@@ -133,8 +190,8 @@ $(document).ready(function(){
 				});
 			
 			},
-			error:function(error){
-				console.log(error);
+			error:function(request,status,error){
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				alert("승인이 실패하였습니다.");
 			}
 		});

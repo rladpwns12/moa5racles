@@ -65,11 +65,6 @@ public class StoreRequestDAOImpl implements StoreRequestDAO {
         }
 
         List<String> pictureList = new ArrayList<>();
-        pictureList = mapper.searchRequestPicture(requestId);
-
-        for(int i = 0 ; i < pictureList.size(); i++){
-            readStoreRequestVO.getPictureList().add(pictureList.get(i));
-        }
 
         return readStoreRequestVO;
     }

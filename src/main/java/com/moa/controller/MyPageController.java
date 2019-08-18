@@ -104,7 +104,6 @@ public class MyPageController {
     @ResponseBody
     public ReadStoreRequestVO myPageRequestInfo(@PathVariable("requestNum") int requestId){
         ReadStoreRequestVO requestVO = luggageRequestInfoService.selectLuggageRequestInfo(requestId);
-
         requestVO.setApplicationDate(requestVO.getApplicationDate());
         return requestVO;
     }

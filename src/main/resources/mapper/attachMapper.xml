@@ -79,7 +79,7 @@
     </select>
 
     <select id="findByArticleNumSR" parameterType="java.lang.Long" resultMap="findByArticleNumMapSR">
-        SELECT * FROM SR_ATTACHED_PICTURE_TB WHERE ARTICLE_NUM=#{articleNum}
+        SELECT * FROM SR_ATTACHED_PICTURE_TB WHERE STORE_REQUEST_ID=#{articleNum}
     </select>
 
     <select id="findByUserId" parameterType="java.lang.Long" resultMap="findByArticleNumMapUSER">
