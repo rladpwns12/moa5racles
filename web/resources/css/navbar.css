@@ -236,3 +236,6 @@ body {
     position: relative !important;
     z-index:10003  !important;
 }
+#signup_mypage_btn{
+    padding : 0;
+}
