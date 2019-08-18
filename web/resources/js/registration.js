@@ -125,17 +125,17 @@ function smsCheck() {
 }
 
 function submit() {
-    let name = $('#name').val();
-    let nickname = $('#nickname').val();
-    let email = $('#email').val();
+    let name = $('#name').val().trim();
+    let nickname = $('#nickname').val().trim();
+    let email = $('#email').val().trim();
     let password = $('#password').val();
     let password2 = $('#password2').val();
-    let phone = $('#phone').val();
-    let postcode = $('#postcode').val();
-    let address = $('#address').val();
-    let detailAddress = $('#detailAddress_fake').val();
-    let latitude = $('#lat').val();
-    let longitude = $('#lng').val();
+    let phone = $('#phone').val().trim();
+    let postcode = $('#postcode').val().trim();
+    let address = $('#address').val().trim();
+    let detailAddress = $('#detailAddress_fake').val().trim();
+    let latitude = $('#lat').val().trim();
+    let longitude = $('#lng').val().trim();
 
     let form = {
         name, nickname, email, password, password2, phone, postcode, address, detailAddress, latitude, longitude
@@ -251,6 +251,8 @@ function isValid(input) {
         return false;
     }
     if (!isDetailAddressValid(input.detailAddress)) {
+        $('#detailAddress_fake').css('border', 'none');
+        $("#detailAddress_fake").focus();
         return false;
     }
     if (!isConfirmValid()) {
@@ -263,7 +265,6 @@ function isNameValid(input) {
     if (!emptyCheck(input)) {
         alert("이름을 입력하세요");
         $('#name').val('');
-        $('#name').focus();
         return false;
     }
     if (getByteLength(input) > 100) {
@@ -276,7 +277,6 @@ function isNicknameValid(input) {
     if (!emptyCheck(input)) {
         alert("닉네임을 입력하세요");
         $("#nickname").val('');
-        $("#nickname").focus();
         return false;
     }
     if (getByteLength(input) > 20) {
@@ -291,7 +291,6 @@ function isNicknameValid(input) {
 
 function isEmailValid(input) {
     if (!emptyCheck(input)) {
-        $('#email').focus();
         $('#email').val('');
         alert("이메일을 입력하세요");
         return false;
@@ -300,7 +299,8 @@ function isEmailValid(input) {
         alert("새로운 이메일을 입력해주세요");
         return false;
     }
-    let emailValid = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
+    // let emailValid = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
+    let emailValid = /^[0-9a-z]([-_.]?[0-9a-z])*@[0-9a-z]([-_.]?[0-9a-z])*.[a-z]{2,3}$/i;//이메일 정규식
     if (!emailValid.test(input)) {
         // alert("이메일 형식이 올바르지 않습니다.");
         return false;
@@ -319,15 +319,11 @@ function isPasswordValid(input) {
         return false;
     }
     if (getByteLength(input) < 5) {
-        alert("비밀번호가 너무 짧습니다");
         $("#password").val("");
-        $("#password").focus();
         return false;
     }
     if (getByteLength(input) > 20) {
-        alert("비밀번호가 너무 깁니다");
         $("#password").val("");
-        $("#password").focus();
         return false;
     }
 
@@ -336,7 +332,6 @@ function isPasswordValid(input) {
     if (!passwordValid.test(input)) {
         alert("비밀번호 형식이 올바르지 않습니다.");
         $("#password").val("");
-        $("#password").focus();
         return false;
     }
     return true;
@@ -344,8 +339,8 @@ function isPasswordValid(input) {
 
 function isPassword2Valid(input1, input2) {
     if (!emptyCheck(input1)) {
-        alert("비밀번호를 입력하세요");
-        // $("#password2").val('');
+        alert("비밀번호 확인을 입력하세요");
+        $("#password2").val('');
         return false;
     }
     if (input1 != input2) {
@@ -384,7 +379,6 @@ function isDetailAddressValid(input) {
         return false;
     }
     if (getByteLength(input) > 200) {
-        alert("한글은 최대 66자리, 영문은 최대 200자리까지 입력이 가능합니다");
         return false;
     }
     return true;
@@ -432,7 +426,7 @@ $('#name').focusout(function () {
         return;
     }
     if (getByteLength(name) > 100) {
-        alert("닉네임은 한글 33자리 또는 영문숫자 100자리까지 입력이 가능합니다");
+        alert("이름은 한글 33자리 또는 영문숫자 100자리까지 입력이 가능합니다");
         $('#name').css("border", "solid 0.2px red");
         $('#name').val(name);
         return;

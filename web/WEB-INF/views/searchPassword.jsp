@@ -77,7 +77,10 @@
                     <div class="col-2">
                         <label class="label">변경할 비밀번호를 입력해주세요</label>
                         <div class="input-group">
-                            <input id="password" class="short2 input100 input--style-4" type="password" name="password" onfocus="emptyPassword()">
+                            <input id="password_fake" class="short2 input100 input--style-4" type="password"
+                                   onfocus="resetPassword()" style="display: none">
+                            <input id="password" class="short2 input100 input--style-4" type="password"
+                                   onfocus="resetPassword()" >
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -86,8 +89,8 @@
                     <div class="col-2">
                         <label class="label">비밀번호를 다시 한번 입력해주세요</label>
                         <div class="input-group">
-                            <%--<input id="password2" class="short2 input100 input--style-4" type="password" name="password2" onfocus="emptyPassword2()">--%>
-                                <input id="password2" class="short2 input100 input--style-4" type="password" name="password2">
+                            <input id="password2" class="short2 input100 input--style-4" type="password" name="password2" onfocus="resetPassword2()">
+<%--                                <input id="password2" class="short2 input100 input--style-4" type="password" name="password2">--%>
                             <span class="focus-input100"></span>
                         </div>
                     </div>

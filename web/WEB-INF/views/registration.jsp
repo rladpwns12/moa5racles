@@ -61,7 +61,7 @@
                         <label class="label">비밀번호를 입력해주세요</label>
                         <div class="input-group">
                             <input id="password_fake" class="input100 input--style-4" type="password"
-                                   onfocus="resetEmail()" style="display: none">
+                                   onfocus="resetPassword()" style="display: none">
                             <input id="password" class="input100 input--style-4" type="password"
                                    onfocus="resetPassword()" >
                             <span class="focus-input100"></span>
