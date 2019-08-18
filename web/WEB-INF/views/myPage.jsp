@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="/resources/css/myPage.css">
 <script src="/resources/js/jquery-3.4.1.min.js"></script>
 <script src="/resources/js/myPage.js"></script>
-
+  <script src="/resources/js/upload.js"></script>
+  <sec:csrfMetaTags/>
 </head>
  <body>
  <%@ include file="navbar.jsp" %>
@@ -47,7 +48,10 @@
             <div class="main_context">
               <div class="left_context">
                 <div class="profile_image">
-                  <img src="/resources/image/${profileName}"><!-- <img src="sessionScope.profile"> -->
+                  <div class="uploadDiv">
+                    <input type="file" id="user" name="uploadFile" accept-charset="UTF-8" style="display: none">
+                  </div>
+                  <img src="" id="profile" style="cursor: pointer">
                 </div>
               </div>
               <div class="middle_context">
@@ -84,7 +88,20 @@
       </div>
 
 	 <%@ include file="footer.jsp" %>
+      <script>
+        function replaceAll(str, searchStr, replaceStr) {
+          return str.split(searchStr).join(replaceStr);
+        }
 
+        $(document).ready(function(){
+          var fileCallPath = encodeURIComponent("${profile.uploadPath}" + "\\" + "${profile.uuid}"
+                  + "_" + "${profile.fileName}");
+          var imgSrc=$('.profile_image')[0].lastElementChild;
+          fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
+          var str = "/display?fileName=/" + fileCallPath;
+          $(imgSrc).attr("src", str);
+        });
+      </script>
     </div>
   </body>
 </html>

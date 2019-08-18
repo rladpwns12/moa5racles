@@ -1,16 +1,20 @@
 package com.moa.controller;
 
 import com.moa.model.init.AttachVOFactory;
+import com.moa.model.service.AttachService;
 import com.moa.model.vo.AttachFileVO;
+import com.moa.model.vo.CustomUser;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -41,7 +45,8 @@ public class UploadController {
     private static final int HEIGHT = 100;
     private Log log = LogFactory.getLog(UploadController.class);
     private Lock lock= new ReentrantLock();
-
+    @Autowired
+    private AttachService attachService;
     @RequestMapping(value = "/uploadAjax", method = RequestMethod.GET)
     public String uploadAjax() {
         log.info("upload ajax");
@@ -53,9 +58,11 @@ public class UploadController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             method = RequestMethod.POST)
     public ResponseEntity<List<AttachFileVO>> uploadAjaxPost(
-            @PathVariable("typeFlag") String typeFlag, MultipartFile[] uploadFile) {
+            @PathVariable("typeFlag") String typeFlag, MultipartFile[] uploadFile, Authentication auth) {
         log.info("update upload ajax post");
         List<AttachFileVO> list=new ArrayList<AttachFileVO>();
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        Long userId=Long.parseLong(customUser.getLoginVO().getUserId());
 
         String uploadFolderPath = getFolder();
         //make folder
@@ -71,7 +78,7 @@ public class UploadController {
             log.info("upload file size : " + multipartFile.getSize());
 
             AttachFileVO attachFileVO = AttachVOFactory.init(typeFlag);
-
+            attachFileVO.setId(userId);
             String uploadFileName =new String(multipartFile.getOriginalFilename().getBytes(StandardCharsets.UTF_8),StandardCharsets.UTF_8);
 
             //IE has file path
@@ -99,12 +106,17 @@ public class UploadController {
                     Thumbnails.of(saveFile).size(WIDTH,HEIGHT).toFile(new File(uploadPath,THUMBNAIL+uploadFileName));
                     //썸네일이 안만들어지는 경우 project structure artifacts에서 추가 했는지 확인하자.
                 }
+                log.info(attachFileVO);
                 list.add(attachFileVO);
             } catch (IOException e) {
                 log.error(e.getMessage());
             }finally {
                 lock.unlock();
             }
+        }
+        if(typeFlag.equals(AttachVOFactory.USER)){
+            if(!attachService.insertAttach(list))
+                return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<List<AttachFileVO>>(list, HttpStatus.OK); //JSON 반환
     }
