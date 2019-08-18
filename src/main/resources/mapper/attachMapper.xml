@@ -41,7 +41,7 @@
         <id property="id" column="USER_ID"/>
         <id property="uploadPath" column="UPLOADPATH"/>
         <id property="fileName" column="PICTURE_NAME"/>
-        <id property="fileType" column="FILETYPE"/>
+        <id property="fileType" column="FILETYPE" javaType="boolean"/>
     </resultMap>
 
 
@@ -50,15 +50,25 @@
        VALUES(<include refid="insert_value"/>, ,AUTO_SB_ATTACHED_PICTURE_TB.NEXTVAL)
    </insert>
 
-    <insert id="insertStoreRequest" parameterType="com.moa.model.vo.AttachFileVO">
+    <update id="insertStoreRequest" parameterType="com.moa.model.vo.AttachFileVO">
         INSERT INTO SR_ATTACHED_PICTURE_TB (<include refid="insert_target"/>,STORE_REQUEST_ID)
         VALUES(<include refid="insert_value"/>)
-    </insert>
+    </update>
 
-    <insert id="insertUser" parameterType="com.moa.model.vo.AttachFileVO">
-        INSERT INTO USER_PROFILE_IMAGE_TB (<include refid="insert_target"/>, USER_ID)
-        VALUES(<include refid="insert_value"/>)
-    </insert>
+    <update id="insertUser" parameterType="com.moa.model.vo.AttachFileVO">
+        MERGE INTO USER_PROFILE_IMAGE_TB
+        USING DUAL
+        ON (USER_ID = #{id})
+        WHEN MATCHED THEN
+            UPDATE SET
+                UUID= #{uuid},
+                UPLOADPATH=#{uploadPath},
+                PICTURE_NAME=#{fileName},
+                FILETYPE=#{fileType}
+        WHEN NOT MATCHED THEN
+            INSERT (<include refid="insert_target"/>, USER_ID)
+            VALUES (<include refid="insert_value"/>)
+    </update>
 
 
     <delete id="deleteStoreBoard" parameterType="java.lang.String">
@@ -83,7 +93,7 @@
     </select>
 
     <select id="findByUserId" parameterType="java.lang.Long" resultMap="findByArticleNumMapUSER">
-        SELECT * FROM USER_PROFILE_IMAGE_TB WHERE ARTICLE_NUM=#{userId}
+        SELECT USER_ID, UUID, PICTURE_NAME, UPLOADPATH, FILETYPE FROM USER_PROFILE_IMAGE_TB WHERE USER_ID=#{userId}
     </select>
 
 

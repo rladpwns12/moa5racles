@@ -9,6 +9,11 @@ $(document).ready(function () {
     var attachImg = 'resources/image/cookie.png';
     var thumbnail = 'thumbnail_';
 
+    $('#profile').click(function (e) {
+        e.preventDefault();
+        $('#user').click();
+    });
+
     //파일 유효성 검사
     $.checkExtenstion=function(fileName, fileSize){
         if(fileSize >= maxSize) {
@@ -35,7 +40,15 @@ $(document).ready(function () {
             str += "data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'";
             str += "><div>";
             str += "<span>" + obj.fileName + "</span>";
-            if(obj.fileType) {
+            if(obj.typeFlag == 'user'){
+                var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + thumbnail
+                    + obj.uuid +"_"+obj.fileName);
+                //이미지 파일 원본 보여주기
+                var imgSrc=$('.profile_image')[0].lastElementChild;
+                str = "/display?fileName=/" + fileCallPath;
+                $(imgSrc).attr("src", str);
+            }
+            else if(obj.fileType) {
                 //GET 방식 첨부파일 이름 사용시 공백, 한글이름이 문제 되므로 encodeURIComponent() 이용
                 var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + thumbnail
                     + obj.uuid +"_"+obj.fileName);
@@ -61,11 +74,11 @@ $(document).ready(function () {
     }
 
     $("input[type='file']").change(function(e){
+        var flag = (e.target.id);
         var formData = new FormData();//IE 10.0 이후 적용
         var inputFile = $("input[name = 'uploadFile']");
         var files = inputFile[0].files;
 
-        console.log(files);
 
         for(var i=0;i<files.length;i++){
             if(!$.checkExtenstion(files[i].name,files[i].size))
@@ -74,7 +87,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url:'/uploadAjax/storeBoard',
+            url:'/uploadAjax/'+flag,
             processData:false, // 반드시 false
             contentType:false, // 반드시 false
             data:formData,
@@ -85,7 +98,6 @@ $(document).ready(function () {
                 xhr.setRequestHeader(header, token);
             },
             success:function (result) {
-                console.log(result);
                  $.showUploadedFile(result); // 첨부한 파일 목록 ul에 추가
                 // $(".uploadDiv").html(cloneObj.html()); // 첨부파일 재 설정
             },

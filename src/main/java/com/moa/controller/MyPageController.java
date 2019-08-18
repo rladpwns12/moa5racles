@@ -49,7 +49,8 @@ public class MyPageController {
     private UserUpdateService userUpdateService;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    private AttachService attachService;
 
 
     @RequestMapping(value="", method= RequestMethod.GET)
@@ -61,13 +62,8 @@ public class MyPageController {
         userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
         SimpleUserInfoVO simpleUserInfoVO = memberInfoService.selectMemberInfo(userId);
-
-        if(simpleUserInfoVO.getProfileName() == null){
-            mav.addObject("profileName", "profile.png");
-        }
-        else {
-            mav.addObject("profileName", simpleUserInfoVO.getProfileName());
-        }
+        AttachFileVO attachFileVO=attachService.getUserProfile(new Long(userId));
+        mav.addObject("profile", attachFileVO);
         mav.addObject("userName", simpleUserInfoVO.getName());
         mav.addObject("userEmail", simpleUserInfoVO.getEmail());
         mav.addObject("requestCnt", simpleUserInfoVO.getRequestCnt());

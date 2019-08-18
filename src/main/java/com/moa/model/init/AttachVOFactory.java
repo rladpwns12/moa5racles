@@ -6,18 +6,18 @@ import com.moa.model.vo.StoreRequestAttachFileVO;
 import com.moa.model.vo.UserAttachFileVO;
 
 public class AttachVOFactory {
-    private static final String STOREBOARD="storeBoard";
-    private static final String STOREREQUEST="storeRequest";
-    private static final String USER="user";
+    public static final String STOREBOARD="storeBoard";
+    public static final String STOREREQUEST="storeRequest";
+    public static final String USER="user";
 
     public static AttachFileVO init(String key){
         switch (key){
             case STOREBOARD:
-                return new StoreBoardAttachFileVO();
+                return new StoreBoardAttachFileVO(STOREBOARD);
             case STOREREQUEST:
-                return new StoreRequestAttachFileVO();
+                return new StoreRequestAttachFileVO(STOREREQUEST);
             case USER:
-                return new UserAttachFileVO();
+                return new UserAttachFileVO(USER);
             default:
                 return null;
         }
