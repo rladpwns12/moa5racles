@@ -3,9 +3,9 @@ function submit() {
         return;
     }
 
-    let name = $('#name').val();
-    let email = $('#email').val();
-    let phone = $('#phone').val();
+    let name = $('#name').val().trim();
+    let email = $('#email').val().trim();
+    let phone = $('#phone').val().trim();
 
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
@@ -188,18 +188,14 @@ function isPassword2Valid(input1, input2) {
     return true;
 }
 
-function emptyPassword() {
-    /*if (!isPasswordValid()) {
-        $('#password').css("border", "none");
-    }*/
-    $('#password').css("border", "none");
+function resetPassword() {
+    $('#password').css('border', 'solid 0.2px #D6D6D6');
+    $('#password').val('');
 }
 
-function emptyPassword2() {
-    /*if (!isPassword2Valid()) {
-        $('#password2').css("border", "none");
-    }*/
-    $('#password2').css("border", "none");
+function resetPassword2() {
+    $('#password2').css('border', 'solid 0.2px #D6D6D6');
+    $('#password2').val('');
 }
 
 function smsCheck() {
