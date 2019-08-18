@@ -19,10 +19,17 @@
 
 	function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
 		var form = document.createElement("form");
+		var article = document.getElementById("article"+articleNum);
+		var distance = $(article).children('.distance')[0];
+		var distanceV= distance.innerHTML;
 		form.setAttribute("charset", "UTF-8");
 		form.setAttribute("method", "GET"); // Get 또는 Post 입력
 		form.setAttribute("action", "/storeboard/"+articleNum);
-
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", "distance");
+		hiddenField.setAttribute("value", distanceV);
+		form.appendChild(hiddenField);
 		document.body.appendChild(form);
 		form.submit();
 	}
@@ -223,7 +230,7 @@ $(document).ready(function() {			//실행시
 			 }
 
 		 }).then(function(data,status){
-		 	console.log(data	);
+		 	console.log(data);
 		 	console.log(status);
 		if(status=="success"){
 			var positions = new Array();
@@ -240,7 +247,7 @@ $(document).ready(function() {			//실행시
 				$('<span/>',{id:'title',text:" "+data[i].detailPrice+"원"}).appendTo(div);
 				$('</div>').appendTo(div);
 				$('<div>',{id:'word'}).appendTo(div);
-				$('<span/>',{text:data[i].distanceResult+"km 이내 "}).appendTo(div);
+				$('<span/>',{class:'distance',text:data[i].distanceResult+"km 이내 "}).appendTo(div);
 				$('<br>').appendTo(div);
 				$('<i/>',{class:'fas fa-thumbs-up',style:'color: #423257;'}).appendTo(div);
 				$('<span/>',{text:" "+data[i].totReviewCnt+" 개 "}).appendTo(div);

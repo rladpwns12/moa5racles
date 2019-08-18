@@ -237,7 +237,10 @@
         </c:if>
         <div class="more_info" id='more_info'>
             <div class="more_info_icon"><i class="fas fa-map-marker-alt"></i>  </div>
-            <div class="more_info_desc">${distance}km 이내</div>
+            <c:if test="${distnace eq null}">
+                <div class="more_info_desc">주소</div>
+            </c:if>
+            <div class="more_info_desc">${distance}</div>
             <span>주소<div class='more_info_item'>${storeBoardVO.baseAddress} ${storeBoardVO.detailAddress}</div></span>
         </div>
         <div class="more_info" id='more_info'>

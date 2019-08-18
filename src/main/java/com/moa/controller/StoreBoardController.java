@@ -70,9 +70,11 @@ public class StoreBoardController {
     }
 
     @RequestMapping("/{articleNum}")
-    public ModelAndView retrieveStoreBoard(@PathVariable("articleNum") int articleNum){
+    public ModelAndView retrieveStoreBoard(@PathVariable("articleNum") int articleNum, String distance){
+        System.out.println(distance);
         ModelAndView mav=new ModelAndView();
         mav.setViewName(PathMessage.STORE_BOARD_ONE);
+        mav.addObject("distance",distance);
         mav.addObject("storeBoard",storeBoardService.selectStorage(articleNum));
         return mav;
     }
