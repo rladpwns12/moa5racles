@@ -214,10 +214,10 @@ body {
     outline: none;
     cursor: pointer;
 }
-*, *:before, *:after{
+/**, *:before, *:after{
     box-sizing: content-box;
     -webkit-box-sizing: content-box;
-}
+}*/
 .sideBtn{
     display: block!important;
 }

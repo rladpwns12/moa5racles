@@ -428,7 +428,7 @@ $('#name').focusout(function () {
     let name = $('#name').val().trim();
     if (name == null || name == "") {
         $('#name').val('');
-        $('#name').css("border", "none");
+        $('#name').css("border", "solid 0.2px #D6D6D6");
         return;
     }
     if (getByteLength(name) > 100) {
@@ -446,7 +446,7 @@ $('#nickname').focusout(function () {
     let nickname = $("#nickname").val().trim();
     if (nickname == null || nickname == "") {
         $('#nickname').val('');
-        $('#nickname').css("border", "none");
+        $('#nickname').css("border", "solid 0.2px #D6D6D6");
         return;
     }
 
@@ -489,7 +489,7 @@ $('#email').focusout(function () {
     let email = $('#email').val().trim();
     if (email == null || email == "") {
         $('#email').val('');
-        $('#email').css("border", "none");
+        $('#email').css("border", "solid 0.2px #D6D6D6");
         return;
     }
 
@@ -540,7 +540,7 @@ $('#password').focusout(function () {
     let password = $('#password').val();
     if (password == null || password == "") {
         $('#password').val('');
-        $('#password').css("border", "none");
+        $('#password').css("border", "solid 0.2px #D6D6D6");
         return;
     }
 
@@ -575,7 +575,7 @@ $('#password2').focusout(function () {
     let password2 = $('#password2').val();
     if (password2 == null || password2 == "") {
         $('#password2').val('');
-        $('#password2').css("border", "none");
+        $('#password2').css("border", "solid 0.2px #D6D6D6");
         return;
     } else {
         if ($('#password').val() == password2) {
@@ -590,7 +590,7 @@ $('#password2').focusout(function () {
 $('#detailAddress_fake').focusout(function () {
     let detailAddress = $('#detailAddress_fake').val().trim();
     if (detailAddress == null || detailAddress == "") {
-        $('#detailAddress_fake').css("border", "none");
+        $('#detailAddress_fake').css("border", "solid 0.2px #D6D6D6");
         $('#detailAddress_fake').val(detailAddress);
         return;
     }
@@ -605,33 +605,33 @@ $('#detailAddress_fake').focusout(function () {
 });
 
 function resetNickname() {
-    $('#nickname').css("border", "none");
+    $('#nickname').css("border", "solid 0.2px #D6D6D6");
     if ($('#nickname').val() == "닉네임이 중복됩니다") {
         $('#nickname').val("");
     }
 }
 
 function resetName() {
-    $('#name').css("border", "none");
+    $('#name').css("border", "solid 0.2px #D6D6D6");
 }
 
 function resetEmail() {
     if ($('#email').val() == "이메일이 중복됩니다") {
         $('#email').val('');
     }
-    $('#email').css("border", "none");
+    $('#email').css("border", "solid 0.2px #D6D6D6");
 }
 
 function resetPassword() {
-    $('#password').css('border', 'none');
+    $('#password').css('border', 'solid 0.2px #D6D6D6');
     $('#password').val('');
 }
 
 function resetPassword2() {
-    $('#password2').css('border', 'none');
+    $('#password2').css('border', 'solid 0.2px #D6D6D6');
     $('#password2').val('');
 }
 
 function resetDetailAddress() {
-    $('#detailAddress_fake').css('border', 'none');
+    $('#detailAddress_fake').css('border', 'solid 0.2px #D6D6D6');
 }
