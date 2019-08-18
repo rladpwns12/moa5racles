@@ -21,12 +21,12 @@
         <sec:authorize access="isAuthenticated()">
             <form class=".logout" action="/logout" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <button id="loginout_btn">로그아웃</button>
+                <button id="logout_btn">로그아웃</button>
             </form>
             <a href="javascript:void(0)">|</a>
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">
-            <a href="/userLogin">로그인</a>
+            <a href="/userLogin" id="login_btn">로그인</a>
             <a href="javascript:void(0)">|</a>
         </sec:authorize>
 
