@@ -148,9 +148,10 @@ function submit() {
     var header = $("meta[name='_csrf_header']").attr("content");
     // 닉네임 중복 체크
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/checkNick",
         data: {nick: nickname},
+        dataType: 'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
@@ -158,9 +159,7 @@ function submit() {
         },
         success(data) {
             if (data) {
-                // $('#nickname').css('border', 'solid 0.2px green');
             } else {
-                // $('#nickname').css('border', 'solid 0.2px red');
                 $('#nickname').val("닉네임이 중복됩니다");
                 alert("닉네임이 중복됩니다");
             }
@@ -172,9 +171,10 @@ function submit() {
 
     //이메일 중복 체크
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/checkEmail",
         data: {email},
+        dataType: 'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
@@ -182,9 +182,7 @@ function submit() {
         },
         success(data) {
             if (data) {
-                // $('#email').css('border', 'solid 0.2px green');
             } else {
-                // $('#email').css('border', 'solid 0.2px red');
                 $('#email').val("이메일이 중복됩니다");
                 alert("이메일이 중복됩니다");
             }
@@ -462,9 +460,10 @@ $('#nickname').focusout(function () {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/checkNick",
         data: {nick: nickname},
+        dataType: 'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
@@ -512,9 +511,10 @@ $('#email').focusout(function () {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/checkEmail",
         data: {email},
+        dataType: 'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
