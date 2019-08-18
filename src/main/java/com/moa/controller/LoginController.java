@@ -38,7 +38,7 @@ public class LoginController {
     @RequestMapping(value="/admin/login")
     public String adminLogin(String error, String logout, Model model){
         log.info("adminLoginPage()...");
-        return "mLogin";
+        return "admin/mLogin";
     }
 
     @RequestMapping(value="/userLogin")
