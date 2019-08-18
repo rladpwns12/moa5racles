@@ -38,7 +38,7 @@
 <div class="doc">
     <div class="sidebar">
         <div class="sidehide">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times fade_out_button" aria-hidden="true"></i>
         </div>
         <div class="author">
             <sec:authorize access="isAuthenticated()">
