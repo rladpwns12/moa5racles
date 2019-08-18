@@ -47,7 +47,7 @@
                 authentication-failure-handler-ref = "adminLoginFailureHandler"
         />
         <security:access-denied-handler ref="memberAccessDenied"/>
-        <security:logout logout-url="/admin" logout-success-url="/admin" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
+        <security:logout logout-url="/admin/logout" logout-success-url="/admin" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
         <security:remember-me services-ref="rememberMeServices" key="moa"  />
     </security:http>
 
