@@ -49,7 +49,7 @@
             <c:when test="${messageType == 'send'}">
                 <button onclick="deleteMsg(${messageInfo.messageId},'send')">삭제</button>
             </c:when>
-        </c:choose>}"
+        </c:choose>
     </div>
 </body>
 </html>
