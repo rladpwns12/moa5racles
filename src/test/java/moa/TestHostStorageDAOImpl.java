@@ -28,13 +28,13 @@ import static org.junit.Assert.*;
 })
 @WebAppConfiguration
 public class TestHostStorageDAOImpl {
-   /* @Autowired
+    @Autowired
     private HostStorageDAO hostStorageDAO;
     @Autowired
-    private StoreRequestDAO storeRequestDAO;*/
+    private StoreRequestDAO storeRequestDAO;
     @Autowired
     private StoreBoardSearchService storeBoard;
-    /*@Test
+    @Test
 
     public void test_호스트신청_신규상가(){
         boolean res =  hostStorageDAO.insertNewCompany(new NewCompanyStorageVO(1,1,"1","1","1",29,"1","1","1"));
@@ -70,7 +70,7 @@ public class TestHostStorageDAOImpl {
         boolean res =  hostStorageDAO.insertOriginOther(new OriginOtherStorageVO(29,29,"1"));
 
         assertTrue(res == true);
-    }*/
+    }
     @Test
     public void test_가져오기(){
         List<String> ary = new ArrayList<>();
@@ -79,16 +79,16 @@ public class TestHostStorageDAOImpl {
         assertEquals(1,entrustAry);
 
     }
-    @Test
-    public void test_요청목록(){
+//    @Test
+//    public void test_요청목록(){
 //        storeRequestDAO.searchList(28);
-    }
-    @Test
-    public void 짐보관글가져오기(){
-        int articleNum=2;
-//        //StoreBoardVO map= storeBoardDAO.searchOne(articleNum);
+//    }
+//    @Test
+//    public void 짐보관글가져오기(){
+//        int articleNum=2;
+//        StoreBoardVO map= storeBoardDAO.searchOne(articleNum);
 //        System.out.println(map);
 //        assertNotNull("짐보관글 가져오기 실패",map);
-    }
+//    }
 
 }

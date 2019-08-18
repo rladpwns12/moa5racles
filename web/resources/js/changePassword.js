@@ -20,9 +20,7 @@ $(document).ready(function () {
         var password = $('#password').val();
         var newPassword1 = $('#new_password1').val();
         var newPassword2 = $('#new_password2').val();
-        console.log(password);
-        console.log(newPassword1);
-        console.log(newPassword2);
+
         //유효성
         //1.빈칸
         if(password ==='' || password ==null){

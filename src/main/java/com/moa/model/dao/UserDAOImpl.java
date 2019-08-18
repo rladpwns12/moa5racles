@@ -46,36 +46,33 @@ public class UserDAOImpl implements UserDAO {
         String password = userVO.getPassword();
         password = passwordEncoder.encode(password);
         userVO.setPassword(password);
-
-        System.out.println(password);
         userInfo.put("UserVO", userVO);
-
         mapper = sqlSession.getMapper(UserMapper.class);
         mapper.signUpUser(userInfo);
         result = ((int)userInfo.get("res") == 1) ? true : false;
-
         return result;
     }
 
     @Override
     public boolean signUpDuplicationCheck(Map<String, Object> duplicationInfo) {
         UserMapper mapper;
-        boolean result;
-
         mapper = sqlSession.getMapper(UserMapper.class);
-        result = (mapper.duplicationCheck(duplicationInfo) >= 1) ? true : false;
-
-        return result;
+        return (mapper.duplicationCheck(duplicationInfo) >= 1) ? true : false;
     }
 
     @Override
     public LoginVO checkLogin(String email) {
         UserMapper mapper;
-        LoginVO result;
 
         mapper = sqlSession.getMapper(UserMapper.class);
 
         return mapper.checkLogin(email);
+    }
+    @Override
+    public boolean findPassword(Map<String, Object> findPasswordInfo){
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        return mapper.findPassword(findPasswordInfo) != null ? true : false;
     }
 
     @Override
@@ -89,6 +86,13 @@ public class UserDAOImpl implements UserDAO {
     public int updatePassword(Map<String, Object> updatePasswordInfo) {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         int result = mapper.updatePassword(updatePasswordInfo);
+        return result;
+    }
+
+    @Override
+    public int updatePasswordByEmailAndName(Map<String, Object> updatePasswordInfo) {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        int result = mapper.updatePasswordByEmailAndName(updatePasswordInfo);
         return result;
     }
 

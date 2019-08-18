@@ -30,7 +30,7 @@
                     <div class="col-2">
                         <label class="label">이름을 입력해주세요</label>
                         <div class="input-group">
-                            <input id="name" class="input100 input--style-4" type="text" name="name">
+                            <input id="name" class="input100 input--style-4" type="text" name="name" onfocus="resetName()">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <label class="label">닉네임을 입력해주세요</label>
                         <div class="input-group">
                             <input id="nickname" class="input100 input--style-4" type="text" name="nickname"
-                                   onfocus="emptyNickname()">
+                                   onfocus="resetNickname()">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             <label class="label">이메일을 입력해주세요</label>
                             <div class="input-group-icon">
                                 <input type="text" id="email" class="email input100 input--style-4"
-                                       name="email" onfocus="emptyEmail()">
+                                       name="email" onfocus="resetEmail()"  style="text-transform:lowercase;">
                                 <span class="long focus-input100"></span>
                                 <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                             </div>
@@ -60,15 +60,17 @@
                     <div class="col-2">
                         <label class="label">비밀번호를 입력해주세요</label>
                         <div class="input-group">
+                            <input id="password_fake" class="input100 input--style-4" type="password"
+                                   onfocus="resetPassword()" style="display: none">
                             <input id="password" class="input100 input--style-4" type="password"
-                                   onfocus="emptyEmail()">
+                                   onfocus="resetPassword()" >
                             <span class="focus-input100"></span>
                         </div>
                     </div>
                     <div class="col-2">
                         <label class="label">비밀번호를 다시 한번 입력해주세요</label>
                         <div class="input-group">
-                            <input id="password2" class="input100 input--style-4" type="password" name="password">
+                            <input id="password2" class="input100 input--style-4" type="password" name="password2" onfocus="resetPassword2()">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -84,12 +86,6 @@
                     <div class="col-2">
                         <label class="label">&nbsp;</label>
                         <div class="input-group">
-                            <%--<form method="get" action="https://www.accountkit.com/v1.0/basic/dialog/sms_login/">
-                                <input type="hidden" name="app_id" value="2291269470991007">
-                                <input type="hidden" name="redirect" value="http://localhost:8089/registration">
-                                <input type="hidden" name="state" value="112133">
-                                <input type="hidden" name="fbAppEventsEnabled" value=true>
-                                <input type="hidden" name="debug" value=true>--%>
                             <button id="identification"
                                     onclick="smsCheck()" class="btn btn--radius-2 btn--purple" type="submit">
                                 휴대폰 인증
@@ -133,7 +129,9 @@
                             <label class="label">상세 주소를 입력해주세요</label>
                             <div class="input-group-icon">
                                 <input type="text" id="detailAddress" class="detailAddress input100 input--style-4"
-                                       name="detailAddress" placeholder="상세주소를 입력하세요">
+                                       name="detailAddress" placeholder="상세주소를 입력하세요" style="display: none">
+                                <input type="text" id="detailAddress_fake" class="detailAddress input100 input--style-4"
+                                       name="detailAddress" placeholder="상세주소를 입력하세요" autocomplete="off" onfocus="resetDetailAddress()">
                                 <span class="long focus-input100"></span>
                             </div>
                             <input type="hidden" id="lat" class="input--style-4" name="latitude">
@@ -144,12 +142,12 @@
                 <div class="add_m_t row row-space">
                     <input type="checkbox" id="confirm1"/>
                     <label for="confirm1" class="confirm">&nbsp;&nbsp;MOA 이용약관 동의</label>
-                    <a href="#" class="agree"> [이용약관 보기] </a>
+                    <a href="/termsOfService" class="agree"> [이용약관 보기] </a>
                 </div>
                 <div class="add_m_t row row-space">
                     <input type="checkbox" id="confirm2"/>
                     <label for="confirm2" class="confirm">&nbsp;&nbsp;위치정보 이용약관 동의</label>
-                    <a href="#" class="agree"> [이용약관 보기] </a>
+                    <a href="termsOfService" class="agree"> [이용약관 보기] </a>
                 </div>
                 <div class="p-t-15">
                     <button class="btn btn--radius-2 btn--purple" type="button" onclick="submit()">회원가입</button>

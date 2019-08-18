@@ -20,7 +20,7 @@
 <div class="page-wrapper bg-gra-02 font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card_t card-4">
-            <div class="add_margin card-body">
+            <div id="content1" class="add_margin card-body">
                 <h2 class="title">아이디 찾기</h2>
                     <div class="row row-space">
                         <div class="col-2">
@@ -35,7 +35,8 @@
                         <div class="col-2">
                             <label class="short label">휴대폰 인증 버튼을 눌러주세요</label>
                             <div class="input-group">
-                                <input id="phone" class="short2 input100 input--style-4" type="text" name="phone" onfocus="emptyPhone()">
+                                <%--<input id="phone" class="short2 input100 input--style-4" type="text" name="phone" onfocus="emptyPhone()">--%>
+                                <input id="phone" class="short2 input100 input--style-4" type="text" name="phone" readonly>
                                 <span class="focus-input100"></span>
                             </div>
                         </div>
@@ -56,6 +57,22 @@
                     </div>
                 <div class="p-t-15">
                     <button class="short btn btn--radius-2 btn--purple" type="button" onclick="submit()">확인</button>
+                </div>
+            </div>
+
+            <div id="content2" class="add_margin card-body" style="display: none;">
+                <h2 class="title">아이디 찾기 완료</h2>
+                <div class="row row-space">
+                    <div class="col-2">
+                        <label class="label">회원님의 아이디 입니다.</label>
+                        <div class="input-group">
+                            <input id="searchedId" class="short2 input100 input--style-4" type="text" name="name" readonly>
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-t-15">
+                    <button class="short btn btn--radius-2 btn--purple" type="button" onclick="exit()">나가기</button>
                 </div>
             </div>
         </div>

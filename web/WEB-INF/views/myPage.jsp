@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="/resources/css/myPage.css">
 <script src="/resources/js/jquery-3.4.1.min.js"></script>
 <script src="/resources/js/myPage.js"></script>
-
+  <script src="/resources/js/upload.js"></script>
+  <sec:csrfMetaTags/>
 </head>
  <body>
  <%@ include file="navbar.jsp" %>
@@ -30,10 +31,10 @@
           </div>
           <div class="menubar_list">
             <ul>
-              <li onclick="moveToInfo();">개인정보</li>
-              <li onclick="moveToMessage();">메세지함</li>
+              <li onclick="location.href='/mypage/myinfo'">개인정보</li>
+              <li onclick="location.href='/mypage/message'">메세지함</li>
               <li onclick="moveToTransaction();">거래내역</li>
-              <li onclick="moveToRequest();">보관해주세요 신청 목록</li>
+              <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
               <li onclick="moveToLatest();">최근 본 보관소</li>
               <li onclick="moveToFavorite();">즐겨찾는 보관소</li>
             </ul>
@@ -47,7 +48,10 @@
             <div class="main_context">
               <div class="left_context">
                 <div class="profile_image">
-                  <img src="/resources/image/${profileName}"><!-- <img src="sessionScope.profile"> -->
+                  <div class="uploadDiv">
+                    <input type="file" id="user" name="uploadFile" accept-charset="UTF-8" style="display: none">
+                  </div>
+                  <img src="" id="profile" style="cursor: pointer">
                 </div>
               </div>
               <div class="middle_context">
@@ -60,17 +64,17 @@
                   </div>
                 </div>
                 <div class="update">
-                  <button type="button" id="update_btn" name="update_btn" onclick="moveToInfo()">수정하기</button>
+                  <button type="button" id="update_btn" name="update_btn"  onclick="location.href='/mypage/myinfo'">수정하기</button>
                 </div>
 
-                <div class="request_entrust_list" onclick="moveToRequest();">
+                <div class="request_entrust_list"  onclick="location.href='/mypage/requestlist/1'">
                   <h3>보관 요청 목록 ></h3>
                   <h3 id="request_entrust_list_cnt">${requestCnt}개</h3>
                 </div>
               </div>
               <div class="right_context">
-                <div class="not_read_message" onclick="moveToMessage();">
-                  <h3>안읽은 쪽지 ></h3>
+                <div class="not_read_message" onclick="location.href='/mypage/message'">
+                  <h3>안읽은 메세지 ></h3>
                   <h3 id="not_read_message_cnt">${notReadMessageCnt}개</h3>
                 </div>
                 <div class="using_storage" onclick="usingStorage();">
@@ -84,7 +88,20 @@
       </div>
 
 	 <%@ include file="footer.jsp" %>
+      <script>
+        function replaceAll(str, searchStr, replaceStr) {
+          return str.split(searchStr).join(replaceStr);
+        }
 
+        $(document).ready(function(){
+          var fileCallPath = encodeURIComponent("${profile.uploadPath}" + "\\" + "${profile.uuid}"
+                  + "_" + "${profile.fileName}");
+          var imgSrc=$('.profile_image')[0].lastElementChild;
+          fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
+          var str = "/display?fileName=/" + fileCallPath;
+          $(imgSrc).attr("src", str);
+        });
+      </script>
     </div>
   </body>
 </html>

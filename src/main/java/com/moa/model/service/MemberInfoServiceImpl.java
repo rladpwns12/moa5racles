@@ -6,6 +6,7 @@ import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.LoginVO;
 import com.moa.model.vo.SimpleUserInfoVO;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 @Service("memberService")
 @NoArgsConstructor
+@Log4j
 public class MemberInfoServiceImpl implements MemberInfoService, UserDetailsService {
     @Autowired
     private UserDAO userDAO;
@@ -37,11 +39,10 @@ public class MemberInfoServiceImpl implements MemberInfoService, UserDetailsServ
         return userDAO.signUpDuplicationCheck(duplicationInfo);
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         LoginVO loginVO = userDAO.checkLogin(email);
-        System.out.println("loadUserByUsername");
+        log.info("loadUserByUsername");
         if(loginVO==null) {
             throw new InternalAuthenticationServiceException(email);
         }

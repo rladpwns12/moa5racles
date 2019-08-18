@@ -268,6 +268,7 @@ input {
     color: #555555;
     width: 220px;
     height: 56px;
+    border: solid 0.2px #D6D6D6;
 }
 
 .input--style-4::-webkit-input-placeholder {
@@ -535,7 +536,7 @@ input {
     width: 510px;
 }
 
-#address, #detailAddress {
+#address, #detailAddress_fake {
     width: 510px;
     margin-bottom: 5px;
 }

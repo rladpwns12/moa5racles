@@ -4,21 +4,23 @@ package com.moa.controller;
 import com.moa.model.service.AddressSearchService;
 import com.moa.model.service.HostRegistrationService;
 import com.moa.model.vo.CustomUser;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
+@Log4j
 public class RegistHostController {
     @Autowired
     private HostRegistrationService hostRegistrationService;
@@ -32,21 +34,27 @@ public class RegistHostController {
         int userId;
         CustomUser customUser = (CustomUser) auth.getPrincipal();
 
-        if(customUser.getLoginVO().getFlag() != null){
-            mav.setViewName("/main");
+       log.info("들어옴");
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        Iterator<? extends GrantedAuthority> iter = authorities.iterator();
+        while(iter.hasNext()){
+           log.info("for문 들어옴");
+            GrantedAuthority authority = iter.next();
+            log.info(authority.getAuthority());
         }
-        else{
-            userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
+        if(customUser.getLoginVO().getFlag() == null){
+            userId = Integer.parseInt(customUser.getLoginVO().getUserId());
             addressInfo =  addressSearchService.searchAddress(userId);
             if(addressInfo != null) {
                 mav.setViewName("registHost");
                 mav.addObject("addressId", addressInfo.get("addressId"));
                 mav.addObject("address", addressInfo.get("address"));
-            }
-            else{
+            }else{
                 //사용자 주소를 가져오지 못할 경우
             }
+        }else{
+            mav.setViewName("/main");
         }
         return mav;
     }
@@ -63,19 +71,15 @@ public class RegistHostController {
                                  @RequestParam (value="company_name") String businessName,
                                  @RequestParam (value="company_registration_name") String registrationNum,
                                  @RequestParam (value="company_representative_name") String representative,
+                                 @RequestParam (value="latitude") double latitude,
+                                 @RequestParam (value="longitude") double longitude,
                                  Authentication auth){
         int userId;
-        double longitude = 21.45333;
-        double latitude = 34.2513551;
 
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
-        if(customUser.getLoginVO().getFlag() != null){
-            return "/main";
-        }
-        else {
-
+        if(customUser.getLoginVO().getFlag() == null){
             Map<String, Object> hostInfo = new HashMap<String, Object>();
 
             hostInfo.put("userId", userId);
@@ -92,13 +96,18 @@ public class RegistHostController {
             hostInfo.put("longitude", longitude);
             hostInfo.put("latitude", latitude);
 
-            boolean res = hostRegistrationService.registHost(hostInfo);
+            if(hostRegistrationService.registHost(hostInfo)){
+                List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+                updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_PRE_HOST"));
+                Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
+                SecurityContextHolder.getContext().setAuthentication(newAuth);
 
-            if (res) {
                 return "success";
-            } else {
+            }else{
                 return "fail";
             }
+        }else {
+            return "/main";
         }
     }
 }

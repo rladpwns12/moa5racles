@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/login_util.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <sec:csrfMetaTags/>
     <title>MOA</title>
 </head>
@@ -36,7 +37,7 @@
             </div>
             <div class="menubar_list">
                 <ul>
-                    <li onclick="location.href='/mypage/myinfo'">개인정보</li>
+                    <li class="current_menu" onclick="location.href='/mypage/myinfo'">개인정보</li>
                     <li onclick="location.href='/mypage/message'">메세지함</li>
                     <li onclick="moveToTransaction();">거래내역</li>
                     <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
@@ -60,7 +61,7 @@
                 <div class="limiter">
                     <div class="container-login100">
                         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-                            <class class="login100-form validate-form flex-sb flex-w" method="post" action="/login">
+                            <class class=" validate-form flex-sb flex-w" method="post" action="/login">
 
                                 <span class="txt1 p-b-11">현재 비밀번호</span>
                                 <div class="wrap-input100 validate-input space" data-validate="비밀번호를 입력하세요">

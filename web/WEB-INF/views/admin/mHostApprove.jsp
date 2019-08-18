@@ -39,6 +39,7 @@
                 <td>${vo.applicationDate}<br>${vo.applicationTime}</td>
             </tr>
         </c:forEach>
+
         </tbody>
     </table>
 </div>

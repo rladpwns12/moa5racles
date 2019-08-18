@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,9 +22,7 @@ public class StoreRequestVO {
     @NotBlank
     private int userId;
     @NotBlank
-    private int measuredPrice;
-    @NotBlank
-    private int bargainPrice;
+    private PriceVO price;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
     @JsonFormat(pattern = "yyyy-mm-dd")
@@ -35,37 +34,9 @@ public class StoreRequestVO {
     @Min(1)
     private String content;
     @NotBlank
-    @Min(0)
-    @Max(99)
-    private String productCnt;
+    private List<ProductVO> productList;
     @NotBlank
-    private String productSize;
+    private List<Integer> productSize;
     @NotBlank
-    @Min(1)
-    @Max(20)
-    private String category;
-    @NotBlank
-    @Min(1)
-    @Max(50)
-    private String product;
-    @NotBlank
-    @Min(1)
-    @Max(260)
-    private String pictureName;
-
-    public StoreRequestVO(int articleNum, int userId, int measuredPrice, int bargainPrice, Date startDate, Date endDate, String transactionWay, String content, String productCnt, String productSize, String category, String product, String pictureName) {
-        this.articleNum = articleNum;
-        this.userId = userId;
-        this.measuredPrice = measuredPrice;
-        this.bargainPrice = bargainPrice;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.transactionWay = transactionWay;
-        this.content = content;
-        this.productCnt = productCnt;
-        this.productSize = productSize;
-        this.category = category;
-        this.product = product;
-        this.pictureName = pictureName;
-    }
+    private List<StoreRequestAttachFileVO> attachList;
 }

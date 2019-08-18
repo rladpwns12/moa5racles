@@ -45,7 +45,7 @@
                 <div class="box__description-text">존재하지 않는 페이지입니다.<br/><br/><br/></div>
             </div>
 
-            <a href="/main" target="_blank" class="box__button">모아 홈으로 가기</a>
+            <a href="/main" class="box__button">모아 홈으로 가기</a>
         </div>
     </div>
 </div>

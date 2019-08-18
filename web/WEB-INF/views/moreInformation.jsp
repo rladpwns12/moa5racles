@@ -237,7 +237,10 @@
         </c:if>
         <div class="more_info" id='more_info'>
             <div class="more_info_icon"><i class="fas fa-map-marker-alt"></i>  </div>
-            <div class="more_info_desc">${distance}km 이내</div>
+            <c:if test="${distnace eq null}">
+                <div class="more_info_desc">주소</div>
+            </c:if>
+            <div class="more_info_desc">${distance}</div>
             <span>주소<div class='more_info_item'>${storeBoardVO.baseAddress} ${storeBoardVO.detailAddress}</div></span>
         </div>
         <div class="more_info" id='more_info'>
@@ -315,7 +318,6 @@
             <form name="reviewForm" accept-charset="UTF-8" onsubmit="return false;" method="post">
                 <input id="ratings-hidden" name="rating" type="hidden">
                 <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="리뷰를 작성해주세요." rows="5"></textarea>
-
                 <div class="text-right">
                     <div class="stars starrr" data-rating="0"></div>
                     <a class=" cancle-btn" href="" id="close-review-box" style="display:none; margin-right: 10px;">

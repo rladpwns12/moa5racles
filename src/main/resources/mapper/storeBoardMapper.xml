@@ -134,7 +134,24 @@
         <foreach collection="category" item="type" open="(" close=")" separator=","> #{type}</foreach>
         )SB
         USING (ARTICLE_NUM)
-       /* SELECT * FROM SEARCH_BOARD_VIEW SBV*/
+        <choose>
+            <when test="filter == '거리 가까운 순'">
+                ORDER BY calc_distance(LATITUDE,LONGITUDE,#{latitude},#{longitude})
+            </when>
+            <when test="filter == '리뷰 많은 순'">
+                ORDER BY SBV.TOT_REVIEW_CNT DESC
+            </when>
+            <when test="filter == '가격 낮은 순'">
+                ORDER BY SBV.DETAIL_PRICE
+            </when>
+            <when test="filter == '가격 높은 순'">
+                ORDER BY SBV.DETAIL_PRICE DESC
+            </when>
+            <when test="filter == '별점 높은 순'">
+                ORDER BY SBV.STAR_POINT_AVG DESC
+            </when>
+        </choose>
+
     </select>
 
     <select id="selectOne" parameterType="int" resultType="hashMap">
@@ -158,7 +175,7 @@
     </select>
 
     <select id="searchMyStorageCnt" parameterType="int" resultType="int">
-        select * from MY_STORAGE_VIEW where host_id = #{hostId}
+        select count(*) from MY_STORAGE_VIEW where host_id = #{hostId}
     </select>
 
     <update id="deleteOne" parameterType="int">

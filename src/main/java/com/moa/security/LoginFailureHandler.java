@@ -1,6 +1,7 @@
 package com.moa.security;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Data
+@Log4j
 public class LoginFailureHandler implements AuthenticationFailureHandler {
     private static final String ID_PW_INCORRECT_MESSAGE = "아이디나 비밀번호가 맞지 않습니다. 다시 확인해주세요.";
     private static final String INACTIVE_USER_MESSAGE = "계정이 비활성화 되었습니다. 관리자에게 문의하세요.";
@@ -31,7 +33,9 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         String password = request.getParameter(this.password);
         String errorMessage = null;
 
-
+        String requestURI = request.getRequestURI();
+        log.info("defaultFailureUrl : "+defaultFailureUrl);
+        log.info("requestURI : "+requestURI);
         if(e instanceof BadCredentialsException) {
             errorMessage = ID_PW_INCORRECT_MESSAGE;
         } else if(e instanceof InternalAuthenticationServiceException) {
@@ -43,7 +47,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         }
 
         request.setAttribute(this.username, username);
-        request.setAttribute(this.password, password);
         request.setAttribute(this.errorMessage, errorMessage);
 
         request.getRequestDispatcher(defaultFailureUrl).forward(request, response);

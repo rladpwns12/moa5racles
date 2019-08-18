@@ -25,7 +25,7 @@ public class ReadStoreRequestVO {
 	private List<Integer> productCnt;
 	private int bargainPrice;
 	private int measuredPrice;
-	private List<String> pictureList;
+	private List<AttachFileVO> attachFileList;
 	private String content;
 	private String transactionType;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
@@ -46,7 +46,7 @@ public class ReadStoreRequestVO {
 		this.productCnt =  new ArrayList<>();
 		this.bargainPrice = 0;
 		this.measuredPrice = 0;
-		this.pictureList =  new ArrayList<>();;
+		this.attachFileList =  new ArrayList<>();
 		this.content = null;
 		this.transactionType = null;
 		this.applicationDate = null;

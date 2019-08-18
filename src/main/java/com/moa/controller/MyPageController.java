@@ -49,7 +49,8 @@ public class MyPageController {
     private UserUpdateService userUpdateService;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    private AttachService attachService;
 
 
     @RequestMapping(value="", method= RequestMethod.GET)
@@ -61,13 +62,8 @@ public class MyPageController {
         userId = Integer.parseInt(customUser.getLoginVO().getUserId());
 
         SimpleUserInfoVO simpleUserInfoVO = memberInfoService.selectMemberInfo(userId);
-        System.out.println(simpleUserInfoVO);
-        if(simpleUserInfoVO.getProfileName() == null){
-            mav.addObject("profileName", "profile.png");
-        }
-        else {
-            mav.addObject("profileName", simpleUserInfoVO.getProfileName());
-        }
+        AttachFileVO attachFileVO=attachService.getUserProfile(new Long(userId));
+        mav.addObject("profile", attachFileVO);
         mav.addObject("userName", simpleUserInfoVO.getName());
         mav.addObject("userEmail", simpleUserInfoVO.getEmail());
         mav.addObject("requestCnt", simpleUserInfoVO.getRequestCnt());
@@ -104,7 +100,6 @@ public class MyPageController {
     @ResponseBody
     public ReadStoreRequestVO myPageRequestInfo(@PathVariable("requestNum") int requestId){
         ReadStoreRequestVO requestVO = luggageRequestInfoService.selectLuggageRequestInfo(requestId);
-
         requestVO.setApplicationDate(requestVO.getApplicationDate());
         return requestVO;
     }
@@ -263,7 +258,7 @@ public class MyPageController {
         if(memberInfoService.checkExistUser((String)messageSendInfo.get("receiverNick"))==false){
             return false;
         }
-        System.out.println(messageSendInfo);
+
         return messengerListService.messageSend(messageSendInfo);
     }
     @RequestMapping(value = {"/message/submit/{receiverNick}"}, method = RequestMethod.GET)
@@ -318,7 +313,7 @@ public class MyPageController {
         Map<String,Object> deleteInfo = new HashMap<String, Object>();
         deleteInfo.put("messageType","send");
         deleteInfo.put("list",deleteNum);
-        
+
         boolean result = messengerListService.messageDelete(deleteInfo);
         return result;
     }
@@ -365,6 +360,7 @@ public class MyPageController {
         if(profile == null || profile.equals("")){
             profile = customUser.getLoginVO().getProfile();
         }
+
         //setting
         Map<String,Object> updateInfo = new HashMap<String, Object>();
         updateInfo.put("AddressVO",addressVO);// -- 1
@@ -373,7 +369,7 @@ public class MyPageController {
         updateInfo.put("userId",userId);
         updateInfo.put("res",1);
 
-        boolean result = userUpdateService.updateUserInformation(updateInfo);
+        boolean result = userUpdateService.updateUserInformation(updateInfo,customUser);
         return result;
     }
     @RequestMapping(value = "myinfo/changepassword",method = RequestMethod.GET)
@@ -382,7 +378,7 @@ public class MyPageController {
     }
     @RequestMapping(value = "myinfo/changepassword",method = RequestMethod.POST)
     public @ResponseBody boolean changePassword(Authentication auth,String password,String newPassword){
-        System.out.println(password);
+
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         String userPassword = customUser.getLoginVO().getPassword();
         int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
@@ -392,9 +388,9 @@ public class MyPageController {
             //업데이트 로직 추가 -- 서비스에서 해싱
             Map<String,Object> newPasswordInformation = new HashMap<String, Object>();
             newPasswordInformation.put("userId",userId);
-            newPasswordInformation.put("password",passwordEncoder.encode(newPassword));
+            newPasswordInformation.put("password",newPassword);
 
-            result = userUpdateService.updateUserPassword(newPasswordInformation);
+            result = userUpdateService.updateUserPassword(newPasswordInformation,customUser);
             return result;
         }
 
