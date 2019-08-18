@@ -15,7 +15,6 @@
             <a href="javascript:void(0)">|</a>
             <a href="/hostpage" id="leave_btn">호스트 페이지</a>
         </sec:authorize>
-
     </div>
     <div class="menu navber_right">
         <sec:authorize access="isAuthenticated()">

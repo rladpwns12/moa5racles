@@ -360,6 +360,7 @@ public class MyPageController {
         if(profile == null || profile.equals("")){
             profile = customUser.getLoginVO().getProfile();
         }
+
         //setting
         Map<String,Object> updateInfo = new HashMap<String, Object>();
         updateInfo.put("AddressVO",addressVO);// -- 1

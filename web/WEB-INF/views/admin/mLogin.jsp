@@ -36,7 +36,13 @@
                 </div>
             </c:if>
             </fieldset>
-            <button type="submit" class="btn btn-primary">로그인</button>
+            <button style="width: 100%" type="submit" class="btn btn-primary">로그인</button>
+
+            <input class="l_i" id="maintain1" type="checkbox" name="remember-me">
+            <label for="maintain1" class="l_l maintain">
+                로그인 상태 유지
+            </label>
+
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
 </div>

@@ -11,9 +11,11 @@
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="/resources/js/admin/mHostApprove.js"></script>
     <link rel="stylesheet" href="/resources/css/admin/mLogin.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <sec:csrfMetaTags/>
     <title>MOA</title>
 </head>
 <body>
@@ -28,86 +30,15 @@
         </tr>
         </thead>
         <tbody>
-<%--        <c:if test="${list.length == 0}">--%>
-<%--            호스트 신청이 존재하지 않습니다.--%>
-<%--        </c:if>--%>
-<%--        <c:forEach var="${AdminHostSimpleVO}" begin="0" end="${list.length}" step="1" items="${list}">--%>
-<%--            <tr onclick="goToInformation(${AdminHostSimpleVO.userId},${AdminHostSimpleVO.storageType})">--%>
-<%--                <td>${AdminHostSimpleVO.nick}</td>--%>
-<%--                <td>${AdminHostSimpleVO.applicationDate}<br>${AdminHostSimpleVO.applicationTime}</td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16<br>13:00:01</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>테스트계정</td>
-            <td>19-08-16</td>
-        </tr>
-
-        <tr onclick="location.href='/admin/hostapprove/info'">
-            <td>ABCDEFGHIJKLMNOPQRST</td>
-            <td>19-08-16</td>
-        </tr>
-
-
+        <c:if test="${confirmWaitingList.size() == 0}">
+            호스트 신청이 존재하지 않습니다.
+        </c:if>
+        <c:forEach var="vo" begin="0" end="${confirmWaitingList.size()}" step="1" items="${confirmWaitingList}">
+            <tr onclick="location.href='/admin/hostapprove/info?userId=${vo.userId}&storageType=${vo.storageType}'">
+                <td>${vo.nick}</td>
+                <td>${vo.applicationDate}<br>${vo.applicationTime}</td>
+            </tr>
+        </c:forEach>
 
         </tbody>
     </table>
