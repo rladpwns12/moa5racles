@@ -145,7 +145,8 @@ $.reviewList = function(section,pageNum){
             ');">&nbsp;</i>';
       }
       strf +='</div>';
-      $('.review_btn').before(strf);
+      $('.review_footer').append(strf);
+      // $('.review_btn').before(strf);
     }
   });
 }
