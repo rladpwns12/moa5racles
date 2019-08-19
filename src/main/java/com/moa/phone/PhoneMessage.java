@@ -3,6 +3,8 @@ package com.moa.phone;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.simple.JSONObject;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.util.HashMap;
 
@@ -17,6 +19,7 @@ public class PhoneMessage {
     }
 
 
+    
     public boolean sendAuthenticationMessage(String phoneNumber, String randomNumber){
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<String, String>();
@@ -32,12 +35,30 @@ public class PhoneMessage {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
-
+        System.out.println(obj);
         //-- end of send message
-        if(Integer.parseInt(obj.get("success_count").toString()) == 1 &&
-           Integer.parseInt(obj.get("success_count").toString()) != 0){
-            return true;
+        int count = 0;
+        while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(obj != null) break;
+            if(count++ >= 10){
+                break;
+            }
+            System.out.println(obj+"is null");
+                 }
+        try{
+            if(Integer.parseInt(obj.get("success_count").toString()) == 1 &&
+                    Integer.parseInt(obj.get("success_count").toString()) != 0){
+                return true;
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
         }
+
 
         return  false;
     }
