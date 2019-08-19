@@ -16,8 +16,9 @@
             <ul class="navbar-nav mr-auto">
                 <sec:authorize access="isAuthenticated()">
                     <form id="logout" class=".logout" action="/admin/logout" method="post">
-                    </form>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+
                         <li class="nav-item" onclick="">
                             <a onclick="formSubmit()" href="#" class="nav-link">로그아웃</a>
                         </li>

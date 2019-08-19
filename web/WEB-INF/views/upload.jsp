@@ -24,7 +24,7 @@
                 <div class="panel-heading">보관할 물품의 사진을 첨부해주세요. 나중에 el로 대체하여 보관글, 보관 요청글 동시 쓸 예정</div>
                 <div class="panel-body">
                     <div class="form-group uploadDiv">
-                        <input type="file" name="uploadFile" multiple>
+                        <input type="file" name="uploadFile" id="storeBoard" multiple>
                     </div>
 
                     <div class="uploadResult">
