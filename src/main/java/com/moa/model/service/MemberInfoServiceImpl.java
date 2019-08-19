@@ -1,6 +1,7 @@
 package com.moa.model.service;
 
 
+import com.moa.model.dao.AttachDAO;
 import com.moa.model.dao.UserDAO;
 import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.LoginVO;
@@ -22,6 +23,8 @@ import java.util.Map;
 public class MemberInfoServiceImpl implements MemberInfoService, UserDetailsService {
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private AttachDAO attachDAO;
 
     public boolean checkExistUser(String userNick) {
         return userDAO.checkExistUser(userNick);
@@ -42,6 +45,7 @@ public class MemberInfoServiceImpl implements MemberInfoService, UserDetailsServ
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         LoginVO loginVO = userDAO.checkLogin(email);
+        loginVO.setProfile(attachDAO.searchByUserId(Long.parseLong(loginVO.getUserId())));
         log.info("loadUserByUsername");
         if(loginVO==null) {
             throw new InternalAuthenticationServiceException(email);
