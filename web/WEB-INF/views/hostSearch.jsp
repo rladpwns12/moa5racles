@@ -163,13 +163,8 @@ $(document).ready(function() {			//실행시
 		$.ajax									//카카오 api get
 		({
 		    url: "https://dapi.kakao.com/v2/local/search/keyword.json?query="+address,
-		    headers: { 'Authorization': 'KakaoAK ea031870cc4a7a31182ea665a1eb62fc'},
-		    type: 'GET',
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader("AJAX", true);
-				xhr.setRequestHeader(header, token);
-				xhr.setRequestHeader("Accept", "application/json; odata=verbose");
-			}
+		    headers: { 'Authorization': 'KakaoAK ea031870cc4a7a31182ea665a1eb62fc '},
+		    type: 'GET'
 		}).done(function(data)
 			{
 				if(data.documents=="")		//만일 검색결과가 없을시

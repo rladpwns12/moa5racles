@@ -242,6 +242,7 @@
 }
 .review_class{
   margin-top: 100px;
+  padding-bottom: 30px;
 }
 .review_header{
   display: flex;
@@ -278,8 +279,6 @@
   width:80%
 }
 .review_btn{
-  width:10%;
-  font-size: 17px;
 }
 .no-uline{
   text-decoration: none;
@@ -363,7 +362,9 @@ a:hover, a:focus {
 }
 .text-right{
   width:96%;
+  margin-bottom: 30px;
 }
 .form-control{
   width: 93%;
+  margin: 0 auto;
 }
