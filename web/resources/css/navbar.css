@@ -103,6 +103,7 @@ body {
 .author_profile img {
     height: 50px;
     width: 50px;
+    border-radius: 100px;
 }
 
 .sidebar .author .author_profile {
