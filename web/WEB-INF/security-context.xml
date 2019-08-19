@@ -36,6 +36,7 @@
             <security:concurrency-control max-sessions="1" expired-url="/admin" />
         </security:session-management>
         <security:intercept-url pattern="/admin/login" access="permitAll()" />
+        <security:intercept-url pattern="/admin/logout" access="permitAll()" />
         <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 
         <security:form-login
@@ -47,7 +48,7 @@
                 authentication-failure-handler-ref = "adminLoginFailureHandler"
         />
         <security:access-denied-handler ref="memberAccessDenied"/>
-        <security:logout logout-url="/admin/logout" logout-success-url="/admin" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
+        <security:logout logout-url="/admin/logout" logout-success-url="/admin/login" invalidate-session="true" delete-cookies="remmeber-me, JSESSION_ID"/>
         <security:remember-me services-ref="rememberMeServices" key="moa"  />
     </security:http>
 
