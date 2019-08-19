@@ -10,21 +10,24 @@ $(document).ready(function(){
        var userId = $('#userId').val();
        var content = $('#content').val();
        var targetUserNick = $('#targetNick').val();
-       var targetId = -1;
+       var targetId = 0;
        var targetType = 0;
 
+       var formData = {
+           userId: userId,
+           content: content,
+           targetUserNick: targetUserNick,
+           targetId: targetId,
+           targetType: targetType
+       }
+       var jsonData = JSON.stringify(formData);
        $.ajax({
            url:"/report/send",
            type:"POST",
-           contentType:"application/json",
+           contentType:"application/json; charset=utf-8",
            dataType:"json",
-           data:{
-               userId: userId,
-               content: content,
-               targetUserNick: targetUserNick,
-               targetId: targetId,
-               targetType: targetType
-           },
+           data:jsonData,
+           cache: false,
            beforeSend: function(xhr){
                xhr.setRequestHeader("AJAX", true);
                xhr.setRequestHeader(header, token);

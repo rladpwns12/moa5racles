@@ -1,6 +1,7 @@
 package com.moa.controller;
 
 
+import com.moa.model.vo.ReportVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,21 +20,9 @@ public class ReportContoller {
 
     @RequestMapping(value = "/send", method = RequestMethod.POST)
     @ResponseBody
-    public boolean sendReport(){
-//        System.out.println(map.get("userId"));
-//        System.out.println(map.get("content"));
-//        System.out.println(map.get("targetUserNick"));
-//        System.out.println(map.get("targetId"));
-//        System.out.println(map.get("targetType"));
-//        Iterator<String> keys = map.keySet().iterator();
-//        while(keys.hasNext()){
-//            System.out.println("값 : " + keys.next());
-//        }
+    public boolean sendReport(@RequestBody ReportVO reportVO){
+        System.out.println("reportVO : " + reportVO);
+
         return true;
     }
-//    userId: userId,
-//    content: content,
-//    targetUserNick: targetUserNick,
-//    targetId: targetId,
-//    targetType: targetType
 }

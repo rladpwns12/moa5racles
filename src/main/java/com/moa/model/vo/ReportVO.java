@@ -13,7 +13,6 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class ReportVO {
     @NotBlank
     private Long userId;
@@ -29,6 +28,5 @@ public class ReportVO {
     @Size(min = 1, max = 1000)
     private String content;
     private Date reportTime;
-    @NotBlank
     private boolean reportState;
 }
