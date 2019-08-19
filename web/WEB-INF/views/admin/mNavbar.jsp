@@ -27,10 +27,10 @@
                     <a id="" class="nav-link" href="#">호스트 인증 관리<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">회원 관리</a>
+                    <a class="nav-link" href="#">신고 관리</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">고객센터 관리</a>
+                    <a class="nav-link" href="#">이용 내역 관리</a>
                 </li>
             </ul>
          </div>
