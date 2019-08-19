@@ -21,7 +21,7 @@
 <body>
 <%@ include file="mNavbar.jsp" %>
 <div class="container">
-    <h2>호스트 신청 목록</h2>
+    <h2>신고 목록</h2>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -31,10 +31,10 @@
         </thead>
         <tbody>
         <c:if test="${confirmWaitingList.size() == 0}">
-            호스트 신청이 존재하지 않습니다.
+            신고 요청이 존재하지 않습니다.
         </c:if>
         <c:forEach var="vo" begin="0" end="${confirmWaitingList.size()}" step="1" items="${confirmWaitingList}">
-            <tr onclick="location.href='/admin/hostapprove/approveinfo?userId=${vo.userId}&storageType=${vo.storageType}'">
+            <tr onclick="location.href='/admin/report/info?userId=${vo.userId}'">
                 <td>${vo.nick}</td>
                 <td>${vo.applicationDate}<br>${vo.applicationTime}</td>
             </tr>

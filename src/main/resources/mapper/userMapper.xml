@@ -85,7 +85,7 @@
 
     <select id="updateUser" statementType="CALLABLE" parameterType="hashMap">
         CALL PI_UPDATE_MY_INFO(#{AddressVO.lat},#{AddressVO.lng},#{AddressVO.postCode},#{AddressVO.baseAddress},#{AddressVO.detailAddress},
-        #{userId},#{phoneNumber},#{profile},'DEFAULT',#{res, mode=OUT, jdbcType=INTEGER })
+        #{userId},#{phoneNumber},#{res, mode=OUT, jdbcType=INTEGER })
     </select>
 
     <select id="searchAddress" parameterType="int" resultType="com.moa.model.vo.AddressVO">

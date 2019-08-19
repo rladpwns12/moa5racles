@@ -2,7 +2,9 @@ var randNum = '';
 var countFlag = false;
 var phoneRegExp = /^\d{3}\d{3,4}\d{4}$/;
 var numberRegExp = /^\d{4}$/;
-var userPhone;
+var userPhone1;
+var userPhone2;
+var userPhone3;
 
 
 function maxLengthCheck(object){
@@ -15,8 +17,11 @@ $(document).ready(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
 
     $("#submit-btn").click(function submit(){
-        userPhone = $('#phone-number').val();
-
+        userPhone1 = $('#phone-number1').val();
+        userPhone2 = $('#phone-number2').val();
+        userPhone3 = $('#phone-number3').val();
+        var userPhone = ''+userPhone1+userPhone2+userPhone3;
+        console.log(userPhone);
         //-- start of validation
         if(userPhone === '' || userPhone === null){
             alert("휴대폰 번호를 입력해주세요.");
@@ -52,7 +57,7 @@ $(document).ready(function () {
         var randomNumber = randNum;
         var data = {phoneNumber,randomNumber};
         $.ajax({
-            url:"/send/phonemessage",
+            url:"/send/textmessage",
             type:"POST",
             contentType:"application/json",
             dataType:"json",
@@ -64,7 +69,7 @@ $(document).ready(function () {
             success:function(result){
                 if(result == true){
                     countFlag = true;
-                    alert("인증번호가 발송되었습니다. ");
+                    alert("인증번호가 발송되었습니다. 최대 1분정도의 시간이 소요됩니다. ");
                     return;
                 }
                 else{
@@ -99,10 +104,7 @@ $(document).ready(function () {
         //-- start of check
         if(randNum === inputNubmer){
             alert("휴대폰 인증에 성공하셨습니다.");
-            opener.setChildValue(userPhone);
-            //부모창 js에 다음과 같은 코드 입력
-            //function setChildValue(userPhone){
-            //window.opener.document.getElementById("휴대폰번호를 입력받을 id").value = userPhone;}
+            opener.setChildValue(''+userPhone1+"-"+userPhone2+"-"+userPhone3);
             window.close();
         }
         else{

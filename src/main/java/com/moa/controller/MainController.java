@@ -38,6 +38,7 @@ public class MainController {
 
         return "test";
     }
+  
     @RequestMapping(value = "authenticatePhone")
     public String authenticatePhone(){
 

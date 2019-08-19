@@ -1,3 +1,5 @@
+var win1;
+var win2;
 (function ($) {
     "use strict";
     var input = $('.validate-input .input100');
@@ -60,6 +62,9 @@
 })(jQuery);
 
 function searchId() {
+    if(win1 != null){
+        win1.close();
+    }
     let width = 500;
     let height = 600;
     let popUpUrl = "/searchId";
@@ -68,10 +73,14 @@ function searchId() {
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=true, " +
         "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
 
-    window.open(popUpUrl, "", popUpOption);
+    win1 = window.open(popUpUrl, "", popUpOption);
+    win1.focus();
 }
 
 function searchPassword() {
+    if(win2 != null){
+        win2.close();
+    }
     let width = 500;
     let height = 600;
     let popUpUrl = "/searchPassword";
@@ -80,7 +89,8 @@ function searchPassword() {
     let popUpOption = "width=" + width + ", height=" + height + ", resizable=no, " +
         "scrollbars=yes, status=no, left=" + popUpX + ",top=" + popUpY + ";";
 
-    window.open(popUpUrl, "", popUpOption);
+    win2 = window.open(popUpUrl, "", popUpOption);
+    win2.focus();
 }
 
 function submit() {

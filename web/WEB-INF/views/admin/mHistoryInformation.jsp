@@ -22,9 +22,9 @@
 <%@ include file="mNavbar.jsp" %>
 <div class="container">
     <button type="button" onclick="location.href='/admin/hostapprove/list'" class="btn btn-primary btn-sm top-btn"><i class="fas fa-angle-left"></i> 목록으로</button>
-    <h2>호스트 승인요청 상세보기</h2>
+    <h2>이용 내역 상세보기</h2>
     <fieldset>
-        <legend>${requestInfo.NICK}의 신청 내용</legend>
+        <legend>${requestInfo.NICK}의 이용 내역</legend>
 
         <div class="form-group">
             <label for="email">이메일</label>
@@ -37,10 +37,6 @@
         <div class="form-group">
             <label for="name">이름</label>
             <input readonly disabled  type="text" name="name"class="form-control input-my-width" id="name" aria-describedby="emailHelp" value="${requestInfo.NAME}">
-        </div>
-        <div class="form-group">
-            <label for="phoneNumber">휴대폰번호</label>
-            <input readonly disabled type="text" name="phoneNumber"class="form-control" id="phoneNumber" aria-describedby="emailHelp" value="${requestInfo.PHONENUMBER}">
         </div>
         <c:if test="${requestInfo.STORAGE_TYPE == '회사' || requestInfo.STORAGE_TYPE == '상가'}">
             <div class="form-group">
@@ -64,13 +60,13 @@
         </c:choose>
 
         <div class="form-group">
-            <label for="content">신고 내용</label>
+            <label for="content">승인/거절 사유</label>
             <textarea class="form-control" name="content" id="content" rows="10" placeholder="승인 혹은 거절 사유를 적어주세요."></textarea>
         </div>
     </fieldset>
     <div class="btn-position">
-        <button onclick="refuse(${requestInfo.USERID},'hostapprove')" type="submit" name="btnType" value="reject" class="btn btn-primary">거절</button>
-        <button onclick="approve(${requestInfo.USERID},'hostapprove')" type="submit" name="btnType" value="approve" class="btn btn-primary">승인</button>
+        <button onclick="refuse(${requestInfo.USERID})" type="submit" name="btnType" value="reject" class="btn btn-primary">거절</button>
+        <button onclick="approve(${requestInfo.USERID})" type="submit" name="btnType" value="approve" class="btn btn-primary">승인</button>
     </div>
 </div>
 
