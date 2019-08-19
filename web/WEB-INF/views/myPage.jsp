@@ -97,9 +97,15 @@
           var fileCallPath = encodeURIComponent("${profile.uploadPath}" + "/" + "${profile.uuid}"
                   + "_" + "${profile.fileName}");
           var imgSrc=$('.profile_image')[0].lastElementChild;
-          fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
-          var str = "/display?fileName=/" + fileCallPath;
+            fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
+            var str = "/display?fileName=/" + fileCallPath;
           $(imgSrc).attr("src", str);
+
+           imgSrc.addEventListener("error", myFunction);
+            function myFunction() {
+                var str='/resources/image/navbar/profile.png';
+                $(imgSrc).attr("src", str);
+            }
         });
       </script>
     </div>
