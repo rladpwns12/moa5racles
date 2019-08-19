@@ -21,6 +21,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -39,12 +40,13 @@ import java.util.concurrent.locks.ReentrantLock;
 @Controller
 public class UploadController {
     private static final String IMAGE = "image";
-    private static final String UPLOAD_FOLDER = "c:\\upload";
+    private static final String UPLOAD_FOLDER = "/uploads";
     private static final String THUMBNAIL="thumbnail_";
     private static final int WIDTH = 100;
     private static final int HEIGHT = 100;
     private Log log = LogFactory.getLog(UploadController.class);
     private Lock lock= new ReentrantLock();
+
     @Autowired
     private AttachService attachService;
     @RequestMapping(value = "/uploadAjax", method = RequestMethod.GET)
@@ -58,7 +60,7 @@ public class UploadController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             method = RequestMethod.POST)
     public ResponseEntity<List<AttachFileVO>> uploadAjaxPost(
-            @PathVariable("typeFlag") String typeFlag, MultipartFile[] uploadFile, Authentication auth) {
+            @PathVariable("typeFlag") String typeFlag, MultipartFile[] uploadFile, Authentication auth, HttpServletRequest request) {
         log.info("update upload ajax post");
         List<AttachFileVO> list=new ArrayList<AttachFileVO>();
         CustomUser customUser = (CustomUser) auth.getPrincipal();
@@ -66,9 +68,8 @@ public class UploadController {
 
         String uploadFolderPath = getFolder();
         //make folder
-        File uploadPath = new File(UPLOAD_FOLDER, uploadFolderPath);
-        log.info("upload path : " + uploadPath);
-
+        File uploadPath = new File(getRealUploadPath(request),uploadFolderPath);
+        log.info("upload path : " + uploadPath.getAbsolutePath());
         if (uploadPath.exists() == false)
             uploadPath.mkdirs(); // yyyy/MM/dd 폴더 생성 ex ) 2019 아래 08 아래 14 폴더
 
@@ -94,6 +95,7 @@ public class UploadController {
                 lock.lock();
 
                 File saveFile = new File(uploadPath, uploadFileName);
+                log.info("saveFile : "+saveFile.getAbsolutePath());
                 multipartFile.transferTo(saveFile); // 업로드되는 파일을 간단히 저장하는 방법
 
                 attachFileVO.setUuid(uuid.toString());
@@ -109,6 +111,7 @@ public class UploadController {
                 log.info(attachFileVO);
                 list.add(attachFileVO);
             } catch (IOException e) {
+                e.printStackTrace();
                 log.error(e.getMessage());
             }finally {
                 lock.unlock();
@@ -125,9 +128,9 @@ public class UploadController {
     @ResponseBody
     //Parameter fileName : 파일 경로가 포함된 이미지 경로
     //return byte[] : 썸네일 이미지 데이터, probeContentType()을 이용해 MIME타입 데이터 -> Http 헤더 메시지 포함
-    public ResponseEntity<byte[]> getFile(String fileName){
+    public ResponseEntity<byte[]> getFile(String fileName, HttpServletRequest request){
         log.info("fileName : "+ fileName);
-        File file =new File(UPLOAD_FOLDER+fileName);
+        File file =new File(getRealUploadPath(request).getAbsolutePath()+fileName);
         log.info("file : " + file);
         ResponseEntity<byte[]> result = null;
 
@@ -236,9 +239,19 @@ public class UploadController {
                 file.delete();
             }
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
             log.error(e.getMessage());
             return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<String>("delete", HttpStatus.OK);
     }
+
+    public File getRealUploadPath(HttpServletRequest request){
+        File upDir = new File(request.getServletContext().getRealPath("/")).getParentFile();
+        File realupDir = new File(upDir,UPLOAD_FOLDER);
+        if(realupDir.exists() == false)
+            realupDir.mkdir();
+        return realupDir;
+    }
+
 }
