@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>보관해주세요</title>
 <script src="/resources/js/jquery-3.4.1.min.js"></script>
-<script src="/resources/js/navbar.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
 <link rel="stylesheet" href="/resources/css/navbar.css">
@@ -101,34 +100,34 @@ $(document).ready(function() {			//실행시
 		level: 3
 	}
 	if (navigator.geolocation) {
-	    
+
 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
 	    navigator.geolocation.getCurrentPosition(function(position) {
-	        
+
 	         lat = position.coords.latitude; // 위도
 	         lon = position.coords.longitude; // 경도
-	        
+
 	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 	            message = '<div style="padding:5px;">현재 위치입니다</div>'; // 인포윈도우에 표시될 내용입니다
 	        // 마커와 인포윈도우를 표시합니다
 	        displayMarker(locPosition, message);
-	            
+
 	});
 	}else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 		var lat = 33.450701;
         var lon = 126.570667;
-	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
 	        message = 'geolocation을 사용할수 없어요..'
-	        
+
 	    displayMarker(locPosition, message);
 	}
 	function displayMarker(locPosition, message) {
-		
+
 	    // 마커를 생성합니다
-	    var marker = new kakao.maps.Marker({  
-	        map: map, 
+	    var marker = new kakao.maps.Marker({
+	        map: map,
 	        position: locPosition
-	    });   
+	    });
 	    var iwContent = message, // 인포윈도우에 표시할 내용
 	        iwRemoveable = true;
 	    // 인포윈도우를 생성합니다
@@ -136,15 +135,15 @@ $(document).ready(function() {			//실행시
 	        content : iwContent,
 	        removable : iwRemoveable
 	    });
-	    // 인포윈도우를 마커위에 표시합니다 
-	    infowindow.open(map, marker);  
+	    // 인포윈도우를 마커위에 표시합니다
+	    infowindow.open(map, marker);
 	    // 지도 중심좌표를 접속위치로 변경합니다
-	    map.setCenter(locPosition);          
-	}    
+	    map.setCenter(locPosition);
+	}
 	search(37.484224, 126.955759);
 	//요주의!!!!!!!
-	
-	    
+
+
 	map = new kakao.maps.Map(container, options);	//맵 기본 세팅
 	var mapTypeControl = new kakao.maps.MapTypeControl();
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
@@ -190,8 +189,8 @@ $(document).ready(function() {			//실행시
 				}
 				map.setCenter(coords);
 				search(lan,log);
-				
-			});	
+
+			});
 	});
 		function search(lan,log){//검색 함수
 
@@ -251,7 +250,7 @@ $(document).ready(function() {			//실행시
 				$('<br>').appendTo(div);
 				$('<i/>',{class:'fas fa-thumbs-up',style:'color: #423257;'}).appendTo(div);
 				$('<span/>',{text:" "+data[i].totReviewCnt+" 개 "}).appendTo(div);
-				
+
 				$('<i/>',{class:'far fa-calendar-alt',style:'color: #423257;'}).appendTo(div);
 				$('<span/>',{text:" "+data[i].storagePeriodTypeId}).appendTo(div);
 				$('<br>').appendTo(div);
@@ -261,18 +260,18 @@ $(document).ready(function() {			//실행시
 			}
 
 			// 마커 이미지의 이미지 주소입니다
-			var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+			var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 			for (var i = 0; i < positions.length; i ++) {
 			    // 마커 이미지의 이미지 크기 입니다
-			    var imageSize = new kakao.maps.Size(24, 35);  
-			    // 마커 이미지를 생성합니다    
-			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+			    var imageSize = new kakao.maps.Size(24, 35);
+			    // 마커 이미지를 생성합니다
+			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 			    // 마커를 생성합니다
 			    var marker = new kakao.maps.Marker({
 			        map: map, // 마커를 표시할 지도
 			        position: positions[i].latlng, // 마커를 표시할 위치
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			        image : markerImage // 마커 이미지 
+			        image : markerImage // 마커 이미지
 			    });
 			}
 		}
@@ -281,10 +280,10 @@ $(document).ready(function() {			//실행시
 		}
 	});
 	}
-	
+
 });
 window.onload = function(){
-	
+
 	  crear_select();
 	}
 
@@ -297,8 +296,8 @@ window.onload = function(){
 	div_cont_select[e].setAttribute('data-selec-open','false');
 	var ul_cont = document.querySelectorAll("[data-indx-select='"+e+"'] > .cont_list_select_mate > ul");
 	 select_ = document.querySelectorAll("[data-indx-select='"+e+"'] >select")[0];
-	
-	 
+
+
 	var select_optiones = select_.options;
 	document.querySelectorAll("[data-indx-select='"+e+"']  > .selecionado_opcion ")[0].setAttribute('data-n-select',e);
 	document.querySelectorAll("[data-indx-select='"+e+"']  > .icon_select_mate ")[0].setAttribute('data-n-select',e);
@@ -310,14 +309,14 @@ window.onload = function(){
 	};
 	li[i].setAttribute('data-index',i);
 	li[i].setAttribute('data-selec-index',e);
-	// funcion click al selecionar 
+	// funcion click al selecionar
 	li[i].addEventListener( 'click', function(){  _select_option(this.getAttribute('data-index'),this.getAttribute('data-selec-index')); });
 	li[i].innerHTML = select_optiones[i].innerHTML;
 	ul_cont[0].appendChild(li[i]);
 
 	    }; // Fin For select_optiones
 	  }; // fin for divs_cont_select
-	} // Fin Function 
+	} // Fin Function
 
 
 	//검색조건
@@ -328,7 +327,7 @@ window.onload = function(){
 	var hg = 0;
 	var slect_open = document.querySelectorAll("[data-indx-select='"+idx1+"']")[0].getAttribute('data-selec-open');
 	var slect_element_open = document.querySelectorAll("[data-indx-select='"+idx1+"'] select")[0];
-	 if (false) { 
+	 if (false) {
 	  if (window.document.createEvent) { // All
 	  var evt = window.document.createEvent("MouseEvents");
 	  evt.initMouseEvent("mousedown", false, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
@@ -342,11 +341,11 @@ window.onload = function(){
 	}
 	else{
 
-	  
+
 	  for (var i = 0; i < ul_cont_li.length; i++) {
 	hg += ul_cont_li[i].offsetHeight;
-	}; 
-	 if (slect_open == 'false') {  
+	};
+	 if (slect_open == 'false') {
 	 document.querySelectorAll("[data-indx-select='"+idx1+"']")[0].setAttribute('data-selec-open','true');
 	 document.querySelectorAll("[data-indx-select='"+idx1+"'] > .cont_list_select_mate > ul")[0].style.height = hg+"px";
 	 document.querySelectorAll("[data-indx-select='"+idx1+"'] > .icon_select_mate")[0].style.transform = 'rotate(180deg)';
@@ -368,7 +367,7 @@ window.onload = function(){
 
 
 	function _select_option(indx,selc){
-	/*  if (isMobileDevice()) { 
+	/*  if (isMobileDevice()) {
 	selc = selc -1;
 	} */
 	    var select_ = document.querySelectorAll("[data-indx-select='"+selc+"'] > select")[0];
@@ -386,24 +385,11 @@ window.onload = function(){
 	select_optiones[indx].selected = true;
 	  select_.selectedIndex = indx;
 	  select_.onchange();
-	  salir_select(selc); 
+	  salir_select(selc);
 	}
-/*$(document).on("click",".guideBox > p",function(){
-	      if($(this).next().css("display")=="none"){
-	        $(this).next().show();
-	        $(this).children("span").text("[닫기]");
-	      }else{
-	        $(this).next().hide();
-	        $(this).children("span").text("[열기]");
-	      }
-	});
-	*/
 
-	
-	
-	
+
 </script>
-	<sec:csrfMetaTags/>
 </head>
 <body>
  <%@ include file="navbar.jsp" %>
@@ -603,7 +589,7 @@ window.onload = function(){
 				<div id="map" style="width:674px;height:776px;"></div>
 			</div>
 		</div>
-		
+
 	</div>
 	
 </body>
