@@ -19,7 +19,7 @@ public class PhoneMessage {
     }
 
 
-    
+
     public boolean sendAuthenticationMessage(String phoneNumber, String randomNumber){
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<String, String>();
@@ -44,15 +44,14 @@ public class PhoneMessage {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(obj != null) break;
+            if(obj.get("success_count") != null) break;
             if(count++ >= 10){
                 break;
             }
             System.out.println(obj+"is null");
                  }
         try{
-            if(Integer.parseInt(obj.get("success_count").toString()) == 1 &&
-                    Integer.parseInt(obj.get("success_count").toString()) != 0){
+            if(Integer.parseInt(obj.get("success_count").toString()) == 1){
                 return true;
             }
         }catch (NullPointerException e){
