@@ -45,10 +45,10 @@ public class MainController {
     }
 
     @RequestMapping(value = "send/phonemessage", method = RequestMethod.POST)
-    public @ResponseBody boolean sendPhoneMessage(@RequestBody Map<String,Object> data){
+    public @ResponseBody boolean sendPhoneMessage(@RequestBody Map<String,Object> data) {
         //-- start of validation
-        if(data.get("phoneNumber").toString().equals("") || data.get("phoneNumber") == null
-        || data.get("randomNumber").toString().equals("") || data.get("randomNumber") == null){
+        if (data.get("phoneNumber").toString().equals("") || data.get("phoneNumber") == null
+                || data.get("randomNumber").toString().equals("") || data.get("randomNumber") == null) {
             return false;
         }
         //-- end of validation
@@ -56,20 +56,9 @@ public class MainController {
         //-- start of send message
         PhoneMessage phoneMessage = new PhoneMessage();
         boolean result = false;
-        result = phoneMessage.sendAuthenticationMessage(data.get("phoneNumber").toString(),data.get("randomNumber").toString());
+        result = phoneMessage.sendAuthenticationMessage(data.get("phoneNumber").toString(), data.get("randomNumber").toString());
 
 
         return result;
-
-    @RequestMapping(value = {"admin/hostapprove/list","admin"})
-    public String mobileHostApprove(){
-
-        return "mHostApprove";
-    }
-    @RequestMapping(value = "admin/hostapprove/info")
-    public String mobileApproveInformation(){
-
-        return "mApproveInformation";
-
     }
 }

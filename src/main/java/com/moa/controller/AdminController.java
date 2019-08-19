@@ -69,18 +69,25 @@ public class AdminController {
 
     @RequestMapping(value = "/hostapprove/confirm")
     @ResponseBody
-    public boolean confirm(@RequestParam(value = "userId") int userId,
+    public boolean hostConfirm(@RequestParam(value = "userId") int userId,
                            @RequestParam(value = "context") String context) {
 
         return hostConfirmService.processConfirm(userId, context);
     }
-
     @RequestMapping(value = "/hostapprove/refuse")
     @ResponseBody
-    public boolean refuse(@RequestParam(value = "userId") int userId,
+    public boolean hostRefuse(@RequestParam(value = "userId") int userId,
                           @RequestParam(value = "context") String context) {
         System.out.println(userId+", " + context);
         return hostConfirmService.processRefuse(userId, context);
     }
+    @RequestMapping(value = "/report/confirm")
+    @ResponseBody
+    public boolean reportConfirm(@RequestParam(value = "userId") int userId,
+                           @RequestParam(value = "context") String context) {
+
+        return hostConfirmService.processRefuse(userId, context);
+    }
+
 
 }

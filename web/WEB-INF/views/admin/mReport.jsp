@@ -22,6 +22,7 @@
 <%@ include file="mNavbar.jsp" %>
 <div class="container">
     <h2>신고 목록</h2>
+    <h5>*답변대기 상태인 글만 올라옵니다.</h5>
     <table class="table table-hover">
         <thead>
         <tr>
