@@ -98,11 +98,11 @@
     <div class="wrap_header">
         <div class="title" id="title"><c:out value="${storeBoardVO.title}"></c:out></div>
         <sec:authentication property="principal" var="customVO" />
-            <sec:authorize access="isAuthenticated()" >
-                <c:if test="${customVO.loginVO.nick eq hostReputationVO.nick}">
-                    <button class="delete_btn moabtn" id="delete_btn">삭제</button>
-                </c:if>
-            </sec:authorize>
+        <sec:authorize access="isAuthenticated()" >
+            <c:if test="${customVO.loginVO.nick eq hostReputationVO.nick}">
+                <button class="delete_btn moabtn" id="delete_btn">삭제</button>
+            </c:if>
+        </sec:authorize>
     </div>
     <div class="wrap_content">
         <div class="host_info" id='host_info'>
@@ -152,10 +152,7 @@
                     <tr>
                         <th>보안시설</th>
                         <td>
-                            <c:choose>
-                                <c:when test="${storeBoardVO.securityFacility != null }">있음</c:when>
-                                <c:otherwise> 없음</c:otherwise>
-                            </c:choose>
+                            ${storeBoardVO.securityFacility}
                         </td>
                     </tr>
                     <tr>
@@ -237,7 +234,7 @@
         </c:if>
         <div class="more_info" id='more_info'>
             <div class="more_info_icon"><i class="fas fa-map-marker-alt"></i>  </div>
-            <c:if test="${distnace eq null}">
+            <c:if test="${distance eq null}">
                 <div class="more_info_desc">주소</div>
             </c:if>
             <div class="more_info_desc">${distance}</div>
@@ -258,7 +255,7 @@
             <div class="more_info_desc">${storeBoardVO.transactionType}</div>
             <span>배송 여부<div class='more_info_item'>${storeBoardVO.transactionType}</div></span>
         </div>
-        <c:if test="${storeBoardVO.securityFacility != null}">
+        <c:if test="${storeBoardVO.securityFacility eq '있음'}">
             <div class="more_info" id='more_info'>
                 <div class="more_info_icon"><i class="fas fa-shield-alt"></i>  </div>
                 <div class="more_info_desc">보안시설</div>

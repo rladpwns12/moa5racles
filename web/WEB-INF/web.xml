@@ -24,7 +24,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
         <multipart-config>
-            <location>C:\\upload\\temp</location> <!--파일 업로드 시 임시로 저장하는 절대 경로-->
+            <location>/</location> <!--파일 업로드 시 임시로 저장하는 절대 경로-->
             <max-file-size>20971520</max-file-size> <!--파일당 최대 파일 크기 20MB = 1024 * 1024 * 20-->
             <max-request-size>41943040</max-request-size> <!--multipart/form-data 요청당 최대 파일 크기 40MB = 1024 * 1024 * 40-->
             <file-size-threshold>20971520</file-size-threshold>  <!--업로드하는 파일이 임시로 파일로 저장되지 않고 메모리에서 바로 스트림으로 전달되는 크기의 한계 20MB = 1024 * 1024 * 20-->

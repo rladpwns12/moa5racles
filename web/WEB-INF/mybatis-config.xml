@@ -8,7 +8,7 @@
 
     <bean id="dataSource_oracle" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@192.168.30.182:1521:xe"/>
+        <property name="url" value="jdbc:oracle:thin:@dbo.powerlinux.co.kr:1521:xe"/>
         <property name="username" value="moa_5racle"/>
         <property name="password" value="moa_5racle"/>
     </bean>
