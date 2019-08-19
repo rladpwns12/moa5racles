@@ -306,9 +306,6 @@
             <sec:authorize access="isAuthenticated()" >
                 <a class="review_btn moabtn btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">리뷰 쓰기</a>
             </sec:authorize>
-            <sec:authorize access="isAnonymous()" >
-                <a class="review_btn" />
-            </sec:authorize>
         </div>
     </div>
 
