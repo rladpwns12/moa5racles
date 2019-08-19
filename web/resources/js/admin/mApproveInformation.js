@@ -1,6 +1,9 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
-function refuse(userId) {
+
+
+function refuse(userId,url) {
+    alert(url);
     var context = $('#content').val();
     //validation
     if(context == '' || context == null){
@@ -9,12 +12,12 @@ function refuse(userId) {
     }
     //start of ajax
     $.ajax({
-        url:"/admin/refuse?userId="+userId+"&context="+context,
+        url:"/admin/"+url+"/refuse?userId="+userId+"&context="+context,
         dataType:'json',
-        success:function(result){
+        success:function(result,url){
             if(result == true){
                 alert("승인이 거절되었습니다.");
-                location.href='/admin/hostapprove/list';
+                location.href='/admin/'+url+'/list';
                 return;
             }
             else{
@@ -26,7 +29,9 @@ function refuse(userId) {
         }
     });//end of ajax
 }
-function approve(userId) {
+
+
+function approve(userId,url) {
     console.log(userId);
     var context = $('#content').val();
     //validation
@@ -35,12 +40,12 @@ function approve(userId) {
     }
     //start of ajax
     $.ajax({
-        url:"/admin/confirm?userId="+userId+"&context="+context,
+        url:"/admin/"+url+"/confirm?userId="+userId+"&context="+context,
         dataType:'json',
         success:function(result){
             if(result == true){
                 alert("승인이 되었습니다.");
-                location.href='/admin/hostapprove/list';
+                location.href='/admin/'+url+'/list';
                 return;
             }
             else{

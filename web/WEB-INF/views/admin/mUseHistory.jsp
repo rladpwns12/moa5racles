@@ -21,20 +21,25 @@
 <body>
 <%@ include file="mNavbar.jsp" %>
 <div class="container">
-    <h2>호스트 신청 목록</h2>
+    <h2>이용 내역 전체 목록</h2>
+    <div class="search_wrapper">
+        <input class="search_input" type="text" placeholder="닉네임을 입력하세요"/>
+        <button class="btn btn-primary" value="검색" style="border-radius: 5px">검색
+        </button>
+    </div>
     <table class="table table-hover">
         <thead>
         <tr>
             <th scope="col">닉네임</th>
-            <th scope="col">신청날짜</th>
+            <th scope="col">날짜</th>
         </tr>
         </thead>
         <tbody>
         <c:if test="${confirmWaitingList.size() == 0}">
-            호스트 신청이 존재하지 않습니다.
+            이용 내역이 존재하지 않습니다.
         </c:if>
         <c:forEach var="vo" begin="0" end="${confirmWaitingList.size()}" step="1" items="${confirmWaitingList}">
-            <tr onclick="location.href='/admin/hostapprove/approveinfo?userId=${vo.userId}&storageType=${vo.storageType}'">
+            <tr onclick="location.href='/admin/history/info?userId=${vo.userId}'">
                 <td>${vo.nick}</td>
                 <td>${vo.applicationDate}<br>${vo.applicationTime}</td>
             </tr>

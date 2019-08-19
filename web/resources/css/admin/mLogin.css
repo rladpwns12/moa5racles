@@ -9,3 +9,15 @@ body {
 .login button{
     width: 100%;
 }
+.search_input {
+    width: 200px;
+    border-radius: 7px;
+    border-style: hidden;
+    background-color: #e3e0e0;
+    padding: 7px;
+    font-family: '나눔고딕';
+}
+.search_wrapper{
+    margin: 5px;
+    margin-bottom: 20px;
+}
