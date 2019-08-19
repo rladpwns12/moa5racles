@@ -61,6 +61,7 @@
         <security:intercept-url pattern="/hostpage/**" access="hasRole('ROLE_HOST')" />
         <security:intercept-url pattern="/storeboard/keep" access="hasRole('ROLE_HOST')" />
         <security:intercept-url pattern="/registhost" access=" !isAnonymous() and !hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')" />
+        <security:intercept-url pattern="/report/**" access="hasRole('ROLE_USER')" />
 
         <security:form-login
                 login-page="/userLogin"

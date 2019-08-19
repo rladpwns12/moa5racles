@@ -90,6 +90,10 @@
                 <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">서비스 가이드</a></li>
                 <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">공지사항</a></li>
                 <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">고객센터</a></li>
+                <sec:authorize access="hasRole('ROLE_USER')">
+                    <li><a onclick="reportPopup();" style="cursor:pointer">신고하기</a></li>
+                </sec:authorize>
+
             </ul>
         </div>
     </div>

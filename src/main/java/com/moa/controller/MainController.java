@@ -60,7 +60,7 @@ public class MainController {
 
 
         return result;
-
+    }
     @RequestMapping(value = {"admin/hostapprove/list","admin"})
     public String mobileHostApprove(){
 
