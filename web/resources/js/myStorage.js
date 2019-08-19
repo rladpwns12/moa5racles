@@ -1,6 +1,21 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
+function deleteStorage(storageNum){
+	var flag=confirm("정말로 삭제하시겠습니까?");
+	if(flag){
+		$.post('/storeBoard/'+storageNum+'/delete',function (data) {
+			if(data==true) {
+				alert("삭제가 완료되었습니다.");
+				location.href="/main";
+			}
+			else
+				alert("삭제에 실패하였습니다.");
+		}).fail(function(){
+			alert('통신에 장애가 생겼습니다, 잠시뒤 시도해주세요.');
+		});
+	}
+};
 $(document).ready(function() {
 	$.storageList(1);
 	 $("#request_btn").on('click',function(){
@@ -17,7 +32,7 @@ function getContextPath(){
 	}
 
 $(document).on('click',".storage_detail",function(){
-	location.href=getContextPath() + "/moa/search/" +event.target.id;
+	location.href="/storeboard/" +event.target.id;
 	});
 
 
@@ -61,7 +76,7 @@ $.storageList = function(curPage){
 				let tr5 = $('<tr/>',{class:'table_bottom'}).appendTo(table);
 				let td51 = $('<td/>',{colspan:'2'}).appendTo(tr5);
 				$('<button/>',{text:'수정'}).appendTo(td51);
-				$('<button/>',{text:'삭제'}).appendTo(td51);
+				$('<button/>',{text:'삭제', onclick:'deleteStorage('+result.list[i].articleNum+')'}).appendTo(td51);
 			}
 
 			//페이징처리
