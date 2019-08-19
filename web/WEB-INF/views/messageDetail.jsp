@@ -5,7 +5,7 @@
          pageEncoding="UTF-8"%>
 <html>
 <head>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="/resources/js/jquery-3.4.1.min.js" ></script>
     <script src="/resources/js/messageDetail.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/messageDetail.css">
     <sec:csrfMetaTags/>
