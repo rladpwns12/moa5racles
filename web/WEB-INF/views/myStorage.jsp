@@ -95,7 +95,7 @@
             </div>
             <div class="main_bottom">
                 <div class="main_paging">
-                    <img src="/resources/image/giphy.gif">
+                    <img src="/resources/image/loading.gif">
                 </div>
             </div>
 

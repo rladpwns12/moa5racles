@@ -44,6 +44,7 @@ public class MainController {
 
         return "mHostApprove";
     }
+
     @RequestMapping(value = "admin/hostapprove/info")
     public String mobileApproveInformation(){
 
