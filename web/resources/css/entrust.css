@@ -175,7 +175,7 @@ i:hover span {
 }
 
 .sizeCnt {
-    width: 40px;
+    width: 45px;
     height: 30px;
     text-align: center;
     font-size: 14pt;
@@ -217,28 +217,23 @@ i:hover span {
 }
 
 .price_e1, .price_e2 {
-    width: 240px;
+    width: 300px;
     display: inline-block;
 }
 
 .price_e1 {
-    margin-left: 210px;
+    margin-left: 180px;
 }
 
 .price_e2 {
-    margin-left: 60px;
-}
-
-.price_class input {
-    margin-left: 10px;
-    float: right;
+    margin-left: 40px;
 }
 
 .i_price {
     width: 140px;
     height: 24px;
     text-align: center;
-    margin-left: 40px;
+    margin-left: 10px;
     font-size: 16px;
     font-weight: bold;
 }
