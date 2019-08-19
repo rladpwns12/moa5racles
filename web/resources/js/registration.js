@@ -239,6 +239,7 @@ function submit() {
         data: {
             name, nickname, email, password, phone, postcode, address, detailAddress, latitude, longitude
         },
+        dataType: 'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
