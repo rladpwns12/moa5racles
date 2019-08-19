@@ -57,7 +57,7 @@
                                 <input type="hidden" name="state" value="112133">
                                 <input type="hidden" name="fbAppEventsEnabled" value=true>
                                 <input type="hidden" name="debug" value=true>--%>
-                                <button id="identification" class="btn btn--radius-2 btn--purple" onclick="smsCheck()">
+                                <button id="identification" class="btn btn--radius-2 btn--purple" onclick="openAuthenticatePhone()">
                                     휴대폰 인증
                                 </button>
                             </form>

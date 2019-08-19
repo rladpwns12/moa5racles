@@ -19,11 +19,20 @@
 </head>
 <body>
     <div class="container">
-        <p>휴대폰 인증</p>
-        <input onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"id="phone-number"class="input-phone" type="text" name="phoneNumber" autocomplete="off" placeholder="-,공백을 제외한 휴대폰 번호를 입력해주세요." class="main_input" style='IME-MODE: disabled' />
-        <button id="submit-btn">인증번호 발송</button>
-        <input oninput="maxLengthCheck(this)" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"class="input-phone" type="text" name="phoneNumber" id="check-number"autocomplete="off" placeholder="연락처로 전송받은 4자리 숫자를 입력해주세요." class="main_input" style='IME-MODE: disabled' />
-        <button  id="check-btn">인증번호 확인</button>
+        <h3>휴대폰 인증</h3>
+        <div class="section">
+            <input oninput="maxLengthCheck(this)" maxlength="3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"id="phone-number1"class="input-phone" type="text" name="phoneNumber" autocomplete="off" class="main_input" style='IME-MODE: disabled' />
+            <input oninput="maxLengthCheck(this)" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"id="phone-number2"class="input-phone" type="text" name="phoneNumber" autocomplete="off" class="main_input" style='IME-MODE: disabled' />
+            <input oninput="maxLengthCheck(this)" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"id="phone-number3"class="input-phone" type="text" name="phoneNumber" autocomplete="off" class="main_input" style='IME-MODE: disabled' />
+
+            <button id="submit-btn">인증번호 발송</button>
+        </div>
+        <div class="section">
+            <input oninput="maxLengthCheck(this)" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"class="input-number" type="text" name="phoneNumber" id="check-number"autocomplete="off" placeholder="연락처로 전송받은 4자리 숫자를 입력해주세요." class="main_input" style='IME-MODE: disabled' />
+            <button  id="check-btn">인증번호 확인</button>
+        </div>
+        <h6>휴대폰 번호로 수신된 인증번호가 오지 않을 시, 고객센터로 연락바랍니다.</h6>
+
     </div>
 </body>
 </html>

@@ -100,7 +100,7 @@ public class UserDAOImpl implements UserDAO {
     public int updateUser(Map<String, Object> updateUserInfo) {
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         mapper.updateUser(updateUserInfo);
-        int result = ((int)updateUserInfo.get("res")== 1 ) ?  1 : 0 ;
+        int result = ((int)updateUserInfo.get("res")>= 1 ) ?  1 : 0 ;
         return result;
     }
 
