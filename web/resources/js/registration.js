@@ -2,7 +2,8 @@ var win;
 var phoneFlag = false;
 var phone;
 var clickFlag = false;
-function setChildValue(phoneNumber){
+
+function setChildValue(phoneNumber) {
     document.getElementById("phone").value = phoneNumber;
     phone = phoneNumber.trim();
     console.log("userPhoneNumber : " + phone);
@@ -10,16 +11,16 @@ function setChildValue(phoneNumber){
 }
 
 function openAuthenticatePhone() {
-    if(win != null){
+    if (win != null) {
         win.close();
     }
     var popUrl = "/authenticatePhone";	//팝업창에 출력될 페이지 URL
-    var popupX = (window.screen.width / 2) - (200 / 2);
+    var popupX = (window.screen.width / 2) - (500 / 2);
 // 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
-    var popupY = (window.screen.height / 2) - (300 / 2);
+    var popupY = (window.screen.height / 2) - (280 / 2);
 
 // 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
-    var popOption = "width=500, height=482, resizable=no, " +
+    var popOption = "width=500, height=280, resizable=no, " +
         "scrollbars=yes, status=no, " +
         "left=" + popupX + ",top=" + popupY + ";";//팝업창 옵션(optoin)
     win = window.open(popUrl, "", popOption);
@@ -155,11 +156,12 @@ function smsCheck() {
 }
 
 function submit() {
-    if(clickFlag === true){
+    // 재전송 방지
+    if (clickFlag === true) {
         alert("현재 회원가입이 진행중입니다. 잠시만 기다려주세요.");
         return;
     }
-    clickFlag = true;
+
     let name = $('#name').val().trim();
     let nickname = $('#nickname').val().trim();
     let email = $('#email').val().trim();
@@ -207,7 +209,7 @@ function submit() {
         }
     });
 
-    //이메일 중복 체크
+    // 이메일 중복 체크
     $.ajax({
         type: "GET",
         url: "/checkEmail",
@@ -231,6 +233,9 @@ function submit() {
             return;
         }
     });
+
+    // 재전송 방지 플래그
+    clickFlag = true;
 
     // 폼 전송
     $.ajax({
@@ -309,9 +314,12 @@ function isNameValid(input) {
         $('#name').val('');
         return false;
     }
-    if (getByteLength(input) > 100) {
+    if (input.length > 33) {
         return false;
     }
+    /*if (getByteLength(input) > 100) {
+        return false;
+    }*/
     return true;
 }
 
@@ -321,7 +329,10 @@ function isNicknameValid(input) {
         $("#nickname").val('');
         return false;
     }
-    if (getByteLength(input) > 20) {
+    /*if (getByteLength(input) > 20) {
+        return false;
+    }*/
+    if (input.size > 15) {
         return false;
     }
     if ($('#nickname').val() == "닉네임이 중복됩니다") {
@@ -347,8 +358,11 @@ function isEmailValid(input) {
         // alert("이메일 형식이 올바르지 않습니다.");
         return false;
     }
-    if (getByteLength(input) > 60) {
+    /*if (getByteLength(input) > 60) {
         // alert("이메일은 최대 60자리까지 입력이 가능합니다");
+        return false;
+    }*/
+    if (input.size > 60) {
         return false;
     }
     return true;
@@ -360,11 +374,19 @@ function isPasswordValid(input) {
         $("#password").val("");
         return false;
     }
-    if (getByteLength(input) < 5) {
+    /*if (getByteLength(input) < 5) {
         $("#password").val("");
         return false;
     }
     if (getByteLength(input) > 20) {
+        $("#password").val("");
+        return false;
+    }*/
+    if (input.size < 5) {
+        $("#password").val("");
+        return false;
+    }
+    if (input.size > 20) {
         $("#password").val("");
         return false;
     }
@@ -420,7 +442,10 @@ function isDetailAddressValid(input) {
         alert("상세주소을 입력하세요");
         return false;
     }
-    if (getByteLength(input) > 200) {
+    /*if (getByteLength(input) > 200) {
+        return false;
+    }*/
+    if (input.size > 66) {
         return false;
     }
     return true;
@@ -445,6 +470,7 @@ function emptyCheck(input) {
     return true;
 }
 
+/*
 function getByteLength(input) {
     let byte = 0;
     for (var idx = 0; idx < input.length; idx++) {
@@ -459,6 +485,7 @@ function getByteLength(input) {
     }
     return byte;
 }
+*/
 
 $('#name').focusout(function () {
     let name = $('#name').val().trim();
@@ -467,12 +494,18 @@ $('#name').focusout(function () {
         $('#name').css("border", "solid 0.2px #D6D6D6");
         return;
     }
-    if (getByteLength(name) > 100) {
+    if (name.length > 33) {
+        alert("이름은 최대 33자리까지 입력 가능합니다");
+        $('#name').css("border", "solid 0.2px red");
+        $('#name').val(name);
+        return;
+    }
+    /*if (getByteLength(name) > 100) {
         alert("이름은 한글 33자리 또는 영문숫자 100자리까지 입력이 가능합니다");
         $('#name').css("border", "solid 0.2px red");
         $('#name').val(name);
         return;
-    } else {
+    } */ else {
         $('#name').val(name);
         $('#name').css("border", "solid 0.2px green");
     }
@@ -486,10 +519,17 @@ $('#nickname').focusout(function () {
         return;
     }
 
-    if (getByteLength(nickname) > 20) {
+    /*if (getByteLength(nickname) > 20) {
         $('#nickname').css("border", "solid 0.2px red");
         $('#nickname').val(nickname);
         alert("닉네임은 한글 6자리 또는 영문숫자 20자리까지 입력이 가능합니다");
+        return;
+    }*/
+
+    if (nickname.length > 15) {
+        alert("닉네임은 최대 15자리까지 입력 가능합니다");
+        $('#nickname').css("border", "solid 0.2px red");
+        $('#nickname').val(nickname);
         return;
     }
 
@@ -537,10 +577,16 @@ $('#email').focusout(function () {
         return;
     }
 
-    if (getByteLength(email) > 60) {
+    /*if (getByteLength(email) > 60) {
         $('#email').css('border', 'solid 0.2px red');
         $('#email').val(email);
         alert("이메일은 최대 60자리까지 입력이 가능합니다");
+        return;
+    }*/
+    if (email.length > 60) {
+        alert("이메일은 최대 60자리까지 입력 가능합니다");
+        $('#email').css("border", "solid 0.2px red");
+        $('#email').val(email);
         return;
     }
 
@@ -582,29 +628,44 @@ $('#password').focusout(function () {
         return;
     }
 
-    if (getByteLength(password) > 20) {
+    /*if (getByteLength(password) > 20) {
         $('#password').css('border', 'solid 0.2px red');
         alert("비밀번호는 최대 20자리까지 입력이 가능합니다");
         if ($('#password2').val() != null && $('#password2').val() != "" && $('#password2').val() != password) {
             $('#password2').css('border', 'solid 0.2px red');
         }
         return;
+    }*/
+
+    if (password.length > 20) {
+        alert("비밀번호는 최대 20자리까지 입력 가능합니다");
+        $('#password').css("border", "solid 0.2px red");
+        // $('#password').val(password);
+        return;
     }
 
-    if (getByteLength(password) < 5) {
+    /*if (getByteLength(password) < 5) {
         $('#password').css('border', 'solid 0.2px red');
         alert("비밀번호는 최소 5자리 이상 입력하셔야 합니다");
         if ($('#password2').val() != null && $('#password2').val() != "" && $('#password2').val() != password) {
             $('#password2').css('border', 'solid 0.2px red');
         }
         return;
+    }*/
+    if (password.length < 5) {
+        $('#password').css("border", "solid 0.2px red");
+        alert("비밀번호는 최소 5자리 이상 입력하셔야 합니다");
+        if ($('#password2').val() != null && $('#password2').val() != "" && $('#password2').val() != password) {
+            $('#password2').css('border', 'solid 0.2px red');
+        }
+        return;
     }
+
     $('#password').css('border', 'solid 0.2px green');
 
     if ($('#password2').val() != null && $('#password2').val() != "" && $('#password2').val() != password) {
         $('#password2').css('border', 'solid 0.2px red');
-    }
-    else if ($('#password2').val() == password) {
+    } else if ($('#password2').val() == password) {
         $('#password2').css('border', 'solid 0.2px green');
     }
 });
@@ -632,12 +693,20 @@ $('#detailAddress_fake').focusout(function () {
         $('#detailAddress_fake').val(detailAddress);
         return;
     }
-    if (getByteLength(detailAddress) > 200) {
+    /*if (getByteLength(detailAddress) > 200) {
         alert("상세주소는 한글 66자리 또는 영문숫자 200자리까지 입력이 가능합니다");
         $('#detailAddress_fake').css("border", "solid 0.2px red");
         $('#detailAddress_fake').val(detailAddress);
         return;
+    }*/
+
+    if (detailAddress.length > 66) {
+        alert("상세주소는 최대 66자리까지 입력 가능합니다");
+        $('#detailAddress_fake').css("border", "solid 0.2px red");
+        $('#detailAddress_fake').val(detailAddress);
+        return;
     }
+
     $('#detailAddress_fake').css("border", "solid 0.2px green");
     $('#detailAddress_fake').val(detailAddress);
 });
