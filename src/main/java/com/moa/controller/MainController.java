@@ -38,28 +38,6 @@ public class MainController {
 
         return "test";
     }
-    @RequestMapping(value = "authenticatePhone")
-    public String authenticatePhone(){
-
-        return "authenticatePhonePopup";
-    }
-
-    @RequestMapping(value = "send/phonemessage", method = RequestMethod.POST)
-    public @ResponseBody boolean sendPhoneMessage(@RequestBody Map<String,Object> data){
-        //-- start of validation
-        if(data.get("phoneNumber").toString().equals("") || data.get("phoneNumber") == null
-        || data.get("randomNumber").toString().equals("") || data.get("randomNumber") == null){
-            return false;
-        }
-        //-- end of validation
-
-        //-- start of send message
-        PhoneMessage phoneMessage = new PhoneMessage();
-        boolean result = false;
-        result = phoneMessage.sendAuthenticationMessage(data.get("phoneNumber").toString(),data.get("randomNumber").toString());
-
-
-        return result;
 
     @RequestMapping(value = {"admin/hostapprove/list","admin"})
     public String mobileHostApprove(){

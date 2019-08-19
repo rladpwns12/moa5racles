@@ -79,7 +79,7 @@
                     <div class="col-2">
                         <label class="label">휴대폰 인증 버튼을 눌려주세요</label>
                         <div class="input-group">
-                            <input id="phone" class="input100 input--style-4" type="text" name="phone">
+                            <input id="phone" class="input100 input--style-4" type="text" name="phone" disabled readonly>
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <label class="label">&nbsp;</label>
                         <div class="input-group">
                             <button id="identification"
-                                    onclick="smsCheck()" class="btn btn--radius-2 btn--purple" type="submit">
+                                    onclick="openAuthenticatePhone()" class="btn btn--radius-2 btn--purple" type="submit">
                                 휴대폰 인증
                             </button>
                             </form>

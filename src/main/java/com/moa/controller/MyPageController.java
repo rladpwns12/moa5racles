@@ -348,7 +348,7 @@ public class MyPageController {
     }
     @RequestMapping(value = "myinfo/update",method = RequestMethod.POST)
     public @ResponseBody boolean updateMyInfo(Authentication auth,
-                                              String phoneNumber, String profile,
+                                              String phoneNumber,
                                               AddressVO addressVO){
         //user
         CustomUser customUser = (CustomUser) auth.getPrincipal();
@@ -357,18 +357,12 @@ public class MyPageController {
         if(phoneNumber == null || phoneNumber.equals("")){
             phoneNumber = customUser.getLoginVO().getPhoneNumber();
         }
-        if(profile == null || profile.equals("")){
-            profile = customUser.getLoginVO().getProfile();
-        }
-
         //setting
         Map<String,Object> updateInfo = new HashMap<String, Object>();
         updateInfo.put("AddressVO",addressVO);// -- 1
         updateInfo.put("phoneNumber",phoneNumber);// -- 2
-        updateInfo.put("profile",profile);// -- 3
         updateInfo.put("userId",userId);
         updateInfo.put("res",1);
-
         boolean result = userUpdateService.updateUserInformation(updateInfo,customUser);
         return result;
     }

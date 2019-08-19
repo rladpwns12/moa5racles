@@ -11,7 +11,6 @@
     <meta name="keywords" content="Colorlib Templates">
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
     <link href="/resources/css/registration.css" rel="stylesheet" media="all">
     <sec:csrfMetaTags/>
 </head>
@@ -31,7 +30,7 @@
                             </div>
                         </div>
                     </div>
-                    <div cla ss="row row-space">
+                    <div class="row row-space">
                         <div class="col-2">
                             <label class="short label">휴대폰 인증 버튼을 눌러주세요</label>
                             <div class="input-group">
@@ -48,7 +47,7 @@
                                     <input type="hidden" name="state" value="112133">
                                     <input type="hidden" name="fbAppEventsEnabled" value=true>
                                     <input type="hidden" name="debug" value=true>--%>
-                                <button id="identification" class="btn btn--radius-2 btn--purple" onclick="smsCheck()">
+                                <button id="identification"  class="btn btn--radius-2 btn--purple" onclick="openAuthenticatePhone()">
                                     휴대폰 인증
                                 </button>
                                 </form>
