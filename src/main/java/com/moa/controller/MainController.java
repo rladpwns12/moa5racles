@@ -24,11 +24,11 @@ public class MainController {
     public String main(HttpServletRequest request) {
         Device device = DeviceUtils.getCurrentDevice(request);
 
-        if (device.isNormal()) {
-            return "main";
-        } else if (device.isTablet() || device.isMobile()) {
-            return "admin/login";
-        }
+//        if (device.isNormal()) {
+//            return "main";
+//        } else if (device.isTablet() || device.isMobile()) {
+//            return "admin/login";
+//        }
         return "main";
     }
 
