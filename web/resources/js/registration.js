@@ -1,3 +1,33 @@
+var win;
+var phoneFlag = false;
+var phone;
+var clickFlag = false;
+function setChildValue(phoneNumber){
+    document.getElementById("phone").value = phoneNumber;
+    phone = phoneNumber.trim();
+    console.log("userPhoneNumber : " + phone);
+
+}
+
+function openAuthenticatePhone() {
+    if(win != null){
+        win.close();
+    }
+    var popUrl = "/authenticatePhone";	//팝업창에 출력될 페이지 URL
+    var popupX = (window.screen.width / 2) - (200 / 2);
+// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+    var popupY = (window.screen.height / 2) - (300 / 2);
+
+// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+    var popOption = "width=500, height=482, resizable=no, " +
+        "scrollbars=yes, status=no, " +
+        "left=" + popupX + ",top=" + popupY + ";";//팝업창 옵션(optoin)
+    win = window.open(popUrl, "", popOption);
+    win.focus();
+
+}
+
+
 (function ($) {
     'use strict';
     try {
@@ -125,12 +155,16 @@ function smsCheck() {
 }
 
 function submit() {
+    if(clickFlag === true){
+        alert("현재 회원가입이 진행중입니다. 잠시만 기다려주세요.");
+        return;
+    }
+    clickFlag = true;
     let name = $('#name').val().trim();
     let nickname = $('#nickname').val().trim();
     let email = $('#email').val().trim();
     let password = $('#password').val();
     let password2 = $('#password2').val();
-    let phone = $('#phone').val().trim();
     let postcode = $('#postcode').val().trim();
     let address = $('#address').val().trim();
     let detailAddress = $('#detailAddress_fake').val().trim();
@@ -160,12 +194,16 @@ function submit() {
         success(data) {
             if (data) {
             } else {
+                clickFlag = false;
                 $('#nickname').val("닉네임이 중복됩니다");
                 alert("닉네임이 중복됩니다");
+                return;
             }
         },
         error() {
+            clickFlag = false;
             console.log("전송 오류");
+            return;
         }
     });
 
@@ -185,10 +223,12 @@ function submit() {
             } else {
                 $('#email').val("이메일이 중복됩니다");
                 alert("이메일이 중복됩니다");
+                return;
             }
         },
         error() {
             console.log("전송 오류");
+            return;
         }
     });
 
@@ -199,6 +239,7 @@ function submit() {
         data: {
             name, nickname, email, password, phone, postcode, address, detailAddress, latitude, longitude
         },
+        dataType: 'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
@@ -207,7 +248,8 @@ function submit() {
         success(data) {
             if (data) {
                 alert("회원가입에 성공하셨습니다.");
-                location.href = "/login";
+                location.href = "/userLogin";
+                return;
             } else {
                 alert("회원가입에 실패하셨습니다.");
             }
@@ -521,10 +563,12 @@ $('#email').focusout(function () {
                 $('#email').css('border', 'solid 0.2px red');
                 $('#email').val("이메일이 중복됩니다");
                 alert("이메일이 중복됩니다");
+                return;
             }
         },
         error() {
             console.log("전송 오류");
+            return;
         }
     });
     $('#email').val(email);

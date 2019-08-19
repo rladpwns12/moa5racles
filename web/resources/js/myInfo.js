@@ -1,3 +1,31 @@
+var win;
+var phone = '';
+
+function setChildValue(phoneNumber){
+    document.getElementById("phone").value = phoneNumber;
+    if(phoneNumber != ''){
+        phoneFlag = true;
+    }
+    phone = $('#phone').val();
+}
+
+function openAuthenticatePhone() {
+    if(win != null){
+        win.close();
+    }
+    var popUrl = "/authenticatePhone";	//팝업창에 출력될 페이지 URL
+    var popupX = (window.screen.width / 2) - (200 / 2);
+// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+    var popupY = (window.screen.height / 2) - (300 / 2);
+
+// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+    var popOption = "width=500, height=482, resizable=no, " +
+        "scrollbars=yes, status=no, " +
+        "left=" + popupX + ",top=" + popupY + ";";//팝업창 옵션(optoin)
+    win = window.open(popUrl, "", popOption);
+    win.focus();
+
+}
 $(document).ready(function () {
     var addrLat = 0;
     var addrLng = 0;
@@ -50,29 +78,23 @@ $(document).ready(function () {
         });
     });//--end of #search_address_btn.click
 
-
-
-    $('#identification').click(function () {
-        alert("휴대폰 인증 서비스 수리중");
-    });
-
     //-- start of update user information
     $('#submit_btn').click(function () {
         //-- start of validation
         //1. 빈칸 검사
-        console.log(passwordText.value);
         if(passwordText.value == '' || passwordText.value == null){
             alert("비밀번호를 입력해주세요.");
             passwordText.focus();
             return;
         }
-        if(userVO.detailAddress === '' || userVO.detailAddress === null){
+        if(($('#address').val()) === '' ||($('#address').val()) === null){
             alert("상세 주소를 입력해주세요.");
             document.getElementById("detailAddress").focus();
+
             return;
         }
         //2. 기본값 검사(이름,닉네임,이메일) -- 휴대폰의 경우 변경하였을 때만
-        //-- wait
+
         //3. 비밀번호 검사
         var pw= JSON.stringify($('#password').val());
         $.ajax({
@@ -94,9 +116,9 @@ $(document).ready(function () {
                     $.ajax({
                         url:"/mypage/myinfo/update",
                         type:"POST",
+                        dataType : 'json',
                         data : {
-                            phoneNumber : ($('#phone').val()),
-                            profile : ('profile.png'),
+                            phoneNumber : phone,
                             postCode :($('#postcode').val()),
                             baseAddress:($('#address').val()),
                             detailAddress:($('#detailAddress').val()),
@@ -108,7 +130,7 @@ $(document).ready(function () {
                             xhr.setRequestHeader(header, token);
                         },
                         success:function(result) {
-                            if (result == true) {
+                            if (result === true) {
                                 alert("수정이 완료되었습니다.");
                                 location.reload();
                             }

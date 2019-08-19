@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @Service
 public class ReviewServiceImpl implements ReviewService {
     @Autowired
@@ -23,6 +22,12 @@ public class ReviewServiceImpl implements ReviewService {
         map.put("articleNum",replyVO.getArticleNum());
 
         CheckReviewVO checkReviewVO=reviewDAO.checkReviewCnt(map);
+        if(checkReviewVO == null) {
+            checkReviewVO = new CheckReviewVO();
+            checkReviewVO.setRev(0);
+            checkReviewVO.setTot(0);
+        }
+
         if(checkReviewVO.getTot()==0)
             return "noAuthority";
         else if(checkReviewVO.getTot()>checkReviewVO.getRev()) {
@@ -36,7 +41,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Map<String,Object> listReview(Map<String, Object> pagingMap) {
         Map<String, Object> articlesMap=new HashMap<String, Object>();
-
         List<ReviewVO> reviewVOList=reviewDAO.selectAllReview(pagingMap);
         int articleNum=(int)pagingMap.get("articleNum");
         int totArticles = reviewDAO.selectTotReview(articleNum);

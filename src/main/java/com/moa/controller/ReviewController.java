@@ -1,8 +1,11 @@
 package com.moa.controller;
 
 import com.moa.model.service.ReviewService;
+import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.ReplyVO;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +20,21 @@ public class ReviewController {
 
     @RequestMapping(value="/{articleNum}", method = RequestMethod.POST)
     public @ResponseBody String writeReview(@PathVariable("articleNum") int articleNum,
-                                             @RequestBody ReplyVO replyVO){
+                                            Authentication auth,
+                                             @RequestBody ReplyVO replyVO) {
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        int userId=Integer.parseInt(customUser.getLoginVO().getUserId());
+
         replyVO.setArticleNum(articleNum);
-        replyVO.setUserId(28); //temporary ... To do userId get from SessionAttribute ...
-        String result=reviewService.insertReview(replyVO);
-        System.out.println(result);
-        return result;
+        replyVO.setUserId(userId);
+
+        return reviewService.insertReview(replyVO);
     }
+
     @RequestMapping(value="/{articleNum}", method = RequestMethod.GET)
     public @ResponseBody  Map<String,Object> retrieveReviewList(@PathVariable("articleNum") int articleNum,
                                                      @RequestParam("section") int section,
-                                                     @RequestParam("pageNum") int pageNum){
+                                                     @RequestParam("pageNum") int pageNum) {
         Map<String,Object> pagingMap=new HashMap<String,Object>();
         pagingMap.put("section",section);
         pagingMap.put("pageNum",pageNum);

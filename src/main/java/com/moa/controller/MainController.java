@@ -38,6 +38,7 @@ public class MainController {
 
         return "test";
     }
+
     @RequestMapping(value = "authenticatePhone")
     public String authenticatePhone(){
 
@@ -61,6 +62,7 @@ public class MainController {
 
         return result;
     }
+
     @RequestMapping(value = {"admin/hostapprove/list","admin"})
     public String mobileHostApprove(){
 

@@ -128,7 +128,7 @@
                                         <div class="col-2">
                                             <div class="input-group">
                                                 <label class="label">휴대폰 인증</label>
-                                                <button id="identification" class="btn btn--radius-2 btn--purple" type="button">
+                                                <button id="identification" class="btn btn--radius-2 btn--purple" onclick="openAuthenticatePhone()" type="button">
                                                     휴대폰 번호 변경
                                                 </button>
                                             </div>

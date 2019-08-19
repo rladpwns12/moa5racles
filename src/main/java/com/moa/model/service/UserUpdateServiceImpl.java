@@ -17,8 +17,8 @@ public class UserUpdateServiceImpl implements UserUpdateService {
     @Override
     public boolean updateUserInformation(Map<String, Object> newUserInfo,CustomUser customUser) {
         boolean result = false;
-        //customer는 추후에 session에 저장되어있는 loginVO정보를 수정하는 데 사용됩니다.
-        if(userDAO.updateUser(newUserInfo)>=1){
+        customUser.getLoginVO().setPhoneNumber(newUserInfo.get("phoneNumber").toString());
+        if(userDAO.updateUser(newUserInfo)==1){
             result = true;
         }
         return result;
