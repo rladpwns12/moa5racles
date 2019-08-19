@@ -94,7 +94,7 @@
         }
 
         $(document).ready(function(){
-          var fileCallPath = encodeURIComponent("${profile.uploadPath}" + "\\" + "${profile.uuid}"
+          var fileCallPath = encodeURIComponent("${profile.uploadPath}" + "/" + "${profile.uuid}"
                   + "_" + "${profile.fileName}");
           var imgSrc=$('.profile_image')[0].lastElementChild;
           fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
