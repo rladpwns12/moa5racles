@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.mybatis.AdminReportMapper">
+    <resultMap id="selectHostReputationMap" type="com.moa.model.vo.AdminHostSimpleVO">
+        <id property="userId" column="userId" />
+        <id property="nick" column="nick" />
+        <id property="storageType" column="storageType" />
+        <id property="applicationDate" column="applicationDate" />
+        <id property="applicationTime" column="applicationTime" />
+    </resultMap>
+    <select id="selectHostConfirmList" resultMap="selectHostReputationMap">
+     select  RT.REPORT_TB_ID,UT.NICKNAME ,UT.PHONENUMBER , RTT.TARGET_TYPE,
+    UTD.NICKNAME , RT.REPORT_DATETIME , RT.REPORT_CONTENT
+    FROM REPORT_TB RT
+    JOIN USER_TB UT ON UT.USER_ID =RT.USER_ID
+    JOIN USER_TB UTD ON UTD.USER_ID = RT.TARGET_USER_ID
+    JOIN REPORT_TARGET_TYPE_TB RTT ON RTT.TARGET_TYPE_TB_ID =RT.TARGET_TYPE_ID
+    WHERE REPORT_DEL_FLAG = 'N' AND REPORT_STATE = #{reportState}
+    </select>
+
+    <update id="">
+        UPDATE REPORT_TB SET REPORT_DEL_FLAG = 'N' WHERE REPORT_TB_ID=#{reportTbId};
+    </update>
+
+
+
+</mapper>
