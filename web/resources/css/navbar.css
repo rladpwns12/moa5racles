@@ -256,3 +256,9 @@ body {
     font-weight: bold;
     left:60px;
 }
+
+.report_img{
+    width: 20px;
+    height: 20px;
+    padding-left: 5px;
+}
