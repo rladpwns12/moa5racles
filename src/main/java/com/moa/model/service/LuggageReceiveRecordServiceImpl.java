@@ -14,6 +14,7 @@ public class LuggageReceiveRecordServiceImpl implements LuggageReceiveRecordServ
 	private StoreRequestDAOImpl storeRequestDAO;
 
 	public List<SimpleHostRequestVO> selectLuggageWaitingReceiveRecord(Map<String,Object> listInfo) {
+
 		List<SimpleHostRequestVO> list = storeRequestDAO.searchListByHost(listInfo);
 
 		return list;
