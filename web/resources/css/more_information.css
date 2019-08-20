@@ -7,7 +7,7 @@
   top:0;
   display: none;
   visibility: visible;
-  background-color: rgb(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.8);
   z-index: 100;
 }
 .gallary_wrap{
@@ -125,7 +125,7 @@
 }
 .info_item_text{
   font-weight: bold;
-  padding-right: 10px auto;
+  padding-right: 10px;
   transform: translate(0,10%);
 }
 .summary_info{
@@ -169,6 +169,7 @@
 }
 .more_info{
   width:14.28%;
+  text-align: center;
 }
 .more_info_icon{
   padding: 20px;
@@ -182,38 +183,38 @@
   overflow: hidden;
 }
 .more_info span{
+  width:200px;
   visibility: hidden;
   text-align: center;
-  border-radius: 8px;
   display: block;
-  background: #c9c0c0;
+  background: #ffffff;
+  border:1px solid #343434;
   position: absolute;
   opacity: 0;
   transition: 0.6s opacity;
   z-index: 0;
-  font-size: 27px;
+  font-size: 17px;
   font-weight: bold;
-  padding:33px;
+  padding:10px;
+  margin-top:10px;
 }
 .more_info span::before{
   content: '';
-  width:33px;
-  height: 33px;
   position: absolute;
   top:-5px;
-  background: #c9c0c0;
+  border:1px solid #343434;
+  background: #ffffff;
   left: 25%;
   transform: translateX(-50%) rotate(45deg);
-  z-index: 1;
+  z-index: -1;
 }
 .more_info:hover > span{
   visibility:visible;
   opacity: 1;
 }
 .more_info_item{
-  margin-top: 25%;
-  margin-bottom: 25%;
-  font-size: 20px;
+  font-size: 15px;
+  margin-top:10px;
 }
 .detail_description{
   padding: 20px;
@@ -222,9 +223,11 @@
 }
 .item_price_tb{
   border-spacing:0 20px;
+  margin-top:10px;
 }
 .item_price_tb th{
-  padding-right: 100px;
+  padding-right: 50px;
+  padding-left: 20px;
 }
 
 .img-magnifier-container {
