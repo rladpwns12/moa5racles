@@ -36,8 +36,12 @@
             addStaffText += ('<option class="category_list" value="${category}">${category}</option>');
             </c:forEach>
             addStaffText += '</select>' + '</td>';
-            addStaffText += '<td class="table_data"><input type="text" class="product_name" name="productList[' + table_product_num + '].product"></td>';
-            addStaffText += '<td class="table_data"><input type="number" class="product_cnt" name="productList[' + table_product_num + '].productCnt" min=0 max=100 value=0></td>' + '</tr>';
+
+            addStaffText += '<td class="table_data"><input type="text" class="product_name" name="productName"></td>';
+            addStaffText += '<td class="table_data"><input type="number" class="product_cnt" name="productCnt" min=0 max=100 value=0></td>' + '</tr>';
+
+            /*addStaffText += '<td class="table_data"><input type="text" class="product_name" name="productList[' + table_product_num + '].product"></td>';
+            addStaffText += '<td class="table_data"><input type="number" class="product_cnt" name="productList[' + table_product_num + '].productCnt" min=0 max=100 value=0></td>' + '</tr>';*/
             var trHtml = $("tr[name=stuff]:last"); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
             trHtml.before(addStaffText); //마지막 trStaff명 뒤에 붙인다
         });
@@ -83,10 +87,12 @@
                                   </c:forEach>
                               </select>
                           </td>
-                          <td class="table_data"><input type="text" class="product_name"
-                                                        name="productList[0].product"></td>
-                          <td class="table_data"><input type="number" class="product_cnt"
-                                                        name="productList[0].productCnt" min=0 max=100 value=0></td>
+                          <td class="table_data">
+                              <input type="text" class="product_name" name="productName">
+                          </td>
+                          <td class="table_data">
+                              <input type="number" class="product_cnt" name="productCnt" min=0 max=100 value=0>
+                          </td>
                       </tr>
                       <tr name='stuff'>
                           <td colspan="4"><i class="fas fa-plus-circle" name='add_row_btn'></i></td>

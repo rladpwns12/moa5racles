@@ -1,6 +1,6 @@
 var num = 1;
-var table_product_num = 0;
-let i = 0;
+var table_product_num = 1;
+var i = 0;
 $(function () {
     $("#start_datepicker").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -127,8 +127,12 @@ function nextForm() {
 
     switch (num) {
         case 1:
-            let productName = document.getElementsByName("productList[0].product");
-            let productCnt = document.getElementsByName("productList[0].productCnt");
+            // let productName = document.getElementsByName("productList[0].product");
+            // let productCnt = document.getElementsByName("productList[0].productCnt");
+
+            let productName = document.getElementsByName("productName");
+            let productCnt = document.getElementsByName("productCnt");
+
             if (productName[0].value == null || productName[0].value.trim() == "") {
                 alert("물건명을 최소 하나 이상 입력해주세요.");
                 productName[0].value = "";
@@ -139,12 +143,27 @@ function nextForm() {
                 alert("물건 개수는 최소 1개 이상이어야 합니다.");
                 return;
             }
-            for (i = table_product_num; i > 0; i--) {
+
+            for (i = table_product_num - 1; i > 0; i--) {
+                console.log(table_product_num + " " + i);
+
+                if (productName[i] == "" || productCnt[i] == 0) {
+                    alert(productName[i]);
+                    productName[i].closest("tr").remove();
+                    table_product_num--;
+                }
+            }
+
+
+            /*for (i = table_product_num; i > 0; i--) {
                 let productName = document.getElementsByName("productList[" + i + "].product");
                 let productCnt = document.getElementsByName("productList[" + i + "].productCnt");
+
                 if (productName[0].value == null || productName[0].value.trim() == "" || productCnt[0].value == 0)
                     productName[0].closest("tr").remove();
-            }
+            }*/
+
+
             $("#content1").hide();
             $("#content2").show();
             $("#left_side").show();
