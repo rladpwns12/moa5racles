@@ -196,12 +196,13 @@
                 </c:when>
             </c:choose>
             <div class="more_info_desc">${storeBoardVO.storageType}</div>
-            <span>보관지 형태<div class='more_info_item'>${storeBoardVO.storageType}</div></span>
+            <span>보관지 형태<div class='more_info_item'><div style="font-size: 15px">${storeBoardVO.storageType}</div></div></span>
         </div>
         <div class="more_info" id='more_info'>
             <div class="more_info_icon"><i class="fas fa-money-bill"></i>  </div>
             <div class="more_info_desc">${storeBoardVO.detailPrice["1달"]}원</div>
-            <span>금액<div class='more_info_item'>5호박스 기준으로 측정한 가격입니다.<br>
+            <span>금액<div class='more_info_item'>
+                <div style="font-size: 11px">5호박스 기준으로 측정한 가격입니다.</div>
           <table class='item_price_tb'>
             <tr>
               <th>1일</th>
