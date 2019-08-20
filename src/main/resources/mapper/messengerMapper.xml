@@ -11,7 +11,7 @@
           RECEIVER_ID receiverId, nickname receiverNick, sender_id senderId,
         SENDER_NICK senderNick,CONTENT content,SENDER_DEL_FLAG senderDelFlag,
         RECIPIENT_DEL_FLAG recipientDelFlag,SEND_DATE sendDate,MESSAGE_ID messageId,READ_STATE readState,
-        To_char(send_date, 'YYYY-MM-DD') sendDate , To_char(send_date, 'hh:mi:ss') sendTime
+        To_char(send_date, 'YYYY-MM-DD') sendDate , To_char(send_date, 'hh24:mi:ss') sendTime
 
         FROM MESSAGE_TB_VIEW  WHERE MESSAGE_ID = #{messageId}
     </select>

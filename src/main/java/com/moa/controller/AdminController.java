@@ -1,5 +1,6 @@
 package com.moa.controller;
 
+import com.moa.model.service.AdminReportSearchService;
 import com.moa.model.service.HostConfirmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import java.util.Map;
 public class AdminController {
     @Autowired
     private HostConfirmService hostConfirmService;
+    @Autowired
+    private AdminReportSearchService adminReportSearchService;
     //-- start of hostapprove
     @RequestMapping(value = {"","/hostapprove/list"}, method = RequestMethod.GET)
     public ModelAndView confirmList() {
@@ -60,7 +63,8 @@ public class AdminController {
     @RequestMapping(value = {"/report/list"}, method = RequestMethod.GET)
     public ModelAndView confirmReport() {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("confirmWaitingList", hostConfirmService.searchHostConfirmList());
+        System.out.println(adminReportSearchService.reportList());
+        mav.addObject("reportList", adminReportSearchService.reportList());
         mav.setViewName("/admin/mReport");
 
         return mav;
