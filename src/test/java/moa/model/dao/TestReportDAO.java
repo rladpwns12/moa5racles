@@ -49,4 +49,12 @@ public class TestReportDAO {
         boolean res = reportDAO.insertReport(reportVO);
         assertFalse(res);
     }
+    @Test
+    public void TEST_관리자_신고목록보기(){
+        System.out.println(reportDAO.selectHostConfirmList());
+    }
+    @Test
+    public void TEST_관리자_신고목록_상세보기(){
+        System.out.println(reportDAO.selectHostConfirm(1));
+    }
 }

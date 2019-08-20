@@ -30,14 +30,13 @@
         </tr>
         </thead>
         <tbody>
-        <c:if test="${confirmWaitingList.size() == 0}">
+        <c:if test="${reportList == null}">
             신고 요청이 존재하지 않습니다.
         </c:if>
-        <c:forEach var="vo" begin="0" end="${confirmWaitingList.size()}" step="1" items="${confirmWaitingList}">
-            <tr onclick="location.href='/admin/report/info?userId=${vo.userId}'">
-<%--                추후 /admin/report/info?reprot-num=으로--%>
-                <td>${vo.nick}</td>
-                <td>${vo.applicationDate}<br>${vo.applicationTime}</td>
+        <c:forEach var="vo" begin="0" end="${reportList.size()}" step="1" items="${reportList}">
+            <tr onclick="location.href='/admin/report/info?reportId=${vo.reportId}'">
+                <td>${vo.userNick}</td>
+                <td>${vo.reportDate}<br>${vo.reportTime}</td>
             </tr>
         </c:forEach>
 

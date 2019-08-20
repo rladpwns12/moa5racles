@@ -10,7 +10,15 @@
         (REPORT_TB_ID, USER_ID, TARGET_TYPE_ID, TARGET_ID, TARGET_USER_ID, REPORT_CONTENT)
         VALUES
         (AUTO_REPORT_TB.NEXTVAL, #{userId}, #{targetType}, #{targetId},
-        (SELECT USER_ID FROM USER_TB WHERE NICKNAME = #{targetUserNick}), #{content})
+        (SELECT USER_ID FROM USER_TB WHERE NIC
+        KNAME = #{targetUserNick}), #{content})
     </insert>
+
+    <select id="selectHostConfirm" parameterType="int" resultType="com.moa.model.vo.ReportAdminVO">
+        SELECT * FROM report_admin_view WHERE REPORTID = #{reportId}
+    </select>
+    <select id="selectHostConfirmList" resultType="com.moa.model.vo.SimpleReportAdminVO">
+        SELECT reportId,userNick,reportDate,reportTime FROM report_admin_view
+    </select>
 
 </mapper>
