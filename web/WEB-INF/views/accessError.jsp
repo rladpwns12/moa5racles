@@ -10,6 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Title</title>
 </head>
 <body>

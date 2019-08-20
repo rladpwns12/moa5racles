@@ -5,6 +5,7 @@
 </head>
 <script src="/resources/js/jquery-3.4.1.min.js"></script>
 <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+<meta name="viewport" content="width=device-width, user-scalable=no">
 <script>
 
     function fclose(){

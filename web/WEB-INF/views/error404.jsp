@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/errorPage.css">
     <script src="/resources/js/errorPage.js"></script>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>에러페이지</title>
 </head>
