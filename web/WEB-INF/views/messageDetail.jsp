@@ -5,6 +5,7 @@
          pageEncoding="UTF-8"%>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="/resources/js/jquery-3.4.1.min.js" ></script>
     <script src="/resources/js/messageDetail.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/messageDetail.css">

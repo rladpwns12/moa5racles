@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="/resources/js/messageSendDetail.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/messageDetail.css">
