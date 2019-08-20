@@ -11,6 +11,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script src="/resources/js/upload.js"></script>
+<meta name="viewport" content="width=device-width, user-scalable=no">
 <link rel="stylesheet" href="/resources/css/upload.css">
 
 <html>

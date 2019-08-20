@@ -31,7 +31,7 @@ public class AdminController {
 
         return mav;
     }
-    @RequestMapping(value = {"/history/list"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/report/info"}, method = RequestMethod.GET)
     public ModelAndView confirmHistory() {
         ModelAndView mav = new ModelAndView();
         mav.addObject("confirmWaitingList", hostConfirmService.searchHostConfirmList());

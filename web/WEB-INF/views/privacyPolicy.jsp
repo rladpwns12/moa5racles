@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" isELIgnored="false" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>개인정보 처리 방침</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/privacyPolicy.css"/>
     <script src="/resources/js/jquery-3.4.1.min.js"></script>

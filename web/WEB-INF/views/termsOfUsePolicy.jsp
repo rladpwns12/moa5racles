@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>이용약관</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="/resources/css/termsOfUsePolicy.css"/>
     <script src="/resources/js/termsOfUsePolicy.js"></script>
     <script src="/resources/js/jquery-3.4.1.min.js"></script>

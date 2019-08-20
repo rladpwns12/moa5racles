@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <script src="/resources/js/reportSend.js" ></script>
     <link rel="stylesheet" href="/resources/css/reportSend.css"></head>
