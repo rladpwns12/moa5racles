@@ -26,7 +26,7 @@
         <thead>
         <tr>
             <th scope="col">닉네임</th>
-            <th scope="col">신청날짜</th>
+            <th scope="col">신고날짜</th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +35,7 @@
         </c:if>
         <c:forEach var="vo" begin="0" end="${confirmWaitingList.size()}" step="1" items="${confirmWaitingList}">
             <tr onclick="location.href='/admin/report/info?userId=${vo.userId}'">
+<%--                추후 /admin/report/info?reprot-num=으로--%>
                 <td>${vo.nick}</td>
                 <td>${vo.applicationDate}<br>${vo.applicationTime}</td>
             </tr>
