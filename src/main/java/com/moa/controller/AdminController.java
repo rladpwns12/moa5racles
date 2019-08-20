@@ -84,7 +84,7 @@ public class AdminController {
         return mav;
     }
     @RequestMapping(value = "/report/reply", method = RequestMethod.POST)
-    public boolean replyReport(int reportId, String content){
+    public @ResponseBody boolean replyReport(int reportId, String content){
         System.out.println("reportId:"+reportId+", \ncontent"+content);
         Map<String,Object> replyInfo = new HashMap<String,Object>();
         replyInfo.put("reportId",reportId);

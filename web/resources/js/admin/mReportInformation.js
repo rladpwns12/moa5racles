@@ -4,7 +4,7 @@ $(document).ready(function () {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     var content = $('#replyContent').val();
-    console.log(content);
+
 
     if(content === replyContent || content === null || content === ''){
       alert("답변을 입력해주세요.");
@@ -15,6 +15,7 @@ $(document).ready(function () {
       $.ajax({
         url:"/admin/report/reply",
         type:"POST",
+
         dataType:"json",
         data :{reportId, content},
         beforeSend: function(xhr) {
@@ -33,7 +34,7 @@ $(document).ready(function () {
           }
         },
         error:function(error){
-          console.log(error);
+          console.log(error.responseText);
           alert("예기치 못한 오류가 발생하였습니다. 잠시 후 다시 등록해주세요.");
           return;
         }
