@@ -23,9 +23,11 @@ $(document).ready(function () {
     $("#my_storage_btn").on('click', function () {
         location.href = "/hostpage/mystorage";
     });
+    //-- start of detailInfo
     $(document).on('click', '.table_click', function (e) {
-        var id = e.target.id;
-
+        // var id = e.target.id;
+        var id = $(this).parent().attr("id");
+        console.log("id:"+id);
         $.ajax({
             type: "GET",
             url: "/hostpage/requestlist/info/" + id,
@@ -196,6 +198,7 @@ $(document).ready(function () {
             }
         });
     });
+    //-- end of detailInfo
 });
 
 
@@ -296,16 +299,16 @@ $.confirmYet = function (curPage) {
                     products = products.substring(0, 20);
                     products = products.concat('...');
                 }
-                let tr = $('<tr />').appendTo('.main_content>table>tbody');
+                let tr = $('<tr />',{id: result.list[i].articleNum,}).appendTo('.main_content>table>tbody');
                 let td1 = $('<td/>').appendTo(tr);
                 $('<img/>', {
                     src: "/resources/image/navbar/" + result.list[i].profileImg,
                     alt: "이미지 경로 오류"
                 }).appendTo(td1);
                 $('<td/>', {text: result.list[i].nick}).appendTo(tr);
-                $('<td/>', {text: result.list[i].startDate + " ~ " + result.list[i].endDate}).appendTo(tr);
-                $('<td/>', {class: 'table_click', id: result.list[i].articleNum, text: products}).appendTo(tr);
-                $('<td/>', {text: result.list[i].price}).appendTo(tr);
+                $('<td/>', {text: result.list[i].startDate + " ~ " + result.list[i].endDate,class: 'table_click'}).appendTo(tr);
+                $('<td/>', {class: 'table_click',  text: products}).appendTo(tr);
+                $('<td/>', {text: result.list[i].price,class: 'table_click'}).appendTo(tr);
                 let td6 = $('<td/>').appendTo(tr);
                 $('<span/>', {
                     id: "approve_btn",

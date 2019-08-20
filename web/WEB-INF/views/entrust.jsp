@@ -62,39 +62,37 @@
                     나가기
                 </button>
             </div>
-
             <form id="regForm" role="form" class="regForm">
-                <div class="content1" id="content1">
-                    <h2 class="head_1">맡기실 물건의 물품명과 개수를 입력해주세요.</h2>
-                    <table class='entrust_product_tb'>
-                        <thead>
-                        <tr class="table_row">
-                            <th class="table_head1">번호</th>
-                            <th class="table_head2">카테고리</th>
-                            <th class="table_head3">물건명</th>
-                            <th class="table_head4">물건 개수</th>
-                        </tr>
-                        </thead>
-                        <tr name='stuff'>
-                            <td class="table_data">1</td>
-                            <td class="table_data">
-                                <select class="category_list" name="productList[0].category">
-                                    <c:forEach var="category" items="${categoryList}" varStatus="cnt">
-                                        <option class="category_list" value="${category}">${category}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                            <td class="table_data"><input type="text" class="product_name"
-                                                          name="productList[0].product"></td>
-                            <td class="table_data"><input type="number" class="product_cnt"
-                                                          name="productList[0].productCnt" min=0 max=100 value=0></td>
-                        </tr>
-                        <tr name='stuff'>
-                            <td colspan="4"><i class="fas fa-plus-circle" name='add_row_btn'></i></td>
-                        </tr>
-                    </table>
-                </div>
-
+              <div class="content1" id="content1">
+                  <h2 class="head_1">맡기실 물건의 물품명과 개수를 입력해주세요.</h2>
+                  <table class='entrust_product_tb'>
+                      <thead>
+                      <tr class="table_row">
+                          <th class="table_head1">번호</th>
+                          <th class="table_head2">카테고리</th>
+                          <th class="table_head3">물건명</th>
+                          <th class="table_head4">물건 개수</th>
+                      </tr>
+                      </thead>
+                      <tr name='stuff'>
+                          <td class="table_data">1</td>
+                          <td class="table_data">
+                              <select class="category_list" name="productList[0].category">
+                                  <c:forEach var="category" items="${categoryList}" varStatus="cnt">
+                                      <option class="category_list" value="${category}">${category}</option>
+                                  </c:forEach>
+                              </select>
+                          </td>
+                          <td class="table_data"><input type="text" class="product_name"
+                                                        name="productList[0].product"></td>
+                          <td class="table_data"><input type="number" class="product_cnt"
+                                                        name="productList[0].productCnt" min=0 max=100 value=0></td>
+                      </tr>
+                      <tr name='stuff'>
+                          <td colspan="4"><i class="fas fa-plus-circle" name='add_row_btn'></i></td>
+                      </tr>
+                  </table>
+              </div>
 				<div class="content2" id="content2" style="display: none;">
 					<div class="content2_header"> 예상 5호 박스 사용 개수를 입력해주세요.
 						<i class="far fa-question-circle"><span><img src="${contextPath}/image/5호박스.png"/></span></i>
@@ -114,35 +112,33 @@
 						<input type="hidden" id="thirdMultiple" value="${multiplePriceList[2]}">
 					</div>
 				</div>
-
-                <div class="content3" id="content3" style="display: none;">
-                    <div class="date_class">
-                        <h2 class="head_3">맡길 기간을 입력해주세요.</h2>
-                        <input type="date" id="start_datepicker" name="startDate" placeholder="시작 일자">
-                        <input type="date" id="end_datepicker" name="endDate" placeholder="종료 일자">
-                    </div>
-                    <h2 class="head_3">흥정을 하고싶다면 직접 가격을 입력해주세요.</h2>
-                    <div class="price_class">
-                        <div class="price_e1">
-                            <input type="radio" class="radio_btn" id="expected_price" name="price_radio"
-                                   value="1" checked="checked"/>
-                            <label for="expected_price"> 측정 가격 </label>
-                            <input type="text" id="measured" class="i_price" name="price.measuredPrice" value="0" readonly numberOnly="true">
-                            <input type="hidden" id="day" value="${detailPriceList[0]}">
-                            <input type="hidden" id="week" value="${detailPriceList[1]}">
-                            <input type="hidden" id="month" value="${detailPriceList[2]}">
-                            <input type="hidden" id="halfYeaer" value="${detailPriceList[3]}">
-                            <input type="hidden" id="year" value="${detailPriceList[4]}">
-                        </div>
-                        <div class="price_e2">
-                            <input type="radio" class="radio_btn" id="bargain_price" name="price_radio"
-                                   value="0"/>
-                            <label for="bargain_price"> 흥정 가격 </label>
-                            <input type="text" id="bargain" class="i_price" name="price.bargainPrice" value="0" disabled numberOnly="true">
-                        </div>
-                    </div>
-                </div>
-
+          <div class="content3" id="content3" style="display: none;">
+              <div class="date_class">
+                  <h2 class="head_3">맡길 기간을 입력해주세요.</h2>
+                  <input type="date" id="start_datepicker" name="startDate" placeholder="시작 일자">
+                  <input type="date" id="end_datepicker" name="endDate" placeholder="종료 일자">
+              </div>
+              <h2 class="head_3">흥정을 하고싶다면 직접 가격을 입력해주세요.</h2>
+              <div class="price_class">
+                  <div class="price_e1">
+                      <input type="radio" class="radio_btn" id="expected_price" name="price_radio"
+                             value="1" checked="checked"/>
+                      <label for="expected_price"> 측정 가격 </label>
+                      <input type="text" id="measured" class="i_price" name="price.measuredPrice" value="0" readonly numberOnly="true">
+                      <input type="hidden" id="day" value="${detailPriceList[0]}">
+                      <input type="hidden" id="week" value="${detailPriceList[1]}">
+                      <input type="hidden" id="month" value="${detailPriceList[2]}">
+                      <input type="hidden" id="halfYeaer" value="${detailPriceList[3]}">
+                      <input type="hidden" id="year" value="${detailPriceList[4]}">
+                  </div>
+                  <div class="price_e2">
+                      <input type="radio" class="radio_btn" id="bargain_price" name="price_radio"
+                             value="0"/>
+                      <label for="bargain_price"> 흥정 가격 </label>
+                      <input type="text" id="bargain" class="i_price" name="price.bargainPrice" value="0" disabled numberOnly="true">
+                  </div>
+              </div>
+          </div>
 				<div class="content4" id="content4" style="display: none;">
 					<h2 class="head_5">원하는 거래방식을 선택해주세요</h2>
 					<div class="deals">
@@ -161,13 +157,9 @@
 					<textarea id="post_contents" class="post_contents" name="content" rows="12" cols="60"
 							  placeholder="맡길 물건에 대한 간단한 설명을 입력해주세요" maxlength="1000"></textarea>
 				</div>
-
 				<div class="content5" id="content5" style="display: none;">
-
 					<jsp:include page="upload.jsp"/>
-
 				</div>
-
 				<div class="content6" id="content6" style="display: none;">
 					<h2 class="head_6">아래 내용을 확인하시고 등록하기 버튼을 눌러주세요</h2>
 					<h3 class="head_6_1">주의하세요!</h3>
@@ -181,13 +173,11 @@
 					<button type="submit" class="register_btn">물품 보관 요청하기</button>
 				</div>
 			</form>
-
 			<div class="content7" id="content7" style="display: none;">
 				<h2 class="head_7"></h2>
 				<h4 class="head_7_1">물건 맡기기 신청을 완료하였습니다.<br> 호스트가 확인하는대로 알림을 드리겠습니다</h4>
 				<button class="finished" onClick="finished()">확인</button>
 			</div>
-
 			<div id="bar">
 				<div id="percent" style="height: 40px; width: 0%">&nbsp;&nbsp;&nbsp;0%</div>
 			</div>
@@ -197,5 +187,4 @@
 <script src="/resources/js/entrust.js"></script>
 <%@ include file="footer.jsp" %>
 </body>
-
 </html>

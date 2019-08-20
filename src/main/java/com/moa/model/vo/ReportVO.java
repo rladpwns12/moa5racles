@@ -13,15 +13,14 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class ReportVO {
     @NotBlank
-    private Long userId;
+    private long userId;
     @NotBlank
     @Size(min = 0, max = 5)
     private int targetType;
     @NotBlank
-    private Long targetId;
+    private long targetId;
     @NotBlank
     @Size(min = 1, max = 33)
     private String targetUserNick;
@@ -29,6 +28,5 @@ public class ReportVO {
     @Size(min = 1, max = 1000)
     private String content;
     private Date reportTime;
-    @NotBlank
     private boolean reportState;
 }

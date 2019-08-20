@@ -164,8 +164,11 @@
                                                     <input type="text" id="address" class="input--style-4" name="address"
                                                            value="${address.baseAddress}" disabled readonly>
                                                 </div>
-                                                <div class="long search_address_btn">
-                                                    <input type="text" id="detailAddress" class="input100 input--style-4"
+                                            </div>
+
+                                            <div class="input-group">
+                                                <div class="search_address_btn">
+                                                    <input type="text" id="detailAddress" class="input--style-4 input100 detailAddress"
                                                            name="detailAddress" value="${address.detailAddress}">
                                                     <span class="move long focus-input100"></span>
                                                 </div>
@@ -174,8 +177,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </form>
                                 <div class="p-t-15">
                                     <button id="submit_btn"class="btn btn--radius-2 btn--purple" type="button">수정완료</button>

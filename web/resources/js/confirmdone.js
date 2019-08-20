@@ -1,5 +1,4 @@
-var token = $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
+
 $(document).ready(function() {
 	$.confirmDone(1);
 	
@@ -26,29 +25,44 @@ function getContextPath(){
 	   return contextPath;
 	}
 
-function cancle_btn(){
+$.deleteBtn =function (state){
+	var articleNum = event.target.parentElement.parentElement.id;
+
+	if(state != '거래완료'){
+		alert('거래완료된 요청만 삭제할 수 있습니다.');
+		return;
+	}
 	if(confirm("정말로 삭제하시겠습니까?")){
-		var aNum = event.target.className;
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+
 		$.ajax({
-			url:getContextPath() + "/moa/confirmyetdel",
+			url:"/hostpage/confirmdone/delete",
 			type:"POST",
-			dataType:"text",
-			data:{
-				articleNum:aNum,
-				state:'delete'
+			dataType:"json",
+			data:{articleNum,state},
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("AJAX", true);
+				xhr.setRequestHeader(header, token);
 			},
-			success:function(data){
-				alert("삭제가 완료되었습니다.");
+			success:function(res){
+				if(res === true){
+					alert("삭제가 완료되었습니다.");
+					$('.main_content>table>tbody>#'+articleNum).remove('tr');
+					return;
+				}else{
+					alert("삭제에 실패하였습니다. 잠시후 다시 이용해주세요.");
+				}
+
 			},
 			error:function(error){
-				alert("삭제를 실패하였습니다.");
+				alert("삭제 도중 오류가 발생하였습니다. 잠시후 다시 이용해주세요.");
 			}
 		});
-		//$('.main_content>table>tbody>tr:nth-child('+event.target.className+')').remove('tr');
 	}
 	else{
 		alert("승인이 취소되었습니다.");
-		return false;
+		return;
 	}
 };
 $.confirmDone = function(curPage){
@@ -61,9 +75,6 @@ $.confirmDone = function(curPage){
 			curPage:curPage
 		},
 		success:function(result){
-			//test console -- 추후 삭제
-
-
 			//리스트
 			$('.main_content>table>tbody>tr').remove('tr');
 			for(let i = result.pagination.curListCnt-1; i >= 0; i--){
@@ -82,18 +93,18 @@ $.confirmDone = function(curPage){
 					products = products.substring(0,20);
 					products = products.concat('...');
 				}
-				let tr = $('<tr/>').appendTo('.main_content>table>tbody');
+				let tr = $('<tr/>',{id:result.list[i].articleNum}).appendTo('.main_content>table>tbody');
 				let td1 = $('<td/>').appendTo(tr);
 				$('<img/>',{src :"/resources/image/navbar/"
 						+result.list[i].profileImg ,alt:"이미지 경로 오류"}).appendTo(td1);
 				$('<td/>',{text:result.list[i].nick}).appendTo(tr);
-				$('<td/>',{text:result.list[i].startDate +" ~ "+result.list[i].endDate}).appendTo(tr);
-				$('<td/>',{text: products,class:'table_click',id:result.list[i].articleNum}).appendTo(tr);
-				$('<td/>',{text:result.list[i].price}).appendTo(tr);
-				$('<td/>',{text:result.list[i].state}).appendTo(tr);
+				$('<td/>',{text:result.list[i].startDate +" ~ "+result.list[i].endDate,class:'table_click'}).appendTo(tr);
+				$('<td/>',{text: products,class:'table_click'}).appendTo(tr);
+				$('<td/>',{text:result.list[i].price,class:'table_click'}).appendTo(tr);
+				$('<td/>',{text:result.list[i].state,class:'table_click'}).appendTo(tr);
 				let td7 = $('<td/>').appendTo(tr);
 
-				$('<button/>',{text:"삭제 ", class:result.list[i].article, onclick:'cancle_btn()'}).appendTo(td7);
+				$('<button/>',{text:"삭제 ", class:result.list[i].article, onclick:'$.deleteBtn("'+result.list[i].state+'"'+')'}).appendTo(td7);
 			}
 
 			//페이징처리
@@ -146,8 +157,8 @@ $.confirmDone = function(curPage){
 };
 
 $(document).on('click','.table_click',function(e){
-	var id = e.target.id;
-
+	// var id = e.target.id;
+	var id = $(this).parent().attr("id");
 	$.ajax({
 		type: "GET",
 		url: "/hostpage/requestlist/info/" + id,
