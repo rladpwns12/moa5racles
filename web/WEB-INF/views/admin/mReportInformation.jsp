@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="/resources/js/admin/mApproveInformation.js"></script>
+    <script src="/resources/js/admin/mReportInformation.js"></script>
     <link rel="stylesheet" href="/resources/css/admin/mApproveInformation.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
@@ -43,12 +43,20 @@
         </div>
         <div class="form-group">
             <label for="content">신고 내역</label>
-            <textarea class="form-control" name="content" id="content" rows="10">${reportInfo.content}</textarea>
+            <textarea class="form-control" name="content" id="content" rows="10" readonly disabled>${reportInfo.content}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="content">답변 내역</label>
+            <textarea class="form-control" name="content" id="replyContent" rows="10">
+[ 신고 답변 내역 ]
+안녕하세요, MOA 신고센터의 상담사 OOO입니다.
+
+</textarea>
         </div>
     </fieldset>
     <div class="btn-position">
-        <button type="submit" name="btnType" value="reject" class="btn btn-primary">취소하기</button>
-        <button  type="submit" name="btnType" value="approve" class="btn btn-primary">답변하기</button>
+        <button onclick="location.href='/admin/report/list'" type="submit" name="btnType" value="reject" class="btn btn-primary">취소하기</button>
+        <button onclick="$.reply(${reportInfo.reportId})" type="submit" name="btnType" value="approve" class="btn btn-primary">답변하기</button>
     </div>
 </div>
 
