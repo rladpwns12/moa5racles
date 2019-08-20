@@ -24,31 +24,31 @@
     <button type="button" onclick="location.href='/admin/report/list'" class="btn btn-primary btn-sm top-btn"><i class="fas fa-angle-left"></i> 목록으로</button>
     <h2>신고 내역 상세보기</h2>
     <fieldset>
-        <legend>${requestInfo.NICK}의 신고 내용</legend>
+        <legend>${reportInfo.userNick}의 신고 내용</legend>
         <div class="form-group">
             <label for="reportDate">작성 일자</label>
-            <input readonly disabled  type="text" name="reportDate"class="form-control input-my-width" id="reportDate" aria-describedby="emailHelp" value="${requestInfo.REPORTDATE}">
+            <input readonly disabled  type="text" name="reportDate"class="form-control input-my-width" id="reportDate" aria-describedby="emailHelp" value="${reportInfo.reportDate} ${reportInfo.reportTime}">
         </div>
         <div class="form-group">
             <label for="targetEmail">신고 대상</label>
-            <input readonly disabled  name="targetEmail"type="text" class="form-control" id="targetEmail" aria-describedby="emailHelp" value="${requestInfo.TARGETEMAIL}">
+            <input readonly disabled  name="targetEmail"type="text" class="form-control" id="targetEmail" aria-describedby="emailHelp" value="${reportInfo.targetUserNick}">
         </div>
         <div class="form-group">
             <label for="targetType">신고 유형</label>
-            <input readonly disabled  type="text" name="targetType"class="form-control input-my-width" id="targetType" aria-describedby="emailHelp" value="${requestInfo.TARGETTYPE}">
+            <input readonly disabled  type="text" name="targetType"class="form-control input-my-width" id="targetType" aria-describedby="emailHelp" value="${reportInfo.targetType}">
         </div>
         <div class="form-group">
             <label for="phoneNumber">휴대폰번호</label>
-            <input readonly disabled type="text" name="phoneNumber"class="form-control" id="phoneNumber" aria-describedby="emailHelp" value="${requestInfo.PHONENUMBER}">
+            <input readonly disabled type="text" name="phoneNumber"class="form-control" id="phoneNumber" aria-describedby="emailHelp" value="${reportInfo.phoneNumber}">
         </div>
         <div class="form-group">
             <label for="content">신고 내역</label>
-            <textarea class="form-control" name="content" id="content" rows="10" placeholder="신고 내용입니다."></textarea>
+            <textarea class="form-control" name="content" id="content" rows="10">${reportInfo.content}</textarea>
         </div>
     </fieldset>
     <div class="btn-position">
-        <button onclick="refuse(${requestInfo.USERID},'report')" type="submit" name="btnType" value="reject" class="btn btn-primary">취소하기</button>
-        <button onclick="approve(${requestInfo.USERID},'report')" type="submit" name="btnType" value="approve" class="btn btn-primary">답변하기</button>
+        <button type="submit" name="btnType" value="reject" class="btn btn-primary">취소하기</button>
+        <button  type="submit" name="btnType" value="approve" class="btn btn-primary">답변하기</button>
     </div>
 </div>
 
