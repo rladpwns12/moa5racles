@@ -2,6 +2,7 @@ package com.moa.controller;
 
 import com.moa.model.service.AdminReportSearchService;
 import com.moa.model.service.HostConfirmService;
+import com.moa.model.vo.ReportAdminVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -71,12 +72,11 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/report/info", method = RequestMethod.GET)
-    public ModelAndView reportInfo(@RequestParam("userId") int userId,
-                                    @RequestParam("storageType")String storageType) {
+    public ModelAndView reportInfo(@RequestParam("reportId") int reportId) {
         ModelAndView mav = new ModelAndView();
-        Map<String, Object> info = new HashMap<>();
-        info = hostConfirmService.searchRequestInfo(userId, storageType);
-        mav.addObject("requestInfo", info);
+
+        ReportAdminVO reportAdminVO = adminReportSearchService.reportInfo(reportId);
+        mav.addObject("reportInfo", reportAdminVO);
         mav.setViewName("/admin/mReportInformation");
         return mav;
     }
