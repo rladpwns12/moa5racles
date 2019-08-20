@@ -7,6 +7,7 @@ import com.moa.model.service.StoreBoardSearchService;
 import com.moa.model.service.StoreBoardService;
 import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.DetailOptionVO;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,11 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/storeboard")
 @Controller
+@Log4j
 public class StoreBoardController {
     @Autowired
     private StoreBoardService storeBoardService;
@@ -89,7 +95,10 @@ public class StoreBoardController {
     }
 
     @RequestMapping(value="/{articleNum}/delete",method = RequestMethod.POST)
-    public @ResponseBody boolean removeStoreBoard(@PathVariable("articleNum") int articleNum){
+    public @ResponseBody boolean removeStoreBoard(@PathVariable("articleNum") int articleNum, @RequestBody String nick, Authentication auth){
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        if(!nick.equals(customUser.getLoginVO().getNick()))
+            return false;
         boolean flag = storeBoardService.deleteStorage(articleNum);
         return flag;
     }

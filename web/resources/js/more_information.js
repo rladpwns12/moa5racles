@@ -34,7 +34,7 @@ $.replyReview = function () {
         url: "/review/" + articleNum,
         contentType: 'application/json; charset=utf-8',
         data: jsonData,
-        // dataType: 'json',
+        dataType: 'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);

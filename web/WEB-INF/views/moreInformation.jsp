@@ -17,6 +17,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+    <sec:csrfMetaTags/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
@@ -31,18 +32,32 @@
     <script src="/resources/js/lightslider.js"></script>
     <script>
         $(document).ready(function() {
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
             $('#delete_btn').click(function(){
                 var flag=confirm("정말로 삭제하시겠습니까?");
                 if(flag){
-                    $.post('/storeBoard/${storeBoardVO.articleNum}/delete',function (data) {
-                        if(data==true) {
-                            alert("삭제가 완료되었습니다.");
-                            location.href="/main";
+                    $.ajax({
+                        type:'POST',
+                        url:'/storeboard/${storeBoardVO.articleNum}/delete',
+                        data : '${hostReputationVO.nick}',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType:'json',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("AJAX", true);
+                            xhr.setRequestHeader(header, token);
+                        },
+                        success:function (data) {
+                            if(data==true) {
+                                alert("삭제가 완료되었습니다.");
+                                location.href = "/main";
+                            }
+                            else
+                                alert("삭제에 실패하였습니다.");
+                        },
+                        error:function () {
+                            alert('통신에 장애가 생겼습니다, 잠시뒤 시도해주세요.');
                         }
-                        else
-                            alert("삭제에 실패하였습니다.");
-                    }).fail(function(){
-                        alert('통신에 장애가 생겼습니다, 잠시뒤 시도해주세요.');
                     });
                 }
             });
@@ -68,7 +83,6 @@
         });
     </script>
     <title>상세보기</title>
-    <sec:csrfMetaTags/>y
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
