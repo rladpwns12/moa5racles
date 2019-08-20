@@ -7,6 +7,8 @@ $(document).ready(function(){
            return;
        }
 
+       if(!confirm('정말로 신고하시겠습니까?')) return;
+
        var userId = $('#userId').val();
        var content = $('#content').val();
        var targetUserNick = $('#targetNick').val();

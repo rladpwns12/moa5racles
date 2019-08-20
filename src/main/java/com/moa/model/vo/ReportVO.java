@@ -15,12 +15,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class ReportVO {
     @NotBlank
-    private Long userId;
+    private long userId;
     @NotBlank
     @Size(min = 0, max = 5)
     private int targetType;
     @NotBlank
-    private Long targetId;
+    private long targetId;
     @NotBlank
     @Size(min = 1, max = 33)
     private String targetUserNick;

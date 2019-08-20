@@ -1,16 +1,17 @@
 package com.moa.controller;
 
 
+import com.moa.model.service.MakeReportService;
 import com.moa.model.vo.ReportVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Iterator;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/report")
 public class ReportContoller {
+    @Autowired
+    private MakeReportService makeReportService;
 
     @RequestMapping(value = "/send", method = RequestMethod.GET)
     public String reportPopup(){
@@ -21,8 +22,6 @@ public class ReportContoller {
     @RequestMapping(value = "/send", method = RequestMethod.POST)
     @ResponseBody
     public boolean sendReport(@RequestBody ReportVO reportVO){
-        System.out.println("reportVO : " + reportVO);
-
-        return true;
+        return makeReportService.makeReport(reportVO);
     }
 }
