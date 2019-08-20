@@ -14,28 +14,12 @@ import java.util.Map;
 public class AdminController {
     @Autowired
     private HostConfirmService hostConfirmService;
-
+    //-- start of hostapprove
     @RequestMapping(value = {"","/hostapprove/list"}, method = RequestMethod.GET)
     public ModelAndView confirmList() {
         ModelAndView mav = new ModelAndView();
         mav.addObject("confirmWaitingList", hostConfirmService.searchHostConfirmList());
         mav.setViewName("/admin/mHostApprove");
-
-        return mav;
-    }
-    @RequestMapping(value = {"/report/list"}, method = RequestMethod.GET)
-    public ModelAndView confirmReport() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("confirmWaitingList", hostConfirmService.searchHostConfirmList());
-        mav.setViewName("/admin/mReport");
-
-        return mav;
-    }
-    @RequestMapping(value = {"/report/info"}, method = RequestMethod.GET)
-    public ModelAndView confirmHistory() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("confirmWaitingList", hostConfirmService.searchHostConfirmList());
-        mav.setViewName("/admin/mReportInformation");
 
         return mav;
     }
@@ -54,18 +38,6 @@ public class AdminController {
 
         return mav;
     }
-    @RequestMapping(value = "/report/info", method = RequestMethod.GET)
-    public ModelAndView reportInfo(@RequestParam("userId") int userId,
-                                    @RequestParam("storageType")String storageType) {
-        ModelAndView mav = new ModelAndView();
-        Map<String, Object> info = new HashMap<>();
-        info = hostConfirmService.searchRequestInfo(userId, storageType);
-        mav.addObject("requestInfo", info);
-        mav.setViewName("/admin/mReportInformation");
-        return mav;
-    }
-
-
 
     @RequestMapping(value = "/hostapprove/confirm")
     @ResponseBody
@@ -82,5 +54,41 @@ public class AdminController {
         System.out.println(userId+", " + context);
         return hostConfirmService.processRefuse(userId, context);
     }
+    //-- end of hostapprove
+
+    //-- start of report
+    @RequestMapping(value = {"/report/list"}, method = RequestMethod.GET)
+    public ModelAndView confirmReport() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("confirmWaitingList", hostConfirmService.searchHostConfirmList());
+        mav.setViewName("/admin/mReport");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/report/info", method = RequestMethod.GET)
+    public ModelAndView reportInfo(@RequestParam("userId") int userId,
+                                    @RequestParam("storageType")String storageType) {
+        ModelAndView mav = new ModelAndView();
+        Map<String, Object> info = new HashMap<>();
+        info = hostConfirmService.searchRequestInfo(userId, storageType);
+        mav.addObject("requestInfo", info);
+        mav.setViewName("/admin/mReportInformation");
+        return mav;
+    }
+    //-- end of report
+
+    @RequestMapping(value = {"/history/list"}, method = RequestMethod.GET)
+    public ModelAndView confirmHistory() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("confirmWaitingList", hostConfirmService.searchHostConfirmList());
+        mav.setViewName("/admin/mReportInformation");
+
+        return mav;
+    }
+
+
+
+
 
 }
