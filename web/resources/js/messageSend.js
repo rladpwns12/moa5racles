@@ -24,7 +24,6 @@ $(document).ready(function () {
             $.ajax({
                 url:"/mypage/message/send/delete",
                 type:"POST",
-                contentType:"application/json",
                 dataType:"json",
                 data :JSON.stringify(checkArray),
                 beforeSend: function(xhr) {

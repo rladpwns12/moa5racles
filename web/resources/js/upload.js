@@ -41,7 +41,7 @@ $(document).ready(function () {
             str += "><div>";
             str += "<span>" + obj.fileName + "</span>";
             if(obj.typeFlag == 'user'){
-                var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + thumbnail
+                var fileCallPath = encodeURIComponent(obj.uploadPath + "/"
                     + obj.uuid +"_"+obj.fileName);
                 //이미지 파일 원본 보여주기
                 var imgSrc=$('.profile_image')[0].lastElementChild;
@@ -50,21 +50,21 @@ $(document).ready(function () {
             }
             else if(obj.fileType) {
                 //GET 방식 첨부파일 이름 사용시 공백, 한글이름이 문제 되므로 encodeURIComponent() 이용
-                var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + thumbnail
+                var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + thumbnail
                     + obj.uuid +"_"+obj.fileName);
 
                 //이미지 파일 원본 보여주기
-                str += "<button type='button' data-file='"+fileCallPath +"\' data-type='image'";
+                str += "<button type='button' data-file='"+fileCallPath +"/' data-type='image'";
                 str += "class='btn btn-warning btn-circle'>" ;
                 str += "<i class='fa fa-times'></i></button><br>";
                 str += "<img src='/display?fileName=/" + fileCallPath + "'>";
                 str += "</div></li>";
             }else{
-                var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + obj.uuid +"_"+obj.fileName);
+                var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid +"_"+obj.fileName);
                 var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
 
                 str += "<button type='button' class='btn btn-warning btn-circle' " +
-                    "data-file='"+fileCallPath +"\' data-type='file'>" ;
+                    "data-file='"+fileCallPath +"/' data-type='file'>" ;
                 str +="<i class='fa fa-times'></i></button><br>";
                 str += "<img src='/" + attachImg + "'></a>";
                 str += "</div></li>";
@@ -98,7 +98,7 @@ $(document).ready(function () {
                 xhr.setRequestHeader(header, token);
             },
             success:function (result) {
-                 $.showUploadedFile(result); // 첨부한 파일 목록 ul에 추가
+                $.showUploadedFile(result); // 첨부한 파일 목록 ul에 추가
                 // $(".uploadDiv").html(cloneObj.html()); // 첨부파일 재 설정
             },
             error:function(request,status,error){

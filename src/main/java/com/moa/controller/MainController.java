@@ -21,22 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 public class MainController {
 
     @RequestMapping(value = {"/main", ""})
-    public String main(HttpServletRequest request) {
-        Device device = DeviceUtils.getCurrentDevice(request);
-
-        if (device.isNormal()) {
-            return "main";
-        } else if (device.isTablet() || device.isMobile()) {
-            return "admin/login";
-        }
+    public String main() {
         return "main";
-    }
-
-
-    @RequestMapping(value = "test")
-    public String test(){
-
-        return "test";
     }
 
     @RequestMapping(value = {"admin/hostapprove/list","admin"})
@@ -44,6 +30,7 @@ public class MainController {
 
         return "mHostApprove";
     }
+
     @RequestMapping(value = "admin/hostapprove/info")
     public String mobileApproveInformation(){
 

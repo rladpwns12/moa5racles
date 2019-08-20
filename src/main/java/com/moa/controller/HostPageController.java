@@ -1,10 +1,7 @@
 package com.moa.controller;
 
 import com.moa.message.TransactionStateMessaage;
-import com.moa.model.service.LuggageReceiveRecordServiceImpl;
-import com.moa.model.service.LuggageRequestApproveServiceImpl;
-import com.moa.model.service.LuggageRequestInfoService;
-import com.moa.model.service.MyStorageServiceImpl;
+import com.moa.model.service.*;
 import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.ReadStoreRequestVO;
 import com.moa.model.vo.SimpleHostRequestVO;
@@ -32,6 +29,8 @@ public class HostPageController {
     private LuggageRequestInfoService luggageRequestInfoService;
     @Autowired
     private MyStorageServiceImpl myStorageService;
+    @Autowired
+    private LuggageRequestUpdateServiceImpl luggageRequestUpdateService;
 
     @RequestMapping("")
     public String hostPage(){
@@ -181,4 +180,18 @@ public class HostPageController {
         return result;
     }
 
+    @RequestMapping(value = "/confirmdone/delete",method = RequestMethod.POST)
+    public @ResponseBody boolean deleteRequest(int articleNum,
+                                               String state){
+        System.out.println("articleNum:"+articleNum+",state:"+state);
+        boolean result = false;
+        if(state == null || state.equals("")){
+            return result;
+        }
+        if(!state.equals("거래완료")){
+            return result;
+        }
+        result = luggageRequestUpdateService.deleteRequest(articleNum);
+        return result;
+    }
 }

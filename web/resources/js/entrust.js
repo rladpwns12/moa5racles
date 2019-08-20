@@ -59,6 +59,18 @@ $(document).ready(function () {
     })
 });
 
+$(document).ready(function () {
+    $("input:radio[name=price_radio]").click(function () {
+        if ($("input[name=price_radio]:checked").val() == "1") {
+            $('#measured').attr("disabled", false);
+            $('#bargain').attr("disabled", true);
+        } else {
+            $('#measured').attr("disabled", true);
+            $('#bargain').attr("disabled", false);
+        }
+    });
+});
+
 function prevForm() {
     var elem = document.getElementById("percent");
     switch (num) {
