@@ -16,8 +16,21 @@
 <link rel="stylesheet" href="/resources/css/hostSearch.css">
 	<sec:csrfMetaTags/>
 <script>
+	var markers=[];
+	var infowindows=[];
+	function removeMarkerInfo() {
+		for ( var i = 0; i < markers.length; i++ ) {
+			markers[i].setMap(null);
+		}
+		for ( var i = 0; i < infowindows.length; i++ ) {
+			infowindows[i].close();
+		}
+		markers = [];
+		infowindows=[];
+	}
 	function searchBtn() 			//검색 버튼 클릭시
 	{
+		removeMarkerInfo();
 		let address=$(".search_input").val();	//검색 키워드
 		if(address ==""){
 			alert("검색어를 입력해주세요");
@@ -52,17 +65,17 @@
 					map: map,
 					position: coords
 				});
+				markers.push(marker);
 			}
 			map.setCenter(coords);
 			search(lan,log);
 
 		});
 	}
+
+
 	function search(lan,log){//검색 함수
-
 		let catAry = new Array();
-		let catAry2 = ["1","2"];
-
 		let i = 0;
 		for(let iv=1 ; iv<11;iv++) { 				//카테고리 체크
 			if($('#ct'+iv).prop('checked'))
@@ -82,7 +95,6 @@
 			longitude:log
 		}
 		$('#selection_content_id1').empty();
-		//요주의!!!!
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 		$.ajax("storeboard/Search",{
@@ -124,11 +136,43 @@
 					$('<br>').appendTo(div);
 					$('<i/>',{class:'fas fa-user',style:'color: #423257;'}).appendTo(div);
 					$('<span/>',{id:'word',text:" "+data[i].nickName}).appendTo(div);
-					positions[i] ={ title:'카카오',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
-				}
+					//positions[i] ={ title:data[i].nickName,latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
+					positions ={ title:data[i].nickName,latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
+					var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+					// 마커 이미지의 이미지 크기 입니다
+					var imageSize = new kakao.maps.Size(24, 35);
+					// 마커 이미지를 생성합니다
+					var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+					// 마커를 생성합니다
+					var marker = new kakao.maps.Marker({
+						map: map, // 마커를 표시할 지도
+						position: positions.latlng, // 마커를 표시할 위치
+						title : positions.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						image : markerImage // 마커 이미지
+					});
+					markers.push(marker);
 
+					// 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+					var iwContent = '<div style="padding:5px;">'+data[i].nickName+'</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+					// 인포윈도우를 생성합니다
+					var infowindow = new kakao.maps.InfoWindow({
+						content : iwContent
+					});
+					infowindows.push(infowindow);
+					// 마커에 마우스오버 이벤트를 등록합니다
+					kakao.maps.event.addListener(marker, 'mouseover', function() {
+						// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+						infowindow.open(map, markers[i+1]);
+					});
+					// 마커에 마우스아웃 이벤트를 등록합니다
+					kakao.maps.event.addListener(marker, 'mouseout', function() {
+						// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+						infowindow.close();
+					});
+				}
 				// 마커 이미지의 이미지 주소입니다
-				var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+				/*var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 				for (var i = 0; i < positions.length; i ++) {
 					// 마커 이미지의 이미지 크기 입니다
 					var imageSize = new kakao.maps.Size(24, 35);
@@ -141,12 +185,34 @@
 						title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 						image : markerImage // 마커 이미지
 					});
-				}
+					markers.push(marker);
+
+					// 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+					var iwContent = '<div style="padding:5px;"></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+					// 인포윈도우를 생성합니다
+					var infowindow = new kakao.maps.InfoWindow({
+						content : iwContent
+					});
+					infowindows.push(infowindow);
+					// 마커에 마우스오버 이벤트를 등록합니다
+					kakao.maps.event.addListener(marker, 'mouseover', function() {
+						// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+						infowindow.open(map, marker);
+					});
+					// 마커에 마우스아웃 이벤트를 등록합니다
+					kakao.maps.event.addListener(marker, 'mouseout', function() {
+						// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+						infowindow.close();
+					});
+				}*/
+
 			}
 			else{
 				alert("지도 오류가 발생했습니다.");
 			}
 		});
+		console.log(markers);
 	}
 
 function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
@@ -248,7 +314,7 @@ $(document).ready(function() {			//실행시
 	         lon = position.coords.longitude; // 경도
 
 	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-	            message = '<div style="padding:5px;">현재 위치입니다</div>'; // 인포윈도우에 표시될 내용입니다
+	            message = '<div style="padding:5px; border-radius: 4px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
 	        // 마커와 인포윈도우를 표시합니다
 	        displayMarker(locPosition, message);
 
@@ -268,6 +334,7 @@ $(document).ready(function() {			//실행시
 	        map: map,
 	        position: locPosition
 	    });
+	    markers.push(marker);
 	    var iwContent = message, // 인포윈도우에 표시할 내용
 	        iwRemoveable = true;
 	    // 인포윈도우를 생성합니다
@@ -275,10 +342,12 @@ $(document).ready(function() {			//실행시
 	        content : iwContent,
 	        removable : iwRemoveable
 	    });
+	    infowindows.push(infowindow);
 	    // 인포윈도우를 마커위에 표시합니다
 	    infowindow.open(map, marker);
 	    // 지도 중심좌표를 접속위치로 변경합니다
 	    map.setCenter(locPosition);
+
 	}
 	search(37.484224, 126.955759);
 	//요주의!!!!!!!
@@ -293,6 +362,11 @@ $(document).ready(function() {			//실행시
 
 
 });
+
+
+
+
+
 window.onload = function(){
 
 	  crear_select();
