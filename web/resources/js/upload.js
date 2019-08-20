@@ -28,6 +28,11 @@ $(document).ready(function () {
         return true;
     }
 
+    function myFunction() {
+        var str='/resources/image/navbar/profile.png';
+        $(imgSrc).attr("src", str);
+    }
+
     //업로드한 완료한 파일 화면에 추가
     $.showUploadedFile = function(uploadedResultArr){
         if(!uploadedResultArr || uploadedResultArr.length == 0)
@@ -43,10 +48,15 @@ $(document).ready(function () {
             if(obj.typeFlag == 'user'){
                 var fileCallPath = encodeURIComponent(obj.uploadPath + "/"
                     + obj.uuid +"_"+obj.fileName);
-                //이미지 파일 원본 보여주기
-                var imgSrc=$('.profile_image')[0].lastElementChild;
-                str = "/display?fileName=/" + fileCallPath;
-                $(imgSrc).attr("src", str);
+                fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
+
+                var list= document.getElementsByClassName("profile_image");
+                for (var i = 0; i < list.length; i++) {
+                    var imgSrc=list[i].lastElementChild;
+                    var str = "/display?fileName=/" + fileCallPath;
+                    $(imgSrc).attr("src", str);
+                    imgSrc.addEventListener("error", myFunction);
+                }
             }
             else if(obj.fileType) {
                 //GET 방식 첨부파일 이름 사용시 공백, 한글이름이 문제 되므로 encodeURIComponent() 이용
@@ -113,7 +123,6 @@ $(document).ready(function () {
         var type = $(this).data("type");
         var targetLi = $(this).closest("li");
 
-        console.log(targetFile);
 
         $.ajax({
             url: '/deleteFile',

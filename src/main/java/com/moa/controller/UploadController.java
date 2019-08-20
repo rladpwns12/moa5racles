@@ -99,6 +99,7 @@ public class UploadController {
                 multipartFile.transferTo(saveFile); // 업로드되는 파일을 간단히 저장하는 방법
 
                 attachFileVO.setUuid(uuid.toString());
+                uploadFolderPath = uploadFolderPath.replaceAll("[\\\\]","/");
                 attachFileVO.setUploadPath(uploadFolderPath);
 
                 //check Image
@@ -120,6 +121,7 @@ public class UploadController {
         if(typeFlag.equals(AttachVOFactory.USER)){
             if(!attachService.insertAttach(list))
                 return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            customUser.getLoginVO().setProfile(list.get(0));
         }
         return new ResponseEntity<List<AttachFileVO>>(list, HttpStatus.OK); //JSON 반환
     }

@@ -320,7 +320,8 @@
 }
 .review_table{
   font-size:11px;
-  border-spacing: 0px 30px;
+  border-collapse: separate;
+  border-spacing: 0px 15px;
 }
 .review_star{
   font-size:10px;

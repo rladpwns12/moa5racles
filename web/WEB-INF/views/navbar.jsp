@@ -114,9 +114,9 @@
             + "_" + "${profile.fileName}");
         var list = document.getElementsByClassName("profile_image");
         for (var i = 0; i < list.length; i++) {
-            console.log(list[i].lastElementChild);
-            var imgSrc = list[i].lastElementChild;
-            fileCallPath = replaceAll(fileCallPath, "%0", "%5c");
+            var imgSrc=list[i].lastElementChild;
+            fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
+
             var str = "/display?fileName=/" + fileCallPath;
             $(imgSrc).attr("src", str);
             imgSrc.addEventListener("error", myFunction);
