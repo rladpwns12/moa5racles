@@ -110,4 +110,11 @@ public class StoreRequestDAOImpl implements StoreRequestDAO {
 
         return mapper.searchAllListCnt(map);
     }
+
+    @Override
+    public int deleteConfrimdoneRequest(int articleNum) {
+        StoreRequestMapper mapper = sqlSession.getMapper(StoreRequestMapper.class);
+
+        return mapper.updateRequestDelFlag(articleNum);
+    }
 }
