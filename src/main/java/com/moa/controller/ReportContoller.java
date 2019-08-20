@@ -1,15 +1,17 @@
 package com.moa.controller;
 
 
+import com.moa.model.service.MakeReportService;
+import com.moa.model.vo.ReportVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Iterator;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/report")
 public class ReportContoller {
+    @Autowired
+    private MakeReportService makeReportService;
 
     @RequestMapping(value = "/send", method = RequestMethod.GET)
     public String reportPopup(){
@@ -19,21 +21,7 @@ public class ReportContoller {
 
     @RequestMapping(value = "/send", method = RequestMethod.POST)
     @ResponseBody
-    public boolean sendReport(){
-//        System.out.println(map.get("userId"));
-//        System.out.println(map.get("content"));
-//        System.out.println(map.get("targetUserNick"));
-//        System.out.println(map.get("targetId"));
-//        System.out.println(map.get("targetType"));
-//        Iterator<String> keys = map.keySet().iterator();
-//        while(keys.hasNext()){
-//            System.out.println("값 : " + keys.next());
-//        }
-        return true;
+    public boolean sendReport(@RequestBody ReportVO reportVO){
+        return makeReportService.makeReport(reportVO);
     }
-//    userId: userId,
-//    content: content,
-//    targetUserNick: targetUserNick,
-//    targetId: targetId,
-//    targetType: targetType
 }

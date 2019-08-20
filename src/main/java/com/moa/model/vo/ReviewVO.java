@@ -13,7 +13,7 @@ public class ReviewVO {
     private int boardNO;
     private int starPoint;
     private String content;
-    private String profile;
+    private UserAttachFileVO profile;
     private String nick;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date writeDate;

@@ -11,7 +11,7 @@ input[type="date"]::-webkit-inner-spin-button {
 
 .ui-datepicker select.ui-datepicker-year {
     width: 30%;
-    text-align: center;
+    text-align-last: center;
 }
 
 .ui-datepicker select.ui-datepicker-month {
@@ -66,6 +66,7 @@ input[type="date"]::-webkit-inner-spin-button {
     margin-right: 20px;
     font-size: 18px;
     font-weight: bold;
+    text-align-last: center;
 }
 
 .product_name {

@@ -107,5 +107,7 @@
     <select id="searchRequestListCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select (count(*) / 10 + 1) from STORE_REQUEST_VIEW WHERE USER_ID = #{userId}
     </select>
-
+    <update id="updateRequestDelFlag" parameterType="Integer">
+        UPDATE STORE_REQUEST_TB SET REQUEST_DEL_FLAG = 1 WHERE STORE_REQUEST_ID = #{articleNum}
+    </update>
 </mapper>
