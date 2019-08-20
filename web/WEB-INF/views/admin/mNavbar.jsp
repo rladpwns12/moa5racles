@@ -25,13 +25,13 @@
 
                 </sec:authorize>
                 <li class="nav-item">
-                    <a id="" class="nav-link" href="#">호스트 인증 관리<span class="sr-only">(current)</span></a>
+                    <a id="" class="nav-link" href="/admin/hostapprove/list">호스트 인증 관리<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">신고 관리</a>
+                    <a class="nav-link" href="/admin/report/list">신고 관리</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">이용 내역 관리</a>
+                    <a class="nav-link" onclick="alert('서비스 준비중입니다.')">이용 내역 관리</a>
                 </li>
             </ul>
          </div>
