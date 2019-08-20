@@ -15,8 +15,140 @@
 <link rel="stylesheet" href="/resources/css/hostSearch.css">
 	<sec:csrfMetaTags/>
 <script>
+	function searchBtn() 			//검색 버튼 클릭시
+	{
+		let address=$(".search_input").val();	//검색 키워드
+		if(address ==""){
+			alert("검색어를 입력해주세요");
+			return;
+		}
+		/*var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");*/
+		$.ajax									//카카오 api get
+		({
+			url: "https://dapi.kakao.com/v2/local/search/keyword.json?query="+address,
+			headers: { 'Authorization': 'KakaoAK ea031870cc4a7a31182ea665a1eb62fc'},
+			type: 'GET',
+			beforeSend: function (xhr) {
+				/*xhr.setRequestHeader("AJAX", true);
+				xhr.setRequestHeader(header, token);*/
+				xhr.setRequestHeader("Accept", "application/json; odata=verbose");
+			}
+		}).done(function(data)
+		{
+			if(data.documents=="")		//만일 검색결과가 없을시
+			{
+				alert("검색된 정보가 없습니다");
+				return;
+			}
+			else
+			{
+				var lan=data.documents[0].y;
+				var log=data.documents[0].x;
+				var coords = new kakao.maps.LatLng(lan, log);
+				var marker = new kakao.maps.Marker
+				({
+					map: map,
+					position: coords
+				});
+			}
+			map.setCenter(coords);
+			search(lan,log);
 
-	function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
+		});
+	}
+	function search(lan,log){//검색 함수
+
+		let catAry = new Array();
+		let catAry2 = ["1","2"];
+
+		let i = 0;
+		for(let iv=1 ; iv<11;iv++) { 				//카테고리 체크
+			if($('#ct'+iv).prop('checked'))
+				catAry[i++]=($('#ct'+iv).val());
+		}
+		jQuery.ajaxSettings.traditional = true;
+		let form={
+			category:catAry,
+			distance:($("#range-slider__range").val()),
+			filter:($("#filter").val()),
+			storageType:($("#storageType").val()),
+			transactionType : ($("#transactionType").val()),
+			storagePeriodType:($("#storagePeriodType").val()),
+			securityFacility:($("#securityFacility").val()),
+			petFlag:($("#petFlag").val()),
+			latitude:lan,
+			longitude:log
+		}
+		$('#selection_content_id1').empty();
+		//요주의!!!!
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$.ajax("storeboard/Search",{
+			type:"POST",
+			data : form,
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("AJAX", true);
+				xhr.setRequestHeader(header, token);
+				xhr.setRequestHeader("Accept", "application/json; odata=verbose");
+			}
+
+		}).then(function(data,status){
+			console.log(data);
+			console.log(status);
+			if(status=="success"){
+				var positions = new Array();
+				for(let i=0;i<data.length;i++){
+					let div = $('<div />', {id:"article"+data[i].articleNum,class : 'room_select',onclick:"roomSelect("+data[i].articleNum+");"}).appendTo($('#selection_content_id1'));
+					$('<img/>',{src:"/resources/image/hostSearch/"+data[i].pictureName ,style:'margin-bottom: 5px;'}).appendTo(div);
+					$('<span/>',{id:'title',text:"보관지 : "+data[i].storageType+"        "}).appendTo(div);
+					for(let j=0;j<parseInt(data[i].starPointAvg.toFixed(0));j++) {
+						$('<i/>', {class: 'fas fa-star', style: 'font-size:15px; float: right;' +
+									'margin-top: 10px; margin-right: 5px;'}).appendTo(div);
+					}
+					/*$('<span/>',{text:" : "+parseInt(data[i].starPointAvg.toFixed(0))+" 개"}).appendTo(div);*/
+					$('<br>').appendTo(div);
+					$('<i/>',{class:'fas fa-coins',style:'color:#423257;'}).appendTo(div);
+					$('<span/>',{id:'title',text:" "+data[i].detailPrice+"원"}).appendTo(div);
+					$('</div>').appendTo(div);
+					$('<br>').appendTo(div);
+					/*$('<div>',{id:'word'}).appendTo(div);*/
+					$('<span/>',{id:'word',class:'distance',text:data[i].distanceResult+"km 이내 "}).appendTo(div);
+					$('<br>').appendTo(div);
+					$('<i/>',{class:'fas fa-thumbs-up',style:'color: #423257;'}).appendTo(div);
+					$('<span/>',{id:'word',text:" "+data[i].totReviewCnt+" 개 "}).appendTo(div);
+
+					$('<i/>',{class:'far fa-calendar-alt',style:'color: #423257;'}).appendTo(div);
+					$('<span/>',{id:'word',text:" "+data[i].storagePeriodTypeId}).appendTo(div);
+					$('<br>').appendTo(div);
+					$('<i/>',{class:'fas fa-user',style:'color: #423257;'}).appendTo(div);
+					$('<span/>',{id:'word',text:" "+data[i].nickName}).appendTo(div);
+					positions[i] ={ title:'카카오',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
+				}
+
+				// 마커 이미지의 이미지 주소입니다
+				var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+				for (var i = 0; i < positions.length; i ++) {
+					// 마커 이미지의 이미지 크기 입니다
+					var imageSize = new kakao.maps.Size(24, 35);
+					// 마커 이미지를 생성합니다
+					var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+					// 마커를 생성합니다
+					var marker = new kakao.maps.Marker({
+						map: map, // 마커를 표시할 지도
+						position: positions[i].latlng, // 마커를 표시할 위치
+						title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						image : markerImage // 마커 이미지
+					});
+				}
+			}
+			else{
+				alert("지도 오류가 발생했습니다.");
+			}
+		});
+	}
+
+function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
 		var form = document.createElement("form");
 		var article = document.getElementById("article"+articleNum);
 		var distance = $(article).children('.distance')[0];
@@ -32,7 +164,11 @@
 		document.body.appendChild(form);
 		form.submit();
 	}
-
+	function enterkey(){
+	if (window.event.keyCode === 13) {
+		searchBtn();
+	}
+	}
 
 $(document).ready(function() {			//실행시
 
@@ -90,13 +226,16 @@ $(document).ready(function() {			//실행시
 		map.width('730px');
 		$(".map_wrapper").css("left", "730px");
 		$('#map').width('1174px');
+
+
+
 	});
 
 
 
 	var container = document.getElementById('map');					//맵 api 세팅
 	var options = {
-		center: new kakao.maps.LatLng(33.450701, 126.570667),
+		center: new kakao.maps.LatLng(37.484061, 126.955548),
 		level: 3
 	}
 	if (navigator.geolocation) {
@@ -114,9 +253,9 @@ $(document).ready(function() {			//실행시
 
 	});
 	}else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-		var lat = 33.450701;
-        var lon = 126.570667;
-	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+		var lat = 37.484061;
+        var lon = 126.955548;
+	    var locPosition = new kakao.maps.LatLng(lat,lon),
 	        message = 'geolocation을 사용할수 없어요..'
 
 	    displayMarker(locPosition, message);
@@ -150,136 +289,7 @@ $(document).ready(function() {			//실행시
 	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-	$('.search_btn').click(function() 			//검색 버튼 클릭시
-	{
-		let address=$(".search_input").val();	//검색 키워드
-		if(address ==""){
-			alert("검색어를 입력해주세요");
-			return;
-		}
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$.ajax									//카카오 api get
-		({
-		    url: "https://dapi.kakao.com/v2/local/search/keyword.json?query="+address,
-		    headers: { 'Authorization': 'KakaoAK ea031870cc4a7a31182ea665a1eb62fc'},
-		    type: 'GET',
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader("AJAX", true);
-				xhr.setRequestHeader(header, token);
-				xhr.setRequestHeader("Accept", "application/json; odata=verbose");
-			}
-		}).done(function(data)
-			{
-				if(data.documents=="")		//만일 검색결과가 없을시
-				{
-				alert("검색된 정보가 없습니다");
-				return;
-				}
-				else
-				{
-			    var lan=data.documents[0].y;
-			    var log=data.documents[0].x;
-				var coords = new kakao.maps.LatLng(lan, log);
-				var marker = new kakao.maps.Marker
-				({
-	            map: map,
-	            position: coords
-	       		 });
-				}
-				map.setCenter(coords);
-				search(lan,log);
 
-			});
-	});
-		function search(lan,log){//검색 함수
-
-		let catAry = new Array();
-		let catAry2 = ["1","2"];
-
-		let i = 0;
-		for(let iv=1 ; iv<11;iv++) { 				//카테고리 체크
-			if($('#ct'+iv).prop('checked'))
-				catAry[i++]=($('#ct'+iv).val());
-		}
-		jQuery.ajaxSettings.traditional = true;
-		let form={
-			category:catAry,
-			distance:($("#range-slider__range").val()),
-			filter:($("#filter").val()),
-			storageType:($("#storageType").val()),
-			transactionType : ($("#transactionType").val()),
-			storagePeriodType:($("#storagePeriodType").val()),
-			securityFacility:($("#securityFacility").val()),
-			petFlag:($("#petFlag").val()),
-			latitude:lan,
-			longitude:log
-		}
-		 $('#selection_content_id1').empty();
-		 //요주의!!!!
-			var token = $("meta[name='_csrf']").attr("content");
-			var header = $("meta[name='_csrf_header']").attr("content");
-		 $.ajax("storeboard/Search",{
-		type:"POST",
-		data : form,
-			 beforeSend: function (xhr) {
-				 xhr.setRequestHeader("AJAX", true);
-				 xhr.setRequestHeader(header, token);
-				 xhr.setRequestHeader("Accept", "application/json; odata=verbose");
-			 }
-
-		 }).then(function(data,status){
-		 	console.log(data);
-		 	console.log(status);
-		if(status=="success"){
-			var positions = new Array();
-			 for(let i=0;i<data.length;i++){
-				let div = $('<div />', {id:"article"+data[i].articleNum,class : 'room_select',onclick:"roomSelect("+data[i].articleNum+");"}).appendTo($('#selection_content_id1'));
-				$('<img/>',{src:"/resources/image/hostSearch/"+data[i].pictureName}).appendTo(div);
-				$('<span/>',{id:'title',text:"보관지 : "+data[i].storageType+"        "}).appendTo(div);
-				for(let j=0;j<parseInt(data[i].starPointAvg.toFixed(0));j++) {
-					$('<i/>', {class: 'fas fa-star', style: 'font-size:15px;'}).appendTo(div);
-				}
-				$('<span/>',{text:" : "+parseInt(data[i].starPointAvg.toFixed(0))+" 개"}).appendTo(div);
-				$('<br>').appendTo(div);
-				$('<i/>',{class:'fas fa-coins',style:'color:#423257;'}).appendTo(div);
-				$('<span/>',{id:'title',text:" "+data[i].detailPrice+"원"}).appendTo(div);
-				$('</div>').appendTo(div);
-				$('<div>',{id:'word'}).appendTo(div);
-				$('<span/>',{class:'distance',text:data[i].distanceResult+"km 이내 "}).appendTo(div);
-				$('<br>').appendTo(div);
-				$('<i/>',{class:'fas fa-thumbs-up',style:'color: #423257;'}).appendTo(div);
-				$('<span/>',{text:" "+data[i].totReviewCnt+" 개 "}).appendTo(div);
-
-				$('<i/>',{class:'far fa-calendar-alt',style:'color: #423257;'}).appendTo(div);
-				$('<span/>',{text:" "+data[i].storagePeriodTypeId}).appendTo(div);
-				$('<br>').appendTo(div);
-				$('<i/>',{class:'fas fa-user',style:'color: #423257;'}).appendTo(div);
-				$('<span/>',{text:" "+data[i].nickName}).appendTo(div);
-				positions[i] ={ title:'카카오',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
-			}
-
-			// 마커 이미지의 이미지 주소입니다
-			var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-			for (var i = 0; i < positions.length; i ++) {
-			    // 마커 이미지의 이미지 크기 입니다
-			    var imageSize = new kakao.maps.Size(24, 35);
-			    // 마커 이미지를 생성합니다
-			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-			    // 마커를 생성합니다
-			    var marker = new kakao.maps.Marker({
-			        map: map, // 마커를 표시할 지도
-			        position: positions[i].latlng, // 마커를 표시할 위치
-			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			        image : markerImage // 마커 이미지
-			    });
-			}
-		}
-		else{
-			alert("지도 오류가 발생했습니다.");
-		}
-	});
-	}
 
 });
 window.onload = function(){
@@ -402,8 +412,8 @@ window.onload = function(){
 			<!-- 검색창 --> 
 			<!--  <form class=map_searchbar>-->
 			<div class="search_wrapper">
-			<input class="search_input" type="search" placeholder="원하시는 장소를 검색하세요"/>
-			<button class="search_btn" value="검색">
+			<input class="search_input" type="search" placeholder="원하시는 장소를 검색하세요" onkeyup="enterkey()"/>
+			<button class="search_btn" value="검색" onclick="searchBtn();">검색
 			</button>
 			</div>
 			
