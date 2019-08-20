@@ -82,15 +82,15 @@ $.confirmDone = function(curPage){
 					products = products.substring(0,20);
 					products = products.concat('...');
 				}
-				let tr = $('<tr/>').appendTo('.main_content>table>tbody');
+				let tr = $('<tr/>',{id:result.list[i].articleNum}).appendTo('.main_content>table>tbody');
 				let td1 = $('<td/>').appendTo(tr);
 				$('<img/>',{src :"/resources/image/navbar/"
 						+result.list[i].profileImg ,alt:"이미지 경로 오류"}).appendTo(td1);
 				$('<td/>',{text:result.list[i].nick}).appendTo(tr);
-				$('<td/>',{text:result.list[i].startDate +" ~ "+result.list[i].endDate}).appendTo(tr);
-				$('<td/>',{text: products,class:'table_click',id:result.list[i].articleNum}).appendTo(tr);
-				$('<td/>',{text:result.list[i].price}).appendTo(tr);
-				$('<td/>',{text:result.list[i].state}).appendTo(tr);
+				$('<td/>',{text:result.list[i].startDate +" ~ "+result.list[i].endDate,class:'table_click'}).appendTo(tr);
+				$('<td/>',{text: products,class:'table_click'}).appendTo(tr);
+				$('<td/>',{text:result.list[i].price,class:'table_click'}).appendTo(tr);
+				$('<td/>',{text:result.list[i].state,class:'table_click'}).appendTo(tr);
 				let td7 = $('<td/>').appendTo(tr);
 
 				$('<button/>',{text:"삭제 ", class:result.list[i].article, onclick:'cancle_btn()'}).appendTo(td7);
@@ -146,8 +146,9 @@ $.confirmDone = function(curPage){
 };
 
 $(document).on('click','.table_click',function(e){
-	var id = e.target.id;
-
+	// var id = e.target.id;
+	var id = $(this).parent().attr("id");
+	console.log("id:"+id);
 	$.ajax({
 		type: "GET",
 		url: "/hostpage/requestlist/info/" + id,

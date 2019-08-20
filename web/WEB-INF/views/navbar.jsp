@@ -2,6 +2,10 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<sec:authorize access="isAuthenticated()" >
+<sec:authentication property="principal" var="customVO" />
+<c:set var="profile" value="${customVO.loginVO.profile}"/>
+</sec:authorize>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/navbar.js"></script>
@@ -43,8 +47,8 @@
             <sec:authorize access="isAuthenticated()">
                 <li>
                     <a href="/mypage">
-                        <div class="author_profile">
-                            <img src="/resources/image/navbar/profile.png" alt="">
+                        <div class="profile_image author_profile">
+                            <img src="/resources/image/navbar/profile.png"  alt="">
                         </div>
                         <div class="author_name">
                             <sec:authentication property="principal.loginVO.name"/> <br/>
@@ -98,3 +102,27 @@
         </div>
     </div>
 </div>
+<script>
+    function replaceAll(str, searchStr, replaceStr) {
+        return str.split(searchStr).join(replaceStr);
+    }
+
+    $(document).ready(function(){
+        var fileCallPath = encodeURIComponent("${profile.uploadPath}" + "/" + "${profile.uuid}"
+            + "_" + "${profile.fileName}");
+        var list= document.getElementsByClassName("profile_image");
+        for (var i = 0; i < list.length; i++) {
+            console.log(list[i].lastElementChild);
+            var imgSrc=list[i].lastElementChild;
+            fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
+            var str = "/display?fileName=/" + fileCallPath;
+            $(imgSrc).attr("src", str);
+            imgSrc.addEventListener("error", myFunction);
+        }
+
+        function myFunction() {
+            var str='/resources/image/navbar/profile.png';
+            $(imgSrc).attr("src", str);
+        }
+    });
+</script>

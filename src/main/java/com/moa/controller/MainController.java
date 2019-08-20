@@ -22,7 +22,6 @@ public class MainController {
 
     @RequestMapping(value = {"/main", ""})
     public String main() {
-
         return "main";
     }
 
@@ -31,6 +30,7 @@ public class MainController {
 
         return "mHostApprove";
     }
+
     @RequestMapping(value = "admin/hostapprove/info")
     public String mobileApproveInformation(){
 

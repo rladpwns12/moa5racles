@@ -147,7 +147,9 @@ $.reviewList = function (section, pageNum) {
                             ');">' + i + '&nbsp;</span>';
                 }
             } else {
-                var lastReview = parseInt((data.totReviews % 50) / 5) + 1;
+                var lastReview = parseInt((data.totReviews % 50) / 5);
+                if(data.totReviews%5!=0)
+                    lastReview +=1;
                 for (var i = 1; i <= lastReview; i++) {
                     if (i == pageNum)
                         strf += '<span class="no-uline sel-page" onclick="$.reviewList(' +

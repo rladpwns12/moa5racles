@@ -163,7 +163,7 @@ $(document).ready(function() {			//실행시
 		$.ajax									//카카오 api get
 		({
 		    url: "https://dapi.kakao.com/v2/local/search/keyword.json?query="+address,
-		    headers: { 'Authorization': 'KakaoAK ea031870cc4a7a31182ea665a1eb62fc'},
+		       headers: { 'Authorization': 'KakaoAK ea031870cc4a7a31182ea665a1eb62fc'},
 		    type: 'GET',
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader("AJAX", true);

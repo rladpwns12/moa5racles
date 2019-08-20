@@ -364,7 +364,7 @@
                         3. “고객”이 “회사”를 통하지 않고 “호스트”에게 직접 현금 결제를 하는 경우
                     </div>
                 </div>
-                <div id="host">
+                <div id="host" style="display:none;">
                     <div class="depth-1">
                         제 1조 (목적)
                     </div>
@@ -595,7 +595,7 @@
                         “회사”는 “호스트”와 개별약정을 체결할 수 있습니다. 이 경우 개별약정이 “본 약관”의 효력보다 우선합니다.
                     </div>
                 </div>
-                <div id="service">
+                <div id="service" style="display:none;">
                     <div class="depth-1">
                         제 1조 (목적)
                     </div>

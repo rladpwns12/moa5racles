@@ -44,10 +44,10 @@
                   <th id="table_title1">나의 보관소</th>
                   <th id="table_space"></th>
                   <th id="table_btn">
-                    <button id="add_address_btn"type="button" name="button">
+                    <button id="add_address_btn" type="button" name="button">
                       주소지 추가+
                     </button>
-                    <button id="add_storage_btn"type="button" name="button" onclick="location.href='${contextPath}/moa/keep'">
+                    <button id="add_storage_btn" type="button" name="button" onclick="location.href='${contextPath}/storeboard/keep'">
                       보관소 추가+
                     </button>
                   </th>
@@ -55,47 +55,11 @@
               </table>
             </div>
             <div class="main_content">
-            <!-- 
-            <table >
-               <tr>
-               	<td class="table_top" colspan="3">
-               		<i class="far fa-star"> 4.5</i>
-               		<i class="far fa-heart"> 20</i>
-               	</td>
-               </tr>
-               
-               <tr>
-               	<td class="table_left table_img" rowspan="4">
-               		<img  alt="" src="${contextPath}/image/navbar/storage.png">
-               	</td>
-               	<td class="table_middle table_title">제 목</td>
-               	<td class="table_right">제목입니다.</td>
-               </tr>
-               
-               <tr>
-               	<td class="table_middle table_title">보관중인 물건 개수</td>
-               	<td class="table_right">0개</td>
-               </tr>
-               
-               <tr>
-               	<td class="table_middle table_title">보관만료된 물건 개수</td>
-               	<td class="table_right">0개</td>
-               </tr>
-               
-               <tr class="table_bottom">
-               	<td colspan="2">
-               		<button>수정</button>
-               		<button>삭제</button>
-               	</td>          	
-               </tr>
-               
-              </table>
-               -->
               
             </div>
             <div class="main_bottom">
                 <div class="main_paging">
-                    <img src="/resources/image/giphy.gif">
+                    <img src="/resources/image/loading.gif">
                 </div>
             </div>
 
