@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $.reviewList(1, 1);
+
 });
 
 // 폼 전송
@@ -71,6 +72,11 @@ $.replyReview = function () {
     });
 }
 
+function myFunction() {
+    var str='/resources/image/navbar/profile.png';
+    $(imgSrc).attr("src", str);
+}
+
 // 리뷰 글 양식
 $.reviewList = function (section, pageNum) {
     var articleNum = location.href.split('/')[location.href.split('/').length - 1];
@@ -90,14 +96,31 @@ $.reviewList = function (section, pageNum) {
             xhr.setRequestHeader(header, token);
         },
         success: function (data) {
+            var thumbnail = 'thumbnail_';
             $('.review_list').remove();
             var str = '<div class="review_list">'
                 + '<table  class="review_table">';
             for (var i = 0; i < Object.keys(data.reviewList).length; i++) {
+                var profile=data.reviewList[i].profile;
+                var fileCallPath = encodeURIComponent(profile.uploadPath + "/" + thumbnail
+                    + profile.uuid +"_"+profile.fileName);
+
+                var imgSrc = $('<img>', {
+                    src: '/display?fileName=/' + fileCallPath,
+                    alt: 'profile',
+                    onerror : 'this.src="/resources/image/navbar/profile.png"'
+                }).css({
+                    borderRadius : '100px',
+                    width:'40px',
+                    height : '40px'
+                });
+                var path = "/display?fileName=/" + fileCallPath;
+                $(imgSrc).attr("src", path);
+
                 str += '<tr>'
-                    + '<td class="review_img">'
-                    + '<img src="/resources/image/profile.png">'
-                    + '</td>'
+                    + '<td class="review_img">';
+                str+=imgSrc[0].outerHTML;
+                str += '</td>'
                     + '<td class="review_id">' + data.reviewList[i].nick + '</td>'
                     + '<td class="review_star">';
                 var starPoint = data.reviewList[i].starPoint;
@@ -176,6 +199,9 @@ $.reviewList = function (section, pageNum) {
             strf += '</div>';
             $('.review_footer').append(strf);
             // $('.review_btn').before(strf);
+        },
+        error:function(request,status,error){
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
     });
 }

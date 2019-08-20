@@ -5,11 +5,11 @@
 <mapper namespace="com.moa.mybatis.ReviewMapper">
 
         <sql id="selectReview_sel_first">
-            SELECT ROWNUM AS RECNUM, LVL, REVIEW_ARTICLE_NUM ARTICLENO, PARENT_REVIEW_ARTICLE_NUM PARENTNO, (SELECT SUBSTR(CONTENT,1,200) FROM DUAL) CONTENT, NICK, WRITEDATE, STARPOINT, PROFILE
+            SELECT ROWNUM AS RECNUM, LVL, REVIEW_ARTICLE_NUM ARTICLENO, PARENT_REVIEW_ARTICLE_NUM PARENTNO, (SELECT SUBSTR(CONTENT,1,200) FROM DUAL) CONTENT, NICK, WRITEDATE, STARPOINT, PICTURE_NAME, UUID, UPLOADPATH, FILETYPE
         </sql>
 
         <sql id="selectReview_sel_second">
-            SELECT LEVEL AS LVL, REVIEW_ARTICLE_NUM, PARENT_REVIEW_ARTICLE_NUM, CONTENT, UT.NICKNAME AS NICK,WRITE_DATE AS WRITEDATE, STAR_POINT AS STARPOINT, UPIT.PICTURE_NAME AS PROFILE
+            SELECT LEVEL AS LVL, REVIEW_ARTICLE_NUM, PARENT_REVIEW_ARTICLE_NUM, CONTENT, UT.NICKNAME AS NICK,WRITE_DATE AS WRITEDATE, STAR_POINT AS STARPOINT, UPIT.PICTURE_NAME AS PICTURE_NAME, UPIT.UUID AS UUID, UPIT.UPLOADPATH AS UPLOADPATH, UPIT.FILETYPE AS FILETYPE
         </sql>
 
         <sql id="selectReview_join">
@@ -57,7 +57,10 @@
         <id property="nick" column="nick" jdbcType="VARCHAR"/>
         <id property="writeDate" column="writeDate" jdbcType="DATE"/>
         <id property="starPoint" column="starPoint" jdbcType="NUMERIC"/>
-        <id property="profile" column="profile" jdbcType="VARCHAR"/>
+        <id property="profile.uuid" column="UUID"/>
+        <id property="profile.uploadPath" column="UPLOADPATH"/>
+        <id property="profile.fileName" column="PICTURE_NAME"/>
+        <id property="profile.fileType" column="FILETYPE" javaType="boolean"/>
     </resultMap>
 
     <select id="selectReviewByPaging"  parameterType="hashMap" resultMap="selectReviewMap">
