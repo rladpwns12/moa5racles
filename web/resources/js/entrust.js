@@ -1,5 +1,6 @@
 var num = 1;
 var table_product_num = 1;
+var copy_table_product_num = 0;
 var i = 0;
 $(function () {
     $("#start_datepicker").datepicker({
@@ -127,11 +128,8 @@ function nextForm() {
 
     switch (num) {
         case 1:
-            // let productName = document.getElementsByName("productList[0].product");
-            // let productCnt = document.getElementsByName("productList[0].productCnt");
-
-            let productName = document.getElementsByName("productName");
-            let productCnt = document.getElementsByName("productCnt");
+            var productName = document.getElementsByName("productName");
+            var productCnt = document.getElementsByName("productCnt");
 
             if (productName[0].value == null || productName[0].value.trim() == "") {
                 alert("물건명을 최소 하나 이상 입력해주세요.");
@@ -144,25 +142,35 @@ function nextForm() {
                 return;
             }
 
-            for (i = table_product_num - 1; i > 0; i--) {
-                console.log(table_product_num + " " + i);
 
-                if (productName[i] == "" || productCnt[i] == 0) {
-                    alert(productName[i]);
+            /*let tableBody;
+            for (i = 0; i < productList.length; i++) {
+                console.log(productName[i].value);
+                if (productName[i].value == "" || productCnt.value == 0) {
+                    continue;
+                }
+            }*/
+
+            alert(table_product_num);
+            for (i = table_product_num - 1; i > 0; i--) {
+                if (productName[i].value == "" || productCnt[i].value == 0) {
                     productName[i].closest("tr").remove();
+                    for (let j = table_product_num - 2; j >= i; j--)
+                        productName[j].closest("td").previousSibling.previousSibling.innerHTML = j + 1;
                     table_product_num--;
                 }
             }
 
-
-            /*for (i = table_product_num; i > 0; i--) {
-                let productName = document.getElementsByName("productList[" + i + "].product");
-                let productCnt = document.getElementsByName("productList[" + i + "].productCnt");
-
-                if (productName[0].value == null || productName[0].value.trim() == "" || productCnt[0].value == 0)
-                    productName[0].closest("tr").remove();
-            }*/
-
+            alert("length: " + productName.length);
+            console.log(document.getElementsByName('productName'));
+            alert("length: " + productName.length);
+            for (i = 0; i < productName.length; i++) {
+                alert(i);
+                document.getElementsByName('productName')[0].setAttribute('name', 'productList[' + (copy_table_product_num++) + '].product');
+                // $('input[name=productName]').attr('name', 'productList[' + (copy_table_product_num++) + '].product');
+                alert("222");
+            }
+            alert("333");
 
             $("#content1").hide();
             $("#content2").show();
@@ -406,6 +414,7 @@ function measuredPriceSetting() {
     }
 }
 
+/*
 $(document).ready(function () {
     $("input:text[numberOnly]").on("focus", function () {
         // $(".i_price").on("focus", function () {
@@ -434,3 +443,26 @@ function removeCommas(x) {
     if (!x || x.length == 0) return "";
     else return x.split(",").join("");
 }
+*/
+
+/*
+function deleteRow(input) {
+    let productName = document.getElementsByName("productName");
+
+    console.log(input.closest("td").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML - 1);
+
+    if((input.closest("td").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML - 1) == 0) {
+        alert("here");
+        productName[input.closest("td").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML - 1].closest("tr").remove();
+    }
+    alert("111");
+    // productName[input.closest("td").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML - 1].closest("tr").remove();
+    if(productName.length != table_product_num) {
+        for (let j = table_product_num - 2; j >= i; j--) {
+            alert(productName[j].closest("td").previousSibling.previousSibling.innerHTML);
+            productName[j].closest("td").previousSibling.previousSibling.innerHTML = j + 1;
+        }
+    }
+    table_product_num--;
+}
+*/
