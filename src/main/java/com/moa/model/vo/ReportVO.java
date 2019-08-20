@@ -15,6 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class ReportVO {
     @NotBlank
+    private long reportId;
+    @NotBlank
     private long userId;
     @NotBlank
     @Size(min = 0, max = 5)

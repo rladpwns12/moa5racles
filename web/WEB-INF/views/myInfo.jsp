@@ -47,6 +47,7 @@
                     <li onclick="location.href='/mypage/requestlist/1'">보관해주세요 신청 목록</li>
                     <li onclick="moveToLatest();">최근 본 보관소</li>
                     <li onclick="moveToFavorite();">즐겨찾는 보관소</li>
+                    <li onclick="location.href='/report/list'">신고 내역</li>
                 </ul>
             </div>
         </div>
