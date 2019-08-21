@@ -245,7 +245,7 @@ margin:0;
 }
 .selection_wrapper{
 	float:left;
-	height:773px;
+	height:797px;
 	width:1230px;
 	margin:0px;
 	background-color:white;
@@ -265,10 +265,10 @@ margin:0;
 }
 .room_select{
     width: 273px;
-    height: 353px;
+    height: 363px;
     background-color: white;
     margin-right: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
     float: left;
     font-size: 20px;
     font-weight: 300;
@@ -279,7 +279,7 @@ margin:0;
 
 }
 .room_select:hover{
-    background-color: #e3e3e3;
+    background-color: #e9e9e9;
 }
 
 .room_select img{
@@ -364,19 +364,21 @@ margin:0;
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 
 
-
+.keep{
+    margin-left: 95px;
+}
 .keepBtn,.mapBtn {
     background-color: #423257;
     border: none;
     color: white;
-    padding: 12px 30px;
-    margin: 8px;
+    padding: 10px 20px;
+    margin: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    font-family: 'Nanum Gothic', sans-serif;
-    border-radius: 4px;
+    font-family: '나눔스퀘어', sans-serif;
+    border-radius: 6px;
 }
 #map{
 	width:674px;
@@ -503,6 +505,15 @@ margin:0;
     color:white;
 }
 
+.noContent{
+    height: 100%;
+    padding: 8px;
+    color: #7f7f7f;
+    font-family: '나눔스퀘어', sans-serif;
+    text-align: center;
+    margin-right: 20px;
+    margin-top:50px;
+}
 
 
 
