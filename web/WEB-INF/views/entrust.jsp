@@ -36,6 +36,7 @@
             <c:forEach var="category" items="${categoryList}" varStatus="cnt">
             addStaffText += ('<option class="category_list" value="${category}">${category}</option>');
             </c:forEach>
+
             addStaffText += '</select>' + '</td>';
             addStaffText += '<td class="table_data"><input type="text" class="product_name" name="productList[' + table_product_num + '].product"></td>';
             addStaffText += '<td class="table_data"><input type="number" class="product_cnt" name="productList[' + table_product_num + '].productCnt" min=0 max=100 value=0></td>' + '</tr>';

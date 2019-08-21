@@ -265,20 +265,16 @@ $("button[type='submit']").on("click", function (e) {
         str += "<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
     });
     formObj.append(str);
-    alert(formObj);
     $.ajax({
         type: "POST",
         url: location.pathname,
         data: formObj.serialize(),
+        dataType:'json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
             xhr.setRequestHeader(header, token);
         },
         success: function (result) {
-            console.log(result);
-            console.log(result.value);
-            console.log(result == true);
-            console.log((result.value == true));
             if (result) {
                 $("#content6").hide();
                 $("#content7").show();

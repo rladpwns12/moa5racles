@@ -38,7 +38,6 @@
         <id property="detailAddress" column="DETAIL_ADDRESS"/>
     </resultMap>
 
-    <!--송준희-->
     <select id="selectStorages" parameterType="Integer" resultMap="storage_address_map">
         SELECT
         <include refid="storage_address_columns"/>
@@ -70,54 +69,47 @@
         WHERE ST.TRANSACTION_WAY=#{transaction} AND SF.SECURITY=#{cctv} AND SP.PERIOD_TYPE=#{storagePeriod}
     </select>
 
-    <insert id="insertIntoStoreBoard" parameterType="hashMap">
-        <choose>
-            <when test="pet_text!=null">
-                INSERT INTO STORE_BOARD_TB (ARTICLE_NUM, HOST_ID, STORAGE_PERIOD_TYPE_ID, SR_TRANSACTION_TYPE_ID,
-                WRITE_DATE, PET_FLAG, TITLE, CONTENT, DEL_FLAG, STORAGE_ID) VALUES (
-                #{articleNum}, #{hostId}, #{storagePeriod}, #{transaction}, DEFAULT, '0', #{title}, #{content}, DEFAULT,
-                #{storageId})
-            </when>
-            <otherwise>
-                INSERT INTO STORE_BOARD_TB (ARTICLE_NUM, HOST_ID, STORAGE_PERIOD_TYPE_ID, SR_TRANSACTION_TYPE_ID,
-                WRITE_DATE, PET_FLAG, TITLE, CONTENT, DEL_FLAG, STORAGE_ID) VALUES (
-                #{articleNum}, #{hostId}, #{storagePeriod}, #{transaction}, DEFAULT, '1', #{title}, #{content}, DEFAULT,
-                #{storageId})
-            </otherwise>
-        </choose>
-    </insert>
-
-    <insert id="insertIntoPetType" parameterType="hashMap">
-        <choose>
-            <when test="pet != null">
-                INSERT INTO PET_TYPE_TB (ARTICLE_NUM, PET) VALUES (#{articleNum}, #{pet})
-            </when>
-        </choose>
-    </insert>
-
-    <insert id="insertIntoSF_SB" parameterType="hashMap">
-        INSERT INTO SF_SB_TB (SECURITY_FACILITY_ID, ARTICLE_NUM) VALUES (#{cctv}, #{articleNum})
-    </insert>
-
-    <insert id="insertIntoSBAttachedPicture" parameterType="hashMap">
-        INSERT INTO SB_ATTACHED_PICTURE_TB (SB_ATTACHED_PICTURE_ID, PICTURE_NAME, ARTICLE_NUM) VALUES (
-        AUTO_SB_ATTACHED_PICTURE_TB.NEXTVAL, #{pictureName}, #{articleNum})
-    </insert>
-
-    <insert id="insertIntoDetailPriceFibo" parameterType="hashMap">
-        INSERT INTO DETAIL_PRICE_FIBO_TB (ARTICLE_NUM, DETAILS_PRICE_ID, DETAIL_PRICE) VALUES (
-        #{articleNum}, #{priceId}, #{price})
-    </insert>
-
     <select id="selectCategoryId" parameterType="String" resultType="Integer">
         SELECT CATEGORY_ID FROM CATEGORY_TB WHERE CATEGORY_NAME = #{category}
     </select>
 
-    <insert id="insertIntoForbiddenProduct" parameterType="hashMap">
-        INSERT INTO FORBIDDEN_PRODUCT_TB (FORBIDDEN_PRODUCT_ID, ARTICLE_NUM, CATEGORY_ID, PRODUCT_NAME) VALUES (
-        AUTO_FORBIDDEN_PRODUCT_TB.NEXTVAL, #{articleNum}, #{categoryId}, #{productName})
+
+
+
+    <insert id="insertStoreBoard" >
+        <selectKey keyProperty="articleNum" resultType="long" order="BEFORE">
+            SELECT AUTO_STORE_BOARD_TB.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT ALL
+        INTO STORE_BOARD_TB (ARTICLE_NUM,HOST_ID,TITLE,CONTENT,SR_TRANSACTION_TYPE_ID,
+        STORAGE_PERIOD_TYPE_ID,STORAGE_ID)
+        VALUES(#{articleNum},#{hostId},#{title},#{content},
+        (SELECT SR_TRANSACTION_TYPE_ID FROM SR_TRANSACTION_TYPE_TB WHERE TRANSACTION_WAY = #{transactionType}),
+        (SELECT STORAGE_PERIOD_TYPE_ID FROM STORAGE_PERIOD_TYPE_TB WHERE PERIOD_TYPE = #{storagePeriodType}),#{storageId})
+        <foreach collection="forbiddenProductList" item="fp" >
+        INTO FORBIDDEN_PRODUCT_TB (FORBIDDEN_PRODUCT_ID,ARTICLE_NUM, PRODUCT_NAME, CATEGORY_ID)
+        VALUES(GET_FP_SQ(),#{articleNum},#{fp.product},
+        (SELECT CATEGORY_ID FROM CATEGORY_TB WHERE CATEGORY_NAME=#{fp.category}))
+        </foreach>
+        <foreach collection="detailPrice" item="price" index="index">
+        INTO DETAIL_PRICE_FIBO_TB (ARTICLE_NUM, DETAILS_PRICE_ID, DETAIL_PRICE)
+        VALUES(#{articleNum},#{index}+1,#{price})
+        </foreach>
+        <foreach collection="securityList" item = "security" >
+        INTO SF_SB_TB (SECURITY_FACILITY_ID, ARTICLE_NUM)
+        VALUES((SELECT SECURITY_FACILITY_ID FROM security_facility_tb WHERE SECURITY = #{security}),#{articleNum})
+        </foreach>
+        <foreach collection="attachList" item="attach">
+        INTO SB_ATTACHED_PICTURE_TB (ARTICLE_NUM, UPLOADPATH, UUID, PICTURE_NAME, FILETYPE, SB_ATTACHED_PICTURE_ID)
+        VALUES(#{articleNum}, #{attach.uploadPath}, #{attach.uuid}, #{attach.fileName}, #{attach.fileType}, GET_SBAP_SQ())
+        </foreach>
+        SELECT *
+        FROM DUAL
     </insert>
-    <!--송준희-->
+
+    <insert id="insertPet">
+        INSERT INTO PET_TYPE_TB (ARTICLE_NUM, PET) VALUES(#{articleNum}, #{pet})
+    </insert>
 
     <select id="searchEntrust" parameterType="com.moa.model.vo.EntrustSearchVO" resultMap="entrustSearchVO">
         SELECT * FROM SEARCH_BOARD_VIEW SBV

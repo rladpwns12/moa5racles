@@ -37,14 +37,13 @@ $(document).ready(function () {
     $.showUploadedFile = function(uploadedResultArr){
         if(!uploadedResultArr || uploadedResultArr.length == 0)
             return;
-
-        var str = "";
+        var qwe = "";
 
         $(uploadedResultArr).each(function(i,obj){
-            str += "<li data-path='" + obj.uploadPath + "'";
-            str += "data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'";
-            str += "><div>";
-            str += "<span>" + obj.fileName + "</span>";
+            qwe += "<li data-path='" + obj.uploadPath + "'";
+            qwe += "data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'";
+            qwe += "><div>";
+            qwe += "<span>" + obj.fileName + "</span>";
             if(obj.typeFlag == 'user'){
                 var fileCallPath = encodeURIComponent(obj.uploadPath + "/"
                     + obj.uuid +"_"+obj.fileName);
@@ -62,25 +61,25 @@ $(document).ready(function () {
                 //GET 방식 첨부파일 이름 사용시 공백, 한글이름이 문제 되므로 encodeURIComponent() 이용
                 var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + thumbnail
                     + obj.uuid +"_"+obj.fileName);
-
+                fileCallPath=replaceAll(fileCallPath,"%0", "%5c");
                 //이미지 파일 원본 보여주기
-                str += "<button type='button' data-file='"+fileCallPath +"/' data-type='image'";
-                str += "class='btn btn-warning btn-circle'>" ;
-                str += "<i class='fa fa-times'></i></button><br>";
-                str += "<img src='/display?fileName=/" + fileCallPath + "'>";
-                str += "</div></li>";
+                qwe += "<button type='button' data-file='"+fileCallPath +"/' data-type='image'";
+                qwe += "class='btn btn-warning btn-circle'>" ;
+                qwe += "<i class='fa fa-times'></i></button><br>";
+                qwe += "<img src='/display?fileName=/" + fileCallPath + "'>";
+                qwe += "</div></li>";
             }else{
                 var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid +"_"+obj.fileName);
                 var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
 
-                str += "<button type='button' class='btn btn-warning btn-circle' " +
+                qwe += "<button type='button' class='btn btn-warning btn-circle' " +
                     "data-file='"+fileCallPath +"/' data-type='file'>" ;
-                str +="<i class='fa fa-times'></i></button><br>";
-                str += "<img src='/" + attachImg + "'></a>";
-                str += "</div></li>";
+                qwe +="<i class='fa fa-times'></i></button><br>";
+                qwe += "<img src='/" + attachImg + "'></a>";
+                qwe += "</div></li>";
             }
         });
-        uploadResult.append(str);
+        uploadResult.append(qwe);
     }
 
     $("input[type='file']").change(function(e){
