@@ -10,6 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class SimpleUserRequestVO {
+	private int historyId;
 	private int requestId;
 	private String profileName;
 	private String hostNick;
@@ -27,6 +28,7 @@ public class SimpleUserRequestVO {
 	private String transactionState;
 
 	public SimpleUserRequestVO() {
+		this.historyId = 0;
 		this.requestId = 0;
 		this.profileName = null;
 		this.hostNick = null;

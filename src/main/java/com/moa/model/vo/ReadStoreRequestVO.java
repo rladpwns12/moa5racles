@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ReadStoreRequestVO {
+	private int historyId;
 	private String profileName;
 	private int userId;
 	private int hostId;
@@ -35,6 +36,7 @@ public class ReadStoreRequestVO {
 	private String detailAddress;
 
 	public ReadStoreRequestVO() {
+		this.historyId = 0;
 		this.profileName = null;
 		this.userId = 0;
 		this.hostId = 0;

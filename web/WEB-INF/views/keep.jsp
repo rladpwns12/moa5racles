@@ -12,14 +12,15 @@
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<sec:csrfMetaTags/>
 	<title>보관해드립니다 글 등록 페이지</title>
-
 	<link rel="stylesheet" type="text/css" href="/resources/css/keep.css"/>
 	<link rel="stylesheet" type="text/css" href="/resources/css/content.css"/>
 	<link rel="stylesheet" href="/resources/css/upload.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 	<script src="/resources/js/jquery-3.4.1.min.js"></script>
 	<script src="/resources/js/upload.js"></script>
+	<script src="/resources/js/keep.js"></script>
 	<script>
 		$(document).on("click", "i[name=add_row_btn]", function () {
 			table_product_num++;
@@ -43,7 +44,6 @@
 			trHtml.before(addStaffText); //마지막 trStaff명 뒤에 붙인다
 		});
 	</script>
-	<sec:csrfMetaTags/>
 </head>
 
 <body>
@@ -223,7 +223,6 @@
 		</div>
 	</div>
 </div>
-<script src="/resources/js/keep.js"></script>
 <%@ include file="footer.jsp" %>
 </body>
 </html>
