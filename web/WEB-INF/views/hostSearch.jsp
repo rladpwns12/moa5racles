@@ -110,6 +110,12 @@
 			console.log(data);
 			console.log(status);
 			if(status=="success"){
+				if(data.length==0){
+					var noContent = '<div class="noContent">' +
+							'<i class="fas fa-search-minus" style="font-size:45px; margin-bottom: 20px;"></i>' +
+							' <br>조건에 맞는 방이 없습니다.<br>조건을 바꿔 검색해보세요.</div>';
+					($('#selection_content_id1').append(noContent));
+				}
 				var positions = new Array();
 				for(let i=0;i<data.length;i++){
 					let div = $('<div />', {id:"article"+data[i].articleNum,class : 'room_select',onclick:"roomSelect("+data[i].articleNum+");"}).appendTo($('#selection_content_id1'));
@@ -153,7 +159,8 @@
 					markers.push(marker);
 
 					// 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-					var iwContent = '<div style="padding:5px;">'+data[i].nickName+'</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+					var iwContent = '<div style="padding:8px; background-color: #1a82ae;' +
+							'    font-family: \'나눔스퀘어\', sans-serif;">'+data[i].nickName+"의 보관소"+'</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
 					// 인포윈도우를 생성합니다
 					var infowindow = new kakao.maps.InfoWindow({
@@ -163,12 +170,12 @@
 					// 마커에 마우스오버 이벤트를 등록합니다
 					kakao.maps.event.addListener(marker, 'mouseover', function() {
 						// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-						infowindow.open(map, markers[i+1]);
+						infowindows[i+1].open(map, markers[i+1]);
 					});
 					// 마커에 마우스아웃 이벤트를 등록합니다
 					kakao.maps.event.addListener(marker, 'mouseout', function() {
 						// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-						infowindow.close();
+						infowindows[i+1].close();
 					});
 				}
 				// 마커 이미지의 이미지 주소입니다
@@ -311,10 +318,10 @@ $(document).ready(function() {			//실행시
 	    navigator.geolocation.getCurrentPosition(function(position) {
 
 	         lat = position.coords.latitude; // 위도
-	         lon = position.coords.longitude; // 경도
+	         lon = position.coords.longitude; //
 
 	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-	            message = '<div style="padding:5px; border-radius: 4px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
+	            message = '<i class="fas fa-angle-down"></i><div style="padding:5px; border-radius: 4px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
 	        // 마커와 인포윈도우를 표시합니다
 	        displayMarker(locPosition, message);
 

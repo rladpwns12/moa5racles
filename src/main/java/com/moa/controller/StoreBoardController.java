@@ -44,7 +44,7 @@ public class StoreBoardController {
 
 
         List<Object> documents = storeBoard.search(detail);
-        System.out.println(documents.get(0));
+        //System.out.println(documents.get(0));
 
         return documents;
     }
