@@ -22,7 +22,7 @@
 
               <div class="center-content">
                   저희 사이트가 처음이세요?
-                  <button type="button" class="middle-btn btn btn-primary btn-lg btn-block">
+                  <button onclick="location.href='/serviceguide'" type="button" class="middle-btn btn btn-primary btn-lg btn-block">
                       서비스 가이드 바로가기
                   </button>
               </div>
