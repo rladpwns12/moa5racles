@@ -63,11 +63,17 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("input:radio[name='price.selectPrice']").click(function () {
         if ($("input[name='price.selectPrice']:checked").val() == "measuredPrice") {
-            $('#measured').attr("disabled", false);
-            $('#bargain').attr("disabled", true);
+            // $('#measured').attr("disabled", false);
+            // $('#bargain').attr("disabled", true);
+            $('#measured').css("background", "#ffffff");
+            $('#bargain').css("background", "#EBEBE4");
+            $('#bargain').attr("readonly", true);
         } else {
-            $('#measured').attr("disabled", true);
-            $('#bargain').attr("disabled", false);
+            // $('#measured').attr("disabled", true);
+            // $('#bargain').attr("disabled", false);
+            $('#measured').css("background", "#EBEBE4");
+            $('#bargain').css("background", "#ffffff");
+            $('#bargain').attr("readonly", false);
         }
     });
 });
@@ -140,23 +146,6 @@ function nextForm() {
                 alert("첫번째 칸의 물건 개수는 반드시 입력하셔야 합니다");
                 return;
             }
-
-            /*for (i = table_product_num - 1; i > 0; i--) {
-                if (productName[i].value == "" || productCnt[i].value == 0) {
-
-                    // console.log(productName[i].closest("tr"));
-                    // console.log(productName[i].closest("td").previousSibling.previousSibling);
-                    // console.log(productName[i].closest("td").nextSibling);
-                    // console.log(productName[i].closest("tr").children('td').eq(0));
-                    // console.log(productName[i].closest("tr").children(".cnt").eq(0));
-
-                    productName[i].closest("tr").remove();
-                    for (var j = (--table_product_num) - 1; j > i; j--) {
-                        productName[j].closest("tr").children("td").eq(0).text(j);
-                    }
-                    // table_product_num--;
-                }
-            }*/
 
             $("#content1").hide();
             $("#content2").show();
@@ -301,15 +290,12 @@ $("button[type='submit']").on("click", function (e) {
             xhr.setRequestHeader(header, token);
         },
         success: function (result) {
-            // console.log(result);
-            // console.log(result.value);
-            // console.log(result == true);
-            // console.log((result.value == true));
             if (result) {
                 $("#content6").hide();
                 $("#content7").show();
                 $("#left_side").hide();
                 $("#right_side").hide();
+                $("#exit_btn").hide();
             } else {
                 alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
             }
@@ -414,7 +400,6 @@ function measuredPriceSetting() {
 }
 
 $(document).ready(function () {
-    // $("input:text[numberOnly]").on("focus", function () {
     $("#bargain").on("focus", function () {
         var x = $(this).val();
         x = removeCommas(x);
