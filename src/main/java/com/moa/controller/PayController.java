@@ -12,10 +12,10 @@ public class PayController {
     public ModelAndView card() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("card");
-        mav.addObject("name", "최모아");
-        mav.addObject("email", "mmmm@naver.com");
-        mav.addObject("phone", "010-3904-9047");
-        mav.addObject("address", "신선로");
+//        mav.addObject("name", "최모아");
+//        mav.addObject("email", "mmmm@naver.com");
+//        mav.addObject("phone", "010-3904-9047");
+//        mav.addObject("address", "신선로");
         mav.addObject("totalPrice", 100);
         return mav;
     }
@@ -24,11 +24,11 @@ public class PayController {
     public ModelAndView kakao() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("kakao");
-        mav.addObject("name", "레이첼");
-        mav.addObject("email", "rCh@naver.com");
-        mav.addObject("phone", "010-3904-9047");
-        mav.addObject("address", "L.A");
-        mav.addObject("totalPrice", 100);
+//        mav.addObject("name", "레이첼");
+//        mav.addObject("email", "rCh@naver.com");
+//        mav.addObject("phone", "010-3904-9047");
+//        mav.addObject("address", "L.A");
+//        mav.addObject("totalPrice", 100);
         return mav;
     }
 }

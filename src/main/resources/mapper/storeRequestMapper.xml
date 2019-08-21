@@ -62,7 +62,7 @@
     </select>
 
     <sql id="requestList_columns">
-        NUMROW, STORE_REQUEST_ID, PROFILE_IMAGE_NAME, NICKNAME, START_DATE, END_DATE, BARGAIN_PRICE, MEASURED_PRICE, BASE_ADDRESS, DETAIL_ADDRESS
+        NUMROW, TRANSACTION_STATE, BARGAIN_PRICE, MEASURED_PRICE, STORE_REQUEST_ID, PROFILE_IMAGE_NAME, NICKNAME, START_DATE, END_DATE, TRANSACTION_PRICE, BASE_ADDRESS, DETAIL_ADDRESS
     </sql>
 
     <resultMap id="requestList_map" type="com.moa.model.vo.SimpleUserRequestVO">
@@ -73,8 +73,10 @@
         <id property="endDate" column="END_DATE"  />
         <id property="bargainPrice" column="BARGAIN_PRICE"  />
         <id property="measuredPrice" column="MEASURED_PRICE"  />
+        <id property="transactionPrice" column="TRANSACTION_PRICE" />
         <id property="baseAddress" column="BASE_ADDRESS"  />
         <id property="detailAddress" column="DETAIL_ADDRESS"  />
+        <id property="transactionState" column="TRANSACTION_STATE" />
     </resultMap>
 
     <select id="searchRequestList" parameterType="map" resultMap="requestList_map">
