@@ -7,6 +7,7 @@ import com.moa.model.vo.ReadStoreRequestVO;
 import com.moa.model.vo.SimpleHostRequestVO;
 import com.moa.model.vo.SimpleStorageBoardVO;
 import com.moa.paging.Pagination;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@Log4j
 @RequestMapping("/hostpage")
 public class HostPageController {
     @Autowired
@@ -173,7 +175,7 @@ public class HostPageController {
         //결과
         result.put("list",list);
         result.put("pagination",pagination);
-        System.out.println(result);
+        log.info(result);
         return result;
     }
 
