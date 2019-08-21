@@ -66,8 +66,13 @@ $.replyReview = function () {
                 alert("오류가 발생하였습니다. 잠시뒤 시도해 주세요...");
             }
         },
-        error: function () {
-            alert("오류가 발생하였습니다. 잠시뒤 시도해 주세요.");
+        error:function(request){
+            var msg = request.responseText;
+            switch (msg) {
+                case "noAuthority" :alert("물건을 맡긴 사람만 답글을 달 수 있습니다.");break;
+                case "overFlow" : alert("하나의 보관당 하나의 답글을 달 수 있습니다.");break;
+                default :  alert("오류가 발생하였습니다. 잠시뒤 시도해 주세요...");
+            }
         }
     });
 }
