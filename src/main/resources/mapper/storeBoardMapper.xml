@@ -24,7 +24,12 @@
         <id property="detailPrice" column="DETAIL_PRICE" jdbcType="NUMERIC"/>
         <id property="starPointAvg" column="STAR_POINT_AVG" jdbcType="NUMERIC"/>
         <id property="storageType" column="STORAGE_TYPE" jdbcType="VARCHAR"/>
-        <id property="pictureName" column="PICTURE_NAME" jdbcType="VARCHAR"/>
+
+        <id property="profile.uuid" column="UUID" />
+        <id property="profile.uploadPath" column="UPLOADPATH" />
+        <id property="profile.fileName" column="PICTURE_NAME" />
+        <id property="profile.fileType" column="FILETYPE"  javaType="boolean"/>
+
         <id property="totReviewCnt" column="TOT_REVIEW_CNT" jdbcType="NUMERIC"/>
         <id property="storagePeriodTypeId" column="STORAGE_PERIOD_TYPE_ID" jdbcType="NUMERIC"/>
         <id property="nickName" column="NICKNAME" jdbcType="VARCHAR"/>
@@ -111,7 +116,7 @@
         INSERT INTO PET_TYPE_TB (ARTICLE_NUM, PET) VALUES(#{articleNum}, #{pet})
     </insert>
 
-    <select id="searchEntrust" parameterType="com.moa.model.vo.EntrustSearchVO" resultMap="entrustSearchVO">
+    <select id="searchEntrust" resultMap="entrustSearchVO">
         SELECT * FROM SEARCH_BOARD_VIEW SBV
        JOIN
         (

@@ -1,12 +1,13 @@
 package com.moa.controller;
 
-import com.moa.file.FileUpload;
 import com.moa.message.PathMessage;
 import com.moa.model.service.LuggageWelcomeService;
 import com.moa.model.service.StoreBoardSearchService;
+import com.moa.model.service.StoreBoardSearchServiceImpl;
 import com.moa.model.service.StoreBoardService;
 import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.DetailOptionVO;
+import com.moa.model.vo.EntrustSearchVO;
 import com.moa.model.vo.StoreBoardFormVO;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -32,20 +28,19 @@ public class StoreBoardController {
     @Autowired
     private LuggageWelcomeService luggageWelcomeService;
     @Autowired
-    private StoreBoardSearchService storeBoard;
+    private StoreBoardSearchService storeBoardSearchService;
 
     @RequestMapping(value="" , method=  RequestMethod.GET)
     public String hostSearch(){
         return "hostSearch";
     }
 
-    @RequestMapping(value="/Search" , method=  RequestMethod.POST)
+    @RequestMapping(value="/Search" , method=  RequestMethod.GET)
     public @ResponseBody
-    List<Object> hostSearch2(DetailOptionVO detail){
+    List<EntrustSearchVO> hostSearchByFilter(DetailOptionVO detail){
 
-
-        List<Object> documents = storeBoard.search(detail);
-        System.out.println(documents.get(0));
+        List<EntrustSearchVO> documents = storeBoardSearchService.search(detail);
+        log.info(documents.get(0));
 
         return documents;
     }
