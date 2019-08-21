@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%
+<%--<%
     String name = (String) request.getAttribute("name");
     String email = (String) request.getAttribute("email");
     String phone = (String) request.getAttribute("phone");
     String address = (String) request.getAttribute("address");
     int totalPrice = (int) request.getAttribute("totalPrice");
-%>
+%>--%>
 
 <html>
 <head>
@@ -28,12 +28,12 @@
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(),
             name: 'MOA 카드 결제 테스트',
-            amount: <%=totalPrice%>,
-            buyer_email: '<%=email%>',
-            buyer_name: '<%=name%>',
-            buyer_tel: '<%=phone%>',
-            buyer_addr: '<%=address%>',
-            buyer_postcode: '123-456',
+            <%--amount: <%=totalPrice%>,--%>
+            <%--buyer_email: '<%=email%>',--%>
+            <%--buyer_name: '<%=name%>',--%>
+            <%--buyer_tel: '<%=phone%>',--%>
+            <%--buyer_addr: '<%=address%>',--%>
+            // buyer_postcode: '123-456',
         }, function (rsp) {
             console.log(rsp);
 
@@ -44,12 +44,12 @@
                 msg += '\n결제 금액 : ' + rsp.paid_amount;
                 msg += '\n카드 승인번호 : ' + rsp.apply_num;
                 //성공시 이동할 페이지
-                location.href = 'http://localhost:8089/mypage';
+                location.href = "http://localhost:8089/mypage/requestlist/1";
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
                 //실패시 이동할 페이지
-                location.href = "http://localhost:8089"
+                location.href = "http://localhost:8089/mypage/requestlist/1"
                 alert(msg);
             }
         });
