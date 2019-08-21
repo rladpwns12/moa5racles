@@ -12,7 +12,6 @@
 </head>
 
 <body class="body-layout">
-<%@ include file="navbar.jsp" %>
 <div class="container sub-layout">
     <div class="join-agree-layout">
         <br><br>
@@ -468,6 +467,5 @@
 </div>
 </div>
 </div></div></div>
-<%@ include file="footer.jsp" %>
 </body>
 </html>
