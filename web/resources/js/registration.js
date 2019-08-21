@@ -742,3 +742,17 @@ function resetPassword2() {
 function resetDetailAddress() {
     $('#detailAddress_fake').css('border', 'solid 0.2px #D6D6D6');
 }
+var win;
+
+function popupOpen(reportId){
+    if(win != null) win.close();
+    var popUrl = "/termsOfService";
+    var popupX = (window.screen.width / 2) - (200 / 2);
+    var popupY= (window.screen.height / 2) - (300 / 2);
+
+    var popOption = "width=500, height=650, resizable=no, " +
+        "scrollbars=yes, status=no, " +
+        "left="+popupX+",top="+popupY+";";
+
+    win = window.open(popUrl,"",popOption);
+}

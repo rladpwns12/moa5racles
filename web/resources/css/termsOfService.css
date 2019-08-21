@@ -5,7 +5,7 @@
 }
 
 .container {
-    margin-top: 80px;
+    /*margin-top: 80px;*/
 }
 
 .row {
@@ -1742,8 +1742,8 @@ pre code {
 .container {
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto
+    /*margin-right: auto;*/
+    /*margin-left: auto*/
 }
 
 @media (min-width: 768px) {
@@ -1754,13 +1754,13 @@ pre code {
 
 @media (min-width: 992px) {
     .container {
-        width: 970px
+        /*width: 970px*/
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        width: 1170px
+        /*width: 1170px*/
     }
 }
 
@@ -2189,7 +2189,7 @@ pre code {
     }
 
     .col-sm-offset-2 {
-        margin-left: 16.66666667%
+        /*margin-left: 16.66666667%*/
     }
 
     .col-sm-offset-1 {
