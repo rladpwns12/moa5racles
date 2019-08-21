@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link href="/resources/css/agency.min.css" rel="stylesheet">
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/serviceGuide.css">
-    <link href="/resources/css/agency.min.css" rel="stylesheet">
+
 
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <title>MOA-service guide</title>
