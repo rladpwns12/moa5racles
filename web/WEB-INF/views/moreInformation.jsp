@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="com.moa.model.vo.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="articlesList" value="${articlesMap.articlesList}"/>
 <c:set var="totArticles" value="${articlesMap.totArticles}"/>
@@ -14,13 +15,14 @@
 <c:set var="hostReputationVO" value="${storeBoard.hostReputationVO}"/>
 <fmt:formatNumber var="star" value="${hostReputationVO.starPointAvg}" maxFractionDigits="0" />
 <% request.setCharacterEncoding("utf-8");%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
     <sec:csrfMetaTags/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3520184da1c100939d7dde66edf0534&libraries=services"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
@@ -87,7 +89,7 @@
 <body>
 <%@ include file="navbar.jsp" %>
 <div class='gallary_div'></div>
-
+<input type="hidden" id="baseAddress" value="${storeBoardVO.baseAddress}" />
 <div class="gallary_wrap">
     <div class="demo">
         <div class="item">
@@ -137,7 +139,7 @@
                 </div>
             </div>
             <div class="summary_info" id='summary_info'>
-                <table class="summary_info_tb" style="width:160px">
+                <table class="summary_info_tb" style="width:150px;">
                     <tr>
                         <th>보관지 형태</th>
                         <td>${storeBoardVO.storageType}</td>
@@ -147,9 +149,8 @@
                         <td>${storeBoardVO.detailPrice["1달"]}원/5호박스 (1달)</td>
                     </tr>
                     <tr>
-
                         <th>주소</th>
-                        <td>${fn:substring(storeBoardVO.baseAddress,0,15)}  </td>
+                        <td >${fn:substring(storeBoardVO.baseAddress,0,15)}  </td>
                     </tr>
                     <tr>
                         <th>배송</th>
@@ -183,7 +184,9 @@
                     </tr>
                 </table>
             </div>
-            <button class='entrust_btn moabtn' id='entrust_btn' onclick="location.href='/entrust/${storeBoardVO.articleNum}'">보관해주세요</button>
+            <div>
+                <button class='entrust_btn moabtn' id='entrust_btn' onclick="location.href='/entrust/${storeBoardVO.articleNum}'">보관해주세요</button>
+            </div>
         </div>
 
         <div class="image_info" id='image_info'>
@@ -192,7 +195,7 @@
             <div class="like_btn" id="like_btn"><i class="far fa-heart"></i></div>
         </div>
     </div>
-    <div class='desc_info'>상세정보</div>
+    <div class='desc_info'>상세 정보</div>
     <div class="wrap_content_footer">
         <div class="more_info" id='more_info'>
             <c:choose>
@@ -210,14 +213,14 @@
                 </c:when>
             </c:choose>
             <div class="more_info_desc">${storeBoardVO.storageType}</div>
-            <span>보관지 형태<div class='more_info_item'><div style="font-size: 15px">${storeBoardVO.storageType}</div></div></span>
+            <span >보관지 형태<div class='more_info_item'><div style="font-size: 15px">${storeBoardVO.storageType}</div></div></span>
         </div>
         <div class="more_info" id='more_info'>
             <div class="more_info_icon"><i class="fas fa-money-bill"></i>  </div>
             <div class="more_info_desc">${storeBoardVO.detailPrice["1달"]}원</div>
             <span>금액<div class='more_info_item'>
                 <div style="font-size: 11px">5호박스 기준으로 측정한 가격입니다.</div>
-          <table class='item_price_tb'>
+          <table class='item_price_tb' >
             <tr>
               <th>1일</th>
               <td>${storeBoardVO.detailPrice["1일"]}원</td>
@@ -282,7 +285,10 @@
             <div class="more_info" id='more_info'>
                 <div class="more_info_icon"><i class="fas fa-ban"></i>  </div>
                 <div class="more_info_desc">금지 물품</div>
-                <span>보관 금지 물품 <div class='more_info_item'>${storeBoardVO.forbiddenProduct}</div></span>
+                <span style="z-index: 4;">
+                    <div>보관 금지 물품 </div>
+                    <div class='more_info_item'>${storeBoardVO.forbiddenProduct}</div>
+                </span>
             </div>
         </c:if>
     </div>
@@ -290,26 +296,40 @@
     <div class="detail_description" id='detail_description'>
         ${storeBoardVO.content}
     </div>
+    <div class='location_map'>
+        <div class="location_map_title">위치 정보</div>
+        <div class="location_map_content" id="map"></div>
+    </div>
     <div class="review_class">
         <div class="review_host_title">리뷰</div>
         <div class="review_header">
             <div class="review_host">
-                <div class="review_host_point">
-                    <c:choose>
-                        <c:when test="${star < 1}">
-                            0
-                        </c:when>
-                        <c:otherwise>
-                            <fmt:formatNumber value="${hostReputationVO.starPointAvg}" pattern=".0"/>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-                <div class="star_icon">
-                    <c:forEach begin="1" end="${star}" step="1">
-                        <i class="fas fa-star"></i>
-                    </c:forEach>
-                </div>
-                <div class="review_host_cnt">${hostReputationVO.totalReviewCnt}명이 리뷰함</div>
+                <c:choose>
+                    <c:when test="${hostReputationVO.totalReviewCnt eq 0}">
+                        <div class="no_review">등록된 리뷰가 없습니다.</div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="review_host_point">
+                            <c:choose>
+                                <c:when test="${star < 1}">
+                                    0
+                                </c:when>
+                                <c:otherwise>
+                                    <fmt:formatNumber value="${hostReputationVO.starPointAvg}" pattern=".0"/>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="star_icon">
+                            <c:forEach begin="1" end="${star}" step="1">
+                                <i class="fas fa-star"></i>
+                            </c:forEach>
+                            <c:forEach begin="1" end="${5 - star}" step="1">
+                                <i class="far fa-star"></i>
+                            </c:forEach>
+                        </div>
+                        <div class="review_host_cnt">(${hostReputationVO.totalReviewCnt}명이 리뷰함)</div>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="review_list">
 
@@ -319,7 +339,7 @@
             <div class="review_paging">
             </div>
             <sec:authorize access="isAuthenticated()" >
-                <a class="review_btn moabtn btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">리뷰 쓰기</a>
+                <a class="review_btn moabtn btn btn-success btn-green"  style="padding: 5px 10px;" href="#reviews-anchor" id="open-review-box">리뷰 쓰기</a>
             </sec:authorize>
         </div>
     </div>
@@ -333,7 +353,7 @@
                     <div class="stars starrr" data-rating="0"></div>
                     <a class=" cancle-btn" href="" id="close-review-box" style="display:none; margin-right: 10px;">
                         <span class="glyphicon glyphicon-remove" id="cancle_btn"></span>&nbsp;취소&nbsp;</a>
-                    <button class="moabtn btn-success " onclick="$.replyReview();return false;">답글달기</button>
+                    <button class="moabtn btn-success "onclick="$.replyReview();return false;">답글달기</button>
                 </div>
             </form>
         </div>

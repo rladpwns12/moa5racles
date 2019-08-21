@@ -6,15 +6,15 @@ $(document).ready(function () {
 	var header = $("meta[name='_csrf_header']").attr("content");
 
     function searchLocation(adr) {
-        var geocoder = new kakao.maps.services.Geocoder();
-        var callback = function (result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                addrLat = result[0].y;
-                addrLng = result[0].x;
-            }
-        };
-        geocoder.addressSearch(adr, callback);
-    }//-- end of find lat&lng
+    var geocoder = new kakao.maps.services.Geocoder();
+    var callback = function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            addrLat = result[0].y;
+            addrLng = result[0].x;
+        }
+    };
+    geocoder.addressSearch(adr, callback);
+}//-- end of find lat&lng
     searchLocation(addr);
 
     $('input[type=radio][name=storage_type_answer]').on('click', function () {
