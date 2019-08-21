@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@Log4j
 @RequestMapping("/entrust")
 public class StoreRequestController {
     private Log logger = LogFactory.getLog(StoreRequestController.class);
@@ -51,10 +50,6 @@ public class StoreRequestController {
                     StoreRequestVO storeRequestVO, Authentication auth) {
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
-
-        log.info("start");
-        log.info(articleNum);
-        log.info(storeRequestVO);
 
         storeRequestVO.setUserId(userId);
         storeRequestVO.setArticleNum(articleNum);
