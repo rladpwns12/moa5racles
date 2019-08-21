@@ -1,10 +1,10 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
-
+var thumbnail = 'thumbnail_';
 function deleteStorage(storageNum){
 	var flag=confirm("정말로 삭제하시겠습니까?");
 	if(flag){
-		$.post('/storeBoard/'+storageNum+'/delete',function (data) {
+		$.post('/storeboard/'+storageNum+'/delete',function (data) {
 			if(data==true) {
 				alert("삭제가 완료되었습니다.");
 				location.href="/main";
@@ -61,7 +61,18 @@ $.storageList = function(curPage){
 				//row2
 				let tr2 = $('<tr/>').appendTo(table);
 				let td21	 = $('<td/>',{class:'table_left table_img storage_detail',rowspan:4}).appendTo(tr2);
-				$('<img/>',{src:'/resources/image/navbar/storage.png',id:result.list[i].articleNum,alt:'사진을 불러올 수 없습니다.'}).appendTo(td21);
+
+				var profile = result.list[i].boardAttach;
+				var fileCallPath = encodeURIComponent(profile.uploadPath + "/" + thumbnail
+					+ profile.uuid + "_" + profile.fileName);
+
+				$('<img/>', {
+					src: '/display?fileName=/' + fileCallPath,
+					alt: 'profile',
+					id:result.list[i].articleNum,
+					onerror: 'this.src="/resources/image/loading.gif"'
+				}).appendTo(td21);
+
 				let td22 = $('<td/>',{class:'table_middle table_title', text:'제 목'}).appendTo(tr2);
 				let td23 = $('<td/>',{class:'table_right storage_detail', id:result.list[i].articleNum ,text:result.list[i].title}).appendTo(tr2);
 				//row3
@@ -121,8 +132,9 @@ $.storageList = function(curPage){
 
 
 		},
-		error:function(error){
+		error:function(request,status,error){
 			alert("목록 불러오기 실패");
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
 };

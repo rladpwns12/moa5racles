@@ -10,10 +10,25 @@
     </sql>
 
     <sql id="my_storage">
-        HOST_ID hostId, ARTICLE_NUM articleNum, TITLE title, STORE_PRODUCT_CNT storeProductCNt,
-        EXPIRE_PRODUCT_CNT exprieProductCnt, FAVORITE_CNT favoriteCnt,
-        REVIEW_CNT reviewCnt, STAR_POINT starPoint, PICTURE_NAME pictureName
+        HOST_ID hostId, ARTICLE_NUM articleNum, TITLE title, STORE_PRODUCT_CNT storeProductCnt,
+        EXPIRE_PRODUCT_CNT expireProductCnt, FAVORITE_CNT favoriteCnt,
+        REVIEW_CNT reviewCnt, STAR_POINT starPoint, PICTURE_NAME, UPLOADPATH ,
+         UUID , FILETYPE
     </sql>
+
+    <resultMap id="searchMyStorageMap" type="com.moa.model.vo.SimpleStorageBoardVO">
+        <id property="articleNum" column="articleNum"/>
+        <id property="title" column="title"/>
+        <id property="storeProductCnt" column="storeProductCnt"/>
+        <id property="expireProductCnt" column="expireProductCnt"/>
+        <id property="favoriteCnt" column="favoriteCnt"/>
+        <id property="reviewCnt" column="reviewCnt"/>
+        <id property="starPoint" column="starPoint"/>
+        <id property="boardAttach.fileName" column="PICTURE_NAME"/>
+        <id property="boardAttach.uploadPath" column="UPLOADPATH"/>
+        <id property="boardAttach.uuid" column="UUID"/>
+        <id property="boardAttach.fileType" column="FILETYPE" javaType="boolean"/>
+    </resultMap>
 
     <sql id="storage_address_columns">
         STORAGE_ID, BASE_ADDRESS, DETAIL_ADDRESS
@@ -159,7 +174,7 @@
         SELECT DETAIL_PRICE_NAME AS 상세가격 FROM DETAILS_PRICE_TB ORDER BY DETAILS_PRICE_ID
     </select>
 
-    <select id="searchMyStorage" parameterType="hashMap" resultType="com.moa.model.vo.SimpleStorageBoardVO">
+    <select id="searchMyStorage" parameterType="hashMap" resultMap="searchMyStorageMap">
 
         select * from
         (
