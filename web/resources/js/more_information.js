@@ -1,7 +1,59 @@
 $(document).ready(function () {
     $.reviewList(1, 1);
 
+    $('#like_btn').click(function () {
+        var like = $('#like_btn > i');
+
+        if( like.attr('class') == 'far fa-heart'){
+            like.attr('class','fas fa-heart');
+        }
+        else{
+            like.attr('class','far fa-heart');
+        }
+    });
+
+    var addrLat = 0;
+    var addrLng = 0;
+    var addr = $('#baseAddress').val();
+
+    function searchLocation(adr) {
+        var geocoder = new kakao.maps.services.Geocoder();
+        var callback = function (result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                addrLat = result[0].y;
+                addrLng = result[0].x;
+            }
+        };
+        geocoder.addressSearch(adr, callback);
+    }//-- end of find lat&lng
+    searchLocation(addr);
+    setTimeout(function(){
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new kakao.maps.LatLng(addrLat,addrLng), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        var markerPosition = new kakao.maps.LatLng(addrLat, addrLng);
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+        marker.setMap(map);
+    }, 500)
 });
+
+
+function searchLocation(adr) {
+    var geocoder = new kakao.maps.services.Geocoder();
+    var callback = function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            addrLat = result[0].y;
+            addrLng = result[0].x;
+        }
+    };
+    geocoder.addressSearch(adr, callback);
+}
 
 // 폼 전송
 $.replyReview = function () {
@@ -78,7 +130,7 @@ $.replyReview = function () {
 }
 
 function myFunction() {
-    var str='/resources/image/navbar/profile.png';
+    var str = '/resources/image/navbar/profile.png';
     $(imgSrc).attr("src", str);
 }
 
@@ -103,61 +155,74 @@ $.reviewList = function (section, pageNum) {
         success: function (data) {
             var thumbnail = 'thumbnail_';
             $('.review_list').remove();
-            var str = '<div class="review_list">'
-                + '<table  class="review_table">';
-            for (var i = 0; i < Object.keys(data.reviewList).length; i++) {
-                var profile=data.reviewList[i].profile;
-                var fileCallPath = encodeURIComponent(profile.uploadPath + "/" + thumbnail
-                    + profile.uuid +"_"+profile.fileName);
 
-                var imgSrc = $('<img>', {
-                    src: '/display?fileName=/' + fileCallPath,
-                    alt: 'profile',
-                    onerror : 'this.src="/resources/image/navbar/profile.png"'
-                }).css({
-                    borderRadius : '100px',
-                    width:'40px',
-                    height : '40px'
-                });
-                var path = "/display?fileName=/" + fileCallPath;
-                $(imgSrc).attr("src", path);
+            if (Object.keys(data.reviewList).length == 0) {
 
-                str += '<tr>'
-                    + '<td class="review_img">';
-                str+=imgSrc[0].outerHTML;
-                str += '</td>'
-                    + '<td class="review_id">' + data.reviewList[i].nick + '</td>'
-                    + '<td class="review_star">';
-                var starPoint = data.reviewList[i].starPoint;
-                for (var j = 0; j < starPoint; j++) {
-                    str += '<i class="fas fa-star"></i>';
+            } else {
+                var str = '<div class="review_list">'
+                    + '<table  class="review_table">';
+                for (var i = 0; i < Object.keys(data.reviewList).length; i++) {
+
+                    var profile = data.reviewList[i].profile;
+                    var fileCallPath = encodeURIComponent(profile.uploadPath + "/" + thumbnail
+                        + profile.uuid + "_" + profile.fileName);
+
+                    var imgSrc = $('<img>', {
+                        src: '/display?fileName=/' + fileCallPath,
+                        alt: 'profile',
+                        onerror: 'this.src="/resources/image/navbar/profile.png"'
+                    }).css({
+                        borderRadius: '100px',
+                        width: '40px',
+                        height: '40px'
+                    });
+                    var path = "/display?fileName=/" + fileCallPath;
+                    $(imgSrc).attr("src", path);
+
+                    str += '<tr style="height: 50px">'
+                        + '<td class="review_img">';
+                    str += imgSrc[0].outerHTML;
+                    str += '</td>'
+                        + '<td class="review_id">' + data.reviewList[i].nick + '</td>'
+                        + '<td class="review_star">';
+                    var starPoint = data.reviewList[i].starPoint;
+                    for (var j = 0; j < starPoint; j++) {
+                        str += '<i class="fas fa-star"></i>';
+                    }
+                    for (var j = 0; j < 5 - starPoint; j++) {
+                        str += '<i class="far fa-star"></i>';
+                    }
+                    str += '&nbsp;' + starPoint + '.0'
+                        + '</td>'
+                        + '<td class="review_content" colspan="3" >'
+                        + data.reviewList[i].content
+                        + '</td>'
+                        + '<td class="review_write_date">'
+                        + data.reviewList[i].writeDate
+                        + '</td>'
+                        + '</tr>';
                 }
-                for (var j = 0; j < 5 - starPoint; j++) {
-                    str += '<i class="far fa-star"></i>';
-                }
-                str += '&nbsp;' + starPoint + '.0'
-                    + '</td>'
-                    + '<td class="review_content" colspan="3" >'
-                    + data.reviewList[i].content
-                    + '</td>'
-                    + '<td class="review_write_date">'
-                    + data.reviewList[i].writeDate
-                    + '</td>'
-                    + '</tr>';
+                str += '</table>'
+                    + '</div>';
             }
-            str += '</table>'
-                + '</div>';
             $('.review_host').after(str);
             $('.review_paging').remove();
             var strf = '<div class="review_paging">';
-            if (section == 1 && pageNum != 1) {
+
+            if(data.totReviews == 0){
+
+            }
+            else if(section == 1 && pageNum == 1) {
+                strf += '<i class="fas fa-angle-left no-uline" style="margin-right: 5px;" />';
+            }
+            else if (section == 1 && pageNum != 1) {
                 strf += '<i class="fas fa-angle-left no-uline" onclick="$.reviewList(1,1);">&nbsp;</i>';
-            } else if (section > 1) {
-                strf += '<i class="fas fa-angle-left no-uline" onclick="$.reviewList(' +
-                    (section - 1) +
-                    ',' +
-                    pageNum +
-                    ');">&nbsp;</i>';
+            }
+            else if (section > 1) {
+                strf += '<i class="fas fa-angle-left no-uline" onclick="$.reviewList(section, 1)"/>';
+            }
+            else{
+                strf += '<i class="fas fa-angle-left no-uline" style="margin-right: 5px;" onclick="$.reviewList(' + (section - 1) + ',' + pageNum + ');" />';
             }
             if (parseInt(data.totReviews / 50) > section - 1) {
                 for (var i = 1; i <= 10; i++) {
@@ -176,8 +241,8 @@ $.reviewList = function (section, pageNum) {
                 }
             } else {
                 var lastReview = parseInt((data.totReviews % 50) / 5);
-                if(data.totReviews%5!=0)
-                    lastReview +=1;
+                if (data.totReviews % 5 != 0)
+                    lastReview += 1;
                 for (var i = 1; i <= lastReview; i++) {
                     if (i == pageNum)
                         strf += '<span class="no-uline sel-page" onclick="$.reviewList(' +
@@ -194,19 +259,31 @@ $.reviewList = function (section, pageNum) {
                 }
             }
             var lastPage = parseInt((data.totReviews % 50) / 5) + 1;
-            if (section == parseInt(data.totReviews / 50) + 1 && (section - 1) * 50 + pageNum * 5 < data.totReviews) {
-                strf += '<i class="fas fa-angle-right no-uline" onclick="$.reviewList(' +
-                    section +
-                    ',' +
-                    lastPage +
-                    ');">&nbsp;</i>';
+
+
+            if(data.totReviews == 0){
+
             }
+            else if(((section - 1) * 10 + pageNum) == Math.ceil(data.totReviews / 5)){
+                strf += '<i class="fas fa-angle-right no-uline" />';
+            }
+            else{
+                strf += '<i class="fas fa-angle-right no-uline" onclick="$.reviewList(' +section +',' + lastPage +');" />';
+            }
+
+            // if (section == parseInt(data.totReviews / 50) + 1 && (section - 1) * 50 + pageNum * 5 < data.totReviews) {
+            //     strf += '<i class="fas fa-angle-right no-uline" onclick="$.reviewList(' +
+            //         section +
+            //         ',' +
+            //         lastPage +
+            //         ');">&nbsp;</i>';
+            // }
             strf += '</div>';
             $('.review_footer').append(strf);
             // $('.review_btn').before(strf);
         },
-        error:function(request,status,error){
-            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
         }
     });
 }
