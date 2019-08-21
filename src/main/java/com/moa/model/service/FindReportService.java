@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface FindReportService {
     Map<String, Object> findReportList(Map<String, Object>map);
-    ReportVO findReport(long reportId);
+    Map<String, Object> findReport(long reportId);
 }

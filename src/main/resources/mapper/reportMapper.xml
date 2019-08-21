@@ -48,4 +48,9 @@
         from report_tb where report_tb_id = #{report_id}
     </select>
 
+    <select id="searchResult" resultType="com.moa.model.vo.ReportResultVO">
+            SELECT RESULT_CONTENT content, RESULT_DATETIME resultTime
+            FROM REPORT_RESULT_TB WHERE REPORT_TB_ID = #{reportId}
+    </select>
+
 </mapper>
