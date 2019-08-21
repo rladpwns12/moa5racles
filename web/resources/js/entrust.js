@@ -1,6 +1,5 @@
 var num = 1;
-var table_product_num = 1;
-var copy_table_product_num = 0;
+var table_product_num = 0;
 var i = 0;
 $(function () {
     $("#start_datepicker").datepicker({
@@ -62,8 +61,8 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $("input:radio[name=price_radio]").click(function () {
-        if ($("input[name=price_radio]:checked").val() == "1") {
+    $("input:radio[name='price.selectPrice']").click(function () {
+        if ($("input[name='price.selectPrice']:checked").val() == "measuredPrice") {
             $('#measured').attr("disabled", false);
             $('#bargain').attr("disabled", true);
         } else {
@@ -128,49 +127,36 @@ function nextForm() {
 
     switch (num) {
         case 1:
-            var productName = document.getElementsByName("productName");
-            var productCnt = document.getElementsByName("productCnt");
+            var productName = document.getElementsByName("productList[0].product");
+            var productCnt = document.getElementsByName("productList[0].productCnt");
 
             if (productName[0].value == null || productName[0].value.trim() == "") {
-                alert("물건명을 최소 하나 이상 입력해주세요.");
+                alert("첫번째 칸의 물건명은 반드시 입력하셔야 합니다");
                 productName[0].value = "";
                 productName[0].focus();
                 return;
             }
             if (productCnt[0].value == 0) {
-                alert("물건 개수는 최소 1개 이상이어야 합니다.");
+                alert("첫번째 칸의 물건 개수는 반드시 입력하셔야 합니다");
                 return;
             }
 
+            /*for (i = table_product_num - 1; i > 0; i--) {
+                if (productName[i].value == "" || productCnt[i].value == 0) {
 
-            /*let tableBody;
-            for (i = 0; i < productList.length; i++) {
-                console.log(productName[i].value);
-                if (productName[i].value == "" || productCnt.value == 0) {
-                    continue;
+                    // console.log(productName[i].closest("tr"));
+                    // console.log(productName[i].closest("td").previousSibling.previousSibling);
+                    // console.log(productName[i].closest("td").nextSibling);
+                    // console.log(productName[i].closest("tr").children('td').eq(0));
+                    // console.log(productName[i].closest("tr").children(".cnt").eq(0));
+
+                    productName[i].closest("tr").remove();
+                    for (var j = (--table_product_num) - 1; j > i; j--) {
+                        productName[j].closest("tr").children("td").eq(0).text(j);
+                    }
+                    // table_product_num--;
                 }
             }*/
-
-            alert(table_product_num);
-            for (i = table_product_num - 1; i > 0; i--) {
-                if (productName[i].value == "" || productCnt[i].value == 0) {
-                    productName[i].closest("tr").remove();
-                    for (let j = table_product_num - 2; j >= i; j--)
-                        productName[j].closest("td").previousSibling.previousSibling.innerHTML = j + 1;
-                    table_product_num--;
-                }
-            }
-
-            alert("length: " + productName.length);
-            console.log(document.getElementsByName('productName'));
-            alert("length: " + productName.length);
-            for (i = 0; i < productName.length; i++) {
-                alert(i);
-                document.getElementsByName('productName')[0].setAttribute('name', 'productList[' + (copy_table_product_num++) + '].product');
-                // $('input[name=productName]').attr('name', 'productList[' + (copy_table_product_num++) + '].product');
-                alert("222");
-            }
-            alert("333");
 
             $("#content1").hide();
             $("#content2").show();
@@ -181,7 +167,7 @@ function nextForm() {
             return;
         case 2:
             for (i = 0; i < 3; i++) {
-                let size = document.getElementsByClassName("productSize[" + i + "]");
+                var size = document.getElementsByClassName("productSize[" + i + "]");
                 if (size.value != 0)
                     break;
             }
@@ -196,10 +182,15 @@ function nextForm() {
             num++;
             return;
         case 3:
-            let startDate = $('#start_datepicker').val();
-            let endDate = $('#end_datepicker').val();
+            var startDate = $('#start_datepicker').val();
+            var endDate = $('#end_datepicker').val();
             if (startDate == "" || endDate == "") {
                 alert("맡길 기간을 입력해주세요");
+                return;
+            }
+
+            if ($('#bargain_price').prop("checked") && $('#bargain').val() == 0) {
+                alert("흥정가격을 입력하거나 측정 가격를 체크해주세요");
                 return;
             }
 
@@ -210,7 +201,7 @@ function nextForm() {
             num++;
             return;
         case 4:
-            let checkValid = document.getElementsByName("transactionWay");
+            var checkValid = document.getElementsByName("transactionWay");
             for (i = 0; i < checkValid.length; i++) {
                 if (checkValid[i].checked == true)
                     break;
@@ -260,13 +251,13 @@ function nextForm() {
 function exit() {
     if (confirm("작성한 내용은 저장되지 않습니다. 정말로 나가시겠습니까?")) {
         $('#regForm')[0].reset();
-        location.href = "/main";
+        location.href = "/storeboard";
     }
 }
 
 function finished() {
     $('#regForm')[0].reset();
-    location.href = "/main";
+    location.href = "/storeboard";
 }
 
 var formObj = $("form[role='form']");
@@ -289,10 +280,18 @@ $("button[type='submit']").on("click", function (e) {
         str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
         str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
         str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
-        str += "<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+        str += "<input type='hidden' name='attachList[" + i + "].fivarype' value='" + jobj.data("type") + "'>";
     });
     formObj.append(str);
-    alert(formObj);
+
+    var measured = $('#measured').val();
+    measured = removeCommas(measured);
+    $('#measured').val(measured);
+
+    var bargain = $('#bargain').val();
+    bargain = removeCommas(bargain);
+    $('#bargain').val(bargain);
+
     $.ajax({
         type: "POST",
         url: location.pathname,
@@ -302,10 +301,10 @@ $("button[type='submit']").on("click", function (e) {
             xhr.setRequestHeader(header, token);
         },
         success: function (result) {
-            console.log(result);
-            console.log(result.value);
-            console.log(result == true);
-            console.log((result.value == true));
+            // console.log(result);
+            // console.log(result.value);
+            // console.log(result == true);
+            // console.log((result.value == true));
             if (result) {
                 $("#content6").hide();
                 $("#content7").show();
@@ -323,13 +322,13 @@ $("button[type='submit']").on("click", function (e) {
 });
 
 function duration(startDate, endDate) {
-    let month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    let period = 0;
-    let sdate = 0, edate = 0;
-    let check;
+    var month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var period = 0;
+    var sdate = 0, edate = 0;
+    var check;
 
-    let start = startDate.split('-');
-    let end = endDate.split('-');
+    var start = startDate.split('-');
+    var end = endDate.split('-');
 
     for (i = 1; i < start[1]; i++)
         sdate += month[i];
@@ -355,7 +354,7 @@ function duration(startDate, endDate) {
 }
 
 function year_check(year) {
-    let check;
+    var check;
     if (year % 4 == 0) {
         if (year % 100 == 0) {
             if (year % 400 == 0)
@@ -370,19 +369,19 @@ function year_check(year) {
 }
 
 function measuredPriceSetting() {
-    let startDate = $('#start_datepicker').val();
-    let endDate = $('#end_datepicker').val();
+    var startDate = $('#start_datepicker').val();
+    var endDate = $('#end_datepicker').val();
 
     if (startDate == "" || endDate == "" || startDate == null || endDate == null) {
         $('#measured').val("0");
         return;
     }
 
-    let period = duration(startDate, endDate);    // 날짜를 선택하지 않으면 리턴
+    var period = duration(startDate, endDate);    // 날짜를 선택하지 않으면 리턴
 
-    let measuredPrice;
-    let selectedPrice;
-    let multiplePrice = $('#firstMultiple').val() * $('#box').val() + $('#secondMultiple').val() * $('#bicycle').val() + $('#thirdMultiple').val() * $('#bed').val();
+    var measuredPrice;
+    var selectedPrice;
+    var multiplePrice = $('#firstMultiple').val() * $('#box').val() + $('#secondMultiple').val() * $('#bicycle').val() + $('#thirdMultiple').val() * $('#bed').val();
 
     if (period < 7) {
         selectedPrice = $('#day').val();
@@ -414,10 +413,9 @@ function measuredPriceSetting() {
     }
 }
 
-/*
 $(document).ready(function () {
-    $("input:text[numberOnly]").on("focus", function () {
-        // $(".i_price").on("focus", function () {
+    // $("input:text[numberOnly]").on("focus", function () {
+    $("#bargain").on("focus", function () {
         var x = $(this).val();
         x = removeCommas(x);
         $(this).val(x);
@@ -443,26 +441,10 @@ function removeCommas(x) {
     if (!x || x.length == 0) return "";
     else return x.split(",").join("");
 }
-*/
 
-/*
-function deleteRow(input) {
-    let productName = document.getElementsByName("productName");
-
-    console.log(input.closest("td").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML - 1);
-
-    if((input.closest("td").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML - 1) == 0) {
-        alert("here");
-        productName[input.closest("td").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML - 1].closest("tr").remove();
-    }
-    alert("111");
-    // productName[input.closest("td").previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML - 1].closest("tr").remove();
-    if(productName.length != table_product_num) {
-        for (let j = table_product_num - 2; j >= i; j--) {
-            alert(productName[j].closest("td").previousSibling.previousSibling.innerHTML);
-            productName[j].closest("td").previousSibling.previousSibling.innerHTML = j + 1;
-        }
-    }
-    table_product_num--;
-}
-*/
+$(document).ready(function () {
+    $('#bargain').on("focusout", function () {
+        if ($('#bargain').val() == "")
+            $('#bargain').val(0);
+    })
+})
