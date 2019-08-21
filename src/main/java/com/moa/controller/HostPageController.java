@@ -124,8 +124,7 @@ public class HostPageController {
         map.put("firstNum",(curPage-1)*10+1);
         map.put("lastNum",(curPage-1)*10+10);
         map.put("hostId",userId);
-        List<SimpleHostRequestVO> list
-                = receiveService.selectLuggageWaitingReceiveRecord(map);
+        List<SimpleHostRequestVO> list = receiveService.selectLuggageWaitingReceiveRecord(map);
 
         //******************paging logic*********************
         Map<String,Object> pagingInfo = new HashMap<String,Object>();
