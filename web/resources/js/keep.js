@@ -165,13 +165,13 @@ function nextForm() {
 function exit() {
     if (confirm("작성한 내용은 저장되지 않습니다. 정말로 나가시겠습니까?")) {
         $('#regForm')[0].reset();
-        location.href = "/moa/main";
+        location.href = "/storeboard";
     }
 }
 
 function finished() {
     $('#regForm')[0].reset();
-    location.href = "/moa/main";
+    location.href = "/storeboard";
 }
 
 function submitForm() {

@@ -122,8 +122,7 @@
               <h2 class="head_3">흥정을 하고싶다면 직접 가격을 입력해주세요.</h2>
               <div class="price_class">
                   <div class="price_e1">
-                      <input type="radio" class="radio_btn" id="expected_price" name="price_radio"
-                             value="1" checked="checked"/>
+                      <input type="radio" class="radio_btn selectPrice" id="expected_price" name="price.selectPrice" value="measuredPrice" checked="checked"/>
                       <label for="expected_price"> 측정 가격 </label>
                       <input type="text" id="measured" class="i_price" name="price.measuredPrice" value="0" readonly numberOnly="true">
                       <input type="hidden" id="day" value="${detailPriceList[0]}">
@@ -133,8 +132,7 @@
                       <input type="hidden" id="year" value="${detailPriceList[4]}">
                   </div>
                   <div class="price_e2">
-                      <input type="radio" class="radio_btn" id="bargain_price" name="price_radio"
-                             value="0"/>
+                      <input type="radio" class="radio_btn selectPrice" id="bargain_price" name="price.selectPrice" value="bargainPrice"/>
                       <label for="bargain_price"> 흥정 가격 </label>
                       <input type="text" id="bargain" class="i_price" name="price.bargainPrice" value="0" disabled numberOnly="true">
                   </div>
@@ -144,8 +142,7 @@
 					<h2 class="head_5">원하는 거래방식을 선택해주세요</h2>
 					<div class="deals">
 						<div class="deal_1">
-							<input type="radio" class="radio_btn" id="direct_deal" name="transactionWay"
-								   value="직거래"/>
+							<input type="radio" class="radio_btn" id="direct_deal" name="transactionWay" value="직거래"/>
 							<label for="direct_deal"> 직거래 </label>
 						</div>
 						<div class="deal_2">
