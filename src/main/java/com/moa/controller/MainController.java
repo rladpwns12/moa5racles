@@ -34,7 +34,12 @@ public class MainController {
     @RequestMapping(value = "admin/hostapprove/info")
     public String mobileApproveInformation(){
 
+
         return "mApproveInformation";
 
+    }
+    @RequestMapping(value = "serviceguide")
+    public String serviceGuide(){
+        return "serviceGuide";
     }
 }
