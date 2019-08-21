@@ -4,14 +4,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="cutil" uri="tld/Util.tld" %>
 <%@ page import="com.moa.model.vo.*" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<c:set var="articlesList" value="${articlesMap.articlesList}"/>
-<c:set var="totArticles" value="${articlesMap.totArticles}"/>
-<c:set var="section" value="${articlesMap.section}"/>
-<c:set var="pageNum" value="${articlesMap.pageNum}"/>
 <c:set var="storeBoardVO" value="${storeBoard.storeBoardVO}"/>
 <c:set var="hostReputationVO" value="${storeBoard.hostReputationVO}"/>
+<c:set var="thumbNail" value="thumbnail_"/>
+<c:set var="pImg" value="${storeBoardVO.attachList[0]}" />
+<c:set var="rImg" value="${pImg.uploadPath}/${pImg.uuid}_${pImg.fileName}"/>
+<c:set var="realImg" value="/display?fileName=/${cutil:encodeURIComponent(rImg)}"/>
+
 <fmt:formatNumber var="star" value="${hostReputationVO.starPointAvg}" maxFractionDigits="0" />
 <% request.setCharacterEncoding("utf-8");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -69,6 +71,7 @@
                 $(".gallary_wrap").css('visibility','hidden');
                 setTimeout(function(){$(".gallary_div").css('display','none');},220);
             })
+
             $('#image-gallery').lightSlider({
                 gallery:true,
                 item:1,
@@ -76,7 +79,8 @@
                 autoWidth:true,
                 slideMargin: 0,
                 keyPress:true,
-                speed:500,
+                speed:1500,
+                pause:3000,
                 auto:false,
                 loop:true
             });
@@ -89,21 +93,18 @@
 <div class='gallary_div'></div>
 
 <div class="gallary_wrap">
+
     <div class="demo">
         <div class="item">
             <div class="clearfix">
                 <ul id="image-gallery" class="gallery list-unstyled">
-                    <li data-thumb="/resources/image/host_board/1/thumb/host_board_thumb_1_1.PNG">
-                        <img src="/resources/image/host_board/1/host_board_1_1.PNG" />
-                    </li>
-                    <li data-thumb="/resources/image/host_board/1/thumb/host_board_thumb_1_2.PNG">
-                        <img src="/resources/image/host_board/1/host_board_1_2.PNG" />
-                    </li>
-                    <li data-thumb="/resources/image/host_board/1/thumb/host_board_thumb_1_3.PNG">
-                        <img src="/resources/image/host_board/1/host_board_1_3.PNG" />
-                    </li>
-
-
+                    <c:forEach items="${storeBoardVO.attachList}" var="attach">
+                        <c:set var="thumb" value="${attach.uploadPath}/${thumbNail}${attach.uuid}_${attach.fileName}"/>
+                        <c:set var="img" value="${attach.uploadPath}/${attach.uuid}_${attach.fileName}"/>
+                        <li data-thumb="/display?fileName=/${cutil:encodeURIComponent(thumb)}" style="width: 474px; height: 400px;">
+                            <img src="/display?fileName=/${cutil:encodeURIComponent(img)}" />
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>
@@ -187,8 +188,8 @@
         </div>
 
         <div class="image_info" id='image_info'>
-            <div class="prev_img" id='prev_img'><img class='prev_image' id='prev_image' src="/resources/image/host_board/1/host_board_1_1.PNG"/></div>
-            <div class="img_btn" id='img_btn'><img class ='img_icon'src="/resources/image/host_board/1/host_board_1_1.PNG"/></div>
+            <div class="prev_img" id='prev_img'><img class='prev_image' id='prev_image' src="${realImg}"/></div>
+            <div class="img_btn" id='img_btn'><img class ='img_icon'src="${realImg}"/></div>
             <div class="like_btn" id="like_btn"><i class="far fa-heart"></i></div>
         </div>
     </div>
