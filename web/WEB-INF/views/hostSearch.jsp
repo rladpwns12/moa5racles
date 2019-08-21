@@ -50,16 +50,12 @@
 			alert("검색어를 입력해주세요");
 			return;
 		}
-		/*var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");*/
 		$.ajax									//카카오 api get
 		({
 			url: "https://dapi.kakao.com/v2/local/search/keyword.json?query="+address,
 			headers: { 'Authorization': 'KakaoAK ea031870cc4a7a31182ea665a1eb62fc'},
 			type: 'GET',
 			beforeSend: function (xhr) {
-				/*xhr.setRequestHeader("AJAX", true);
-				xhr.setRequestHeader(header, token);*/
 				xhr.setRequestHeader("Accept", "application/json; odata=verbose");
 			}
 		}).done(function(data)
@@ -111,7 +107,7 @@
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 		$.ajax("storeboard/Search",{
-			type:"POST",
+			type:"GET",
 			data : form,
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader("AJAX", true);
@@ -130,7 +126,17 @@
 				var positions = new Array();
 				for(let i=0;i<data.length;i++){
 					let div = $('<div />', {id:"article"+data[i].articleNum,class : 'room_select',onclick:"roomSelect("+data[i].articleNum+");"}).appendTo($('#selection_content_id1'));
-					$('<img/>',{src:"/resources/image/hostSearch/"+data[i].pictureName ,style:'margin-bottom: 5px;'}).appendTo(div);
+
+					var profile=data[i].profile;
+					var fileCallPath = encodeURIComponent(profile.uploadPath + "/" + profile.uuid +"_"+profile.fileName);
+					$('<img>', {
+						src: '/display?fileName=/' + fileCallPath,
+						alt: 'profile',
+						onerror : 'this.src="/resources/image/loading.gif"'
+					}).css({
+						marginBottom : '5px'
+					}).appendTo(div);
+
 					$('<span/>',{id:'title',text:"보관지 : "+data[i].storageType+"        "}).appendTo(div);
 					for(let j=0;j<parseInt(data[i].starPointAvg.toFixed(0));j++) {
 						$('<i/>', {class: 'fas fa-star', style: 'font-size:15px; float: right;' +

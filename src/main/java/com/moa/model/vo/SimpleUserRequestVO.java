@@ -20,8 +20,11 @@ public class SimpleUserRequestVO {
 	private List<Integer> productCnt;
 	private int measuredPrice;
 	private int bargainPrice;
+	private int transactionPrice;
 	private String baseAddress;
 	private String detailAddress;
+
+	private String transactionState;
 
 	public SimpleUserRequestVO() {
 		this.requestId = 0;
@@ -34,7 +37,10 @@ public class SimpleUserRequestVO {
 		this.productCnt = new ArrayList<>();
 		this.bargainPrice = 0;
 		this.measuredPrice = 0;
+		this.transactionPrice = 0;
 		this.baseAddress = null;
 		this.detailAddress = null;
+
+		this.transactionState = null;
 	}
 }

@@ -60,9 +60,9 @@ public class ReportContoller {
     @RequestMapping("/detail/{reportId}")
     public ModelAndView reportDetail(@PathVariable("reportId") long reportId){
         ModelAndView mav = new ModelAndView();
-        ReportVO reportVO = findReportService.findReport(reportId);
+        Map<String, Object> info = findReportService.findReport(reportId);
 
-        mav.addObject("reportVO", reportVO);
+        mav.addObject("info", info);
         mav.setViewName("reportDetail");
 
         return mav;

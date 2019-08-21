@@ -44,15 +44,25 @@ input[name="r"]{
   position: absolute;
 
 }
-.slide_text{
+.center-content{
   position: absolute;
-  top:60%;
-  left:29%;
+  top:80%;
+  left:42%;
   color:white;
   text-align: center;
-  font-size: 100px;
-  font-family: "³ª´®¹Ù¸¥°íµñ";
-  font-weight: 500;
+  font-size: 25px;
+  color: black;
+  /*font-family: "ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½";*/
+  font-weight: 700;
+}
+.middle-btn{
+  height: 80px;
+  font-weight: 700;
+  font-size: 25px;
+  border-radius: 3px;
+  border: 0;
+  cursor: pointer;
+  outline: 0;
 }
 .left_btn{
   position: absolute;
@@ -69,7 +79,7 @@ input[name="r"]{
   height: 50px;
   border-radius: 3px;
   font-size: 18px;
-  font-family: "³ª´®¹Ù¸¥°íµñ";
+  font-family: "NanumGothic";
   font-weight: 500;
   border: 2px solid #534A6D;
   background: white;
@@ -120,3 +130,4 @@ input[name="r"]{
 .wrapper {
 	height: 900px;
 }
+
