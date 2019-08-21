@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 import java.util.HashMap;
 import java.util.List;
@@ -70,5 +71,11 @@ public class ReportDAOImpl implements ReportDAO {
     public List<SimpleReportAdminVO> selectHostConfirmList() {
         ReportMapper mapper = sqlSession.getMapper(ReportMapper.class);
         return mapper.selectHostConfirmList();
+    }
+
+    @Override
+    public int insertResultReport(Map<String,Object> insertInfo) {
+        ReportMapper mapper = sqlSession.getMapper(ReportMapper.class);
+        return mapper.insertResultReport(insertInfo);
     }
 }

@@ -16,4 +16,5 @@ public interface ReportMapper {
     ReportResultVO searchResult(long reportId);
     ReportAdminVO selectHostConfirm(int reportId);
     List<SimpleReportAdminVO> selectHostConfirmList();
+    int insertResultReport(Map<String,Object> insertInfo);
 }
