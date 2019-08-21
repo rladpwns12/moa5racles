@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<%@ taglib prefix="cutil" uri="tld/Util.tld" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -70,7 +70,9 @@
                             <c:when test="${fn:length(requestList) != 0}">
                                 <c:forEach var="requestListVO" items="${requestList}" begin="0" varStatus="loopCount">
                                     <tr class="rows" id="${requestListVO.requestId}">
-                                        <td><img src="/resources/image/${requestListVO.profileName}" alt=""></td>
+                                        <c:set var="attach" value="${requestListVO.profile}"/>
+                                        <c:set var="img" value="${attach.uploadPath}/${attach.uuid}_${attach.fileName}"/>
+                                        <td><img src="/display?fileName=/${cutil:encodeURIComponent(img)}" onerror="this.src='/resources/image/navbar/profile.png'"></td>
                                         <td>${requestListVO.hostNick}</td>
                                         <td>${requestListVO.startDate} ~ ${requestListVO.endDate}</td>
                                         <td>

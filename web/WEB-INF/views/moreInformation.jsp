@@ -103,8 +103,8 @@
                     <c:forEach items="${storeBoardVO.attachList}" var="attach">
                         <c:set var="thumb" value="${attach.uploadPath}/${thumbNail}${attach.uuid}_${attach.fileName}"/>
                         <c:set var="img" value="${attach.uploadPath}/${attach.uuid}_${attach.fileName}"/>
-                        <li data-thumb="/display?fileName=/${cutil:encodeURIComponent(thumb)}" style="width: 474px; height: 400px;">
-                            <img src="/display?fileName=/${cutil:encodeURIComponent(img)}" />
+                        <li data-thumb="/display?fileName=/${cutil:encodeURIComponent(thumb)}"  onerror="this.src='/resources/image/loading.gif'" style="width: 474px; height: 400px;">
+                            <img src="/display?fileName=/${cutil:encodeURIComponent(img)}" onerror="this.src='/resources/image/loading.gif'"/>
                         </li>
                     </c:forEach>
                 </ul>

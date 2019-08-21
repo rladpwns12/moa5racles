@@ -4,6 +4,7 @@ import com.moa.model.vo.*;
 import com.moa.mybatis.CheckLuggageMapper;
 import com.moa.mybatis.StoreRequestMapper;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Repository
 @NoArgsConstructor
+@Log4j
 public class StoreRequestDAOImpl implements StoreRequestDAO {
     @Autowired
     private SqlSession sqlSession;
@@ -78,7 +80,6 @@ public class StoreRequestDAOImpl implements StoreRequestDAO {
         simpleList = mapper.searchRequestList(map);
 
         List<RequestProductVO> productList = new ArrayList<RequestProductVO>();
-
         for(int i = 0 ; i < simpleList.size(); i++) {
             productList = mapper.searchRequestProduct(simpleList.get(i).getRequestId());
 
