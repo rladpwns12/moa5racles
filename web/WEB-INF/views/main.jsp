@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+
+    <link rel="stylesheet" href="/resources/css/pulse_bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 <title>welcome to MOA</title>
@@ -17,9 +19,13 @@
 	<div class="wrapper">
   	<div class="container">
           <div class="slidershow middle">
-            <div class="slide_text">
-             	 <!-- 이러다 지구도 담겠어! -->
-            </div>
+
+              <div class="center-content">
+                  저희 사이트가 처음이세요?
+                  <button type="button" class="middle-btn btn btn-primary btn-lg btn-block">
+                      서비스 가이드 바로가기
+                  </button>
+              </div>
 
             <div class="left_paging"> 
               <i class="fas fa-angle-left"></i>
