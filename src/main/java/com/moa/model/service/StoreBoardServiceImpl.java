@@ -1,5 +1,6 @@
 package com.moa.model.service;
 
+import com.moa.model.dao.AttachDAO;
 import com.moa.model.dao.HostReputationDAO;
 import com.moa.model.dao.StoreBoardDAO;
 import com.moa.model.vo.HostReputationVO;
@@ -16,6 +17,8 @@ public class StoreBoardServiceImpl implements StoreBoardService {
     private StoreBoardDAO storeBoardDAO;
     @Autowired
     private HostReputationDAO hostReputationDAO;
+    @Autowired
+    private AttachDAO attachDAO;
     @Override
     public Map<String, Object> selectStorage(int articleNum) {
         Map<String,Object> selectMap=new HashMap<String,Object>();
@@ -23,11 +26,9 @@ public class StoreBoardServiceImpl implements StoreBoardService {
         if(storeBoardVO==null)
             return null;
         HostReputationVO hostReputationVO = hostReputationDAO.searchOne(articleNum);
-        //List<ReviewVO> reviewList= ReviewDAO.searchList(hostReputationVO.getNick());
-        //file upload logic
+        storeBoardVO.setAttachList(attachDAO.searchByArticleSB(new Long(articleNum)));
         selectMap.put("storeBoardVO", storeBoardVO);
         selectMap.put("hostReputationVO", hostReputationVO);
-        //selectMap.put("reviewList", reviewList);
         return selectMap;
     }
     @Override

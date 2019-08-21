@@ -90,7 +90,6 @@ public class StoreBoardDAOImpl implements StoreBoardDAO {
         vo.setForbiddenProduct((String)map.get("보관금지물품"));
         vo.setSecurityFacility((String)map.get("보안시설"));
         vo.setPet((String)map.get("펫"));
-        vo.setPictureName(Arrays.asList(((String)map.get("사진명")).split(",")));
         List<String> detailPriceNameList = mapper.selectDetailPrice();
         List<String> detailPriceList=Arrays.asList(((String)map.get("상세가격")).split(","));
         Map<String,Integer> detailPriceMap=new HashMap<String,Integer>();

@@ -19,7 +19,6 @@ public class StoreBoardVO {
     private String forbiddenProduct;
     private String securityFacility;
     private String pet;
-    private List<String> pictureName;
+    private List<AttachFileVO> attachList;
     private Map<String,Integer> detailPrice;
-    private List<StoreBoardAttachFileVO> attachVOList;
 }
