@@ -26,7 +26,7 @@ $(document).ready(function () {
         alert(tr);
     }
 
-    /*$('.rows').click(function () {
+    $('.rows').click(function () {
         var tr = $(this);
         var id = tr.attr('id');
 
@@ -194,7 +194,7 @@ $(document).ready(function () {
                 alert("승인이 실패하였습니다.");
             }
         });
-    });*/
+    });
     $('#listTable td').click(function () {
 
 //		$('.rs_confirm_button').click(function(){
@@ -247,22 +247,4 @@ function getContextPath() {
     var hostIndex = location.href.indexOf(location.host) + location.host.length;
     var contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
     return contextPath;
-}
-
-function pay(price) {
-    $.ajax({
-        type: "GET",
-        url: "/pay/kakao",
-        data: {price: price},
-        dataType: 'json',
-		contentType: 'application/json',
-        success: function (result) {
-            if (!result)
-                alert("결제에 실패하셨습니다.");
-            // location.href = "http://localhost:8089/mypage/requestlist/1"
-            window.reload();
-        }, error: function () {
-            console.log("error 발생");
-        }
-    });
 }

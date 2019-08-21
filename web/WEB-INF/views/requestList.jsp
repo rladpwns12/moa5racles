@@ -86,8 +86,7 @@
                                             <c:when test="${requestListVO.transactionState == '결제전'}">
                                                 <td>
                                                     <button type="button"
-                                                            onclick="kakao(${requestListVO.historyId}, ${requestListVO.transactionPrice})"> ${requestListVO.transactionState} </button>
-                                                        <%--<a href="/pay/kakao?price=" + ${requestListVO.transactionPrice}> ${requestListVO.transactionState} </a>--%>
+                                                            onclick="card(${requestListVO.historyId}, ${requestListVO.transactionPrice})"> ${requestListVO.transactionState} </button>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
