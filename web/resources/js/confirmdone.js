@@ -1,4 +1,4 @@
-
+var thumbnail = 'thumbnail_';
 $(document).ready(function() {
 	$.confirmDone(1);
 	
@@ -95,8 +95,21 @@ $.confirmDone = function(curPage){
 				}
 				let tr = $('<tr/>',{id:result.list[i].articleNum}).appendTo('.main_content>table>tbody');
 				let td1 = $('<td/>').appendTo(tr);
-				$('<img/>',{src :"/resources/image/navbar/"
-						+result.list[i].profileImg ,alt:"이미지 경로 오류"}).appendTo(td1);
+
+				var profile = result.list[i].profile;
+				var fileCallPath = encodeURIComponent(profile.uploadPath + "/" + thumbnail
+					+ profile.uuid + "_" + profile.fileName);
+
+				$('<img/>', {
+					src: '/display?fileName=/' + fileCallPath,
+					alt: 'profile',
+					onerror: 'this.src="/resources/image/navbar/profile.png"'
+				}).css({
+					borderRadius: '100px',
+					width: '40px',
+					height: '40px'
+				}).appendTo(td1);
+
 				$('<td/>',{text:result.list[i].nick}).appendTo(tr);
 				$('<td/>',{text:result.list[i].startDate +" ~ "+result.list[i].endDate,class:'table_click'}).appendTo(tr);
 				$('<td/>',{text: products,class:'table_click'}).appendTo(tr);
