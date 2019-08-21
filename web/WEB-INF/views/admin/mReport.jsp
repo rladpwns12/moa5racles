@@ -30,16 +30,15 @@
         </tr>
         </thead>
         <tbody>
-        <c:if test="${reportList == null}">
-            신고 요청이 존재하지 않습니다.
-        </c:if>
-        <c:forEach var="vo" begin="0" end="${reportList.size()}" step="1" items="${reportList}">
-            <tr onclick="location.href='/admin/report/info?reportId=${vo.reportId}'">
-                <td>${vo.userNick}</td>
-                <td>${vo.reportDate}<br>${vo.reportTime}</td>
-            </tr>
-        </c:forEach>
-
+            <c:if test="${reportList == null}">
+                신고 요청이 존재하지 않습니다.
+            </c:if>
+            <c:forEach var="vo" begin="0" end="${reportList.size()}" step="1" items="${reportList}">
+                <tr onclick="location.href='/admin/report/info?reportId=${vo.reportId}'">
+                    <td>${vo.userNick}</td>
+                    <td>${vo.reportDate}<br>${vo.reportTime}</td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
 </div>

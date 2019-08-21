@@ -1,7 +1,9 @@
 package com.moa.controller;
 
+import com.moa.model.service.AdminReportReplyService;
 import com.moa.model.service.AdminReportSearchService;
 import com.moa.model.service.HostConfirmService;
+import com.moa.model.vo.ReportAdminVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ public class AdminController {
     private HostConfirmService hostConfirmService;
     @Autowired
     private AdminReportSearchService adminReportSearchService;
+    @Autowired
+    private AdminReportReplyService adminReportReplyService;
     //-- start of hostapprove
     @RequestMapping(value = {"","/hostapprove/list"}, method = RequestMethod.GET)
     public ModelAndView confirmList() {
@@ -71,14 +75,24 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/report/info", method = RequestMethod.GET)
-    public ModelAndView reportInfo(@RequestParam("userId") int userId,
-                                    @RequestParam("storageType")String storageType) {
+    public ModelAndView reportInfo(@RequestParam("reportId") int reportId) {
         ModelAndView mav = new ModelAndView();
-        Map<String, Object> info = new HashMap<>();
-        info = hostConfirmService.searchRequestInfo(userId, storageType);
-        mav.addObject("requestInfo", info);
+
+        ReportAdminVO reportAdminVO = adminReportSearchService.reportInfo(reportId);
+        mav.addObject("reportInfo", reportAdminVO);
         mav.setViewName("/admin/mReportInformation");
         return mav;
+    }
+    @RequestMapping(value = "/report/reply", method = RequestMethod.POST)
+    public @ResponseBody boolean replyReport(int reportId, String content){
+        System.out.println("reportId:"+reportId+", \ncontent"+content);
+        Map<String,Object> replyInfo = new HashMap<String,Object>();
+        replyInfo.put("reportId",reportId);
+        replyInfo.put("content",content);
+
+        boolean result = adminReportReplyService.replyReport(replyInfo);
+        System.out.println("serviceResult in controller:" + result);
+        return result;
     }
     //-- end of report
 

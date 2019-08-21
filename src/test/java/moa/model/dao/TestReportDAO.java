@@ -9,8 +9,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.*;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -56,5 +58,15 @@ public class TestReportDAO {
     @Test
     public void TEST_관리자_신고목록_상세보기(){
         System.out.println(reportDAO.selectHostConfirm(1));
+    }
+    @Test
+    public void TEST_관리자_신고목록_답변하기(){
+        Map<String,Object> insertInfo = new HashMap<String, Object>();
+        insertInfo.put("reportId",2);
+        insertInfo.put("content","매너가 안좋아서 슬퍼요\n\n안녕하세요,상담사 최민성입니다. 먼저 고객님의 슬픔에 저희도 안타깝습니다. 고객님께서 상대방의 매너에 대하여" +
+                "슬프다고 하였는데, 저희가 확인한 결과 신고접수고 5회 이상된 이용자로 확인이 되었습니다. 상대방은" +
+                "이에 상대방에게 호스트 이용 자격을 박탈하는 제제를 주었습니다. 고객님께서 불편함을 겪음에 다시한번 사과드리고 저희" +
+                "MOA를 이용해주셔서 항상 감사합니다. 좋은하루 되세요. 상담사 최민성이었습니다.");
+        System.out.println(reportDAO.insertResultReport(insertInfo));
     }
 }
