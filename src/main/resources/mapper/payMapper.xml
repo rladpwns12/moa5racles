@@ -8,7 +8,7 @@
     <update id="updateHistory" parameterType="com.moa.model.vo.PayVO">
         update TRANSACTION_HISTORY_TB SET MERCHANT_UID = #{merchantUid},
         IMP_UID = #{impUid}, PAYMENT_STATUS = #{status}, TRANSACTION_STATE_ID = 3,
-        DEPOSIT_DATE = SYSDATE
+        DEPOSIT_DATE = #{depositDate}
         WHERE TRANSACTION_HISTORY_ID = #{historyId} AND TRANSACTION_PRICE = #{transactionPrice}
     </update>
 </mapper>
