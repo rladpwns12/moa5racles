@@ -64,13 +64,13 @@
         </c:choose>
 
         <div class="form-group">
-            <label for="content">신고 내용</label>
+            <label for="content">승인/거절 내용</label>
             <textarea class="form-control" name="content" id="content" rows="10" placeholder="승인 혹은 거절 사유를 적어주세요."></textarea>
         </div>
     </fieldset>
     <div class="btn-position">
-        <button onclick="refuse(${requestInfo.USERID},'hostapprove')" type="submit" name="btnType" value="reject" class="btn btn-primary">거절</button>
-        <button onclick="approve(${requestInfo.USERID},'hostapprove')" type="submit" name="btnType" value="approve" class="btn btn-primary">승인</button>
+        <button onclick="check(${requestInfo.USERID,'refuse'},'hostapprove')" type="submit" name="btnType" value="reject" class="btn btn-primary">거절</button>
+        <button onclick="check(${requestInfo.USERID,'confirm'},'hostapprove')" type="submit" name="btnType" value="approve" class="btn btn-primary">승인</button>
     </div>
 </div>
 
