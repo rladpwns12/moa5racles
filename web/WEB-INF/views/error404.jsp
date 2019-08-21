@@ -10,11 +10,22 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>에러페이지</title>
+    <script>
+        var filter = "win16|win32|win64|mac";
+        if (navigator.platform && filter.indexOf(navigator.platform.toLowerCase()) >= 0) {
+            alert("모바일이 아닙니다.");
+            window.close();
+        }
+    </script>
 </head>
 <body>
-
 <%@ include file="navbar.jsp" %>
 <div class="back_box">
+    <h3>navigator.platform : </h3>
+    <p><script>document.write(navigator.platform);</script></p>
+    <h3>navigator.userAgent :</h3>
+    <p><script>document.write(navigator.userAgent);</script></p>
+
     <div class="box">
         <div class="box__ghost">
             <div class="symbol"></div>

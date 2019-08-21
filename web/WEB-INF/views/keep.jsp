@@ -16,25 +16,29 @@
 
 	<link rel="stylesheet" type="text/css" href="/resources/css/keep.css"/>
 	<link rel="stylesheet" type="text/css" href="/resources/css/content.css"/>
+	<link rel="stylesheet" href="/resources/css/upload.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 	<script src="/resources/js/jquery-3.4.1.min.js"></script>
-	<script src="/resources/js/keep.js"></script>
+	<script src="/resources/js/upload.js"></script>
 	<script>
-		var table_product_num = 1;
 		$(document).on("click", "i[name=add_row_btn]", function () {
 			table_product_num++;
-			if (table_product_num > 100) {
+			if (table_product_num > 99) {
 				alert('더이상 늘릴수 없습니다.');
-				table_product_num = 100;
+				table_product_num = 99;
 				return;
 			}
 
-			var addStaffText = '<tr name="stuff">' + '<td class="table_data">' + table_product_num + '</td>' + '<td class="table_data">' + '<select class="category_list" name="category">';
+			var addStaffText = '<tr name="stuff">'
+					+ '<td class="table_data">' + (table_product_num+1) + '</td>'
+					+ '<td class="table_data">'
+					+ '<select class="category_list" name="forbiddenProductList[' + table_product_num + '].category">';
 			<c:forEach var="category" items="${map.category}" varStatus="cnt">
 			addStaffText += ('<option class="category_list" value="${category}">${category}</option>');
 			</c:forEach>
+
 			addStaffText += '</select>' + '</td>';
-			addStaffText += '<td class="table_data"><input type="text" class="product_name" name="product_name"></td>' + '</tr>';
+			addStaffText += '<td class="table_data"><input type="text" class="product_name" name="forbiddenProductList[' + table_product_num + '].product"></td>' + '</tr>';
 			var trHtml = $("tr[name=stuff]:last"); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
 			trHtml.before(addStaffText); //마지막 trStaff명 뒤에 붙인다
 		});
@@ -58,12 +62,11 @@
 				<button type="button" class="exit_btn" id="exit_btn" name="exit_btn" onClick="exit()">나가기</button>
 			</div>
 
-			<form id="regForm" class="regForm">
+			<form id="regForm" role="form" class="regForm">
 				<div class="content0" id="content0">
 					<h2 class="head_0">보관 장소를 선택해주세요</h2>
 					<div class="storage_type">
-						<select id="storage_address" class="storage_select" name="storage_type">
-							<option class="storage" value=0 style="display: none;">장소를 선택해주세요.</option>
+						<select id="storage_address" class="storage_select" name="storageId">
 							<c:forEach var="storage" items="${map.storageAddress}" varStatus="cnt">
 								<option class="storage"
 										value="${storage.storageId}">${storage.baseAddress} ${storage.detailAddress}</option>
@@ -77,7 +80,7 @@
 					<div class="deliver_type">
 						<c:forEach var="transaction" items="${map.transaction}" varStatus="cnt">
 							<div class="deliver">
-								<input type="radio" id="${transaction}" class="radio_btn" name="trade_type_answer"
+								<input type="radio" id="${transaction}" class="radio_btn" name="transactionType"
 									   value="${transaction}"/> <label
 									for="${transaction}">&nbsp;&nbsp;${transaction}</label>
 							</div>
@@ -89,7 +92,7 @@
 						<div class="pet">
 							<input type="radio" id="pet_true" class="radio_btn, c_btn" name="pet_radio" value="1"/>
 							<label for="pet_true">&nbsp;유</label>
-							<input type="text" id="pet_text" class="pet_text" name="pet_text" placeholder="종류를 입력하세요"
+							<input type="text" id="pet_text" class="pet_text" name="pet" placeholder="종류를 입력하세요"
 								   disabled/>
 							<input type="radio" id="pet_false" class="radio_btn, c_btn" name="pet_radio" value="0"/>
 							<label for="pet_false">&nbsp;무</label>
@@ -99,9 +102,9 @@
 					<h2 class="head_1">CCTV 여부를 선택해주세요</h2>
 					<div class="cctv_type">
 						<div class="cctv">
-							<input type="radio" id="CCTV" class="radio_btn, c_btn" name="cctv_answer" value="CCTV"/>
+							<input type="radio" id="CCTV" class="radio_btn, c_btn" name="securityList" value="CCTV"/>
 							<label for="CCTV">&nbsp;유</label>
-							<input type="radio" id="없음" class="cctv_r radio_btn, c_btn" name="cctv_answer" value="없음"/>
+							<input type="radio" id="없음" class="cctv_r radio_btn, c_btn" name="securityList" value="없음"/>
 							<label for="없음">&nbsp;무</label>
 						</div>
 					</div>
@@ -120,13 +123,13 @@
 						<tr name='stuff'>
 							<td class="table_data">1</td>
 							<td class="table_data">
-								<select class="category_list" name="category">
+								<select class="category_list" name="forbiddenProductList[0].category">
 									<c:forEach var="category" items="${map.category}" varStatus="cnt">
 										<option class="category_list" value="${category}">${category}</option>
 									</c:forEach>
 								</select>
 							</td>
-							<td class="table_data"><input type="text" class="product_name" name="product_name"></td>
+							<td class="table_data"><input type="text" class="product_name" name="forbiddenProductList[0].product"></td>
 						</tr>
 						<tr id="stuff" name='stuff'>
 							<td colspan="4"><i class="fas fa-plus-circle" name='add_row_btn'></i></td>
@@ -139,7 +142,7 @@
 					<div class="time_type">
 						<c:forEach var="period" items="${map.period}" varStatus="cnt">
 							<div class="time">
-								<input type="radio" id="${period}" class="radio_btn" name="time_answer"
+								<input type="radio" id="${period}" class="radio_btn" name="storagePeriodType"
 									   value="${period}"/> <label for="${period}">&nbsp;${period} </label>
 							</div>
 						</c:forEach>
@@ -147,11 +150,11 @@
 
 					<h2 class="head_3">보관 가격(5호 박스 기준)을 입력해주세요</h2>
 					<div class="price_type">
-						<c:forEach var="price" items="${map.price}" varStatus="cnt">
+						<c:forEach var="price" items="${map.price}" varStatus="status">
 							<div class="prices">
 								<ul>
 									<li class="price">${price}</li>
-									<li><input type="text" class="i_price" name="price" placeholder="금액 입력"
+									<li><input type="text" class="i_price" name="detailPrice[${status.index}]" placeholder="금액 입력"
 											   numberOnly="true"/> 원
 									</li>
 								</ul>
@@ -162,41 +165,35 @@
 
 				<div class="content4" id="content4" style="display: none;">
 					<h2 class="head_4">보관 장소의 사진을 첨부해주세요</h2>
-					<div class="photo_type">
-						<label for="photo_main1">
-							<img id="main_1" class="photo_main" src="/resources/image/photo_main.jpg"/> </label>
-						<input type="file" id="photo_main1" class="input_p" name="photo" accept=".jpg, .png"
-							   onchange="readURL1(this);"/>
-						<label for="photo_main2">
-							<img id="main_2" class="photo_main" src="/resources/image/photo_main.jpg"/> </label>
-						<input type="file" id="photo_main2" class="input_p" name="photo" accept=".jpg, .png"
-							   onchange="readURL2(this);"/>
-					</div>
-					<h4 class="head_4_1">공간 사진을 최소 2장 촬영해주세요</h4>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">보관할 물품의 사진을 첨부해주세요. 나중에 el로 대체하여 보관글, 보관 요청글 동시 쓸 예정</div>
+								<div class="panel-body">
+									<div class="form-group uploadDiv">
+										<input type="file" name="uploadFile" id="storeBoard" multiple>
+									</div>
 
-					<div class="photo_type2">
-						<label for="photo_etc1">
-							<img id="etc_1" class="photo_etc" src="/resources/image/photo_etc.jpg"/></label>
-						<input type="file" id="photo_etc1" class="input_p" name="photo" accept=".jpg, .png" onchange="readURL3(this);"/>
-						<label for="photo_etc2">
-							<img id="etc_2" class="photo_etc" src="/resources/image/photo_etc.jpg"/></label>
-						<input type="file" id="photo_etc2" class="input_p" name="photo" accept=".jpg, .png" onchange="readURL4(this);"/>
-						<label for="photo_etc3">
-							<img id="etc_3" class="photo_etc" src="/resources/image/photo_etc.jpg"/></label>
-						<input type="file" id="photo_etc3" class="input_p" name="photo" accept=".jpg, .png"
-							   onchange="readURL5(this);"/>
+									<div class="uploadResult">
+										<ul>
+
+										</ul>
+									</div>
+
+								</div>
+							</div>
+						</div>
 					</div>
-					<h4 class="head_4_1">추가 사진은 3장까지 가능합니다</h4>
 				</div>
 
 				<div class="content5" id="content5" style="display: none;">
 					<h2 class="head_5">제목을 입력해주세요</h2>
 					<div>
-						<input type="text" class="post_title" id="post_title" name="post_title"
+						<input type="text" class="post_title" id="post_title" name="title"
 							   placeholder="제목을 20자리 이내로 작성하세요" maxlength="20">
 					</div>
 					<h2 class="head_5">상세 설명을 입력해주세요</h2>
-					<textarea class="post_contents" id="post_contents" name="post_contents" rows="14" cols="60"
+					<textarea class="post_contents" id="post_contents" name="content" rows="14" cols="60"
 							  placeholder="맡길 물건에 대한 간단한 설명을 입력해주세요" maxlength="1333"></textarea>
 				</div>
 
@@ -210,7 +207,7 @@
 							<li class="content6_li">위 내용을 확인했습니다.</li>
 						</ul>
 					</div>
-					<button type="button" class="register_btn" onclick="submitForm()">맡아주기 글 등록하기</button>
+					<button type="submit" class="register_btn">맡아주기 글 등록하기</button>
 				</div>
 			</form>
 
@@ -226,7 +223,7 @@
 		</div>
 	</div>
 </div>
-
+<script src="/resources/js/keep.js"></script>
 <%@ include file="footer.jsp" %>
 </body>
 </html>

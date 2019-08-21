@@ -7,6 +7,7 @@ import com.moa.model.service.StoreBoardSearchService;
 import com.moa.model.service.StoreBoardService;
 import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.DetailOptionVO;
+import com.moa.model.vo.StoreBoardFormVO;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -65,14 +66,14 @@ public class StoreBoardController {
     }
 
     @RequestMapping(value = "/keep", method = RequestMethod.POST)
-    public @ResponseBody void keepRegisterStoreBoard(HttpServletRequest request, Authentication auth) {
+    public @ResponseBody boolean keepRegisterStoreBoard(StoreBoardFormVO storeBoardFormVO, Authentication auth) {
+        log.info(storeBoardFormVO);
         String hostId;
-
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         hostId = customUser.getLoginVO().getUserId();
-        Map<String, Object> articleMap = FileUpload.keepUpload(request);
-        articleMap.put("hostId", hostId);
-        System.out.println("Result: " + luggageWelcomeService.noticeStorage(articleMap));
+        storeBoardFormVO.setHostId(hostId);
+       luggageWelcomeService.noticeStorage(storeBoardFormVO);
+       return true;
     }
 
     @RequestMapping("/{articleNum}")

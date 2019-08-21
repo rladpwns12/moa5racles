@@ -15,7 +15,6 @@ public interface StoreBoardDAO {
     int searchMyStorageCnt(int hostId);
     StoreBoardVO searchOne(int articleNum);
     List<EntrustSearchVO> searchEntrust(DetailOptionVO detail);
-    int insert(StoreBoardFormVO storeBoardFormVO);
-
+    void insert(StoreBoardFormVO storeBoardFormVO);
     int delete(int articleNum);
 }

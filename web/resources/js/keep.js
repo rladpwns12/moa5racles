@@ -1,4 +1,8 @@
 var num = 0;
+var table_product_num = 0;
+var vtrade_type_answer='transactionType';
+var vcctv_answer= 'securityList';
+var vtime_answer = 'storagePeriodType';
 
 $(document).ready(function () {
     $("input:radio[name=pet_radio]").click(function () {
@@ -84,11 +88,11 @@ function nextForm() {
             num++;
             return;
         case 1:
-            if (!isValid("trade_type_answer"))
+            if (!isValid(vtrade_type_answer))
                 return;
             if (!isValid("pet_radio"))
                 return;
-            if (!isValid('cctv_answer'))
+            if (!isValid(vcctv_answer))
                 return;
             $("#content1").hide();
             $("#content2").show();
@@ -97,16 +101,17 @@ function nextForm() {
             num++;
             return;
         case 2:
-            let productName = document.getElementsByName("product_name");
+            let productName = document.getElementsByName("forbiddenProductList[0].product");
             if (productName[0].value == null || productName[0].value.trim() == "") {
                 alert("물건명을 최소 하나 이상 입력해주세요.");
                 productName[0].value = "";
                 productName[0].focus();
                 return;
             }
-            for (i = productName.length - 1; i > 0; i--) {
-                if (productName[i].value == null || productName[i].value.trim() == "")
-                    productName[i].closest("tr").remove();
+            for (i = table_product_num; i > 0; i--) {
+                let productName = document.getElementsByName("forbiddenProductList[" + i + "].product");
+                if (productName[0].value == null || productName[0].value.trim() == "")
+                    productName[0].closest("tr").remove();
             }
             $("#content2").hide();
             $("#content3").show();
@@ -115,7 +120,7 @@ function nextForm() {
             num++;
             return;
         case 3:
-            if (!isValid("time_answer"))
+            if (!isValid(vtime_answer))
                 return;
             if (!isPriceValid())
                 return;
@@ -174,88 +179,64 @@ function finished() {
     location.href = "/storeboard";
 }
 
-function submitForm() {
-    if ($("#submit_check").prop("checked")) {
-        var form = $('#regForm')[0];
-        let data = new FormData(form);
 
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-        $.ajax({
-            type: "POST",
-            enctype: "multipart/form-data",
-            url: "/storeboard/keep",
-            data: data,
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("AJAX", true);
-                xhr.setRequestHeader(header, token);
-            },
-            success: function () {
-                $("#left_side").hide();
+
+var formObj = $("form[role='form']");
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
+$("button[type='submit']").on("click", function (e) {
+    e.preventDefault();
+    if (!$("#submit_check").prop("checked")) {
+        alert("체크박스를 체크하세요");
+        return;
+    }
+    alert("물건을 맡깁니다.");
+    var str = "";
+
+    var prices = document.getElementsByClassName('i_price');
+    for (var price of prices) {
+        var priceCom = price.value;
+        priceCom = removeCommas(priceCom);
+        $(price).val(priceCom);
+    }
+
+    $(".uploadResult ul li").each(function (i, obj) {
+        var jobj = $(obj);
+        console.dir(jobj);
+
+        str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
+        str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+        str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
+        str += "<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+    });
+    formObj.append(str);
+    $.ajax({
+        type: "POST",
+        url: location.pathname,
+        data: formObj.serialize(),
+        dataType:'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("AJAX", true);
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (result) {
+            if (result) {
                 $("#content6").hide();
                 $("#content7").show();
-            },
-            error: function () {
-                console.log("에러 발생");
+                $("#left_side").hide();
+                $("#right_side").hide();
+            } else {
+                alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
             }
-        });
-    } else {
-        alert("체크박스를 체크하세요");
-    }
-}
-
-function readURL1(input) {
-    if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            $('#main_1').attr('src', e.target.result);
+        },
+        error: function (request, status, error) {
+            alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
         }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+    })
+});
 
-function readURL2(input) {
-    if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            $('#main_2').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function readURL3(input) {
-    if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            $('#etc_1').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function readURL4(input) {
-    if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            $('#etc_2').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function readURL5(input) {
-    if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            $('#etc_3').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
 
 function isValid(input) {
     let i;
@@ -266,16 +247,16 @@ function isValid(input) {
     }
     if (i == checkValid.length) {
         switch (input) {
-            case "trade_type_answer":
+            case vtrade_type_answer:
                 alert("선호 거래 방식을 선택해주세요.");
                 return false;
             case "pet_radio":
                 alert("반려 동물 정보를 입력해주세요.");
                 return false;
-            case "cctv_answer":
+            case vcctv_answer:
                 alert("CCTV 여부를 선택해주세요.");
                 return false;
-            case "time_answer":
+            case vtime_answer:
                 alert("보관 기간을 선택해주세요.");
                 return false;
             default:
@@ -323,12 +304,11 @@ function removeCommas(x) {
 }
 
 function isPriceValid() {
-    let i;
-    let checkValid = document.getElementsByName("price");
-    for (i = 0; i < checkValid.length; i++) {
-        if (checkValid[i].value == null || checkValid[i].value.trim() == "") {
+    var prices = document.getElementsByClassName('i_price');
+    for (var price of prices) {
+        if (price.value == null || price.value.trim() == "") {
             alert("보관 가격을 입력해주세요.");
-            checkValid[i].focus();
+            price.focus();
             return false;
         }
     }

@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StoreBoardFormVO {
+    private Long articleNum;
     @NotBlank
     private String hostId;
     @NotBlank
@@ -21,18 +22,15 @@ public class StoreBoardFormVO {
     @Max(100)
     private String pet;
     @NotBlank
-    private String cctv;
+    private List<String> securityList;
     @NotBlank
-    private List<String> forbiddenCategoryList;
-    @NotBlank
-    private List<String> forbiddenProductList;
+    private List<ForbiddenProductVO> forbiddenProductList;
     @NotBlank
     private String storagePeriodType;
     @NotBlank
-    @Pattern(regexp = "\\d")
-    private List<String> price;
+    private List<String> detailPrice;
     @NotBlank
-    private List<String> pictureName;
+    private List<StoreRequestAttachFileVO> attachList;
     @NotBlank
     @Max(20)
     @Min(1)
@@ -42,5 +40,5 @@ public class StoreBoardFormVO {
     @Min(1)
     private String content;
     @NotBlank
-    private int storageId;
+    private Long storageId;
 }

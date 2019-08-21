@@ -285,6 +285,7 @@ $("button[type='submit']").on("click", function (e) {
         type: "POST",
         url: location.pathname,
         data: formObj.serialize(),
+        dataType:'json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
             xhr.setRequestHeader(header, token);
