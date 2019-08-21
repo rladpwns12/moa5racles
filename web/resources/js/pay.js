@@ -53,10 +53,10 @@ function kakao(historyId, price) {
                 merchantUid: rsp.merchant_uid,
                 impUid: rsp.imp_uid,
                 transactionPrice: rsp.paid_amount,
-                status: rsp.status
+                status: rsp.status,
+                depositDate: new Date().getTime()
             }
             console.log("결제가 완료되었습니다.");
-            console.log(form);
 
             $.ajax({
                 type: "POST",
@@ -69,7 +69,6 @@ function kakao(historyId, price) {
                     xhr.setRequestHeader(header, token);
                 },
                 success: function (result) {
-                    console.log("js.result: " + result);
                     if (result) {
                         alert("DB까지 갔다오기 성공");
                     } else {

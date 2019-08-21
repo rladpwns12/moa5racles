@@ -24,7 +24,6 @@ public class PayController {
     @RequestMapping(value = "/kakao", method = RequestMethod.POST)
     public @ResponseBody
     boolean kakao(@RequestBody PayVO payVO) {
-        log.info("Controller");
         return payService.updateHistory(payVO);
     }
 }

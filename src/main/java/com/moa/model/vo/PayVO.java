@@ -3,7 +3,6 @@ package com.moa.model.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -23,4 +22,7 @@ public class PayVO {
     private int transactionPrice;
     @NotBlank
     private String status;
+    @NotBlank
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date depositDate;
 }
