@@ -3,12 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <sec:csrfMetaTags/>
     <title>마이페이지</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
@@ -17,6 +19,8 @@
     <link rel="stylesheet" href="/resources/css/upload.css">
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
     <script src="/resources/js/requestList.js"></script>
+    <script src="/resources/js/pay.js"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 
 <body>
@@ -79,8 +83,9 @@
                                         <c:choose>
                                             <c:when test="${requestListVO.transactionState == '결제전'}">
                                                 <td>
-                                                    <button value="${requestListVO.transactionPrice}" type="button"> ${requestListVO.transactionState} </button>
-                                                    <%--<a href="/pay/kakao?price=" + ${requestListVO.transactionPrice}> ${requestListVO.transactionState} </a>--%>
+                                                    <button type="button"
+                                                            onclick="kakao(${requestListVO.historyId}, ${requestListVO.transactionPrice})"> ${requestListVO.transactionState} </button>
+                                                        <%--<a href="/pay/kakao?price=" + ${requestListVO.transactionPrice}> ${requestListVO.transactionState} </a>--%>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>

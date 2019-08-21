@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.mybatis.PayMapper">
+
+    <update id="updateHistory" parameterType="com.moa.model.vo.PayVO">
+        update TRANSACTION_HISTORY_TB SET MERCHANT_UID = #{merchantUid},
+        IMP_UID = #{impUid}, PAYMENT_STATUS = #{status}, TRANSACTION_STATE_ID = 3,
+        DEPOSIT_DATE = SYSDATE
+        WHERE TRANSACTION_HISTORY_ID = #{historyId} AND TRANSACTION_PRICE = #{transactionPrice}
+    </update>
+</mapper>

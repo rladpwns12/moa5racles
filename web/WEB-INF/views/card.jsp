@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%--<%
-    String name = (String) request.getAttribute("name");
-    String email = (String) request.getAttribute("email");
-    String phone = (String) request.getAttribute("phone");
-    String address = (String) request.getAttribute("address");
-    int totalPrice = (int) request.getAttribute("totalPrice");
-%>--%>
+<%
+//    String name = (String) request.getAttribute("name");
+//    String email = (String) request.getAttribute("email");
+//    String phone = (String) request.getAttribute("phone");
+//    String address = (String) request.getAttribute("address");
+    int price = (int) request.getAttribute("price");
+%>
 
 <html>
 <head>
@@ -28,7 +28,7 @@
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(),
             name: 'MOA 카드 결제 테스트',
-            <%--amount: <%=totalPrice%>,--%>
+            amount: <%=price%>,
             <%--buyer_email: '<%=email%>',--%>
             <%--buyer_name: '<%=name%>',--%>
             <%--buyer_tel: '<%=phone%>',--%>
