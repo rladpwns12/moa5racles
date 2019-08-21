@@ -151,7 +151,7 @@
                     </tr>
                     <tr>
                         <th>주소</th>
-                        <td >${fn:substring(storeBoardVO.baseAddress,0,15)}  </td>
+                        <td >${fn:substring(storeBoardVO.baseAddress,0,20)}  </td>
                     </tr>
                     <tr>
                         <th>배송</th>
@@ -258,7 +258,7 @@
                 <div class="more_info_desc">주소</div>
             </c:if>
             <div class="more_info_desc">${distance}</div>
-            <span>주소<div class='more_info_item'>${storeBoardVO.baseAddress} ${storeBoardVO.detailAddress}</div></span>
+            <span>주소<div class='more_info_item' style="font-size: 15px">${storeBoardVO.baseAddress} ${storeBoardVO.detailAddress}</div></span>
         </div>
         <div class="more_info" id='more_info'>
             <c:choose>
@@ -279,15 +279,15 @@
             <div class="more_info" id='more_info'>
                 <div class="more_info_icon"><i class="fas fa-shield-alt"></i>  </div>
                 <div class="more_info_desc">보안시설</div>
-                <span>보안시설<div class='more_info_item'>${storeBoardVO.securityFacility}</div></span>
+                <span >보안시설<div class='more_info_item'>${storeBoardVO.securityFacility}</div></span>
             </div>
         </c:if>
         <c:if test="${storeBoardVO.forbiddenProduct != null}">
             <div class="more_info" id='more_info'>
                 <div class="more_info_icon"><i class="fas fa-ban"></i>  </div>
                 <div class="more_info_desc">금지 물품</div>
-                <span style="z-index: 4;">
-                    <div>보관 금지 물품 </div>
+                <span>
+                    <div>금지 물품 </div>
                     <div class='more_info_item'>${storeBoardVO.forbiddenProduct}</div>
                 </span>
             </div>
