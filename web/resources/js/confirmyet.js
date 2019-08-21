@@ -1,6 +1,6 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
-
+var thumbnail = 'thumbnail_';
 function getContextPath() {
     var hostIndex = location.href.indexOf(location.host) + location.host.length;
     var contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
@@ -301,9 +301,19 @@ $.confirmYet = function (curPage) {
                 }
                 let tr = $('<tr />',{id: result.list[i].articleNum,}).appendTo('.main_content>table>tbody');
                 let td1 = $('<td/>').appendTo(tr);
+
+                var profile = result.list[i].profile;
+                var fileCallPath = encodeURIComponent(profile.uploadPath + "/" + thumbnail
+                    + profile.uuid + "_" + profile.fileName);
+
                 $('<img/>', {
-                    src: "/resources/image/navbar/" + result.list[i].profileImg,
-                    alt: "이미지 경로 오류"
+                    src: '/display?fileName=/' + fileCallPath,
+                    alt: 'profile',
+                    onerror: 'this.src="/resources/image/navbar/profile.png"'
+                }).css({
+                    borderRadius: '100px',
+                    width: '40px',
+                    height: '40px'
                 }).appendTo(td1);
                 $('<td/>', {text: result.list[i].nick}).appendTo(tr);
                 $('<td/>', {text: result.list[i].startDate + " ~ " + result.list[i].endDate,class: 'table_click'}).appendTo(tr);
@@ -369,9 +379,10 @@ $.confirmYet = function (curPage) {
 
 
         },
-        error: function (error) {
+        error:function(request,status,error){
             alert("목록 불러오기 실패");
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
-    });
+    })
 };
 

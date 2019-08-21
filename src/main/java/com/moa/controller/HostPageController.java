@@ -8,12 +8,14 @@ import com.moa.model.vo.SimpleHostRequestVO;
 import com.moa.model.vo.SimpleStorageBoardVO;
 import com.moa.paging.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,10 +59,7 @@ public class HostPageController {
         map.put("lastNum",(curPage-1)*10+10);
         map.put("hostId",userId);
         map.put("stateType", TransactionStateMessaage.WAITING_APPROVE);
-        List<SimpleHostRequestVO> list
-                = receiveService.selectLuggageWaitingReceiveRecord(map);
-
-
+        List<SimpleHostRequestVO> list = receiveService.selectLuggageWaitingReceiveRecord(map);
         //******************paging logic*********************
         Map<String,Object> pagingInfo = new HashMap<String,Object>();
         pagingInfo.put("hostId",userId);
@@ -68,7 +67,6 @@ public class HostPageController {
 
         int listCnt = receiveService.selectLuggageWaitingReceiveRecordCnt(pagingInfo);
         Pagination pagination = new Pagination(listCnt,curPage,list.size());
-
 
         //결과
         Map<String,Object> result = new HashMap<String, Object>();
