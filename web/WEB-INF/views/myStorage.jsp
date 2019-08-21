@@ -48,7 +48,7 @@
                     <button id="add_address_btn" type="button" name="button">
                       주소지 추가+
                     </button>
-                    <button id="add_storage_btn" type="button" name="button" onclick="location.href='${contextPath}/storeboard/keep'">
+                    <button id="add_storage_btn" type="button" name="button" onclick="location.href='/storeboard/keep'">
                       보관소 추가+
                     </button>
                   </th>
