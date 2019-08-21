@@ -120,13 +120,13 @@
     <!--송준희-->
 
     <select id="searchEntrust" parameterType="com.moa.model.vo.EntrustSearchVO" resultMap="entrustSearchVO">
-        SELECT * FROM SEARCH_BOARD_VIEW SBV
+        SELECT DISTINCT * FROM SEARCH_BOARD_VIEW SBV
        JOIN
         (
         SELECT ARTICLE_NUM FROM ARTICLE_SEARCH_VIEW
-        WHERE SR_TRANSACTION_TYPE_ID LIKE #{transactionType}
+        WHERE (SR_TRANSACTION_TYPE_ID  LIKE '3' or SR_TRANSACTION_TYPE_ID  LIKE #{transactionType} )
         AND calc_distance(LATITUDE,LONGITUDE,#{latitude},#{longitude}) <![CDATA[<=]]> #{distance}
-        AND STORAGE_PERIOD_TYPE_ID LIKE #{storagePeriodType}
+        AND (STORAGE_PERIOD_TYPE_ID LIKE '3' OR STORAGE_PERIOD_TYPE_ID LIKE #{storagePeriodType})
         AND PET_FLAG LIKE #{petFlag}
         AND SECURITY_FACILITY_ID LIKE #{securityFacility}
         AND STORAGE_TYPE LIKE #{storageType}

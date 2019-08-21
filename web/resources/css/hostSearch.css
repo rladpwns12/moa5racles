@@ -245,7 +245,7 @@ margin:0;
 }
 .selection_wrapper{
 	float:left;
-	height:773px;
+	height:797px;
 	width:1230px;
 	margin:0px;
 	background-color:white;
@@ -364,19 +364,21 @@ margin:0;
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 
 
-
+.keep{
+    margin-left: 95px;
+}
 .keepBtn,.mapBtn {
     background-color: #423257;
     border: none;
     color: white;
-    padding: 12px 30px;
-    margin: 8px;
+    padding: 10px 20px;
+    margin: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    font-family: 'Nanum Gothic', sans-serif;
-    border-radius: 4px;
+    font-family: '나눔스퀘어', sans-serif;
+    border-radius: 6px;
 }
 #map{
 	width:674px;

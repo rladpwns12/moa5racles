@@ -32,9 +32,14 @@ public class StoreBoardSearchService {
 		double latResult = en.getLatitude();
 		double logResult = en.getLongitude();
 			System.out.println("서비스 가동 : "+en.getNickName());
-		String distanceResult = (Double.toString(distance(detail.getLatitude(),detail.getLongitude(),
-				latResult,logResult,"kilometer"))).substring(0,3);
-		
+		double distance =(distance(detail.getLatitude(),detail.getLongitude(),
+				latResult,logResult,"kilometer"));
+			System.out.println(distance);
+		String distanceResult = Double.toString(Math.round(distance*10)/10.0);
+
+
+
+			System.out.println(distanceResult);
 		if(en.getStoragePeriodTypeId().equals("1"))
 		{
 			storagePeriod="무관";

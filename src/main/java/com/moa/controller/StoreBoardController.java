@@ -42,7 +42,7 @@ public class StoreBoardController {
     public @ResponseBody
     List<Object> hostSearch2(DetailOptionVO detail){
 
-
+        System.out.println(detail.getCategory());
         List<Object> documents = storeBoard.search(detail);
         //System.out.println(documents.get(0));
 

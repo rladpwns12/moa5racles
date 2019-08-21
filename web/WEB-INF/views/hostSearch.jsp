@@ -16,8 +16,23 @@
 <link rel="stylesheet" href="/resources/css/hostSearch.css">
 	<sec:csrfMetaTags/>
 <script>
-	var markers=[];
-	var infowindows=[];
+	var markers = [];
+	var infowindows = [];
+	var container = document.getElementById('map');
+	function initMap() {
+		var container = document.getElementById('map');
+						//맵 api 세팅
+		var options = {
+			center: new kakao.maps.LatLng(37.484061, 126.955548),
+			level: 3
+		}
+
+		map = new kakao.maps.Map(container, options);	//맵 기본 세팅
+		var mapTypeControl = new kakao.maps.MapTypeControl();
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+		var zoomControl = new kakao.maps.ZoomControl();
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	}
 	function removeMarkerInfo() {
 		for ( var i = 0; i < markers.length; i++ ) {
 			markers[i].setMap(null);
@@ -28,8 +43,7 @@
 		markers = [];
 		infowindows=[];
 	}
-	function searchBtn() 			//검색 버튼 클릭시
-	{
+	function searchBtn(){ 			//검색 버튼 클릭시
 		removeMarkerInfo();
 		let address=$(".search_input").val();	//검색 키워드
 		if(address ==""){
@@ -72,8 +86,6 @@
 
 		});
 	}
-
-
 	function search(lan,log){//검색 함수
 		let catAry = new Array();
 		let i = 0;
@@ -81,6 +93,7 @@
 			if($('#ct'+iv).prop('checked'))
 				catAry[i++]=($('#ct'+iv).val());
 		}
+		catAry[catAry.length++]='99';
 		jQuery.ajaxSettings.traditional = true;
 		let form={
 			category:catAry,
@@ -107,8 +120,6 @@
 			}
 
 		}).then(function(data,status){
-			console.log(data);
-			console.log(status);
 			if(status=="success"){
 				if(data.length==0){
 					var noContent = '<div class="noContent">' +
@@ -142,8 +153,8 @@
 					$('<br>').appendTo(div);
 					$('<i/>',{class:'fas fa-user',style:'color: #423257;'}).appendTo(div);
 					$('<span/>',{id:'word',text:" "+data[i].nickName}).appendTo(div);
-					//positions[i] ={ title:data[i].nickName,latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
-					positions ={ title:data[i].nickName,latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
+
+					positions ={ title:'클릭시 이동합니다.',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
 					var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 					// 마커 이미지의 이미지 크기 입니다
 					var imageSize = new kakao.maps.Size(24, 35);
@@ -159,8 +170,8 @@
 					markers.push(marker);
 
 					// 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-					var iwContent = '<div style="padding:8px; background-color: #1a82ae;' +
-							'    font-family: \'나눔스퀘어\', sans-serif;">'+data[i].nickName+"의 보관소"+'</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+					var iwContent = '<div style="padding:8px;' +
+							'    font-family: \'나눔스퀘어 \', sans-serif;">'+data[i].nickName+"님의 보관소"+'</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
 					// 인포윈도우를 생성합니다
 					var infowindow = new kakao.maps.InfoWindow({
@@ -176,6 +187,10 @@
 					kakao.maps.event.addListener(marker, 'mouseout', function() {
 						// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
 						infowindows[i+1].close();
+					});
+					kakao.maps.event.addListener(marker, 'click', function() {
+						// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+						roomSelect(data[i].articleNum);
 					});
 				}
 				// 마커 이미지의 이미지 주소입니다
@@ -219,10 +234,8 @@
 				alert("지도 오류가 발생했습니다.");
 			}
 		});
-		console.log(markers);
-	}
-
-function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
+	}   //검색 실행
+	function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
 		var form = document.createElement("form");
 		var article = document.getElementById("article"+articleNum);
 		var distance = $(article).children('.distance')[0];
@@ -237,24 +250,39 @@ function roomSelect(articleNum) {    //상세보기 버튼 클릭 이벤트
 		form.appendChild(hiddenField);
 		document.body.appendChild(form);
 		form.submit();
-	}
+	}  //방 버튼 클릭
 	function enterkey(){
 	if (window.event.keyCode === 13) {
 		searchBtn();
 	}
+	}     //엔터버튼 클릭
+	function mapResize() {						//맵 화면 크기 조정 이벤트
+		let container = document.getElementById('map');
+		let mapWrapper = $('.selection_wrapper');
+		let mapSize = document.querySelector(".selection_wrapper").style.width;
+		if( mapSize == "1230px") {
+			mapWrapper.width("640px");
+			$(".map_wrapper").css("left", "640px");
+			container.style.width = "1280px";
+		}
+		else{
+			mapWrapper.width("1230px");
+			$(".map_wrapper").css("left", "1230px");
+			container.style.width = "690px";
+		}
+		map.relayout();
 	}
-
-$(document).ready(function() {			//실행시
-
+$(document).ready(function() {			//검색 화면 실행시
+	initMap();
 	$('#categoryAllBtn').click(function() { //카테고리 전체 클릭 이벤트
 		$('input[name="category"]').prop('checked', !$('input[name="category"]').prop('checked'));
-	});
+	});         //카테고리 전체 클릭시
 	$('input[name="category"]').click(function() { //카테고리 전체 클릭 이벤트
 		for(let iv=1 ; iv<11;iv++) {
 			if($('#ct'+iv).prop('checked')==false)
 				$('#ct0').prop('checked', false);
 		}
-	});
+	});  //카테고리 버튼 클릭시
 	$('#categoryBtn').click(function() {		//카테고리 버튼 클릭이벤트
 		var con =  document.getElementById('category');
 		if(con.style.display=='none'){
@@ -290,28 +318,16 @@ $(document).ready(function() {			//실행시
 			});
 		});
 	};
-
 	rangeSlider();
 
-	$('.mapBtn').click(function() {						//맵 화면 크기 조정 이벤트
-
-		let map = $('.selection_wrapper');
-		console.log(map.style);
-		map.width('730px');
-		$(".map_wrapper").css("left", "730px");
-		$('#map').width('1174px');
 
 
 
-	});
-
-
-
-	var container = document.getElementById('map');					//맵 api 세팅
+	/*var container = document.getElementById('map');					//맵 api 세팅
 	var options = {
 		center: new kakao.maps.LatLng(37.484061, 126.955548),
 		level: 3
-	}
+	}*/
 	if (navigator.geolocation) {
 
 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -321,7 +337,7 @@ $(document).ready(function() {			//실행시
 	         lon = position.coords.longitude; //
 
 	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-	            message = '<i class="fas fa-angle-down"></i><div style="padding:5px; border-radius: 4px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
+	            message = '<div style="padding:5px; border-radius: 4px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
 	        // 마커와 인포윈도우를 표시합니다
 	        displayMarker(locPosition, message);
 
@@ -358,27 +374,20 @@ $(document).ready(function() {			//실행시
 	}
 	search(37.484224, 126.955759);
 	//요주의!!!!!!!
-
-
-	map = new kakao.maps.Map(container, options);	//맵 기본 세팅
+	/*map = new kakao.maps.Map(container, options);	//맵 기본 세팅
 	var mapTypeControl = new kakao.maps.MapTypeControl();
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 	var zoomControl = new kakao.maps.ZoomControl();
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);*/
 
 
 
 });
 
 
-
-
-
 window.onload = function(){
-
 	  crear_select();
 	}
-
 	var li = new Array();
 	function crear_select(){
 	var div_cont_select = document.querySelectorAll("[data-mate-select='active']");
@@ -409,8 +418,6 @@ window.onload = function(){
 	    }; // Fin For select_optiones
 	  }; // fin for divs_cont_select
 	} // Fin Function
-
-
 	//검색조건
 	var cont_slc = 0;
 	function open_select(idx){
@@ -449,15 +456,12 @@ window.onload = function(){
 	}
 
 	} // fin function open_select
-
 	function salir_select(indx){
 	var select_ = document.querySelectorAll("[data-indx-select='"+indx+"'] > select")[0];
 	 document.querySelectorAll("[data-indx-select='"+indx+"'] > .cont_list_select_mate > ul")[0].style.height = "0px";
 	document.querySelector("[data-indx-select='"+indx+"'] > .icon_select_mate").style.transform = 'rotate(0deg)';
 	 document.querySelectorAll("[data-indx-select='"+indx+"']")[0].setAttribute('data-selec-open','false');
 	}
-
-
 	function _select_option(indx,selc){
 	/*  if (isMobileDevice()) {
 	selc = selc -1;
@@ -647,8 +651,8 @@ window.onload = function(){
 			<!-- 반려동물 --> 
 			<div class="select_mate" data-mate-select="active" >
 				<select name="" onchange="" onclick="return false;" id="petFlag">
-				<option value="0"  >반려동물 없음 </option>
-				<option value="1">반려동물 있음</option>
+				<option value="%">반려동물 무관 </option>
+				<option value="0">반려동물 없음</option>
 
 				</select>
 				<p class="selecionado_opcion"  onclick="open_select(this)" ></p><span onclick="open_select(this)" class="icon_select_mate" ><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -666,7 +670,7 @@ window.onload = function(){
 			</div>
 			
 			<div class="mapSize">
-    			<button class="mapBtn">지도 크기</button>
+    			<button class="mapBtn" onclick="mapResize();">지도 크기</button>
 			</div>
 		</div>
 		
@@ -678,7 +682,7 @@ window.onload = function(){
 			</div>
 		</div>
 			<div class="map_wrapper">
-				<div id="map" style="width:674px;height:776px;"></div>
+				<div id="map" style="width:690px;height:797px;"></div>
 			</div>
 		</div>
 
