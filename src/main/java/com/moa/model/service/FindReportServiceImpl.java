@@ -18,7 +18,7 @@ public class FindReportServiceImpl implements FindReportService {
     }
 
     @Override
-    public ReportVO findReport(long reportId) {
+    public Map<String, Object> findReport(long reportId) {
         return reportDAO.selectUserReport(reportId);
     }
 

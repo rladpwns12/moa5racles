@@ -1,6 +1,7 @@
 package com.moa.model.dao;
 
 import com.moa.model.vo.ReportAdminVO;
+import com.moa.model.vo.ReportResultVO;
 import com.moa.model.vo.ReportVO;
 import com.moa.model.vo.SimpleReportAdminVO;
 import com.moa.mybatis.ReportMapper;
@@ -46,10 +47,18 @@ public class ReportDAOImpl implements ReportDAO {
     }
 
     @Override
-    public ReportVO selectUserReport(long reportId) {
+    public Map<String, Object> selectUserReport(long reportId) {
         ReportMapper mapper = sqlSession.getMapper(ReportMapper.class);
-        return mapper.searchUserReport(reportId);
+        Map<String, Object> info = new HashMap<>();
 
+        ReportVO reportVO = mapper.searchUserReport(reportId);
+        info.put("reportVO", reportVO);
+        if(reportVO.isReportState()){
+            ReportResultVO reportResultVO = mapper.searchResult(reportId);
+            info.put("reportResultVO", reportResultVO);
+        }
+
+        return info;
     }
 
     @Override
