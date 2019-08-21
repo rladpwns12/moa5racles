@@ -101,7 +101,6 @@ public class StoreRequestDAOImpl implements StoreRequestDAO {
     @Override
     public List<SimpleHostRequestVO> searchListByHost(Map<String,Object> map){
         StoreRequestMapper mapper = sqlSession.getMapper(StoreRequestMapper.class);
-
         return mapper.searchListByHost(map);
     }
     @Override
