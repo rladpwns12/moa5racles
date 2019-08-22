@@ -35,7 +35,7 @@
     <script src="/resources/js/more_information.js"></script>
     <script src="/resources/js/lightslider.js"></script>
     <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
             $('#delete_btn').click(function(){
@@ -191,8 +191,8 @@
         </div>
 
         <div class="image_info" id='image_info'>
-            <div class="prev_img" id='prev_img'><img class='prev_image' id='prev_image' src="${realImg}"/></div>
-            <div class="img_btn" id='img_btn'><img class ='img_icon'src="${realImg}"/></div>
+            <div class="prev_img" id='prev_img'><img class='prev_image' id='prev_image' src="${realImg}" onerror="setDefault(this)"/></div>
+            <div class="img_btn" id='img_btn'><img class ='img_icon'src="${realImg}" onerror="this.src='/resources/image/loading.gif'"/></div>
             <div class="like_btn" id="like_btn"><i class="far fa-heart"></i></div>
         </div>
     </div>
