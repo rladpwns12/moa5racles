@@ -1,7 +1,7 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
-function card(price) {
+function card(historyId, price) {
     var IMP = window.IMP; // 생략가능
     IMP.init('imp85881502'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
     var msg;

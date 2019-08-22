@@ -82,8 +82,7 @@
                     <div class="col-2">
                         <label class="label">휴대폰 인증 버튼을 눌려주세요</label>
                         <div class="input-group">
-                            <input id="phone" class="input100 input--style-4" type="text" name="phone" disabled
-                                   readonly>
+                            <input id="phone" class="input100 input--style-4" type="text" name="phone" readonly>
                             <span class="focus-input100"></span>
                         </div>
                     </div>
