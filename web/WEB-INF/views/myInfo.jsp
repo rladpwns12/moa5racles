@@ -112,7 +112,7 @@
                                         <div class="col-2">
                                             <label class="label">비밀번호</label>
                                             <div class="input-group">
-                                                <input id="password" class="input100 input--style-4" type="password" name="password">
+                                                <input id="password" class="input100 input--style-4" type="password" name="password" maxlength="20">
                                                 <span class="focus-input100"></span>
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@
                                             <div class="input-group">
                                                 <div class="search_address_btn">
                                                     <input type="text" id="detailAddress" class="input--style-4 input100 detailAddress"
-                                                           name="detailAddress" value="${address.detailAddress}">
+                                                           name="detailAddress" value="${address.detailAddress}" maxlength="66">
                                                     <span class="move long focus-input100"></span>
                                                 </div>
                                                 <input type="hidden" id="latitude" class="input--style-4" name="latitude">

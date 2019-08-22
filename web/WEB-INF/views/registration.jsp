@@ -65,7 +65,7 @@
                             <input id="password_fake" class="input100 input--style-4" type="password"
                                    onfocus="resetPassword()" maxlength="20" style="display: none">
                             <input id="password" class="input100 input--style-4" type="password"
-                                   onfocus="resetPassword()">
+                                   onfocus="resetPassword()" maxlength="20">
                             <span class="focus-input100"></span>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         <label class="label">비밀번호를 다시 한번 입력해주세요</label>
                         <div class="input-group">
                             <input id="password2" class="input100 input--style-4" type="password" name="password2"
-                                   onfocus="resetPassword2()">
+                                   onfocus="resetPassword2()" maxlength="20">
                             <span class="focus-input100"></span>
                         </div>
                     </div>

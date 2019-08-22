@@ -29,7 +29,6 @@ function openAuthenticatePhone() {
 $(document).ready(function () {
     var addrLat = 0;
     var addrLng = 0;
-    var passwordText = document.getElementById("password");
     var addr = $('#address').val();
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
@@ -80,17 +79,24 @@ $(document).ready(function () {
 
     //-- start of update user information
     $('#submit_btn').click(function () {
-        //-- start of validation
-        //1. 빈칸 검사
-        if(passwordText.value == '' || passwordText.value == null){
-            alert("비밀번호를 입력해주세요.");
-            passwordText.focus();
+        var passwordText = $('#password').val();
+        if(passwordText == '' || passwordText == null){
+            alert("비밀번호를 입력해주세요");
+            $('#password').focus();
             return;
         }
-        if(($('#address').val()) === '' ||($('#address').val()) === null){
-            alert("상세 주소를 입력해주세요.");
-            document.getElementById("detailAddress").focus();
+        else if(passwordText.length < 5) {
+            alert('비밀번호는 최소 5자리 이상 입력하셔야 합니다');
+            return;
+        }
+        else if(passwordText.length > 20) {
+            alert('비밀번호는 최대 20자리까지 입력이 가능합니다');
+            return;
+        }
 
+        if(($('#detailAddress').val()) === '' ||($('#detailAddress').val()) === null){
+            alert("상세 주소를 입력해주세요.");
+            $('#detailAddress').focus();
             return;
         }
         //2. 기본값 검사(이름,닉네임,이메일) -- 휴대폰의 경우 변경하였을 때만
@@ -131,11 +137,11 @@ $(document).ready(function () {
                         },
                         success:function(result) {
                             if (result === true) {
-                                alert("수정이 완료되었습니다.");
+                                alert("회원정보가 수정되었습니다");
                                 location.reload();
                             }
                             else{
-                                alert("비정상적으로 수정이 완료되었습니다.");
+                                alert("회원정보 수정에 실패하셨습니다");
                             }
                         },
                         error:function(request,status,error){
