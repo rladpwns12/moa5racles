@@ -1,3 +1,8 @@
+function setDefault(e){
+    e.src='/resources/image/loading.gif';
+    $('.img_btn').remove();
+}
+
 $(document).ready(function () {
     $.reviewList(1, 1);
 
@@ -11,6 +16,8 @@ $(document).ready(function () {
             like.attr('class','far fa-heart');
         }
     });
+
+
 
     var addrLat = 0;
     var addrLng = 0;

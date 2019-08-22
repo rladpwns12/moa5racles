@@ -39,6 +39,7 @@ $(document).ready(function () {
                 data : {
                     password:password
                 },
+                dataType :'json',
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("AJAX", true);
                     xhr.setRequestHeader(header, token);
