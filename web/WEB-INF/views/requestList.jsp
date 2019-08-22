@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="main_paging">
-                    <img id="load" src="/resources/image/load.gif"/>
+                    <img id="load" src="/resources/image/loading.gif"/>
                     <c:choose>
                         <c:when test="${fn:length(requestList) != 0}">
                             <c:choose>

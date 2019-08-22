@@ -392,7 +392,8 @@ function isPasswordValid(input) {
     }
 
     // let passwordValid = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{5, 20}$/;
-    let passwordValid = /^[A-Za-z0-9]{5,20}$/;
+    // let passwordValid = /^[A-Za-z0-9]{5,20}$/;
+    let passwordValid = /^.*(?=.{5,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
     if (!passwordValid.test(input)) {
         alert("비밀번호 형식이 올바르지 않습니다.");
         $("#password").val("");
