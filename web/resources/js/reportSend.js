@@ -27,7 +27,6 @@ $(document).ready(function(){
            url:"/report/send",
            type:"POST",
            contentType:"application/json; charset=utf-8",
-           dataType:"json",
            data:jsonData,
            cache: false,
            beforeSend: function(xhr){
@@ -35,17 +34,31 @@ $(document).ready(function(){
                xhr.setRequestHeader(header, token);
            },
            success: function(result){
-               if(result == true){
-                   alert('신고가 정상적으로 완료되었습니다.');
-                   window.close();
-                   return;
+               switch (result) {
+                   case OK :
+                       alert('신고가 정상적으로 완료되었습니다.');
+                       window.close();
+                       break;
+                   case MISMATCH:
+                       alert("전송에 실패하였습니다.\n로그인을 다시 해주세요.");
+                       break;
+                   case FAIL :
+                       alert("전송에 실패하였습니다.\n신고 대상 닉네임을 다시 한번 확인해주세요.");
+                       break;
+                   case TARGET|TOOLONG:
+                       alert("전송에 실패하였습니다.\n신고 대상 닉네임을 다시 한번 확인해주세요.");
+                       break;
+                   case MESSAGE_CONTENT|TOOLONG:
+                       alert("메세지는 최대 3000 글자까지 보낼 수 있습니다.");
+                       break;
+                   case SELF:
+                       alert("자기 자신은 신고 할 수 없습니다");
+                       break;
                }
-               alert('해당 닉네임이 존재하지 않습니다.');
-               return;
            },
-           error: function (error) {
-               alert('신고가 정상적으로 완료되지 않았습니다.\n고객센터로 문의해 주세요.');
-               return;
+           error:function(request,status,error){
+               console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+               alert('신고가 정상적으로 완료되지 않았습니다.\n 잠시뒤 시도 해 주세요.');
            }
        });
     });

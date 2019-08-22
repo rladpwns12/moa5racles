@@ -20,7 +20,7 @@ $(document).ready(function () {
             alert("선택된 메시지가 없습니다.");
             return;
         }
-        if(confirm("정말로 삭제하시겠습니가?")){
+        if(confirm("정말로 삭제하시겠습니까?")){
             $.ajax({
                 url:"/mypage/message/send/delete",
                 type:"POST",

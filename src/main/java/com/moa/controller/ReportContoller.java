@@ -1,21 +1,26 @@
 package com.moa.controller;
 
 
+import com.moa.message.MessengerStateMessage;
+import com.moa.message.ValidMessage;
 import com.moa.model.service.FindReportService;
 import com.moa.model.service.MakeReportService;
 import com.moa.model.vo.CustomUser;
+import com.moa.model.vo.LoginVO;
 import com.moa.model.vo.ReportVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
 @RequestMapping(value = "/report")
-public class ReportContoller {
+public class ReportContoller implements ValidMessage {
     @Autowired
     private MakeReportService makeReportService;
     @Autowired
@@ -29,8 +34,23 @@ public class ReportContoller {
 
     @RequestMapping(value = "/send", method = RequestMethod.POST)
     @ResponseBody
-    public boolean sendReport(@RequestBody ReportVO reportVO){
-        return makeReportService.makeReport(reportVO);
+    public String sendReport(@RequestBody @Valid ReportVO reportVO, BindingResult bindingResult, Authentication auth){
+        CustomUser customUser=(CustomUser)auth.getPrincipal();
+        LoginVO loginVO=customUser.getLoginVO();
+        if(reportVO.getUserId()!=Long.parseLong(loginVO.getUserId()))
+            return MISMATCH;
+        if(reportVO.getTargetUserNick().equals(loginVO.getNick()))
+            return SELF;
+        if(bindingResult.hasErrors()){
+            if(bindingResult.getTarget().equals(reportVO.getTargetUserNick()))
+                return (TARGET+TOOLONG);
+            else
+                return (MESSAGE_CONTENT+TOOLONG);
+        }
+        if(makeReportService.makeReport(reportVO))
+            return OK;
+        else
+            return FAIL;
     }
 
     @RequestMapping(value = {"/list/{pageNum}","/list"})

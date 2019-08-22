@@ -1,9 +1,12 @@
 package com.moa.model.vo;
 
+import com.moa.valid.MaxByteLength;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -13,22 +16,20 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReportVO {
-    @NotBlank
     private long reportId;
-    @NotBlank
+    @Min(0)
     private long userId;
-    @NotBlank
     private String userNick;
-    @NotBlank
-    @Size(min = 0, max = 5)
+    @Min(0)
+    @Max(5)
     private int targetType;
-    @NotBlank
+    @Min(0)
     private long targetId;
     @NotBlank
-    @Size(min = 1, max = 33)
+    @MaxByteLength(100)
     private String targetUserNick;
     @NotBlank
-    @Size(min = 1, max = 1000)
+    @MaxByteLength(3000)
     private String content;
     private Date reportTime;
     private boolean reportState;
