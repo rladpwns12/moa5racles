@@ -45,11 +45,11 @@ $(document).ready(function(){
                    case FAIL :
                        alert("전송에 실패하였습니다.\n신고 대상 닉네임을 다시 한번 확인해주세요.");
                        break;
-                   case TARGET|TOOLONG:
+                   case TARGET+TOOLONG:
                        alert("전송에 실패하였습니다.\n신고 대상 닉네임을 다시 한번 확인해주세요.");
                        break;
-                   case MESSAGE_CONTENT|TOOLONG:
-                       alert("메세지는 최대 3000 글자까지 보낼 수 있습니다.");
+                   case MESSAGE_CONTENT+TOOLONG:
+                       alert("신고 내용은 최대 1333 글자까지 보낼 수 있습니다.");
                        break;
                    case SELF:
                        alert("자기 자신은 신고 할 수 없습니다");
