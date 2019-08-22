@@ -8,7 +8,7 @@
         <ul>
           <li onclick="privacyPolicy();">개인정보 처리방침</li>
           <li onclick="termsOfUsePolicy();">이용약관</li>
-          <li onclick="move();">서비스 가이드</li>
+          <li onclick="serviceGuild();">서비스 가이드</li>
           <li onclick="move();">공지사항</li>
           <li onclick="move();">자주 찾는 질문</li>
         </ul>
