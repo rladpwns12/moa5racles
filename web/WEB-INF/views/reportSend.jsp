@@ -7,6 +7,7 @@
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="/resources/js/validMessage.js" ></script>
     <script src="/resources/js/reportSend.js" ></script>
     <link rel="stylesheet" href="/resources/css/reportSend.css"></head>
     <sec:csrfMetaTags/>
