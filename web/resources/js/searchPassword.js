@@ -46,6 +46,7 @@ function submit() {
         type: "POST",
         url: "/searchPassword",
         data: {name, email, phone},
+        dataType:"json",
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
@@ -82,6 +83,7 @@ function submitPassword() {
         type: "POST",
         url: "/updatePassword",
         data: {email, name, password},
+        dataType:'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
