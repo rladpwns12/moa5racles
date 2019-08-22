@@ -69,8 +69,8 @@
         </div>
     </fieldset>
     <div class="btn-position">
-        <button onclick="check(${requestInfo.USERID,'refuse'},'hostapprove')" type="submit" name="btnType" value="reject" class="btn btn-primary">거절</button>
-        <button onclick="check(${requestInfo.USERID,'confirm'},'hostapprove')" type="submit" name="btnType" value="approve" class="btn btn-primary">승인</button>
+        <button onclick="refuse(${requestInfo.USERID})" type="submit" name="btnType" value="reject" class="btn btn-primary">거절</button>
+        <button onclick="approve(${requestInfo.USERID})" type="submit" name="btnType" value="approve" class="btn btn-primary">승인</button>
     </div>
 </div>
 
