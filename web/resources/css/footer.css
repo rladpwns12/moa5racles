@@ -7,6 +7,7 @@
   height: 200px;
   text-align: center;
   margin-left: 520px;
+  position: relative;
 }
 .category{
   padding-top: 20px;

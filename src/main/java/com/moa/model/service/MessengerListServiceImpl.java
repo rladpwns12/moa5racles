@@ -1,7 +1,9 @@
 package com.moa.model.service;
 
+import com.moa.model.dao.MessengerDAO;
 import com.moa.model.dao.MessengerDAOImpl;
 import com.moa.model.vo.MessageVO;
+import com.moa.model.vo.SimpleMessageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class MessengerListServiceImpl {
+public class MessengerListServiceImpl implements MessengerListService{
     @Autowired
-    private MessengerDAOImpl dao;
+    private MessengerDAO dao;
 
     public List<MessageVO>  messageList(Map<String,Object> messageInfo){
         return dao.searchMessage(messageInfo);
@@ -28,7 +30,7 @@ public class MessengerListServiceImpl {
     public MessageVO messageDetail(int messageId){
         return dao.searchOneMessage(messageId);
     }
-    public boolean messageSend(Map<String,Object> sentMessage){
+    public boolean messageSend(SimpleMessageVO sentMessage){
         return dao.insertOneMessage(sentMessage);
     }
 }

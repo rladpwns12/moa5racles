@@ -31,7 +31,7 @@ public class TestMessengerService {
         messageInfo.put("receiverNick","JIHO");
         messageInfo.put("content","new test");
 
-        System.out.println(service.messageSend(messageInfo));
+        //System.out.println(service.messageSend(messageInfo));
     }
     @Test
     public void TEST_유저존재여부(){
