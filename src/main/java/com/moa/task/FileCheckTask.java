@@ -32,7 +32,7 @@ public class FileCheckTask {
         return str.replace("-", File.separator);
     }
 
-    @Scheduled(cron = "* * 2 * * * ") //cron이라는 속성을 부여해 주기를 제어 매일 새벽 2시
+    @Scheduled(cron = "0 0 2 * * * ") //cron이라는 속성을 부여해 주기를 제어 매일 새벽 2시
     //초, 분, 시, 일, 월, 주, 년(옵션)
     //* 모든수, ? 제외, - 기간, ' 특정 시간, / 시작 시간과 반복시간, L 마지막, W 가까운 평일
     public void checkFiles() throws Exception{
