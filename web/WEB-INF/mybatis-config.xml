@@ -27,4 +27,5 @@
     </bean>
     <tx:annotation-driven/>
     <mybatis-spring:scan base-package="com.moa.mybatis"/>
+
 </beans>
