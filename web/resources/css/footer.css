@@ -5,6 +5,7 @@
   font-family: "nanum gothic";
   width: 900px;
   height: 200px;
+  text-align: center;
   margin-left: 520px;
 }
 .category{
@@ -13,12 +14,13 @@
   height: 45px;
 }
 .category ul{
+  text-align: center;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 .category ul li{
-  float:left;
+  display: inline-block;
   margin-right: 30px;
   font-weight: bold;
   cursor: pointer;
