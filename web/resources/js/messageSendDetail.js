@@ -1,3 +1,8 @@
+var MISMATCH_SENDER="mismathSender";
+var NOT_EXISTS="notExists";
+var  OK="ok";
+var FAIL="fail";
+var TOOLONG="tooLong";
 $(document).ready(function () {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
@@ -17,23 +22,34 @@ $(document).ready(function () {
            $.ajax({
                url:"/mypage/message/sendmessage",
                type:"POST",
-               contentType:"application/json",
-               dataType:"json",
+               contentType:"application/json; charset=UTF-8",
                data :JSON.stringify(messageData),
                beforeSend: function(xhr) {
                    xhr.setRequestHeader("AJAX", true);
                    xhr.setRequestHeader(header, token);
                },
                success:function(result){
-                   if(result == true){
-                       alert("전송되었습니다.");
-                       window.close();
-                   }
-                   else{
-                       alert("전송에 실패하였습니다.\n받는 사람 닉네임을 다시 한번 확인해주세요.");
+                   switch (result) {
+                       case OK :
+                           alert("전송되었습니다.");
+                           window.close();
+                           break;
+                       case MISMATCH_SENDER:
+                           alert("전송에 실패하였습니다.\n로그인을 다시 해주세요.");
+                           break;
+                       case NOT_EXISTS :
+                           alert("전송에 실패하였습니다.\n받는 사람 닉네임을 다시 한번 확인해주세요.");
+                           break;
+                       case FAIL :
+                           alert("전송에 실패하였습니다.\n 잠시뒤 시도해 주세요.");
+                           break;
+                       case TOOLONG:
+                           alert("메세지는 최대 3000 글자까지 보낼 수 있습니다.");
+                           break;
                    }
                },
-               error:function(error){
+               error:function(request,status,error){
+                   console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                    alert("전송에 실패하였습니다.");
                }
            });

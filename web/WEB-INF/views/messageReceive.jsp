@@ -11,6 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="${pageContext.request.contextPath}/resources/js/messageReceive.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/myPage.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/message.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/requestStoreInfo.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">

@@ -8,6 +8,7 @@ import com.moa.model.dao.UserDAOImpl;
 import com.moa.model.service.*;
 import com.moa.model.vo.*;
 import com.moa.paging.Pagination;
+import lombok.extern.log4j.Log4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -32,6 +37,7 @@ import java.util.*;
 
 
 @Controller
+@Log4j
 @RequestMapping(value="/mypage")
 public class MyPageController {
     @Autowired
@@ -39,7 +45,7 @@ public class MyPageController {
     @Autowired
     private LuggageRequestInfoService luggageRequestInfoService;
     @Autowired
-    private MessengerListServiceImpl messengerListService;
+    private MessengerListService messengerListService;
     @Autowired
     @Qualifier("memberService")
     private MemberInfoServiceImpl memberInfoService;
@@ -254,12 +260,20 @@ public class MyPageController {
     }
     @ResponseBody
     @RequestMapping(value = {"/message/sendmessage"}, method = RequestMethod.POST)
-    public boolean messageSubmit(@RequestBody Map<String,Object> messageSendInfo){
-        if(memberInfoService.checkExistUser((String)messageSendInfo.get("receiverNick"))==false){
-            return false;
+    public String messageSubmit(@RequestBody @Valid SimpleMessageVO messageSendInfo, BindingResult bindingResult, Authentication auth){
+        if(bindingResult.hasErrors()){
+            return MessengerStateMessage.TOOLONG;
         }
-
-        return messengerListService.messageSend(messageSendInfo);
+        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        if(!customUser.getLoginVO().getNick().equals(messageSendInfo.getSenderNick()))
+            return MessengerStateMessage.MISMATCH_SENDER;
+        if(memberInfoService.checkExistUser(messageSendInfo.getReceiverNick())==false){
+            return MessengerStateMessage.NOT_EXISTS;
+        }
+        if(messengerListService.messageSend(messageSendInfo))
+            return MessengerStateMessage.OK;
+        else
+            return MessengerStateMessage.FAIL;
     }
     @RequestMapping(value = {"/message/submit/{receiverNick}"}, method = RequestMethod.GET)
     public ModelAndView messageReply(@PathVariable String receiverNick, Authentication auth){

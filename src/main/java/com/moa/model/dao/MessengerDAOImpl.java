@@ -1,6 +1,7 @@
 package com.moa.model.dao;
 
 import com.moa.model.vo.MessageVO;
+import com.moa.model.vo.SimpleMessageVO;
 import com.moa.mybatis.MessengerMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class MessengerDAOImpl {
+public class MessengerDAOImpl implements MessengerDAO{
     @Autowired
     private SqlSession sqlSession_oracle;
 
     public List<MessageVO> searchMessage(Map<String,Object> messageInfo){
         MessengerMapper mapper= sqlSession_oracle.getMapper(MessengerMapper.class);
-
         return mapper.searchMessage(messageInfo);
     }
 
@@ -39,12 +39,11 @@ public class MessengerDAOImpl {
         MessengerMapper mapper= sqlSession_oracle.getMapper(MessengerMapper.class);
         return mapper.searchOneMessage(messageId);
     }
-    public boolean insertOneMessage(Map<String,Object> insertMessageInfo){
+    public boolean insertOneMessage(SimpleMessageVO insertMessageInfo){
         MessengerMapper mapper= sqlSession_oracle.getMapper(MessengerMapper.class);
         if(mapper.insertOneMessage(insertMessageInfo) == false){
             return true;
         }
-
         return false;
     }
 }
