@@ -31,7 +31,7 @@ public class AdminController {
         return mav;
     }
 
-    @RequestMapping(value = "/hostapprove/info", method = RequestMethod.GET)
+    @RequestMapping(value = "/hostapprove/info", method = RequestMethod.GET, produces = "application/json")
     public ModelAndView confirmProc(@RequestParam("userId") int userId,
                                     @RequestParam("storageType")String storageType) {
 
