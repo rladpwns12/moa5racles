@@ -6,3 +6,4 @@ var TARGET = "target";
 var MESSAGE_CONTENT = "content";
 var TOOLONG="tooLong";
 var SELF="self";
+var BLANK="blank";

@@ -39,6 +39,9 @@ $(document).ready(function(){
                        alert('신고가 정상적으로 완료되었습니다.');
                        window.close();
                        break;
+                   case BLANK :
+                       alert('신고 대상 닉네임을 입력해 주세요.');
+                       break;
                    case MISMATCH:
                        alert("전송에 실패하였습니다.\n로그인을 다시 해주세요.");
                        break;
@@ -49,7 +52,7 @@ $(document).ready(function(){
                        alert("전송에 실패하였습니다.\n신고 대상 닉네임을 다시 한번 확인해주세요.");
                        break;
                    case MESSAGE_CONTENT+TOOLONG:
-                       alert("신고 내용은 최대 1333 글자까지 보낼 수 있습니다.");
+                       alert("신고 내용은 최대 1000 글자까지 보낼 수 있습니다.");
                        break;
                    case SELF:
                        alert("자기 자신은 신고 할 수 없습니다");

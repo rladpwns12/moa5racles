@@ -9,4 +9,5 @@ public interface ValidMessage {
     String TARGET = "target";
     String MESSAGE_CONTENT = "content";
     String SELF="self";
+    String BLANK="blank";
 }

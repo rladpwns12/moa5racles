@@ -42,6 +42,8 @@ public class ReportContoller implements ValidMessage {
         if(reportVO.getTargetUserNick().equals(loginVO.getNick()))
             return SELF;
         if(bindingResult.hasErrors()){
+            if(reportVO.getTargetUserNick()==null || reportVO.getTargetUserNick().trim().equals(""))
+                return BLANK;
             if(bindingResult.getTarget().equals(reportVO.getTargetUserNick()))
                 return (TARGET+TOOLONG);
             else
