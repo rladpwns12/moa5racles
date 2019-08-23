@@ -6,11 +6,15 @@ import java.nio.charset.StandardCharsets;
 
 public class MaxByteLengthValidator implements ConstraintValidator<MaxByteLength,String> {
     private int max;
+    private int min;
     public void initialize(MaxByteLength constraintAnnotation) {
-        this.max = constraintAnnotation.value();
+        this.min = constraintAnnotation.minValue();
+        this.max = constraintAnnotation.maxValue();
     }
     @Override
     public boolean isValid(String object, ConstraintValidatorContext constraintContext) {
-        return object == null || object.getBytes(StandardCharsets.UTF_8).length <= this.max;
+        if(object==null)
+            return true;
+        return object.getBytes(StandardCharsets.UTF_8).length >= this.min && object.getBytes(StandardCharsets.UTF_8).length <= this.max;
     }
 }
