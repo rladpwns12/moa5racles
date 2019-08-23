@@ -2,6 +2,68 @@ var num = 1;
 var table_product_num = 0;
 var i = 0;
 $(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+
+    $("button[type='submit']").on("click", function (e) {
+
+        var measured = $('#measured').val();
+        measured = removeCommas(measured);
+        $('#measured').val(measured);
+
+        var bargain = $('#bargain').val();
+        bargain = removeCommas(bargain);
+        $('#bargain').val(bargain);
+
+        var formObj = $("form[role='form']");
+        var formObjClone = $(formObj).clone();
+        e.preventDefault();
+        if (!$("#submit_check").prop("checked")) {
+            alert("체크박스를 체크하세요");
+            return;
+        }
+        alert("물건을 맡깁니다.");
+        var str = "";
+
+        $(".uploadResult ul li").each(function (i, obj) {
+            var jobj = $(obj);
+            console.dir(jobj);
+
+            str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
+            str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+            str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
+            str += "<input type='hidden' name='attachList[" + i + "].filetype' value='" + jobj.data("type") + "'>";
+        });
+        formObjClone.append(str);
+
+        $.ajax({
+            type: "POST",
+            url: location.pathname,
+            data: formObjClone.serialize(),
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("AJAX", true);
+                xhr.setRequestHeader(header, token);
+            },
+            success: function (result) {
+                if (result) {
+                    $("#content6").hide();
+                    $("#content7").show();
+                    $("#left_side").hide();
+                    $("#right_side").hide();
+                    $("#exit_btn").hide();
+                } else {
+                    alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
+                }
+            },
+            error: function (request, status, error) {
+                alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
+    });
+
     $("#start_datepicker").datepicker({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -223,7 +285,7 @@ function nextForm() {
             $("#percent").html("&nbsp;&nbsp;&nbsp;100%");
             num++;
             return;
-        /*case 6:
+        case 6:
             $("#content6").hide();
             $("#content7").show();
             num++;
@@ -232,7 +294,7 @@ function nextForm() {
         case 7:
             $("#left_side").hide();
             $("#right_side").hide();
-            return;*/
+            return;
     }
 }
 
@@ -248,64 +310,7 @@ function finished() {
     location.href = "/storeboard";
 }
 
-var formObj = $("form[role='form']");
-var token = $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
 
-$("button[type='submit']").on("click", function (e) {
-    e.preventDefault();
-    if (!$("#submit_check").prop("checked")) {
-        alert("체크박스를 체크하세요");
-        return;
-    }
-    alert("물건을 맡깁니다.");
-    var str = "";
-
-    $(".uploadResult ul li").each(function (i, obj) {
-        var jobj = $(obj);
-        console.dir(jobj);
-
-        str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
-        str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
-        str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
-        str += "<input type='hidden' name='attachList[" + i + "].filetype' value='" + jobj.data("type") + "'>";
-    });
-    formObj.append(str);
-
-    var measured = $('#measured').val();
-    measured = removeCommas(measured);
-    $('#measured').val(measured);
-
-    var bargain = $('#bargain').val();
-    bargain = removeCommas(bargain);
-    $('#bargain').val(bargain);
-
-    $.ajax({
-        type: "POST",
-        url: location.pathname,
-        data: formObj.serialize(),
-        dataType: 'json',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("AJAX", true);
-            xhr.setRequestHeader(header, token);
-        },
-        success: function (result) {
-            if (result) {
-                $("#content6").hide();
-                $("#content7").show();
-                $("#left_side").hide();
-                $("#right_side").hide();
-                $("#exit_btn").hide();
-            } else {
-                alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
-            }
-        },
-        error: function (request, status, error) {
-            alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
-            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-        }
-    })
-});
 
 //보관 기간 총 몇일인지 구하는 알고리즘
 function duration(startDate, endDate) {
