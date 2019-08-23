@@ -38,6 +38,7 @@
             </fieldset>
             <button style="width: 100%" type="submit" class="btn btn-primary">로그인</button>
 
+
             <input class="l_i" id="maintain1" type="checkbox" name="remember-me">
             <label for="maintain1" class="l_l maintain">
                 로그인 상태 유지
