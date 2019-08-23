@@ -25,19 +25,6 @@ public class MainController {
         return "main";
     }
 
-    @RequestMapping(value = {"admin/hostapprove/list","admin"})
-    public String mobileHostApprove(){
-
-        return "mHostApprove";
-    }
-
-    @RequestMapping(value = "admin/hostapprove/info")
-    public String mobileApproveInformation(){
-
-
-        return "mApproveInformation";
-
-    }
     @RequestMapping(value = "serviceguide")
     public String serviceGuide(){
         return "serviceGuide";
