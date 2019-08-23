@@ -152,9 +152,9 @@
 					<div class="price_type">
 						<c:forEach var="price" items="${map.price}" varStatus="status">
 							<div class="prices">
-								<ul>
-									<li class="price">${price}</li>
-									<li><input type="text" class="i_price" name="detailPrice[${status.index}]" placeholder="금액 입력"
+								<ul class="price_ul">
+									<li class="price price_li">${price} 가격</li>
+									<li class="price_li"><input type="text" class="i_price" name="detailPrice[${status.index}]" placeholder="금액 입력"
 											   numberOnly="true"/> 원
 									</li>
 								</ul>
@@ -164,22 +164,21 @@
 				</div>
 
 				<div class="content4" id="content4" style="display: none;">
-					<h2 class="head_4">보관 장소의 사진을 첨부해주세요</h2>
+					<h2 class="head_4">보관 장소의 사진(최소 2장)을 첨부해주세요</h2>
+					<h3 class="head_4_1" style="text-align: center">
+						<label for="storeBoard"> <img src="/resources/image/navbar/profile.jpg"/> </label>
+						<input type="file" name="uploadFile" id="storeBoard" multiple style="display:none">
+					</h3>
+
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="panel panel-default">
-								<div class="panel-heading">보관할 물품의 사진을 첨부해주세요. 나중에 el로 대체하여 보관글, 보관 요청글 동시 쓸 예정</div>
 								<div class="panel-body">
-									<div class="form-group uploadDiv">
-										<input type="file" name="uploadFile" id="storeBoard" multiple>
-									</div>
-
 									<div class="uploadResult">
 										<ul>
 
 										</ul>
 									</div>
-
 								</div>
 							</div>
 						</div>
