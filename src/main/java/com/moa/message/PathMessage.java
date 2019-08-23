@@ -11,4 +11,5 @@ public class PathMessage {
     public static final String KEEPREGISTER = "/keepregister";
     public static final String ADMIIN = "/admin";
     public static final String USER_ANDROID = "/userAndroid";
+    public static final String MAIN = "/main";
 }

@@ -2,6 +2,7 @@ package com.moa.security;
 
 import com.moa.message.PathMessage;
 import com.moa.message.RoleMessage;
+import com.moa.message.ValidMessage;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -19,7 +20,7 @@ import java.util.Enumeration;
 import java.util.Locale;
 
 @Log4j
-public class AdminSuccessHandler implements AuthenticationSuccessHandler {
+public class AdminSuccessHandler implements AuthenticationSuccessHandler, ValidMessage {
 
     @Autowired
     MessageSource messageSource;
@@ -36,7 +37,11 @@ public class AdminSuccessHandler implements AuthenticationSuccessHandler {
                 break;
             }
         if(!isAdmin){
-            httpServletResponse.sendRedirect((PathMessage.USER_ANDROID));
+            String userAgent= httpServletRequest.getHeader("User-Agent").toUpperCase();
+            if(userAgent.contains(IS_PC))
+                httpServletResponse.sendRedirect(PathMessage.MAIN);
+            else
+                httpServletResponse.sendRedirect((PathMessage.USER_ANDROID));
             /*new SecurityContextLogoutHandler().logout(httpServletRequest,httpServletResponse,authentication);
             httpServletRequest.setAttribute(RoleMessage.ERRORMSG,messageSource.getMessage("login.incorrect",null, Locale.getDefault()));
             httpServletRequest.getRequestDispatcher("/admin/login?error").forward(httpServletRequest,httpServletResponse);*/

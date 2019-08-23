@@ -10,4 +10,5 @@ public interface ValidMessage {
     String MESSAGE_CONTENT = "content";
     String SELF="self";
     String BLANK="blank";
+    String IS_PC = "PC";
 }
