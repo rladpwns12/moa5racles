@@ -7,22 +7,19 @@
     <title>Title</title>
     <sec:csrfMetaTags/>
     <sec:authentication property="principal" var="customVO" />
-    <c:set var="loginVO" property="${customVO}"/>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script>
 <script>
     $(document).ready(function() {
         if(window.android){
             console.info("android");
-            window.android.callSettingsActivity("${loginVO.email}");
+            window.android.callSettingsActivity("${customVO.loginVO.email}");
         }
         else{
-            console.info("web");
+           location.href="/main";
         }
-
     });
 </script>
 <body>
-
 </body>
 </html>
