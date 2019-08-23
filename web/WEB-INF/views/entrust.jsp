@@ -134,7 +134,7 @@
                             <input type="hidden" id="day" value="${detailPriceList[0]}">
                             <input type="hidden" id="week" value="${detailPriceList[1]}">
                             <input type="hidden" id="month" value="${detailPriceList[2]}">
-                            <input type="hidden" id="halfYeaer" value="${detailPriceList[3]}">
+                            <input type="hidden" id="halfYear" value="${detailPriceList[3]}">
                             <input type="hidden" id="year" value="${detailPriceList[4]}">
                         </div>
                         <div class="price_e2">

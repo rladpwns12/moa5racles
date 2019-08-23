@@ -21,6 +21,7 @@ $(function () {
             measuredPriceSetting();
         }
     });
+
     $("#end_datepicker").datepicker({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -63,14 +64,10 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("input:radio[name='price.selectPrice']").click(function () {
         if ($("input[name='price.selectPrice']:checked").val() == "measuredPrice") {
-            // $('#measured').attr("disabled", false);
-            // $('#bargain').attr("disabled", true);
             $('#measured').css("background", "#ffffff");
             $('#bargain').css("background", "#EBEBE4");
             $('#bargain').attr("readonly", true);
         } else {
-            // $('#measured').attr("disabled", true);
-            // $('#bargain').attr("disabled", false);
             $('#measured').css("background", "#EBEBE4");
             $('#bargain').css("background", "#ffffff");
             $('#bargain').attr("readonly", false);
@@ -135,7 +132,6 @@ function nextForm() {
         case 1:
             var productName = document.getElementsByName("productList[0].product");
             var productCnt = document.getElementsByName("productList[0].productCnt");
-
             if (productName[0].value == null || productName[0].value.trim() == "") {
                 alert("첫번째 칸의 물건명은 반드시 입력하셔야 합니다");
                 productName[0].value = "";
@@ -164,6 +160,7 @@ function nextForm() {
                 alert("크기를 하나 이상 입력해주세요.");
                 return;
             }
+
             $("#content2").hide();
             $("#content3").show();
             elem.style.width = 40 + '%';
@@ -177,7 +174,6 @@ function nextForm() {
                 alert("맡길 기간을 입력해주세요");
                 return;
             }
-
             if ($('#bargain_price').prop("checked") && $('#bargain').val() == 0) {
                 alert("흥정가격을 입력하거나 측정 가격를 체크해주세요");
                 return;
@@ -204,6 +200,7 @@ function nextForm() {
                 alert("내용을 입력해주세요.");
                 return;
             }
+
             $("#content4").hide();
             $("#content5").show();
             elem.style.width = 80 + '%';
@@ -218,6 +215,7 @@ function nextForm() {
                 alert("보관할 물품 사진을 최소 2장 이상 추가해야 합니다.");
                 return;
             }
+
             $("#content5").hide();
             $("#content6").show();
             $("#right_side").hide();
@@ -225,15 +223,16 @@ function nextForm() {
             $("#percent").html("&nbsp;&nbsp;&nbsp;100%");
             num++;
             return;
-        case 6:
+        /*case 6:
             $("#content6").hide();
             $("#content7").show();
             num++;
             return;
+
         case 7:
             $("#left_side").hide();
             $("#right_side").hide();
-            return;
+            return;*/
     }
 }
 
@@ -285,7 +284,7 @@ $("button[type='submit']").on("click", function (e) {
         type: "POST",
         url: location.pathname,
         data: formObj.serialize(),
-        dataType:'json',
+        dataType: 'json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
             xhr.setRequestHeader(header, token);
@@ -308,6 +307,7 @@ $("button[type='submit']").on("click", function (e) {
     })
 });
 
+//보관 기간 총 몇일인지 구하는 알고리즘
 function duration(startDate, endDate) {
     var month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     var period = 0;
@@ -317,29 +317,30 @@ function duration(startDate, endDate) {
     var start = startDate.split('-');
     var end = endDate.split('-');
 
-    for (i = 1; i < start[1]; i++)
+    // 그 해 1월 1일부터 시작날짜까지의 총 일수
+    for (i = 0; i < start[1] - 1; i++)
         sdate += month[i];
     if (year_check(start[0]) == 1 && start[1] > 2)
         sdate++;
-    sdate += start[2];
+    sdate += (start[2] / 1);
 
-    for (i = 1; i < end[1]; i++)
+    // 그 해 1월 1일부터 종료날짜까지의 총 일수
+    for (i = 0; i < end[1] - 1; i++)
         edate += month[i];
     if (year_check(end[0]) == 1 && end[1] > 2)
         edate++;
-    edate += end[2];
+    edate += (end[2] / 1);
 
     for (i = start[0]; i < end[0]; i++) {
         check = year_check(i);
-        if (check == 1)
-            period += 366;
-        else
-            period += 365;
+        check == 1 ? period += 366 : period += 365;
     }
     period += (edate - sdate + 1);
+    console.log("period: " + period);
     return period;
 }
 
+//윤년 체크
 function year_check(year) {
     var check;
     if (year % 4 == 0) {
@@ -358,14 +359,12 @@ function year_check(year) {
 function measuredPriceSetting() {
     var startDate = $('#start_datepicker').val();
     var endDate = $('#end_datepicker').val();
-
-    if (startDate == "" || endDate == "" || startDate == null || endDate == null) {
+    if (startDate == "" || endDate == "" || startDate == null || endDate == null || ($('#box').val() == 0) && $('#bicycle').val() == 0 && $('#bed').val() == 0) {
         $('#measured').val("0");
         return;
     }
 
     var period = duration(startDate, endDate);    // 날짜를 선택하지 않으면 리턴
-
     var measuredPrice;
     var selectedPrice;
     var multiplePrice = $('#firstMultiple').val() * $('#box').val() + $('#secondMultiple').val() * $('#bicycle').val() + $('#thirdMultiple').val() * $('#bed').val();
@@ -373,19 +372,18 @@ function measuredPriceSetting() {
     if (period < 7) {
         selectedPrice = $('#day').val();
         measuredPrice = selectedPrice * multiplePrice * (period / 1);
-        $('#measured').val(measuredPrice - measuredPrice % 100);
     } else if (period < 30) {
         selectedPrice = $('#week').val();
-        measuredPrice = selectedPrice * multiplePrice * ((period + (period % 7)) / 7);
+        measuredPrice = selectedPrice * multiplePrice * (period / 7);
     } else if (period < 180) {
         selectedPrice = $('#month').val();
-        measuredPrice = selectedPrice * multiplePrice * ((period + (period % 30)) / 30);
+        measuredPrice = selectedPrice * multiplePrice * (period / 30);
     } else if (period < 365) {
         selectedPrice = $('#halfYear').val();
-        measuredPrice = selectedPrice * multiplePrice * ((period + (period % 180)) / 180);
+        measuredPrice = selectedPrice * multiplePrice * (period / 180);
     } else {
         selectedPrice = $('#year').val();
-        measuredPrice = selectedPrice * multiplePrice * ((period + (period % 365)) / 365);
+        measuredPrice = selectedPrice * multiplePrice * (period / 365);
     }
     $('#measured').val(measuredPrice - measuredPrice % 100);
 
@@ -434,3 +432,13 @@ $(document).ready(function () {
             $('#bargain').val(0);
     })
 })
+
+$("#box").change(function () {
+    measuredPriceSetting();
+});
+$("#bicycle").change(function () {
+    measuredPriceSetting();
+});
+$('#bed').change(function () {
+    measuredPriceSetting();
+});
