@@ -12,6 +12,11 @@ $(document).ready(function () {
 
     $("button[type='submit']").on("click", function (e) {
 
+
+        var textArea = $('#post_contents').val();
+        textArea = textArea.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+        $('#post_contents').val(textArea);
+        
         var prices = document.getElementsByClassName('i_price');
         for (var price of prices) {
             var priceCom = price.value;
@@ -27,9 +32,7 @@ $(document).ready(function () {
             return;
         }
 
-        var textArea = $('#post_contents').val();
-        textArea = textArea.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-        $('#post_contents').val(textArea);
+
 
         var str = "";
 
