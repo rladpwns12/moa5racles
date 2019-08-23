@@ -11,6 +11,14 @@ $(document).ready(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
 
     $("button[type='submit']").on("click", function (e) {
+
+        var prices = document.getElementsByClassName('i_price');
+        for (var price of prices) {
+            var priceCom = price.value;
+            priceCom = removeCommas(priceCom);
+            $(price).val(priceCom);
+        }
+
         var formObj = $("form[role='form']");
         var formObjClone = $(formObj).clone();
         e.preventDefault();
@@ -25,12 +33,7 @@ $(document).ready(function () {
 
         var str = "";
 
-        var prices = document.getElementsByClassName('i_price');
-        for (var price of prices) {
-            var priceCom = price.value;
-            priceCom = removeCommas(priceCom);
-            $(price).val(priceCom);
-        }
+
 
         $(".uploadResult ul li").each(function (i, obj) {
             var jobj = $(obj);
