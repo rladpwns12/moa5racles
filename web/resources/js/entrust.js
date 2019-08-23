@@ -291,7 +291,7 @@ $("button[type='submit']").on("click", function (e) {
         },
         success: function (result) {
             if (result) {
-                $("#content6").hide();
+                $("#regForm").hide();
                 $("#content7").show();
                 $("#left_side").hide();
                 $("#right_side").hide();
