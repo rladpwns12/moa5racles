@@ -44,4 +44,10 @@ public class NotificationController {
 
 //        return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
     }
+
+    @RequestMapping(value = "/pushtoken")
+    public void getToken(String body){
+        System.out.println("들어옴");
+        System.out.println(body);
+    }
 }
