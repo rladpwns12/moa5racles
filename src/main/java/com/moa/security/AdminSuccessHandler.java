@@ -37,9 +37,9 @@ public class AdminSuccessHandler implements AuthenticationSuccessHandler {
             }
         if(!isAdmin){
             httpServletResponse.sendRedirect((PathMessage.USER_ANDROID));
-            new SecurityContextLogoutHandler().logout(httpServletRequest,httpServletResponse,authentication);
+            /*new SecurityContextLogoutHandler().logout(httpServletRequest,httpServletResponse,authentication);
             httpServletRequest.setAttribute(RoleMessage.ERRORMSG,messageSource.getMessage("login.incorrect",null, Locale.getDefault()));
-            httpServletRequest.getRequestDispatcher("/admin/login?error").forward(httpServletRequest,httpServletResponse);
+            httpServletRequest.getRequestDispatcher("/admin/login?error").forward(httpServletRequest,httpServletResponse);*/
         }
         else
             httpServletResponse.sendRedirect(PathMessage.ADMIIN);
