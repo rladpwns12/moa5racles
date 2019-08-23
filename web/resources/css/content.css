@@ -230,7 +230,7 @@ li {
 
 .head_4 {
     margin: 30px;
-    font-size: 24pt;
+    font-size: 20pt;
     font-weight: bold;
     text-align: center;
     color: #423257;
@@ -238,7 +238,6 @@ li {
 
 .head_4_1 {
     text-align: center;
-    /*margin-top: -10px;*/
     font-size: 18pt;
     color: #423257;
 }
@@ -251,7 +250,7 @@ li {
 .row > .col-lg-12 > .panel > .panel-body > .uploadResult > ul {
     width: 100%;
     height: 100%;
-    margin-left: 70px;
+    margin-left: 60px;
 }
 
 .row > .col-lg-12 > .panel > .panel-body > .uploadResult > ul > li {
@@ -260,6 +259,14 @@ li {
     margin: 10px;
     align-content: center;
     float: left;
+}
+
+.row > .col-lg-12 > .panel > .panel-body > .uploadResult > ul > li > div > button {
+    border: none;
+    background: none;
+    margin-left: 190px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .row > .col-lg-12 > .panel > .panel-body > .uploadResult > ul > li > div > img{
@@ -372,6 +379,7 @@ img:hover {
     margin-bottom: 40px;
     margin-left: 120px;
     line-height: 180%;
+    background: #ffffffaa;
 }
 
 .confirm {

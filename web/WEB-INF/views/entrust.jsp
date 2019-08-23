@@ -165,9 +165,9 @@
                               placeholder="맡길 물건에 대한 간단한 설명을 입력해주세요" maxlength="1000"></textarea>
                 </div>
                 <div class="content5" id="content5" style="display: none;">
-                    <h2 class="head_5">보관 장소의 사진(최소 2장)을 첨부해주세요</h2>
+                    <h2 class="head_5">맡기실 물건의 사진(최소 2장, 최대 6장)을 첨부해주세요</h2>
                     <h3 class="head_5_1" style="text-align: center">
-                        <label for="storeBoard"> <img src="/resources/image/navbar/profile.jpg"/> </label>
+                        <label for="storeBoard"> <i class="fas fa-plus-circle"></i> </label>
                         <input type="file" name="uploadFile" id="storeBoard" multiple style="display:none">
                     </h3>
 

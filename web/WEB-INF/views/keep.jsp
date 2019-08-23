@@ -164,9 +164,9 @@
 				</div>
 
 				<div class="content4" id="content4" style="display: none;">
-					<h2 class="head_4">보관 장소의 사진(최소 2장)을 첨부해주세요</h2>
+					<h2 class="head_4">보관 장소의 사진(최소 2장, 최대 6장)을 첨부해주세요</h2>
 					<h3 class="head_4_1" style="text-align: center">
-						<label for="storeBoard"> <img src="/resources/image/navbar/profile.jpg"/> </label>
+						<label for="storeBoard"> <i class="fas fa-plus-circle"></i> </label>
 						<input type="file" name="uploadFile" id="storeBoard" multiple style="display:none">
 					</h3>
 
