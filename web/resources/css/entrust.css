@@ -312,6 +312,14 @@ li {
     height: 160px;
 }
 
+.row > .col-lg-12 > .panel > .panel-body > .uploadResult > ul > li > div > button {
+    border: none;
+    background: none;
+    margin-left: 190px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 .panel-body > .uploadResult {
     width: 100%;
     flex-wrap: wrap;

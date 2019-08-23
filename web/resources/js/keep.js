@@ -55,8 +55,9 @@ $(document).ready(function () {
             },
             success: function (result) {
                 if (result) {
-                    $("#content6").hide();
+                    $("#regForm").hide();
                     $("#content7").show();
+                    $("#exit_btn").hide();
                     $("#left_side").hide();
                     $("#right_side").hide();
                 } else {
@@ -217,11 +218,6 @@ function nextForm() {
             $("#percent").html("&nbsp;&nbsp;&nbsp;100%");
             num++;
             return;
-        case 6:
-            $("#content6").hide();
-            $("#content7").show();
-            num++;
-            return;
     }
 }
 
@@ -236,10 +232,6 @@ function finished() {
     $('#regForm')[0].reset();
     location.href = "/storeboard";
 }
-
-
-
-
 
 function isValid(input) {
     let i;

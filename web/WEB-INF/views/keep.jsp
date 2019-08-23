@@ -212,7 +212,7 @@
 
 			<div class="content7" id="content7" style="display: none;">
 				<h2 class="head_7"></h2>
-				<h4 class="head_7_1">'보관해드립니다' 글 등록이 료되었습니다</h4>
+				<h4 class="head_7_1">'보관해드립니다' 글 등록이 완료되었습니다</h4>
 				<button class="finished" onclick="finished()">확인</button>
 			</div>
 
