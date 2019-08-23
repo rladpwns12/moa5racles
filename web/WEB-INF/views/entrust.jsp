@@ -12,15 +12,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
+    <sec:csrfMetaTags/>
     <title>보관해주세요 글 작성 페이지</title>
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/css/entrust.css"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/keep.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/resources/css/entrust.css"/>
+    <link rel="stylesheet" href="/resources/css/upload.css">
+    <script src="/resources/js/jquery-3.4.1.min.js"></script>
+    <script src="/resources/js/upload.js"></script>
+    <script src="/resources/js/entrust.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script type="text/javascript">
         $(document).on("click", "i[name=add_row_btn]", function () {
             table_product_num++;
@@ -44,7 +46,6 @@
             trHtml.before(addStaffText); //마지막 trStaff명 뒤에 붙인다
         });
     </script>
-    <sec:csrfMetaTags/>
 </head>
 
 <body>
@@ -147,7 +148,7 @@
                     </div>
                 </div>
                 <div class="content4" id="content4" style="display: none;">
-                    <h2 class="head_5">원하는 거래방식을 선택해주세요</h2>
+                    <h2 class="head_4">원하는 거래방식을 선택해주세요</h2>
                     <div class="deals">
                         <div class="deal_1">
                             <input type="radio" class="radio_btn" id="direct_deal" name="transactionWay" value="직거래"/>
@@ -159,12 +160,30 @@
                             <label for="delivery"> 택배 </label>
                         </div>
                     </div>
-                    <h2 class="head_5">추가로 전달할 내용을 입력해주세요</h2>
+                    <h2 class="head_4">추가로 전달할 내용을 입력해주세요</h2>
                     <textarea id="post_contents" class="post_contents" name="content" rows="12" cols="60"
                               placeholder="맡길 물건에 대한 간단한 설명을 입력해주세요" maxlength="1000"></textarea>
                 </div>
                 <div class="content5" id="content5" style="display: none;">
-                    <jsp:include page="upload.jsp"/>
+                    <h2 class="head_5">보관 장소의 사진(최소 2장)을 첨부해주세요</h2>
+                    <h3 class="head_5_1" style="text-align: center">
+                        <label for="storeBoard"> <img src="/resources/image/navbar/profile.jpg"/> </label>
+                        <input type="file" name="uploadFile" id="storeBoard" multiple style="display:none">
+                    </h3>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="uploadResult">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="content6" id="content6" style="display: none;">
                     <h2 class="head_6">아래 내용을 확인하시고 등록하기 버튼을 눌러주세요</h2>
@@ -190,7 +209,6 @@
         </div>
     </div>
 </div>
-<script src="/resources/js/entrust.js"></script>
 <%@ include file="footer.jsp" %>
 </body>
 </html>
