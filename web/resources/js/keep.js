@@ -4,7 +4,69 @@ var vtrade_type_answer='transactionType';
 var vcctv_answer= 'securityList';
 var vtime_answer = 'storagePeriodType';
 
+
 $(document).ready(function () {
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+    $("button[type='submit']").on("click", function (e) {
+        var formObj = $("form[role='form']");
+        var formObjClone = $(formObj).clone();
+        e.preventDefault();
+        if (!$("#submit_check").prop("checked")) {
+            alert("체크박스를 체크하세요");
+            return;
+        }
+
+        var textArea = $('#post_contents').val();
+        textArea = textArea.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+        $('#post_contents').val(textArea);
+
+        var str = "";
+
+        var prices = document.getElementsByClassName('i_price');
+        for (var price of prices) {
+            var priceCom = price.value;
+            priceCom = removeCommas(priceCom);
+            $(price).val(priceCom);
+        }
+
+        $(".uploadResult ul li").each(function (i, obj) {
+            var jobj = $(obj);
+
+            str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
+            str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+            str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
+            str += "<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
+        });
+        formObjClone.append(str);
+        $.ajax({
+            type: "POST",
+            url: location.pathname,
+            data: formObjClone.serialize(),
+            dataType:'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("AJAX", true);
+                xhr.setRequestHeader(header, token);
+            },
+            success: function (result) {
+                if (result) {
+                    $("#content6").hide();
+                    $("#content7").show();
+                    $("#left_side").hide();
+                    $("#right_side").hide();
+                } else {
+                    alert("잘못된 정보가 입력되었습니다, 다시 시도해 주세요.");
+                }
+            },
+            error: function (request, status, error) {
+                alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
+    });
+
     $("input:radio[name=pet_radio]").click(function () {
         if ($("input[name=pet_radio]:checked").val() == "1") {
             $("#pet_text").attr("disabled", false);
@@ -101,14 +163,7 @@ function nextForm() {
             num++;
             return;
         case 2:
-            let productName = document.getElementsByName("forbiddenProductList[0].product");
-            if (productName[0].value == null || productName[0].value.trim() == "") {
-                alert("물건명을 최소 하나 이상 입력해주세요.");
-                productName[0].value = "";
-                productName[0].focus();
-                return;
-            }
-            for (i = table_product_num; i > 0; i--) {
+            for (i = table_product_num; i >= 0; i--) {
                 let productName = document.getElementsByName("forbiddenProductList[" + i + "].product");
                 if (productName[0].value == null || productName[0].value.trim() == "")
                     productName[0].closest("tr").remove();
@@ -181,61 +236,6 @@ function finished() {
 
 
 
-var formObj = $("form[role='form']");
-var token = $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
-
-$("button[type='submit']").on("click", function (e) {
-    e.preventDefault();
-    if (!$("#submit_check").prop("checked")) {
-        alert("체크박스를 체크하세요");
-        return;
-    }
-    alert("물건을 맡깁니다.");
-    var str = "";
-
-    var prices = document.getElementsByClassName('i_price');
-    for (var price of prices) {
-        var priceCom = price.value;
-        priceCom = removeCommas(priceCom);
-        $(price).val(priceCom);
-    }
-
-    $(".uploadResult ul li").each(function (i, obj) {
-        var jobj = $(obj);
-        console.dir(jobj);
-
-        str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename") + "'>";
-        str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
-        str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
-        str += "<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
-    });
-    formObj.append(str);
-    $.ajax({
-        type: "POST",
-        url: location.pathname,
-        data: formObj.serialize(),
-        dataType:'json',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("AJAX", true);
-            xhr.setRequestHeader(header, token);
-        },
-        success: function (result) {
-            if (result) {
-                $("#content6").hide();
-                $("#content7").show();
-                $("#left_side").hide();
-                $("#right_side").hide();
-            } else {
-                alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
-            }
-        },
-        error: function (request, status, error) {
-            alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
-            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-        }
-    })
-});
 
 
 function isValid(input) {

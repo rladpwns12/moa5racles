@@ -9,13 +9,16 @@ import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.DetailOptionVO;
 import com.moa.model.vo.EntrustSearchVO;
 import com.moa.model.vo.StoreBoardFormVO;
+import com.moa.valid.CollectionValidator;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +32,8 @@ public class StoreBoardController {
     private LuggageWelcomeService luggageWelcomeService;
     @Autowired
     private StoreBoardSearchService storeBoardSearchService;
+    @Autowired
+    private CollectionValidator collectionValidator;
 
     @RequestMapping(value="" , method=  RequestMethod.GET)
     public String hostSearch(){
@@ -61,8 +66,14 @@ public class StoreBoardController {
     }
 
     @RequestMapping(value = "/keep", method = RequestMethod.POST)
-    public @ResponseBody boolean keepRegisterStoreBoard(StoreBoardFormVO storeBoardFormVO, Authentication auth) {
+    public @ResponseBody boolean keepRegisterStoreBoard( StoreBoardFormVO storeBoardFormVO, Authentication auth,BindingResult bindingResult) {
+        collectionValidator.validate(storeBoardFormVO,bindingResult);
+        log.warn("==============================================");
         log.info(storeBoardFormVO);
+        if (bindingResult.hasErrors()) {
+            log.warn(bindingResult.getAllErrors().toString());
+            return false;
+        }
         String hostId;
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         hostId = customUser.getLoginVO().getUserId();

@@ -18,7 +18,7 @@ public class SimpleMessageVO {
     private String senderNick;
     @NotBlank
     private String receiverNick;
-    @MaxByteLength(3000)
+    @MaxByteLength(maxValue = 3000)
     @NotBlank
     private String content;
 }
