@@ -10,14 +10,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<sec:csrfMetaTags/>
 	<title>보관해드립니다 글 등록 페이지</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/keep.css"/>
 	<link rel="stylesheet" type="text/css" href="/resources/css/content.css"/>
 	<link rel="stylesheet" href="/resources/css/upload.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 	<script src="/resources/js/jquery-3.4.1.min.js"></script>
 	<script src="/resources/js/upload.js"></script>
 	<script src="/resources/js/keep.js"></script>
