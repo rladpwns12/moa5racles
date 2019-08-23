@@ -106,22 +106,24 @@
         VALUES(#{articleNum},#{hostId},#{title},#{content},
         (SELECT SR_TRANSACTION_TYPE_ID FROM SR_TRANSACTION_TYPE_TB WHERE TRANSACTION_WAY = #{transactionType}),
         (SELECT STORAGE_PERIOD_TYPE_ID FROM STORAGE_PERIOD_TYPE_TB WHERE PERIOD_TYPE = #{storagePeriodType}),#{storageId})
-        <foreach collection="forbiddenProductList" item="fp" >
-        INTO FORBIDDEN_PRODUCT_TB (FORBIDDEN_PRODUCT_ID,ARTICLE_NUM, PRODUCT_NAME, CATEGORY_ID)
-        VALUES(GET_FP_SQ(),#{articleNum},#{fp.product},
-        (SELECT CATEGORY_ID FROM CATEGORY_TB WHERE CATEGORY_NAME=#{fp.category}))
-        </foreach>
+        <if test="forbiddenProductList neq null">
+            <foreach collection="forbiddenProductList" item="fp" >
+                INTO FORBIDDEN_PRODUCT_TB (FORBIDDEN_PRODUCT_ID,ARTICLE_NUM, PRODUCT_NAME, CATEGORY_ID)
+                VALUES(GET_FP_SQ(),#{articleNum},#{fp.product},
+                (SELECT CATEGORY_ID FROM CATEGORY_TB WHERE CATEGORY_NAME=#{fp.category}))
+            </foreach>
+        </if>
         <foreach collection="detailPrice" item="price" index="index">
-        INTO DETAIL_PRICE_FIBO_TB (ARTICLE_NUM, DETAILS_PRICE_ID, DETAIL_PRICE)
-        VALUES(#{articleNum},#{index}+1,#{price})
+            INTO DETAIL_PRICE_FIBO_TB (ARTICLE_NUM, DETAILS_PRICE_ID, DETAIL_PRICE)
+            VALUES(#{articleNum},#{index}+1,#{price})
         </foreach>
         <foreach collection="securityList" item = "security" >
-        INTO SF_SB_TB (SECURITY_FACILITY_ID, ARTICLE_NUM)
-        VALUES((SELECT SECURITY_FACILITY_ID FROM security_facility_tb WHERE SECURITY = #{security}),#{articleNum})
+            INTO SF_SB_TB (SECURITY_FACILITY_ID, ARTICLE_NUM)
+            VALUES((SELECT SECURITY_FACILITY_ID FROM security_facility_tb WHERE SECURITY = #{security}),#{articleNum})
         </foreach>
         <foreach collection="attachList" item="attach">
-        INTO SB_ATTACHED_PICTURE_TB (ARTICLE_NUM, UPLOADPATH, UUID, PICTURE_NAME, FILETYPE, SB_ATTACHED_PICTURE_ID)
-        VALUES(#{articleNum}, #{attach.uploadPath}, #{attach.uuid}, #{attach.fileName}, #{attach.fileType}, GET_SBAP_SQ())
+            INTO SB_ATTACHED_PICTURE_TB (ARTICLE_NUM, UPLOADPATH, UUID, PICTURE_NAME, FILETYPE, SB_ATTACHED_PICTURE_ID)
+            VALUES(#{articleNum}, #{attach.uploadPath}, #{attach.uuid}, #{attach.fileName}, #{attach.fileType}, GET_SBAP_SQ())
         </foreach>
         SELECT *
         FROM DUAL
@@ -133,7 +135,7 @@
 
     <select id="searchEntrust" parameterType="com.moa.model.vo.EntrustSearchVO" resultMap="entrustSearchVO">
         SELECT DISTINCT * FROM SEARCH_BOARD_VIEW SBV
-       JOIN
+        JOIN
         (
         SELECT ARTICLE_NUM FROM ARTICLE_SEARCH_VIEW
         WHERE (SR_TRANSACTION_TYPE_ID  LIKE '3' or SR_TRANSACTION_TYPE_ID  LIKE #{transactionType} )

@@ -17,6 +17,6 @@ public class MaxListValidator implements ConstraintValidator<MaxList, List<? ext
     public boolean isValid(List<?> objects, ConstraintValidatorContext constraintValidatorContext) {
         if(objects==null)
             return true;
-        return objects.size() >= this.max && objects.size() <= this.max;
+        return objects.size() >= this.min && objects.size() <= this.max;
     }
 }
