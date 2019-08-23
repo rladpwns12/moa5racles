@@ -1,7 +1,7 @@
 package com.moa.mobile.controller;
 
 import com.moa.mobile.model.service.HostRequestSearchService;
-import com.moa.mobile.model.vo.RequestListInfo;
+import com.moa.mobile.model.vo.RequestListInfoVO;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +17,11 @@ public class HostController {
 
 
     @RequestMapping(value = "/list")
-    public List<RequestListInfo> requestList(){
+    public List<RequestListInfoVO> requestList(){
         //임시 아이디
         int userId = 7;
-        return hostRequestSearchService.searchRequestList(userId);
+        List<RequestListInfoVO> list = hostRequestSearchService.searchRequestList(userId);
+        System.out.println(list);
+        return list;
     }
 }

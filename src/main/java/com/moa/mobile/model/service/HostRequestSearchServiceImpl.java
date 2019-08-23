@@ -1,7 +1,7 @@
 package com.moa.mobile.model.service;
 
 import com.moa.mobile.model.dao.HostRequestDAO;
-import com.moa.mobile.model.vo.RequestListInfo;
+import com.moa.mobile.model.vo.RequestListInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class HostRequestSearchServiceImpl implements HostRequestSearchService {
     private HostRequestDAO hostRequestDAO;
 
     @Override
-    public List<RequestListInfo> searchRequestList(int hostId) {
+    public List<RequestListInfoVO> searchRequestList(int hostId) {
         return hostRequestDAO.requestList(hostId);
     }
 }

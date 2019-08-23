@@ -1,8 +1,8 @@
 package com.moa.mobile.model.dao;
 
-import com.moa.mobile.model.vo.RequestListInfoVO;
-
+import com.moa.mobile.model.vo.ApplyListInfoVO;
 import com.moa.mybatis.mobile.HostRequestMapper;
+import com.moa.mybatis.mobile.UserApplyMapper;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,13 @@ import java.util.List;
 
 @Repository
 @NoArgsConstructor
-public class HostRequestDAOImpl implements HostRequestDAO{
+public class UserApplyDAOImpl implements UserApplyDAO {
     @Autowired
     private SqlSession sqlSession;
 
     @Override
-    public List<RequestListInfoVO> requestList(int hostId) {
-        HostRequestMapper mapper = sqlSession.getMapper(HostRequestMapper.class);
-        System.out.println(mapper);
-        return mapper.hostRequestList(hostId);
+    public List<ApplyListInfoVO> userApplyList(int userId) {
+        UserApplyMapper mapper = sqlSession.getMapper(UserApplyMapper.class);
+        return mapper.userApplyList(userId);
     }
 }
