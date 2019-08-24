@@ -144,8 +144,11 @@
         AND PET_FLAG LIKE #{petFlag}
         AND SECURITY_FACILITY_ID LIKE #{securityFacility}
         AND STORAGE_TYPE LIKE #{storageType}
-        AND CATEGORY_ID NOT IN
-        <foreach collection="category" item="type" open="(" close=")" separator=","> #{type}</foreach>
+        <if test="category neq null">
+            AND CATEGORY_ID NOT IN
+            <foreach collection="category" item="type" open="(" close=")" separator=","> #{type}</foreach>
+            OR CATEGORY_ID IS NULL
+        </if>
         )SB
         USING (ARTICLE_NUM)
         <choose>
