@@ -32,7 +32,7 @@
                 return;
             }
             var addStaffText = '<tr name="stuff">'
-                + '<td class="table_data">' + table_product_num + '</td>'
+                + '<td class="table_data">' + (table_product_num + 1) + '</td>'
                 + '<td class="table_data">'
                 + '<select class="category_list" name="productList[' + table_product_num + '].category">';
             <c:forEach var="category" items="${categoryList}" varStatus="cnt">
