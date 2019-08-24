@@ -141,6 +141,7 @@
             </div>
             <div class="summary_info" id='summary_info'>
                 <table class="summary_info_tb" style="width:150px;">
+
                     <tr>
                         <th>보관지 형태</th>
                         <td>${storeBoardVO.storageType}</td>
