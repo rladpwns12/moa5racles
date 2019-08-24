@@ -5,16 +5,15 @@
 
 <mapper namespace="com.moa.mybatis.mobile.HostRequestMapper">
 
-    <select id="HostRequestList" parameterType="int" resultType="com.moa.mobile.model.vo.RequestListInfo">
-        select nickname "nick",TRANSACTION_PRICE "price",
+    <select id="hostRequestList" parameterType="int" resultType="com.moa.mobile.model.vo.RequestListInfoVO">
+        select UT.nickname "nick",TRANSACTION_PRICE "price",
         APPLICATION_DATE AS "date",To_char(APPLICATION_DATE,'hh24:mi:ss') "time",TRANSACTION_STATE
         from store_request_view
-        where transaction_state = '승인대기중' AND host_id = 7
+        left outer join user_tb UT
+        using(user_id)
+        where transaction_state = '승인대기중' AND host_id = #{hostId}
         order by APPLICATION_DATE asc
     </select>
 
-    <select id="selectTransaction" resultType="String">
-        SELECT TRANSACTION_WAY FROM SR_TRANSACTION_TYPE_TB
-    </select>
 
 </mapper>

@@ -1,9 +1,7 @@
 package com.moa.mobile.controller;
 
-import com.moa.mobile.model.service.HostRequestSearchService;
 import com.moa.mobile.model.service.UserApplySearchService;
-import com.moa.mobile.model.vo.RequestListInfoVO;
-import org.json.JSONObject;
+import com.moa.mobile.model.vo.ApplyListInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,18 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/mobile/host")
-public class HostController {
+@RequestMapping(value = "/mobile/user")
+public class UserController {
     @Autowired
-    private HostRequestSearchService hostRequestSearchService;
-
+    private UserApplySearchService userApplySearchService;
 
 
     @RequestMapping(value = "/list")
-    public List<RequestListInfoVO> requestList(){
+    public List<ApplyListInfoVO> requestList(){
         //임시 아이디
-        int userId = 7;
-        List<RequestListInfoVO> list = hostRequestSearchService.searchRequestList(userId);
+        int userId = 1;
+        List<ApplyListInfoVO> list = userApplySearchService.searchApplyList(userId);
         System.out.println(list);
         return list;
     }

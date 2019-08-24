@@ -1,9 +1,9 @@
 package com.moa.mobile.model.service;
 
-import com.moa.mobile.model.vo.RequestListInfo;
+import com.moa.mobile.model.vo.RequestListInfoVO;
 
 import java.util.List;
 
 public interface HostRequestSearchService {
-    List<RequestListInfo> searchRequestList(int hostId);
+    List<RequestListInfoVO> searchRequestList(int hostId);
 }
