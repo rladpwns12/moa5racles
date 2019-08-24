@@ -136,48 +136,6 @@
 						marginBottom : '5px'
 					}).appendTo(div);
 
-					if(storageType == "집"){
-						$('<i/>',{class:'fas fas fa-home',style:'font-size:18px'}).appendTo(div);
-						$('<span/>',{id:'title',style: "font-size:16px;font-weight:normal;margin-left:5px",text:data[i].storageType}).appendTo(div);
-					}
-					else if(storageType == "상가"){
-						$('<i/>',{class:'fas fas fa-store',style:'font-size:18px'}).appendTo(div);
-						$('<span/>',{id:'title',style: "font-size:16px;font-weight:normal;margin-left:5px",text:data[i].storageType}).appendTo(div);
-					}
-					else if(storageType == "회사"){
-						$('<i/>',{class:'fas fas fa-city',style:'font-size:18px'}).appendTo(div);
-						$('<span/>',{id:'title',style: "font-size:16px;font-weight:normal;margin-left:5px",text:data[i].storageType}).appendTo(div);
-					}
-					else if(storageType == "기타"){
-						$('<i/>',{class:'fas fas fa-warehouse',style:'font-size:18px'}).appendTo(div);
-						$('<span/>',{id:'title',style: "font-size:16px;font-weight:normal;margin-left:5px",text:data[i].storageType}).appendTo(div);
-					}
-
-					for(let j=0;j<parseInt(data[i].starPointAvg.toFixed(0));j++) {
-						$('<i/>', {class: 'fas fa-star', style: 'font-size:15px; float: right;' +
-									'margin-top: 10px; margin-right: 5px;'}).appendTo(div);
-					}
-					/*$('<span/>',{text:" : "+parseInt(data[i].starPointAvg.toFixed(0))+" 개"}).appendTo(div);*/
-					$('<br>').appendTo(div);
-					$('<i/>',{class:'fas fa-won-sign',style:'font-size:18px'}).appendTo(div);
-					$('<span/>',{id:'title', text:" "+data[i].detailPrice+"원"}).appendTo(div);
-					$('</div>').appendTo(div);
-					$('<br>').appendTo(div);
-					/*$('<div>',{id:'word'}).appendTo(div);*/
-					$('<i/>',{class:'fas fa-walking',style:'font-size:20px;margin-left:3px;'}).appendTo(div);
-					$('<span/>',{id:'word', style:'margin-left:9px;', class:'distance',text:data[i].distanceResult+"km 이내 "}).appendTo(div);
-					$('<i/>',{class:'far fa-comment-dots',style:'margin-left:8px'}).appendTo(div);
-					$('<span/>',{id:'word',style:"font-size:16px;margin-left:5px;margin-bottom:3px;", text:" "+data[i].totReviewCnt}).appendTo(div);
-					$('<br>').appendTo(div);
-
-
-					$('<i/>',{class:'far fa-calendar-alt',style:''}).appendTo(div);
-					$('<span/>',{id:'word', style:'margin-left:7px', text:data[i].storagePeriodTypeId}).appendTo(div);
-					$('<br>').appendTo(div);
-					// $('<i/>',{class:'fas fa-user',style:''}).appendTo(div);
-					// $('<span/>',{id:'word',style:'margin-left:3px', text:" "+data[i].nickName}).appendTo(div);
-
-
 					var userProfile=data[i].userAttach;
 					var userFileCallPath = encodeURIComponent(userProfile.uploadPath + "/" + userProfile.uuid +"_"+userProfile.fileName);
 					$('<img>', {
@@ -185,13 +143,55 @@
 						alt: 'userProfile',
 						onerror : 'this.src="/resources/image/navbar/profile.png"'
 					}).css({
-						width:'20px',
-						height:'20px',
+						width:'35px',
+						height:'35px',
 						borderRadius:'100px'
 					}).appendTo(div);
 
+					$('<span/>',{id:'word',style:'margin-left:5px;font-size:18px;font-weight:bold;vertical-align:top;color:#000000', class :'nickName',text:data[i].nickName}).appendTo(div);
 
-					$('<span/>',{id:'word',style:'margin-left:5px;', class :'nickName',text:data[i].nickName}).appendTo(div);
+					for(let j=0;j<parseInt(data[i].starPointAvg.toFixed(0));j++) {
+						$('<i/>', {class: 'fas fa-star', style: 'font-size:15px; float: right;' +
+									'margin-top: 10px; margin-right: 5px;'}).appendTo(div);
+					}
+					/*$('<span/>',{text:" : "+parseInt(data[i].starPointAvg.toFixed(0))+" 개"}).appendTo(div);*/
+					$('<br>').appendTo(div);
+					$('<i/>',{class:'fas fa-won-sign',style:'font-size:18px;margin-left:8px'}).appendTo(div);
+					$('<span/>',{id:'title', text:" "+data[i].detailPrice+"원"}).appendTo(div);
+					$('</div>').appendTo(div);
+					$('<br>').appendTo(div);
+					/*$('<div>',{id:'word'}).appendTo(div);*/
+					$('<i/>',{class:'fas fa-walking',style:'font-size:20px;margin-left:11px;'}).appendTo(div);
+					$('<span/>',{id:'word', style:'margin-left:9px;', class:'distance',text:data[i].distanceResult+"km 이내 "}).appendTo(div);
+					$('<i/>',{class:'far fa-comment-dots',style:'margin-left:8px'}).appendTo(div);
+					$('<span/>',{id:'word',style:"font-size:16px;margin-left:5px;margin-bottom:3px;", text:" "+data[i].totReviewCnt}).appendTo(div);
+					$('<br>').appendTo(div);
+
+
+					$('<i/>',{class:'far fa-calendar-alt',style:'margin-left:8px'}).appendTo(div);
+					$('<span/>',{id:'word', style:'margin-left:7px', text:data[i].storagePeriodTypeId}).appendTo(div);
+					$('<br>').appendTo(div);
+					// $('<i/>',{class:'fas fa-user',style:''}).appendTo(div);
+					// $('<span/>',{id:'word',style:'margin-left:3px', text:" "+data[i].nickName}).appendTo(div);
+
+					if(storageType == "집"){
+						$('<i/>',{class:'fas fas fa-home',style:'font-size:16px;margin-left:8px'}).appendTo(div);
+						$('<span/>',{id:'title',style: "font-size:16px;font-weight:normal;margin-left:5px;color:rgb(102, 102, 102);",text:data[i].storageType}).appendTo(div);
+					}
+					else if(storageType == "상가"){
+						$('<i/>',{class:'fas fas fa-store',style:'font-size:16px;margin-left:8px'}).appendTo(div);
+						$('<span/>',{id:'title',style: "font-size:16px;font-weight:normal;margin-left:5px;color:rgb(102, 102, 102);",text:data[i].storageType}).appendTo(div);
+					}
+					else if(storageType == "회사"){
+						$('<i/>',{class:'fas fas fa-city',style:'font-size:16px;margin-left:8px'}).appendTo(div);
+						$('<span/>',{id:'title',style: "font-size:16px;font-weight:normal;margin-left:5px;color:rgb(102, 102, 102);",text:data[i].storageType}).appendTo(div);
+					}
+					else if(storageType == "기타"){
+						$('<i/>',{class:'fas fas fa-warehouse',style:'font-size:16px;margin-left:8px'}).appendTo(div);
+						$('<span/>',{id:'title',style: "font-size:16px;font-weight:normal;margin-left:5px;color:rgb(102, 102, 102);",text:data[i].storageType}).appendTo(div);
+					}
+
+
 
 					positions ={ title:'클릭시 이동합니다.',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
 					var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
