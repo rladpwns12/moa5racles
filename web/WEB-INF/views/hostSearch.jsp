@@ -151,7 +151,7 @@
 					/*$('<div>',{id:'word'}).appendTo(div);*/
 					$('<span/>',{id:'word',class:'distance',text:data[i].distanceResult+"km 이내 "}).appendTo(div);
 					$('<br>').appendTo(div);
-					$('<i/>',{class:'fas fa-thumbs-up',style:'color: #423257;'}).appendTo(div);
+					$('<i/>',{class:'far fa-comment-dots',style:'color: #423257;'}).appendTo(div);
 					$('<span/>',{id:'word',text:" "+data[i].totReviewCnt+" 개 "}).appendTo(div);
 
 					$('<i/>',{class:'far fa-calendar-alt',style:'color: #423257;'}).appendTo(div);

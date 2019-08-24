@@ -93,7 +93,6 @@ $.replyReview = function () {
         url: "/review/" + articleNum,
         contentType: 'application/json; charset=utf-8',
         data: jsonData,
-        dataType: 'json',
         cache: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader("AJAX", true);
@@ -116,7 +115,6 @@ $.replyReview = function () {
                     openReviewBtn.fadeIn(200);
                 });
                 closeReviewBtn.hide();
-                window.reload();
             } else if (check == "noAuthority") {
                 alert("물건을 맡긴 사람만 답글을 달 수 있습니다.");
             } else if (check == "overFlow") {
