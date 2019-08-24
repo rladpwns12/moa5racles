@@ -12,7 +12,7 @@ body {
     align-items: center;
     background: white;
     width: 100%;
-    font-size: 15px;
+    font-size: 13px;
     font-family: "NanumGothic";
     z-index: 10001;
 
@@ -45,14 +45,26 @@ body {
 .navber_right {
     display: flex;
 }
-
-.navber_right a, .navbar_left a {
+.navber_right a  {
     color: #423257;
     text-decoration: none;
     margin-left: 10px;
     transition: color 0.3s;
     padding-top: 1px;
     background-color: white;
+}
+
+.navbar_left a {
+    color: #423257;
+    text-decoration: none;
+    transition: color 0.3s;
+    padding-top: 1px;
+    background-color: white;
+}
+
+.navbar_left{
+    font-weight: 600;
+    font-size: 16px;
 }
 
 #sidebar_btn {
@@ -214,8 +226,8 @@ body {
     text-align: inherit;
     align-items: inherit;
     color: #423257;
-    padding: 0;
-    font-size: 15px;
+    padding: 0px;
+    font-size: 13px;
     margin: 0 0 0 10px;
     font-family: "Nanum Gothic";
     outline: none;
@@ -264,4 +276,9 @@ body {
     padding-left: 5px;
     vertical-align: bottom;
     background-color: white;
+}
+
+.important-menu{
+    font-weight: 600;
+    font-size: 15px;
 }

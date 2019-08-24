@@ -13,14 +13,20 @@
 <div class="navbar">
     <div class="logo_img">
     </div>
+
     <div class="navbar_left ">
-        <a href="/storeboard" id="take_charge_btn">보관소 찾기</a>
-        <sec:authorize access="hasRole('ROLE_HOST')">
-            <a href="javascript:void(0)">|</a>
-            <a href="/hostpage" id="leave_btn">호스트 페이지</a>
-        </sec:authorize>
+        <a>물품 보관 중개 사이트 MOA</a>
     </div>
     <div class="menu navber_right">
+        <div class="important-menu">
+            <a href="/storeboard" id="take_charge_btn">보관소 찾기</a>
+            <sec:authorize access="hasRole('ROLE_HOST')">
+<%--                <a href="javascript:void(0)">|</a>--%>
+                <a href="/hostpage" id="leave_btn">호스트 페이지</a>
+            </sec:authorize>
+        </div>
+        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
         <sec:authorize access="isAuthenticated()">
             <form class=".logout" action="/logout" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -78,14 +84,12 @@
         <div class="main_menu">
             <ul>
 
+
+                <li><a href="/storeboard">보관소 찾기</a></li>
+                <li><a href="/mypage">마이페이지</a></li>
                 <sec:authorize access="!hasAnyRole('ROLE_HOST', 'ROLE_PRE_HOST')">
                     <li><a href="/registhost">호스트 신청하기</a></li>
                 </sec:authorize>
-                <li><a href="/main">홈으로</a></li>
-                <li><a href="/storeboard">보관소 찾기</a></li>
-                <li><a href="/mypage">마이페이지</a></li>
-                <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">즐겨찾기</a></li>
-                <li><a onclick="alert('일시적으로 서비스가 중단되었습니다.');" style="cursor:pointer">최근 본 장소</a></li>
             </ul>
         </div>
         <div class="sub_menu">
