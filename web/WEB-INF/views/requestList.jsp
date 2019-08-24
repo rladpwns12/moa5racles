@@ -72,7 +72,7 @@
                                     <tr class="rows" id="${requestListVO.requestId}">
                                         <c:set var="attach" value="${requestListVO.profile}"/>
                                         <c:set var="img" value="${attach.uploadPath}/${attach.uuid}_${attach.fileName}"/>
-                                        <td><img src="/display?fileName=/${cutil:encodeURIComponent(img)}" onerror="this.src='/resources/image/navbar/profile.png'"></td>
+                                        <td class="profileR"><img src="/display?fileName=/${cutil:encodeURIComponent(img)}" onerror="this.src='/resources/image/navbar/profile.png'"></td>
                                         <td>${requestListVO.hostNick}</td>
                                         <td>${requestListVO.startDate} ~ ${requestListVO.endDate}</td>
                                         <td class="productInfo">

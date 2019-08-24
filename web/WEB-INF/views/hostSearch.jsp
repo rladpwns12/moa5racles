@@ -197,9 +197,8 @@
             
             
 						positions ={ title:'클릭시 이동합니다.',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
-						var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-						// 마커 이미지의 이미지 크기 입니다
-						var imageSize = new kakao.maps.Size(24, 35);
+						var imageSrc = "/resources/image/marker.png";// 마커 이미지의 이미지 크기 입니다
+						var imageSize = new kakao.maps.Size(40, 45);
 						// 마커 이미지를 생성합니다
 						var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 						// 마커를 생성합니다

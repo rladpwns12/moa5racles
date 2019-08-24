@@ -276,3 +276,6 @@ a:hover {
   color: black;
   cursor: pointer;
 }
+.profileR{
+  border-radius: 100px;
+}
