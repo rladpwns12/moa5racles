@@ -89,7 +89,6 @@
 			if($('#ct'+iv).prop('checked'))
 				catAry[i++]=($('#ct'+iv).val());
 		}
-		catAry[catAry.length++]='99';
 		jQuery.ajaxSettings.traditional = true;
 		let form={
 			category:catAry,
@@ -558,7 +557,7 @@ window.onload = function(){
 							음반/DVD</label>
 					</div>
 					<div class="category2">
-						<label for="ct10"><input type="checkbox" name="category" value="10" id="ct10" checked="checked">
+						<label for="ct10"><input type="checkbox" name="category" value="10" id="ct10">
 							기타</label>
 					</div>
 				</div>
