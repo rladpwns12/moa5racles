@@ -148,3 +148,13 @@ img{
     width: 256px;
     height: 256px
 }
+.pay-btn{
+  background: #534A6D;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 3px;
+  width: 80px;
+  font-weight: bold;
+}
