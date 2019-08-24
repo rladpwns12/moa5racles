@@ -19,6 +19,7 @@
 	var markers = [];
 	var infowindows = [];
 	var container = document.getElementById('map');
+	var thumbnail = 'thumbnail_';
 	function initMap() {
 		var container = document.getElementById('map');
 						//맵 api 세팅
@@ -156,8 +157,22 @@
 					$('<i/>',{class:'far fa-calendar-alt',style:'color: #423257;margin-left:15px'}).appendTo(div);
 					$('<span/>',{id:'word', text:" "+data[i].storagePeriodTypeId}).appendTo(div);
 					$('<br>').appendTo(div);
-					$('<i/>',{class:'fas fa-user',style:'color: #423257;'}).appendTo(div);
-					$('<span/>',{id:'word',text:" "+data[i].nickName}).appendTo(div);
+
+
+					var userProfile=data[i].userAttach;
+					var userFileCallPath = encodeURIComponent(userProfile.uploadPath + "/" + userProfile.uuid +"_"+userProfile.fileName);
+					$('<img>', {
+						src: '/display?fileName=/' + userFileCallPath,
+						alt: 'userProfile',
+						onerror : 'this.src="/resources/image/navbar/profile.png"'
+					}).css({
+						width:'35px',
+						height:'35px',
+						borderRadius:'100px'
+					}).appendTo(div);
+
+
+					$('<span/>',{id:'word',class :'nickName',text:" "+data[i].nickName}).appendTo(div);
 
 					positions ={ title:'클릭시 이동합니다.',latlng: new kakao.maps.LatLng(data[i].latitude,data[i].longitude) }
 					var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
