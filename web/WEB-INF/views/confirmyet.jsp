@@ -12,6 +12,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/confirmyet.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/confirmyet.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/requestStoreInfo.css">
+    <link rel="stylesheet" href="/resources/css/upload.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <sec:csrfMetaTags/>

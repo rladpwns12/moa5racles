@@ -1,3 +1,13 @@
+function showImage(fileCallPath) {
+    $(".bigPictureWrapper").css("display", "flex").show();
+    $(".bigPicture").html("<img src ='/display?fileName=/" + encodeURI(fileCallPath) + "'" +
+        "onerror="+'"'+"this.src='" +
+        "/resources/image/loading.gif" +
+        "'"+'"' +
+        ">")
+        .animate({width: '100%', height: '100%'}, 1000);
+}
+
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 var thumbnail = 'thumbnail_';
@@ -115,6 +125,46 @@ $(document).ready(function () {
                 str += '</div>'
                 str += '</div>'
                 str += '</div>'
+
+
+                str += '<div class="uploadResult">';
+                $(data.attachFileList).each(function (i, obj) {
+                    var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + thumbnail
+                        + obj.uuid + "_" + obj.fileName);
+
+                    str += "<li data-path='" + obj.uploadPath + "'";
+                    str += "data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType + "'";
+                    str += "><div>";
+                    if (obj.fileType) {
+                        //GET 방식 첨부파일 이름 사용시 공백, 한글이름이 문제 되므로 encodeURIComponent() 이용
+                        var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + thumbnail
+                            + obj.uuid + "_" + obj.fileName);
+
+                        //이미지 파일 원본 보여주기
+                        var originPath = obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName;
+                        originPath = originPath.replace(new RegExp(/\\/g), "/");
+
+                        str += "<li><a href=\"javascript:showImage('" + originPath + "');\">" +
+                            "<img src='/display?fileName=/" + fileCallPath +"'" +
+                            "onerror="+'"'+"this.src='" +
+                            "/resources/image/loading.gif" +
+                            "'"+'"'+"></a>" +
+                            "</li>";
+                    } else {
+                        var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+                        str += "<li><div><a href='/download?fileName=" + fileCallPath + "'>"
+                            + "<img src='/" + attachImg + "'>" + obj.fileName + "</a>" +
+                            "</div></li>";
+                    }
+                });
+                str += '</div>';
+                str += '<div class="bigPictureWrapper">'
+                    + '<div class="bigPicture">'
+                    + '</div>'
+                    + '</div>';
+
+
+
                 str += '</div>'
                 str += '<div class="rs_button">'
                 str += '<div class="rs_confirm_button">'
