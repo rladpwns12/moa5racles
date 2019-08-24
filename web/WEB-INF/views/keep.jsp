@@ -10,14 +10,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<sec:csrfMetaTags/>
 	<title>보관해드립니다 글 등록 페이지</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/keep.css"/>
 	<link rel="stylesheet" type="text/css" href="/resources/css/content.css"/>
 	<link rel="stylesheet" href="/resources/css/upload.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 	<script src="/resources/js/jquery-3.4.1.min.js"></script>
 	<script src="/resources/js/upload.js"></script>
 	<script src="/resources/js/keep.js"></script>
@@ -152,9 +152,9 @@
 					<div class="price_type">
 						<c:forEach var="price" items="${map.price}" varStatus="status">
 							<div class="prices">
-								<ul>
-									<li class="price">${price}</li>
-									<li><input type="text" class="i_price" name="detailPrice[${status.index}]" placeholder="금액 입력"
+								<ul class="price_ul">
+									<li class="price price_li">${price} 가격</li>
+									<li class="price_li"><input type="text" class="i_price" name="detailPrice[${status.index}]" placeholder="금액 입력"
 											   numberOnly="true"/> 원
 									</li>
 								</ul>
@@ -164,22 +164,21 @@
 				</div>
 
 				<div class="content4" id="content4" style="display: none;">
-					<h2 class="head_4">보관 장소의 사진을 첨부해주세요</h2>
+					<h2 class="head_4">보관 장소의 사진(최소 2장)을 첨부해주세요</h2>
+					<h3 class="head_4_1" style="text-align: center">
+						<label for="storeBoard"> <img src="/resources/image/navbar/profile.jpg"/> </label>
+						<input type="file" name="uploadFile" id="storeBoard" multiple style="display:none">
+					</h3>
+
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="panel panel-default">
-								<div class="panel-heading">보관할 물품의 사진을 첨부해주세요. 나중에 el로 대체하여 보관글, 보관 요청글 동시 쓸 예정</div>
 								<div class="panel-body">
-									<div class="form-group uploadDiv">
-										<input type="file" name="uploadFile" id="storeBoard" multiple>
-									</div>
-
 									<div class="uploadResult">
 										<ul>
 
 										</ul>
 									</div>
-
 								</div>
 							</div>
 						</div>

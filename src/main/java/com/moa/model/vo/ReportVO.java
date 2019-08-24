@@ -26,10 +26,10 @@ public class ReportVO {
     @Min(0)
     private long targetId;
     @NotBlank
-    @MaxByteLength(100)
+    @MaxByteLength(maxValue = 100)
     private String targetUserNick;
     @NotBlank
-    @MaxByteLength(3000)
+    @MaxByteLength(maxValue = 3000)
     private String content;
     private Date reportTime;
     private boolean reportState;

@@ -1,13 +1,14 @@
 package com.moa.model.vo;
 
+import com.moa.valid.MaxByteLength;
+import com.moa.valid.MaxByteLengthList;
+import com.moa.valid.MaxList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Data
@@ -15,30 +16,33 @@ import java.util.List;
 @AllArgsConstructor
 public class StoreBoardFormVO {
     private Long articleNum;
-    @NotBlank
     private String hostId;
-    @NotBlank
     private String transactionType;
-    @Max(100)
+    @MaxByteLength(maxValue = 100)
     private String pet;
-    @NotBlank
+    @MaxByteLengthList(maxValue = 60)
+    @MaxList(max = 100)
+    @NotNull
     private List<String> securityList;
-    @NotBlank
+    @Valid
+    @MaxList(max = 100)
     private List<ForbiddenProductVO> forbiddenProductList;
     @NotBlank
+    @MaxByteLength(maxValue = 30)
     private String storagePeriodType;
-    @NotBlank
+    @MaxByteLengthList(maxValue = 7) //0~999만원
+    @NotNull
     private List<String> detailPrice;
-    @NotBlank
+    @Valid
+    @MaxList(min = 2, max = 6)
+    @NotNull
     private List<StoreRequestAttachFileVO> attachList;
     @NotBlank
-    @Max(20)
-    @Min(1)
+    @MaxByteLength(maxValue = 60)
     private String title;
-    @NotBlank
-    @Max(1333)
-    @Min(1)
+    @NotNull
+    @MaxByteLength(maxValue = 4000)
     private String content;
-    @NotBlank
+    @Min(0)
     private Long storageId;
 }
