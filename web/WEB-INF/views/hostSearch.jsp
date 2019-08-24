@@ -72,7 +72,7 @@
 					var lan=data.documents[0].y;
 					var log=data.documents[0].x;
 					var coords = new kakao.maps.LatLng(lan, log);
-					message = '<div style="padding:5px; border-radius: 4px;">검색 위치</div>'; // 인포윈도우에 표시될 내용입니다
+					message = ''; // 인포윈도우에 표시될 내용입니다
 					displayMarker(coords, message);
 				}
 				map.setCenter(coords);
@@ -81,7 +81,6 @@
 			});
 		}
 		function search(lan,log){//검색 함수
-			console.log('gd');
 			let catAry = new Array();
 			let i = 0;
 			for(let iv=1 ; iv<11;iv++) { 				//카테고리 체크
@@ -163,7 +162,8 @@
 					$('<br>').appendTo(div);
 					/*$('<div>',{id:'word'}).appendTo(div);*/
 					$('<i/>',{class:'fas fa-walking',style:'font-size:20px;margin-left:11px;'}).appendTo(div);
-					$('<span/>',{id:'word', style:'margin-left:9px;', class:'distance',text:data[i].distanceResult+"km 이내 "}).appendTo(div);
+
+					$('<span/>',{id:'word', style:'margin-left:9px;', class:'distance',text:Math.ceil(data[i].distanceResult)+"km 이내 "}).appendTo(div);
 					$('<i/>',{class:'far fa-comment-dots',style:'margin-left:8px'}).appendTo(div);
 					$('<span/>',{id:'word',style:"font-size:16px;margin-left:5px;margin-bottom:3px;", text:" "+data[i].totReviewCnt}).appendTo(div);
 					$('<br>').appendTo(div);
@@ -297,11 +297,10 @@
 			// 인포윈도우를 생성합니다
 			var infowindow = new kakao.maps.InfoWindow({
 				content : iwContent,
-				removable : iwRemoveable
+				removable : iwRemoveable,
 			});
 			infowindows.push(infowindow);
 			// 인포윈도우를 마커위에 표시합니다
-			infowindow.open(map, marker);
 			// 지도 중심좌표를 접속위치로 변경합니다
 			map.setCenter(locPosition);
 
@@ -311,7 +310,7 @@
 			var centerP= map.getCenter();
 			var lan = centerP.Ha;
 			var log = centerP.Ga;
-			message = '<div style="padding:5px; border-radius: 4px;">검색 위치</div>'; // 인포윈도우에 표시될 내용입니다
+			message = ''; // 인포윈도우에 표시될 내용입니다
 			displayMarker(centerP, message);
 			search(lan, log);
 		}
