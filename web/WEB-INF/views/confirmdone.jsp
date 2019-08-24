@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/confirmdone.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/requestStoreInfo.css">
+    <link rel="stylesheet" href="/resources/css/upload.css">
     <sec:csrfMetaTags/>
     <title>MOA</title>
 </head>
