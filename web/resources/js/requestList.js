@@ -126,7 +126,7 @@ $(document).ready(function () {
 
                 str += '<div class="uploadResult">';
                 $(data.attachFileList).each(function (i, obj) {
-                    var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + thumbnail
+                    var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + thumbnail
                         + obj.uuid + "_" + obj.fileName);
 
                     str += "<li data-path='" + obj.uploadPath + "'";
@@ -134,11 +134,11 @@ $(document).ready(function () {
                     str += "><div>";
                     if (obj.fileType) {
                         //GET 방식 첨부파일 이름 사용시 공백, 한글이름이 문제 되므로 encodeURIComponent() 이용
-                        var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + thumbnail
+                        var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + thumbnail
                             + obj.uuid + "_" + obj.fileName);
 
                         //이미지 파일 원본 보여주기
-                        var originPath = obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName;
+                        var originPath = obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName;
                         originPath = originPath.replace(new RegExp(/\\/g), "/");
 
                         str += "<li><a href=\"javascript:showImage('" + originPath + "');\">" +
@@ -148,7 +148,7 @@ $(document).ready(function () {
                             "'"+'"'+"></a>" +
                             "</li>";
                     } else {
-                        var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName);
+                        var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
                         str += "<li><div><a href='/download?fileName=" + fileCallPath + "'>"
                             + "<img src='/" + attachImg + "'>" + obj.fileName + "</a>" +
                             "</div></li>";
