@@ -85,7 +85,7 @@
                                         <c:choose>
                                             <c:when test="${requestListVO.transactionState == '결제전'}">
                                                 <td>
-                                                    <button type="button"
+                                                    <button type="button" class="pay-btn"
                                                             onclick="card(${requestListVO.historyId}, ${requestListVO.transactionPrice})"> ${requestListVO.transactionState} </button>
                                                 </td>
                                             </c:when>
