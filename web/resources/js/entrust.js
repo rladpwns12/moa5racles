@@ -270,10 +270,8 @@ function nextForm() {
             num++;
             return;
         case 5:
-            var inputFile = $("input[name = 'uploadFile']");
-            var files = inputFile[0].files;
-            console.log(files.length);
-            if (files.length < 2) {
+            var fileCnt = document.getElementsByClassName("btn");
+            if (fileCnt.length < 2) {
                 alert("보관할 물품 사진을 최소 2장 이상 추가해야 합니다.");
                 return;
             }
@@ -309,7 +307,6 @@ function finished() {
     $('#regForm')[0].reset();
     location.href = "/storeboard";
 }
-
 
 
 //보관 기간 총 몇일인지 구하는 알고리즘
