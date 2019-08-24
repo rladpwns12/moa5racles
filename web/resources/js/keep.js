@@ -314,8 +314,9 @@ function isPriceValid() {
 }
 
 function isPhotoValid() {
-    if (($('#photo_main1').val() == "" || $('#photo_main2').val() == "")) {
-        alert("공간 사진을 최소 2장 이상 추가해야 합니다.");
+    var fileCnt = document.getElementsByClassName("btn");
+    if (fileCnt.length < 2) {
+        alert("보관할 물품 사진을 최소 2장 이상 추가해야 합니다.");
         return false;
     }
     return true;
