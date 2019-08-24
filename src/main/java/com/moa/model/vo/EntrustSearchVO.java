@@ -21,9 +21,5 @@ public class EntrustSearchVO {
 	private double latitude;
 	private double longitude;
 	private String distanceResult;
-	
-
-	
-	
-	
+	private UserAttachFileVO userAttach;
 }

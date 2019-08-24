@@ -50,6 +50,11 @@
         <id property="nickName" column="NICKNAME" jdbcType="VARCHAR"/>
         <id property="latitude" column="LATITUDE" jdbcType="NUMERIC"/>
         <id property="longitude" column="LONGITUDE" jdbcType="NUMERIC"/>
+
+        <id property="userAttach.uuid" column="USER_UUID" />
+        <id property="userAttach.uploadPath" column="USER_UPLOADPATH" />
+        <id property="userAttach.fileName" column="USER_PICTURE_NAME" />
+        <id property="userAttach.fileType" column="USER_FILETYPE"  javaType="boolean"/>
     </resultMap>
 
     <resultMap id="storage_address_map" type="com.moa.model.vo.SimpleStorageAddressVO">
