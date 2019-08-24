@@ -231,7 +231,7 @@
 							infowindows[i+1].close();
 						});
 						kakao.maps.event.addListener(marker, 'click', function() {
-							$('.selectArticle').css('background','#ffffff');
+							$('.selectArticle').css('background','');
 							$('.selectArticle').removeClass('.selectArticle');
 							$('#article'+data[i].articleNum).addClass('selectArticle');
 							$('#article'+data[i].articleNum)[0].scrollIntoView({behavior:"smooth"});
