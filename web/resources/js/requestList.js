@@ -26,7 +26,7 @@ $(document).ready(function () {
         alert(tr);
     }
 
-    $('.rows').click(function () {
+    $('.productInfo').click(function () {
         var tr = $(this);
         var id = tr.attr('id');
 

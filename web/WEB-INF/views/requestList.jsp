@@ -75,7 +75,7 @@
                                         <td><img src="/display?fileName=/${cutil:encodeURIComponent(img)}" onerror="this.src='/resources/image/navbar/profile.png'"></td>
                                         <td>${requestListVO.hostNick}</td>
                                         <td>${requestListVO.startDate} ~ ${requestListVO.endDate}</td>
-                                        <td>
+                                        <td class="productInfo">
                                                 ${productList[loopCount.index]}
                                         </td>
                                         <td><fmt:formatNumber value="${requestListVO.transactionPrice}"

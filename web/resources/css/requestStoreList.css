@@ -134,7 +134,7 @@ img{
   height: 60px;
   border-radius: 100px;
 }
-#listTable tr td{
+.productInfo {
 	cursor:pointer;
 }
 .not_cur_page {
