@@ -41,7 +41,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h5 class="section-subheading text-uppercase fa-purple-color">summary</h5>
+                        <h5 class="section-subheading text-uppercase fa-purple-color">user</h5>
                         <h3 class="section-heading text-uppercase">어떻게 사용하나요?</h3>
 
                     </div>
@@ -184,6 +184,51 @@
             </div>
         </section>
     </div>
+
+    <div id="host-guide-section" class="section">
+        <section class="page-section" id="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h5 class="section-subheading text-uppercase fa-purple-color">host</h5>
+                        <h3 class="section-heading text-uppercase">어떻게 사용하나요?</h3>
+
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+          <span class="fa-stack fa-4x fa-circle-margin">
+              <h6 class="section-subheading text-uppercase fa-purple-color">step1</h6>
+            <i class="fas fa-circle fa-stack-2x fa-purple-color"></i>
+              <i class="fas fa-file-signature fa-stack-1x fa-inverse"></i>
+          </span>
+                        <h4 class="service-heading">호스트 신청하기</h4>
+                        <p class="text-muted">계절 지난 옷,가구,침구,여행 중 캐리어,등의 물건을 맡길 보관소를 찾아 선택합니다.</p>
+                    </div>
+                    <div class="col-md-4">
+          <span class="fa-stack fa-4x fa-circle-margin">
+               <h6 class="section-subheading text-uppercase fa-purple-color">step2</h6>
+            <i class="fas fa-circle fa-stack-2x fa-purple-color"></i>
+            <i class="fas fa-user-edit fa-stack-1x fa-inverse"></i>
+          </span>
+                        <h4 class="service-heading">글 등록하기</h4>
+                        <p class="text-muted">이용자는 호스트에게 물건을 맡깁니다. 물건을 맡기는 방식은 택배/직거래 방식이 있습니다.</p>
+                    </div>
+                    <div class="col-md-4">
+          <span class="fa-stack fa-4x fa-circle-margin">
+               <h6 class="section-subheading text-uppercase fa-purple-color">step3</h6>
+            <i class="fas fa-circle fa-stack-2x fa-purple-color"></i>
+              <i class="fas fa-user-check fa-stack-1x fa-inverse"></i>
+          </span>
+
+                        <h4 class="service-heading">요청 승인하기</h4>
+                        <p class="text-muted">기한이 만료된 물품을 이용자가 호스트로부터 물건을 찾아갑니다. 물건을 찾아가는 방식은 마찬가지로 택배/직거래 방식이 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
 
     <div id="service-strength-section" class="section">
         <section class="page-section" id="services">
