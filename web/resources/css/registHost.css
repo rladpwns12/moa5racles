@@ -1,199 +1,306 @@
-body{
-  padding: 0;
-  margin: 0;
-  font-family: 'Nanum Gothic', sans-serif;
-}
-.container{
-  width: 1920px;
-  margin-top: 80px;
-  height: 800px;
-} 
-.content .top_component{
-  position: relative;
-  width: 1920px;
-  height:100%;
-  overflow: hidden;
-}
-.box{
-   width:100%;
-   height:100%;
-   filter: brightness(60%);
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
-.box_text{
-  position: absolute;
-  top:50%;
-  left: 50%;
-  font-size: 20pt;
-  font-weight: bold;
-  color: white;
-  transform: translate(-50%, -50%);
-}
-.title{
-  clear:both;
-  display: block;
-  content:'';
-  position: relative;
-  text-align: center;
-  font-size: 15t;
-  color: #544667;
-}
-.main{
-  background-color: rgb(224, 224, 224);
-  padding: 10px 40px;
-  width: 310px;
-  height: auto;
-  float: left;
-  position:absolute;
-
-  left: 50%;
-  transform: translate(-50%);
-}
-ul{
-  list-style: none;
-}
-li{
-  float:left;
-  margin-right: 30px;
-  margin-bottom: 10px;
-}
-.address{
-  clear: both;
-  display: block;
-  content: '';
-  margin-bottom: 30px;
-}
-.address h4{
-  padding: 0;
-  margin: 0;
-  color: #544667;
-}
-.address .origin_or_new{
-  font-size: 11pt;
-}
-.address .origin_or_new ul{
-  padding:0;
-  margin:0;
-}
-.address .origin_or_new li:first-child{
-  margin-left: 55px;
-}
-.address .address_combo_box{
-  width: 273px;
-  height: 25px;
-  margin-left: 18px;
-}
-.address .search_address_btn input
-{
-  width: 160px;
-  height: 20px;
-  margin: 0 0 5px 15px;
-}
-.address #address, .address #detailAddress{
-  width: 270px;
-}
-.company_info{
-  margin-top: 20px;
-}
-.company_info h4{
-  padding:0;
-  margin: 0;
-  color: #544667;
+.wrapper {
+    width: 1920px;
+    margin-top: 80px;
 }
 
-.company_info input{
-  float: right;
-  height: 20px;
-  width: 180px;
+.container {
+    width: 100%;
+    height: 80%;
+    margin-bottom: 30px;
 }
 
+.content .top_component {
+    position: relative;
+    width: 1920px;
+    overflow: hidden;
+}
 
+.box {
+    width: 100%;
+    height: 100%;
+    filter: brightness(60%);
+}
 
-.phone_certification{
-  clear:both;
-  display: block;
-  content:'';
-  margin-top: 30px;
+.box_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 20pt;
+    font-weight: bold;
+    color: white;
+    transform: translate(-50%, -50%);
 }
-.phone_certification h4{
-  margin: 0 0 10px 0;
+
+.title {
+    clear: both;
+    display: block;
+    content: '';
+    position: relative;
+    text-align: center;
+    font-size: 15pt;
+    color: #423257;
 }
-.phone_certification #phone_number_text{
-  margin-left: 40px;
+
+.main {
+    background-color: #E9E9E9;
+    padding: 10px 40px;
+    width: 500px;
+    float: left;
+    position: relative;
+    left: 960px;
+    transform: translate(-50%);
+    margin-bottom: 30px;
 }
-.storage_type h4{
-  color: #544667;
+
+.form {
+    width: 100%;
+    height: 100%;
 }
-.storage_type_contents{
-	width: 300px;
-	height: 100px;
+
+ul {
+    list-style: none;
 }
-.storage_type_contents label{
-	margin-right: 0px;
+
+li {
+    float: left;
+    margin: 0 50px 20px 30px;
 }
-.storage_type_contents ul{
-	width :300px;
-	height: 100px;
+
+.address {
+    clear: both;
+    display: block;
+    content: '';
+    margin-bottom: 30px;
+    width: 100%;
+    height: 100%;
 }
-.storage_type{
-  height: 100px;
-  margin-bottom: 30px;
+
+.address h4 {
+    padding: 0;
+    margin: 20px;
+    color: #423257;
+    font-size: 26px;
+    font-weight: bold;
 }
-.storage_type #other_text{
-  width: 160px;
-  height: 20px;
-  margin-left: 13px;
+
+.address .origin_or_new {
+    font-size: 11pt;
+    width: 100%;
+    height: 100%;
 }
+
+.address .origin_or_new ul {
+    padding: 0;
+    margin: 0;
+}
+
+.address .origin_or_new li:first-child {
+    margin-left: 68px;
+    margin-right: 108px;
+}
+
+.address .address_combo_box {
+    width: 320px;
+    height: 30px;
+    margin-left: 70px;
+    font-size: 11pt;
+    font-weight: bold;
+    text-align-last: center;
+}
+
+.address .search_address_btn input {
+    width: 160px;
+    height: 20px;
+    /*margin: 0 0 5px 15px;*/
+}
+
+#postcode {
+    width: 190px;
+    height: 24px;
+    font-size: 10pt;
+    font-weight: bold;
+    text-align-last: center;
+}
+
+.address #address, .address #detailAddress {
+    width: 300px;
+    height: 24px;
+    font-size: 10pt;
+    font-weight: bold;
+    text-align-last: center;
+}
+
+.search_address_btn {
+    margin-left: 100px;
+}
+
+.company_info {
+    margin-top: 20px;
+    margin-left: 90px;
+}
+
+.company_info h4 {
+    padding: 0;
+    margin: 0;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #423257;
+}
+
+.company_info input {
+    width: 170px;
+    height: 24px;
+    font-size: 10pt;
+    font-weight: bold;
+    text-align-last: center;
+    margin-left: 10px;
+}
+
+.phone_certification {
+    clear: both;
+    display: block;
+    content: '';
+    margin-top: 30px;
+}
+
+.phone_certification h4 {
+    margin: 0 0 10px 0;
+}
+
 .phone_certification #phone_number_text {
-  height:20px;
+    margin-left: 40px;
 }
+
+.storage_type h4 {
+    color: #423257;
+    font-weight: bold;
+    font-size: 26px;
+    margin: 30px 20px;
+}
+
+.storage_type_contents {
+    width: 100%;
+    height: 100%;
+    /*width: 300px;
+    height: 100px;*/
+}
+
+.storage_type_contents label {
+    margin-right: 0px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.storage_type_contents ul {
+    width: 100%;
+    height: 100%;
+}
+
+.storage_type {
+    width: 100%;
+    height: 140px;
+    margin-bottom: 30px;
+}
+
+.storage_type #other_text {
+    width: 160px;
+    height: 24px;
+    margin-left: 13px;
+    font-size: 10pt;
+    font-weight: bold;
+    text-align-last: center;
+}
+
+.phone_certification #phone_number_text {
+    height: 20px;
+}
+
 #phone_certification_btn,
 #host_apply_btn,
-#search_address_btn{
-  background-color: rgb(94, 94, 94);
-  color: rgb(255, 255, 255);
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+#search_address_btn {
+    background-color: rgb(94, 94, 94);
+    color: rgb(255, 255, 255);
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 
-  margin: 4px;
-  cursor : pointer;
-  border-radius: 5px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-#phone_certification_btn{
-  font-size: 10pt;
-  height: 30px;
-  width: 50px;
-  padding: 5px 0;
+#host_apply_btn:hover,
+#search_address_btn:hover {
+    background: #423257;
 }
 
-#search_address_btn{
-  font-size: 10pt;
-  height: 30px;
-  width: 100px;
-  padding: 5px 0;
+#p
+hone_certification_btn {
+    font-size: 10pt;
+    height: 30px;
+    width: 50px;
+    padding: 5px 0;
 }
 
-#host_apply_btn{
-  font-size: 12pt;
-  width: 200px;
-  height: 40px;
-  padding: 10px 0;
-  margin: 30px 0 15px 0;
-  position:relative;
-  left: 50%;
-  transform: translate(-50%);
+#search_address_btn {
+    font-size: 10pt;
+    height: 30px;
+    width: 100px;
+    padding: 5px 0;
 }
+
+#host_apply_btn {
+    font-size: 12pt;
+    width: 200px;
+    height: 40px;
+    padding: 10px 0;
+    margin: 30px 0 15px 0;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
 .address_combo,
 .search_address_btn,
-.company_info
-{
-  display:none;
+.company_info {
+    display: none;
 }
 
-.main{
-	
+.origin_or_new > ul > li > label {
+    font-size: 20px;
+    font-weight: bold;
 }
 
+#home, #store, #company, #other, #origin, #new {
+    display: none;
+}
+
+.select {
+    margin: 5px;
+    font-size: 14pt;
+}
+
+.select:before {
+    content: "\f111";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    color: #423257;
+}
+
+#home:checked + .select:before,
+#store:checked + .select:before,
+#company:checked + .select:before,
+#other:checked + .select:before,
+#origin:checked + .select:before,
+#new:checked + .select:before {
+    content: "\f058";
+    font-weight: 400;
+    color: #423257;
+}
