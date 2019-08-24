@@ -1,6 +1,10 @@
 function showImage(fileCallPath) {
     $(".bigPictureWrapper").css("display", "flex").show();
-    $(".bigPicture").html("<img src ='/display?fileName=/" + encodeURI(fileCallPath) + "'>")
+    $(".bigPicture").html("<img src ='/display?fileName=/" + encodeURI(fileCallPath) + "'" +
+        "onerror="+'"'+"this.src='" +
+        "/resources/image/loading.gif" +
+        "'"+'"' +
+        ">")
         .animate({width: '100%', height: '100%'}, 1000);
 }
 
@@ -27,7 +31,7 @@ $(document).ready(function () {
     }
 
     $('.productInfo').click(function () {
-        var tr = $(this);
+        var tr = $(this).closest('tr');
         var id = tr.attr('id');
 
         $.ajax({
@@ -83,16 +87,6 @@ $(document).ready(function () {
                 str += '<h2>기타 정보</h2>'
                 str += '</div>'
                 str += '<div class="rs_other_content">'
-//				str +=    '<div class="rs_size">'
-//				str +=      '<div class="rs_size_title">'
-//				str +=        '<h4>크기</h4>'
-//				str +=      '</div>'
-//				str +=      '<div class="rs_size_contents">'
-//				str +=        '<h4 class="rs_box">박스기준 : 8개</h4>'
-//				str +=        '<h4 class="rs_bicycle">자전거 이상 : 0개</h4>'
-//				str +=        '<h4 class="rs_bed">싱글 침대 이상 : 0개</h4>'
-//				str +=      '</div>'
-//				str +=    '</div>'
                 str += '<div class="rs_price">'
                 str += '<div class="rs_price_title">'
                 str += '<h4>가격</h4>'
@@ -148,7 +142,10 @@ $(document).ready(function () {
                         originPath = originPath.replace(new RegExp(/\\/g), "/");
 
                         str += "<li><a href=\"javascript:showImage('" + originPath + "');\">" +
-                            "<img src='/display?fileName=/" + fileCallPath + "'></a>" +
+                            "<img src='/display?fileName=/" + fileCallPath +"'" +
+                            "onerror="+'"'+"this.src='" +
+                            "/resources/image/loading.gif" +
+                            "'"+'"'+"></a>" +
                             "</li>";
                     } else {
                         var fileCallPath = encodeURIComponent(obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName);
@@ -195,25 +192,6 @@ $(document).ready(function () {
             }
         });
     });
-    $('#listTable td').click(function () {
-
-//		$('.rs_confirm_button').click(function(){
-//			var result = confirm('정말로 승인하시겠습니까?');
-//			if(result == true){
-//				alert("승인되었습니다.");
-//				$('.popup').remove();
-//			}
-//		});
-//		$('.rs_refuse_button').click(function(){
-//			var result = confirm('정말로 삭제하시겠습니까?');
-//			if(result == true){
-//				alert("삭제되었습니다.")
-//			}
-//				
-//		});
-
-    });
-
 
 })
 
