@@ -15,17 +15,16 @@
     </div>
 
     <div class="navbar_left ">
-        <a>물품 보관 중개 사이트 MOA</a>
-    </div>
-    <div class="menu navber_right">
         <div class="important-menu">
             <a href="/storeboard" id="take_charge_btn">보관소 찾기</a>
             <sec:authorize access="hasRole('ROLE_HOST')">
-<%--                <a href="javascript:void(0)">|</a>--%>
+                <a href="javascript:void(0)">&nbsp;|&nbsp;</a>
                 <a href="/hostpage" id="leave_btn">호스트 페이지</a>
             </sec:authorize>
         </div>
-        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    </div>
+    <div class="menu navber_right">
+
 
         <sec:authorize access="isAuthenticated()">
             <form class=".logout" action="/logout" method="post">

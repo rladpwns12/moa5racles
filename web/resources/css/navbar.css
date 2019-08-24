@@ -19,10 +19,10 @@ body {
 }
 
 .logo_img {
-    background: url(../image/navbar/logo.png) no-repeat 50% 50%;
+    background: url(../image/navbar/new_logo_a.png) no-repeat 50% 50%;
     background-size: contain;
-    width: 150px;
-    height: 40px;
+    width: 200px;
+    height: 50px;
     float: left;
     cursor: pointer;
 }
