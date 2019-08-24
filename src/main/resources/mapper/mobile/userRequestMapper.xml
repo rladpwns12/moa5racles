@@ -6,7 +6,7 @@
 <mapper namespace="com.moa.mybatis.mobile.UserApplyMapper">
     <select id="userApplyList" parameterType="int" resultType="com.moa.mobile.model.vo.ApplyListInfoVO">
          select nickname "nick",TRANSACTION_PRICE "price",
-        APPLICATION_DATE AS "date",To_char(APPLICATION_DATE,'hh24:mi:ss') "time",TRANSACTION_STATE "transactionState",
+        to_char(APPLICATION_DATE,'yy-mm-dd') AS "date",To_char(APPLICATION_DATE,'hh24:mi:ss') "time",TRANSACTION_STATE "transactionState",
         BASE_ADDRESS "baseAddress", DETAIL_ADDRESS "detailAddress"
         from store_request_view
         WHERE user_id = #{userId}
