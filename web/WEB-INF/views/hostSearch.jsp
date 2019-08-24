@@ -137,7 +137,7 @@
 						marginBottom : '5px'
 					}).appendTo(div);
 
-					$('<span/>',{id:'title',text:"보관지 : "+data[i].storageType+"        "}).appendTo(div);
+					$('<span/>',{id:'title',style: "font-size:18px;font-weight:normal;",text:data[i].storageType+"        "}).appendTo(div);
 					for(let j=0;j<parseInt(data[i].starPointAvg.toFixed(0));j++) {
 						$('<i/>', {class: 'fas fa-star', style: 'font-size:15px; float: right;' +
 									'margin-top: 10px; margin-right: 5px;'}).appendTo(div);
@@ -145,7 +145,7 @@
 					/*$('<span/>',{text:" : "+parseInt(data[i].starPointAvg.toFixed(0))+" 개"}).appendTo(div);*/
 					$('<br>').appendTo(div);
 					$('<i/>',{class:'fas fa-coins',style:'color:#423257;'}).appendTo(div);
-					$('<span/>',{id:'title',text:" "+data[i].detailPrice+"원"}).appendTo(div);
+					$('<span/>',{id:'title', text:" "+data[i].detailPrice+"원"}).appendTo(div);
 					$('</div>').appendTo(div);
 					$('<br>').appendTo(div);
 					/*$('<div>',{id:'word'}).appendTo(div);*/
@@ -154,8 +154,8 @@
 					$('<i/>',{class:'far fa-comment-dots',style:'color: #423257;'}).appendTo(div);
 					$('<span/>',{id:'word',text:" "+data[i].totReviewCnt+" 개 "}).appendTo(div);
 
-					$('<i/>',{class:'far fa-calendar-alt',style:'color: #423257;'}).appendTo(div);
-					$('<span/>',{id:'word',text:" "+data[i].storagePeriodTypeId}).appendTo(div);
+					$('<i/>',{class:'far fa-calendar-alt',style:'color: #423257;margin-left:15px'}).appendTo(div);
+					$('<span/>',{id:'word', text:" "+data[i].storagePeriodTypeId}).appendTo(div);
 					$('<br>').appendTo(div);
 					$('<i/>',{class:'fas fa-user',style:'color: #423257;'}).appendTo(div);
 					$('<span/>',{id:'word',text:" "+data[i].nickName}).appendTo(div);
