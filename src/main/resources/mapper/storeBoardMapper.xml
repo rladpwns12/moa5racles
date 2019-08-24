@@ -150,9 +150,8 @@
         AND SECURITY_FACILITY_ID LIKE #{securityFacility}
         AND STORAGE_TYPE LIKE #{storageType}
         <if test="category neq null">
-            AND CATEGORY_ID NOT IN
+            AND NVL(CATEGORY_ID,0) NOT IN
             <foreach collection="category" item="type" open="(" close=")" separator=","> #{type}</foreach>
-            OR CATEGORY_ID IS NULL
         </if>
         )SB
         USING (ARTICLE_NUM)
