@@ -15,5 +15,4 @@ public class ApplyListInfoVO {
     private String transactionType;
     private String baseAddress;
     private String detailAddress;
-
 }
