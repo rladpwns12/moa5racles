@@ -31,6 +31,8 @@
         <property name="defaultFailureUrl" value="/admin/login?error"/>
     </bean>
 
+    <security:http security="none" pattern="/push/**"/>
+
     <security:http pattern="/admin/**">
         <security:session-management invalid-session-url="/admin" >
             <security:concurrency-control max-sessions="1" expired-url="/admin" />

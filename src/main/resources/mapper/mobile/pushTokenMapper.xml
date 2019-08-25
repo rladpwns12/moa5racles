@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.mybatis.mobile.PushTokenMapper">
+
+    <select id="selectPushToken" resultType="String">
+       select token from PUSH_ALARM_TOKEN_TB
+    </select>
+
+    <insert id="insertPushToken" parameterType="String">
+        insert into push_alarm_token_tb
+        (push_alarm_token_id, token)
+        values (AUTO_PUSH_ALARM_TOKEN_TB.nextval, #{token})
+    </insert>
+
+</mapper>
