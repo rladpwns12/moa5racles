@@ -25,7 +25,7 @@ $(document).ready(function () {
         }
 
         var formObj = $("form[role='form']");
-        var formObjClone = $(formObj).clone();
+        // var formObjClone = $(formObj).clone();
         e.preventDefault();
         if (!$("#submit_check").prop("checked")) {
             alert("체크박스를 체크하세요");
@@ -46,11 +46,13 @@ $(document).ready(function () {
             str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='" + jobj.data("path") + "'>";
             str += "<input type='hidden' name='attachList[" + i + "].fileType' value='" + jobj.data("type") + "'>";
         });
-        formObjClone.append(str);
+        // formObjClone.append(str);
+        formObj.append(str);
         $.ajax({
             type: "POST",
             url: location.pathname,
-            data: formObjClone.serialize(),
+            // data: formObjClone.serialize(),
+            data: formObj.serialize(),
             dataType:'json',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("AJAX", true);
