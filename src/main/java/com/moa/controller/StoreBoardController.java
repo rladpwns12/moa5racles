@@ -68,8 +68,7 @@ public class StoreBoardController {
     @RequestMapping(value = "/keep", method = RequestMethod.POST)
     public @ResponseBody boolean keepRegisterStoreBoard( StoreBoardFormVO storeBoardFormVO, Authentication auth,BindingResult bindingResult) {
         collectionValidator.validate(storeBoardFormVO,bindingResult);
-        log.warn("==============================================");
-        log.info(storeBoardFormVO);
+        log.warn(storeBoardFormVO);
         if (bindingResult.hasErrors()) {
             log.warn(bindingResult.getAllErrors().toString());
             return false;
@@ -89,15 +88,6 @@ public class StoreBoardController {
         mav.setViewName(PathMessage.STORE_BOARD_ONE);
         mav.addObject("distance",distance);
         mav.addObject("storeBoard",storeBoardService.selectStorage(articleNum));
-        return mav;
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleException(Exception e){
-        ModelAndView mav=new ModelAndView();
-        e.printStackTrace();
-        mav.setViewName("/error/page");
-        mav.addObject("message","존재하지 않는 페이지 입니다.");
         return mav;
     }
 

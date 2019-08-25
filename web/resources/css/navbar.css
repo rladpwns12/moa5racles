@@ -282,3 +282,6 @@ body {
     font-weight: 600;
     font-size: 15px;
 }
+::selection{
+    background-color: unset;
+}

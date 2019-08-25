@@ -103,7 +103,7 @@
 			$('#selection_content_id1').empty();
 			var token = $("meta[name='_csrf']").attr("content");
 			var header = $("meta[name='_csrf_header']").attr("content");
-			$.ajax("storeboard/Search",{
+			$.ajax("/storeboard/Search",{
 				type:"GET",
 				data : form,
 				beforeSend: function (xhr) {
