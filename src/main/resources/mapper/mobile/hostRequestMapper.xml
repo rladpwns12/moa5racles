@@ -7,11 +7,12 @@
 
     <select id="hostRequestList" parameterType="int" resultType="com.moa.mobile.model.vo.RequestListInfoVO">
         select UT.nickname "nick",TRANSACTION_PRICE "price",
-        APPLICATION_DATE AS "date",To_char(APPLICATION_DATE,'hh24:mi:ss') "time",TRANSACTION_STATE
+        APPLICATION_DATE AS "date",To_char(APPLICATION_DATE,'hh24:mi:ss') "time",TRANSACTION_STATE "state",
+        start_date startDate, end_date endDate
         from store_request_view
         left outer join user_tb UT
         using(user_id)
-        where transaction_state = '승인대기중' AND host_id = #{hostId}
+        where transaction_state = '승인대기중' OR transaction_state = '결제전' AND host_id = #{hostId}
         order by APPLICATION_DATE asc
     </select>
 
