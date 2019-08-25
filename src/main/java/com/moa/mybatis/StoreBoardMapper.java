@@ -6,6 +6,8 @@ package com.moa.mybatis;
 
   import com.moa.model.vo.StoreBoardFormVO;
 
+  import java.util.List;
+
   public interface StoreBoardMapper {
     int deleteOne(int articleNum);
     void insertStoreBoard(StoreBoardFormVO storeBoardFormVO);
@@ -19,5 +21,6 @@ package com.moa.mybatis;
     java.util.List<String> selectCategory();
     java.util.List<String> selectStoragePeriod();
     java.util.List<String> selectPrice();
+    List<Integer> selectStorePrice(int articleNum);
     void insertPet(StoreBoardFormVO storeBoardFormVO);
   }

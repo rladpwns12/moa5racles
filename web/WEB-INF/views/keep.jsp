@@ -123,7 +123,7 @@
 						<tr name='stuff'>
 							<td class="table_data">1</td>
 							<td class="table_data">
-								<select class="category_list" name="forbiddenProductList[0].category">
+								<select class="category_list"  name="forbiddenProductList[0].category">
 									<c:forEach var="category" items="${map.category}" varStatus="cnt">
 										<option class="category_list" value="${category}">${category}</option>
 									</c:forEach>

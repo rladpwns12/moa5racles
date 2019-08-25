@@ -183,6 +183,10 @@
         SELECT DETAIL_PRICE_NAME AS 상세가격 FROM DETAILS_PRICE_TB ORDER BY DETAILS_PRICE_ID
     </select>
 
+    <select id="selectStorePrice" parameterType="int" resultType="java.lang.Integer">
+        SELECT DETAIL_PRICE AS 상세가격 FROM DETAIL_PRICE_FIBO_TB WHERE ARTICLE_NUM = #{articleNum} ORDER BY DETAILS_PRICE_ID
+    </select>
+
     <select id="searchMyStorage" parameterType="hashMap" resultMap="searchMyStorageMap">
 
         select * from

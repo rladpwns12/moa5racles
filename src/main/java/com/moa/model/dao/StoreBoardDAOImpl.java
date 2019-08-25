@@ -93,8 +93,14 @@ public class StoreBoardDAOImpl implements StoreBoardDAO {
         List<String> detailPriceNameList = mapper.selectDetailPrice();
         List<String> detailPriceList=Arrays.asList(((String)map.get("상세가격")).split(","));
         Map<String,Integer> detailPriceMap=new HashMap<String,Integer>();
-        for(int i=0;i<detailPriceNameList.size();i++)
-            detailPriceMap.put(detailPriceNameList.get(i), Integer.parseInt(detailPriceList.get(i)));
+        try {
+            for (int i = 0; i < detailPriceNameList.size(); i++)
+                detailPriceMap.put(detailPriceNameList.get(i), Integer.parseInt(detailPriceList.get(i)));
+        }catch(ArrayIndexOutOfBoundsException e){
+            List<Integer> storepriceList = mapper.selectStorePrice(articleNum);
+            for (int i = 0; i < detailPriceNameList.size(); i++)
+                detailPriceMap.put(detailPriceNameList.get(i), storepriceList.get(i));
+        }
         vo.setDetailPrice(detailPriceMap);
         return vo;
     }
