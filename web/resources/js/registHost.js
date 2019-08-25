@@ -15,7 +15,6 @@ $(document).ready(function () {
     };
     geocoder.addressSearch(adr, callback);
 }//-- end of find lat&lng
-    searchLocation(addr);
 
     $('input[type=radio][name=storage_type_answer]').on('click', function () {
         var chkValue = $('input[type=radio][name=storage_type_answer]:checked').val();
