@@ -7,7 +7,7 @@ $(function () {
 
 
     $("button[type='submit']").on("click", function (e) {
-
+        $("button[type='submit']").attr('disabled', true);
         var measured = $('#measured').val();
         measured = removeCommas(measured);
         $('#measured').val(measured);
@@ -64,6 +64,7 @@ $(function () {
                     var textArea = $('#post_contents').val();
                     textArea = textArea.replace('<br/>', '\r\n');
                     $('#post_contents').val(textArea);
+                    $("button[type='submit']").attr('disabled', false);
                 }
             },
             error: function (request, status, error) {
@@ -72,6 +73,7 @@ $(function () {
                 var textArea = $('#post_contents').val();
                 textArea = textArea.replace('<br/>', '\r\n');
                 $('#post_contents').val(textArea);
+                $("button[type='submit']").attr('disabled', false);
             }
         })
     });
@@ -282,7 +284,7 @@ function nextForm() {
             num++;
             return;
         case 5:
-            var fileCnt = document.getElementsByClassName("btn");
+            var fileCnt = document.getElementsByClassName("btn-deleteFile");
             if (fileCnt.length < 2) {
                 alert("보관할 물품 사진을 최소 2장 이상 추가해야 합니다.");
                 return;

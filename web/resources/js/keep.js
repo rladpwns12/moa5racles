@@ -11,7 +11,7 @@ $(document).ready(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
 
     $("button[type='submit']").on("click", function (e) {
-
+        $("button[type='submit']").attr('disabled', true);
 
         var textArea = $('#post_contents').val();
         textArea = textArea.replace(/(?:\r\n|\r|\n)/g, '<br/>');
@@ -70,6 +70,7 @@ $(document).ready(function () {
                     var textArea = $('#post_contents').val();
                     textArea = textArea.replace('<br/>', '\r\n');
                     $('#post_contents').val(textArea);
+                    $("button[type='submit']").attr('disabled', false);
                 }
             },
             error: function (request, status, error) {
@@ -77,6 +78,7 @@ $(document).ready(function () {
                 var textArea = $('#post_contents').val();
                 textArea = textArea.replace('<br/>', '\r\n');
                 $('#post_contents').val(textArea);
+                $("button[type='submit']").attr('disabled', false);
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
         })
@@ -322,7 +324,7 @@ function isPriceValid() {
 }
 
 function isPhotoValid() {
-    var fileCnt = document.getElementsByClassName("btn");
+    var fileCnt = document.getElementsByClassName("btn-deleteFile");
     if (fileCnt.length < 2) {
         alert("보관할 물품 사진을 최소 2장 이상 추가해야 합니다.");
         return false;

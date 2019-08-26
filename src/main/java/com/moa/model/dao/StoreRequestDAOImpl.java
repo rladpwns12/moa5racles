@@ -117,4 +117,11 @@ public class StoreRequestDAOImpl implements StoreRequestDAO {
 
         return mapper.updateRequestDelFlag(articleNum);
     }
+
+    @Override
+    public boolean checkBoard(Map<String, Object> map) {
+        StoreRequestMapper mapper = sqlSession.getMapper(StoreRequestMapper.class);
+
+        return mapper.checkSelfBoard(map)>0 ? true:false;
+    }
 }

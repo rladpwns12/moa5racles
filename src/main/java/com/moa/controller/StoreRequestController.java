@@ -5,19 +5,23 @@ import com.moa.model.service.PriceService;
 import com.moa.model.service.StoreRequestService;
 import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.StoreRequestVO;
+import com.moa.valid.CollectionValidator;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.ValidationException;
 import java.util.List;
 
 @Controller
 @RequestMapping("/entrust")
+@Log4j
 public class StoreRequestController {
     private Log logger = LogFactory.getLog(StoreRequestController.class);
 
@@ -27,6 +31,8 @@ public class StoreRequestController {
     private CategoryService categoryService;
     @Autowired
     private PriceService priceService;
+    @Autowired
+    private CollectionValidator collectionValidator;
 
     @RequestMapping(value = "/{articleNum}", method = RequestMethod.GET)
     public ModelAndView entrustForm(@PathVariable("articleNum") int articleNum) {
@@ -47,18 +53,23 @@ public class StoreRequestController {
     @RequestMapping(value = "/{articleNum}", method = RequestMethod.POST)
     public @ResponseBody
     boolean entrust(@PathVariable("articleNum") int articleNum,
-                    StoreRequestVO storeRequestVO, Authentication auth) {
+                    StoreRequestVO storeRequestVO, Authentication auth, BindingResult bindingResult) {
+        log.warn(storeRequestVO);
+        collectionValidator.validate(storeRequestVO, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            log.warn(bindingResult.getAllErrors().toString());
+            return false;
+        }
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
+
+        if(storeRequestService.isOwnsBoard(userId,articleNum))
+            return false;
 
         storeRequestVO.setUserId(userId);
         storeRequestVO.setArticleNum(articleNum);
 
-        logger.info("=====================================");
-        logger.info("StoreRequest : " + storeRequestVO);
-        if (storeRequestVO.getAttachList() != null)
-            storeRequestVO.getAttachList().forEach(storeRequestAttachFileVO -> logger.info(storeRequestAttachFileVO.toString()));
-        logger.info("=====================================");
         return storeRequestService.insert(storeRequestVO);
 
     }

@@ -10,12 +10,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.moa.message.PathMessage;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Component;
 
 
-
+@Log4j
 public class CORSFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -31,6 +33,7 @@ public class CORSFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest ;
+        deleteFileCnt(request);
         if(excludeUrl(request)){
             filterChain.doFilter(servletRequest, servletResponse); //걸러내는 URI일 경우 요청값 그대로 처리
         }else{
@@ -52,10 +55,19 @@ public class CORSFilter implements Filter {
     }
     private boolean excludeUrl(HttpServletRequest request) {
         String uri = request.getRequestURI().toString().trim();
-        if (uri.startsWith(PathMessage.STOREBOARD)) {
+        if (uri.startsWith(PathMessage.STOREBOARD)||uri.startsWith(PathMessage.ENTRUST)) {
             return true;
         } else {
             return false;
+        }
+    }
+    private void deleteFileCnt(HttpServletRequest request){
+        String uri = request.getRequestURI().toString().trim();
+        if(!(uri.startsWith(PathMessage.UPLOAD) || uri.startsWith(PathMessage.DISPLAY)||uri.startsWith(PathMessage.DELETE_FILE))) {
+            if (uri.contains(PathMessage.KEEP)||uri.startsWith(PathMessage.ENTRUST))
+                return;
+            HttpSession session = request.getSession();
+            session.removeAttribute("fileCnt");
         }
     }
 }

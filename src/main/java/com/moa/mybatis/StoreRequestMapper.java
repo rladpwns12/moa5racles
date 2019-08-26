@@ -15,6 +15,7 @@ public interface StoreRequestMapper {
     ReadStoreRequestVO searchRequestInfo(int requestId);
     List<SimpleUserRequestVO> searchRequestList(Map<String, Object> map);
     List<RequestProductVO> searchRequestProduct(int requestId);
-    int searchRequestListCount(int userId);
+    Integer searchRequestListCount(int userId);
     int updateRequestDelFlag(int articleNum);
+    Integer checkSelfBoard(Map<String, Object> map);
 }

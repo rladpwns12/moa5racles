@@ -16,4 +16,5 @@ public interface StoreRequestDAO {
     int searchAllListCnt(Map<String, Object> map);
     public List<SimpleHostRequestVO> searchListByHost(Map<String, Object> map);
     int deleteConfrimdoneRequest(int articleNum);
+    boolean checkBoard(Map<String, Object> map);
 }

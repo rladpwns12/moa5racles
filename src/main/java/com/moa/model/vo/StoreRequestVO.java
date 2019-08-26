@@ -1,13 +1,14 @@
 package com.moa.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.moa.valid.MaxByteLength;
+import com.moa.valid.MaxList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.sql.Date;
 import java.util.List;
 
@@ -15,28 +16,29 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StoreRequestVO {
-    @NotBlank
     private int storeRequestNum;
-    @NotBlank
     private int articleNum;
-    @NotBlank
     private int userId;
-    @NotBlank
+    @Valid
     private PriceVO price;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
-    @NotBlank
+    @NotNull
+    @MaxByteLength(maxValue = 60)
     private String transactionWay;
-    @NotBlank
-    @Max(1000)
-    @Min(1)
+    @NotNull
+    @MaxByteLength(maxValue = 3000)
     private String content;
-    @NotBlank
+    @Valid
+    @MaxList(min = 1, max = 100)
+    @NotNull
     private List<ProductVO> productList;
-    @NotBlank
+    @NotNull
     private List<Integer> productSize;
-    @NotBlank
+    @Valid
+    @MaxList(min = 2, max = 6)
+    @NotNull
     private List<StoreRequestAttachFileVO> attachList;
 }
