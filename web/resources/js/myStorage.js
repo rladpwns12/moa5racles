@@ -4,16 +4,27 @@ var thumbnail = 'thumbnail_';
 function deleteStorage(storageNum){
 	var flag=confirm("정말로 삭제하시겠습니까?");
 	if(flag){
-		$.post('/storeboard/'+storageNum+'/delete',function (data) {
-			if(data==true) {
-				alert("삭제가 완료되었습니다.");
-				location.href="/main";
+		$.ajax({
+			url:'/storeboard/'+storageNum+'delete',
+			type:'POST',
+			data : realUserNick,
+			contentType : 'application/json; charset = utf-8',
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("AJAX", true);
+				xhr.setRequestHeader(header, token);
+			},
+			success:function (data) {
+				if(data==true) {
+					alert("삭제가 완료되었습니다.");
+					location.reload();
+				}
+				else
+					alert("삭제에 실패하였습니다.");
+			},
+			error:function () {
+				alert('통신에 장애가 생겼습니다, 잠시뒤 시도해주세요.');
 			}
-			else
-				alert("삭제에 실패하였습니다.");
-		}).fail(function(){
-			alert('통신에 장애가 생겼습니다, 잠시뒤 시도해주세요.');
-		});
+		})
 	}
 };
 $(document).ready(function() {

@@ -1,10 +1,7 @@
 package com.moa.controller;
 
 import com.moa.message.PathMessage;
-import com.moa.model.service.LuggageWelcomeService;
-import com.moa.model.service.StoreBoardSearchService;
-import com.moa.model.service.StoreBoardSearchServiceImpl;
-import com.moa.model.service.StoreBoardService;
+import com.moa.model.service.*;
 import com.moa.model.vo.CustomUser;
 import com.moa.model.vo.DetailOptionVO;
 import com.moa.model.vo.EntrustSearchVO;
@@ -34,6 +31,8 @@ public class StoreBoardController {
     private StoreBoardSearchService storeBoardSearchService;
     @Autowired
     private CollectionValidator collectionValidator;
+    @Autowired
+    private StoreRequestService storeRequestService;
 
     @RequestMapping(value="" , method=  RequestMethod.GET)
     public String hostSearch(){
@@ -89,6 +88,9 @@ public class StoreBoardController {
     public @ResponseBody boolean removeStoreBoard(@PathVariable("articleNum") int articleNum, @RequestBody String nick, Authentication auth){
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         if(!nick.equals(customUser.getLoginVO().getNick()))
+            return false;
+        int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
+        if(storeRequestService.isOwnsBoard(userId,articleNum))
             return false;
         boolean flag = storeBoardService.deleteStorage(articleNum);
         return flag;
