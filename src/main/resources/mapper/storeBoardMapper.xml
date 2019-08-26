@@ -196,7 +196,8 @@
         <include refid="my_storage"/>
         FROM MY_STORAGE_VIEW WHERE HOST_ID = #{hostId}) MY_STORAGE_VIEW
         WHERE RW <![CDATA[<=]]> #{lastNum}
-        ) where rw >= #{firstNum}
+        )
+        where rw >= #{firstNum}
     </select>
 
     <select id="searchMyStorageCnt" parameterType="int" resultType="int">

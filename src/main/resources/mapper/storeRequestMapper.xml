@@ -131,4 +131,9 @@
     <update id="updateRequestDelFlag" parameterType="Integer">
         UPDATE STORE_REQUEST_TB SET REQUEST_DEL_FLAG = 1 WHERE STORE_REQUEST_ID = #{articleNum}
     </update>
+
+    <select id="checkSelfBoard" parameterType="hashMap" resultType="java.lang.Integer">
+        SELECT count(*) FROM STORE_BOARD_TB WHERE HOST_ID = #{userId} AND ARTICLE_NUM = #{articleNum}
+    </select>
+
 </mapper>

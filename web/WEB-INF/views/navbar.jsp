@@ -4,6 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="customVO"/>
+    <script>
+        var realUserNick = '${customVO.loginVO.nick}';
+    </script>
     <c:set var="profile" value="${customVO.loginVO.profile}"/>
 </sec:authorize>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">

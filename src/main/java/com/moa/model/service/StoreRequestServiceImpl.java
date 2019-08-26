@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StoreRequestServiceImpl implements StoreRequestService {
@@ -27,7 +29,6 @@ public class StoreRequestServiceImpl implements StoreRequestService {
             return false;
 
         Long id = new Long(storeRequestVO.getStoreRequestNum());
-        log.info("storeRequestArticleNum  : "+ id);
         List<StoreRequestAttachFileVO> attachList = storeRequestVO.getAttachList();
         if(attachList ==null || attachList.size()<=0)
             return false;
@@ -37,5 +38,13 @@ public class StoreRequestServiceImpl implements StoreRequestService {
             attachDAO.insertAttach(attach);
         });
         return true;
+    }
+
+    @Override
+    public boolean isOwnsBoard(int userId, int articleNum) {
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("userId",userId);
+        map.put("articleNum",articleNum);
+        return storeRequestDAO.checkBoard(map);
     }
 }

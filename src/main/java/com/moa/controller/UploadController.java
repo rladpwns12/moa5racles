@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -44,6 +45,7 @@ public class UploadController {
     private static final String THUMBNAIL="thumbnail_";
     private static final int WIDTH = 100;
     private static final int HEIGHT = 100;
+    private static final int MAX_SIZE = 5242880;
     private Log log = LogFactory.getLog(UploadController.class);
     private Lock lock= new ReentrantLock();
 
@@ -61,6 +63,19 @@ public class UploadController {
             method = RequestMethod.POST)
     public ResponseEntity<List<AttachFileVO>> uploadAjaxPost(
             @PathVariable("typeFlag") String typeFlag, MultipartFile[] uploadFile, Authentication auth, HttpServletRequest request) {
+        int fileCnt=0;
+        HttpSession session = request.getSession();
+        if(!typeFlag.equals(AttachVOFactory.USER)) {
+            if (session.getAttribute("fileCnt") == null) {
+                session.setAttribute("fileCnt", 0);
+            }
+            fileCnt =(int)session.getAttribute("fileCnt");
+            log.warn("========hi");
+            log.warn(fileCnt);
+            log.warn("========hi");
+            if(fileCnt + uploadFile.length >6)
+                return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
         log.info("update upload ajax post");
         List<AttachFileVO> list=new ArrayList<AttachFileVO>();
         CustomUser customUser = (CustomUser) auth.getPrincipal();
@@ -77,6 +92,8 @@ public class UploadController {
             log.info("-----------------");
             log.info("upload file name : " + multipartFile.getOriginalFilename());
             log.info("upload file size : " + multipartFile.getSize());
+            if(multipartFile.getSize()>MAX_SIZE)
+                return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
 
             AttachFileVO attachFileVO = AttachVOFactory.init(typeFlag);
             attachFileVO.setId(userId);
@@ -114,15 +131,20 @@ public class UploadController {
             } catch (IOException e) {
                 e.printStackTrace();
                 log.error(e.getMessage());
+                return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
             }finally {
                 lock.unlock();
             }
+            if(!typeFlag.equals(AttachVOFactory.USER))
+                fileCnt++;
         }
         if(typeFlag.equals(AttachVOFactory.USER)){
             if(!attachService.insertAttach(list))
                 return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
             customUser.getLoginVO().setProfile(list.get(0));
         }
+        if(!typeFlag.equals(AttachVOFactory.USER))
+            session.setAttribute("fileCnt", fileCnt);
         return new ResponseEntity<List<AttachFileVO>>(list, HttpStatus.OK); //JSON 반환
     }
 
@@ -228,7 +250,16 @@ public class UploadController {
 
     @RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> deleteFile(String fileName, String type){
+    public ResponseEntity<String> deleteFile(String fileName, String type, String nick, Authentication auth, HttpServletRequest request){
+        CustomUser customUser = (CustomUser)auth.getPrincipal();
+        if(!nick.equals(customUser.getLoginVO().getNick()))
+            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        HttpSession session = request.getSession();
+        if(session.getAttribute("fileCnt") !=null){
+            int fileCnt = (int)session.getAttribute("fileCnt") ;
+            if(fileCnt>0)
+                session.setAttribute("fileCnt",--fileCnt);
+        }
         log.info("deleteFile : "+ fileName + " / type : "+ type);
         File file;
 

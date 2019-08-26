@@ -168,7 +168,7 @@
                     <h2 class="head_5">맡기실 물건의 사진(최소 2장, 최대 6장)을 첨부해주세요</h2>
                     <h3 class="head_5_1" style="text-align: center">
                         <label for="storeBoard"> <i class="fas fa-plus-circle"></i> </label>
-                        <input type="file" name="uploadFile" id="storeBoard" multiple style="display:none">
+                        <input type="file" name="uploadFile" accept="image/*" id="storeBoard" maxlength="6" multiple style="display:none">
                     </h3>
 
                     <div class="row">

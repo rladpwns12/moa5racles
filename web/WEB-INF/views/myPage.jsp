@@ -51,7 +51,7 @@
               <div class="left_context">
                 <div class="profile_image">
                   <div class="uploadDiv">
-                    <input type="file" id="user" name="uploadFile" accept-charset="UTF-8" style="display: none">
+                    <input type="file" id="user" name="uploadFile" accept="image/*" accept-charset="UTF-8" style="display: none">
                   </div>
                   <img src="" id="profile" style="cursor: pointer">
                 </div>

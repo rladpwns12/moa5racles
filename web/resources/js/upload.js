@@ -1,8 +1,6 @@
 $(document).ready(function () {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
-
-    var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
     var maxSize = 5242880; // 5MB
     var cloneObj = $(".uploadDiv").clone(); // input type = file 은 readonly라서 div를 clone
     var uploadResult = $(".uploadResult ul");
@@ -21,7 +19,7 @@ $(document).ready(function () {
             return false;
         }
 
-        if (regex.test(fileName)) {
+        if (/(\.gif|\.jpg|\.jpeg|.tiff|.png)$/i.test(fileName) == false) {
             alert("해당 종류의 파일은 업로드할 수 없습니다.");
             return false;
         }
@@ -62,7 +60,7 @@ $(document).ready(function () {
                 fileCallPath = replaceAll(fileCallPath, "%0", "%5c");
                 //이미지 파일 원본 보여주기
                 qwe += "<button type='button' data-file='" + fileCallPath + "/' data-type='image'";
-                qwe += "class='btn btn-warning btn-circle'>";
+                qwe += "class='btn btn-warning btn-circle btn-deleteFile'>";
                 qwe += "<i class='fa fa-times'></i></button><br>";
                 qwe += "<img src='/display?fileName=/" + fileCallPath + "'>";
                 qwe += "</div></li>";
@@ -85,7 +83,13 @@ $(document).ready(function () {
         var formData = new FormData();//IE 10.0 이후 적용
         var inputFile = $("input[name = 'uploadFile']");
         var files = inputFile[0].files;
+        var uploadList = $(".uploadResult ul li");
 
+        if(uploadList!=null)
+            if((uploadList.length+files.length)>6) {
+                alert('사진은 6장 이상 추가 할 수 없습니다.')
+                return false;
+            }
         for (var i = 0; i < files.length; i++) {
             if (!$.checkExtenstion(files[i].name, files[i].size))
                 return false;
@@ -122,7 +126,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: '/deleteFile',
-            data: {fileName: targetFile, type: type},
+            data: {fileName: targetFile, type: type, nick : realUserNick},
             dataType: 'text',
             type: 'POST',
             beforeSend: function (xhr) {

@@ -19,7 +19,6 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/content.css"/>
 	<link rel="stylesheet" href="/resources/css/upload.css">
 	<script src="/resources/js/jquery-3.4.1.min.js"></script>
-	<script src="/resources/js/upload.js"></script>
 	<script src="/resources/js/keep.js"></script>
 	<script>
 		$(document).on("click", "i[name=add_row_btn]", function () {
@@ -167,7 +166,7 @@
 					<h2 class="head_4">보관 장소의 사진(최소 2장, 최대 6장)을 첨부해주세요</h2>
 					<h3 class="head_4_1" style="text-align: center">
 						<label for="storeBoard"> <i class="fas fa-plus-circle"></i> </label>
-						<input type="file" name="uploadFile" id="storeBoard" multiple style="display:none">
+						<input type="file" name="uploadFile" id="storeBoard" accept="image/*" maxlength="6" multiple style="display:none">
 					</h3>
 
 					<div class="row">
@@ -222,6 +221,7 @@
 		</div>
 	</div>
 </div>
+<script src="/resources/js/upload.js"></script>
 <%@ include file="footer.jsp" %>
 </body>
 </html>

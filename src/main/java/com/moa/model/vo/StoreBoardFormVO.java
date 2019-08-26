@@ -17,6 +17,8 @@ import java.util.List;
 public class StoreBoardFormVO {
     private Long articleNum;
     private String hostId;
+    @NotNull
+    @MaxByteLength(maxValue = 60)
     private String transactionType;
     @MaxByteLength(maxValue = 100)
     private String pet;
