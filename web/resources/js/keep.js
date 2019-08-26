@@ -67,10 +67,16 @@ $(document).ready(function () {
                     $("#right_side").hide();
                 } else {
                     alert("잘못된 정보가 입력되었습니다, 다시 시도해 주세요.");
+                    var textArea = $('#post_contents').val();
+                    textArea = textArea.replace('<br/>', '\r\n');
+                    $('#post_contents').val(textArea);
                 }
             },
             error: function (request, status, error) {
                 alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
+                var textArea = $('#post_contents').val();
+                textArea = textArea.replace('<br/>', '\r\n');
+                $('#post_contents').val(textArea);
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
         })
