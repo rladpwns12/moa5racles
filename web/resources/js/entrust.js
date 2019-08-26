@@ -60,7 +60,7 @@ $(function () {
                     $("#right_side").hide();
                     $("#exit_btn").hide();
                 } else {
-                    alert("서버에 일시적 문제가 생겼습니다, 다시 시도해 주세요.");
+                    alert("잘못된 정보가 입력되었습니다, 다시 시도해 주세요.");
                     var textArea = $('#post_contents').val();
                     textArea = textArea.replace('<br/>', '\r\n');
                     $('#post_contents').val(textArea);

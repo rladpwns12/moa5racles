@@ -227,12 +227,7 @@ public class UploadController {
         CustomUser customUser = (CustomUser)auth.getPrincipal();
         if(!nick.equals(customUser.getLoginVO().getNick()))
             return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-        HttpSession session = request.getSession();
-        if(session.getAttribute("fileCnt") !=null){
-            int fileCnt = (int)session.getAttribute("fileCnt") ;
-            if(fileCnt>0)
-                session.setAttribute("fileCnt",--fileCnt);
-        }
+
         File file;
 
         try {
@@ -244,9 +239,14 @@ public class UploadController {
                 file.delete();
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
             log.error(e.getMessage());
             return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        }
+        HttpSession session = request.getSession();
+        if(session.getAttribute("fileCnt") !=null){
+            int fileCnt = (int)session.getAttribute("fileCnt") ;
+            if(fileCnt>0)
+                session.setAttribute("fileCnt",--fileCnt);
         }
         return new ResponseEntity<String>("delete", HttpStatus.OK);
     }
