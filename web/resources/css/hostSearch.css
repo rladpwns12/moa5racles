@@ -368,6 +368,7 @@ margin:0;
     margin-left: 95px;
 }
 .keepBtn,.mapBtn {
+    cursor:pointer;
     background-color: #423257;
     border: none;
     color: white;
