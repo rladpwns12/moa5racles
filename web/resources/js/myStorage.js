@@ -5,15 +5,17 @@ function deleteStorage(storageNum){
 	var flag=confirm("정말로 삭제하시겠습니까?");
 	if(flag){
 		$.ajax({
-			url:'/storeboard/'+storageNum+'delete',
+			url:'/storeboard/'+storageNum+'/delete',
 			type:'POST',
 			data : realUserNick,
 			contentType : 'application/json; charset = utf-8',
+			dataType: 'json',
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader("AJAX", true);
 				xhr.setRequestHeader(header, token);
 			},
 			success:function (data) {
+				console.log(data);
 				if(data==true) {
 					alert("삭제가 완료되었습니다.");
 					location.reload();

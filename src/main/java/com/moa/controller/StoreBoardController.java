@@ -90,8 +90,9 @@ public class StoreBoardController {
         if(!nick.equals(customUser.getLoginVO().getNick()))
             return false;
         int userId = Integer.parseInt(customUser.getLoginVO().getUserId());
-        if(storeRequestService.isOwnsBoard(userId,articleNum))
+        if(!storeRequestService.isOwnsBoard(userId,articleNum)) {
             return false;
+        }
         boolean flag = storeBoardService.deleteStorage(articleNum);
         return flag;
     }
