@@ -9,7 +9,7 @@
         to_char(APPLICATION_DATE,'yy-mm-dd') AS "date",To_char(APPLICATION_DATE,'hh24:mi:ss') "time",TRANSACTION_STATE "transactionType",
         BASE_ADDRESS "baseAddress", DETAIL_ADDRESS "detailAddress"
         from store_request_view
-        WHERE user_id = #{userId}
+        WHERE TRANSACTION_STATE = '결제전' OR TRANSACTION_STATE = '승인대기중' AND user_id = #{userId}
         order by APPLICATION_DATE asc
     </select>
 
