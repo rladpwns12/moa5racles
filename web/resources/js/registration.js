@@ -645,14 +645,6 @@ $('#password').focusout(function () {
         return;
     }
 
-    /*if (getByteLength(password) < 5) {
-        $('#password').css('border', 'solid 0.2px red');
-        alert("비밀번호는 최소 5자리 이상 입력하셔야 합니다");
-        if ($('#password2').val() != null && $('#password2').val() != "" && $('#password2').val() != password) {
-            $('#password2').css('border', 'solid 0.2px red');
-        }
-        return;
-    }*/
     if (password.length < 5) {
         $('#password').css("border", "solid 0.2px red");
         alert("비밀번호는 최소 5자리 이상 입력하셔야 합니다");
@@ -660,6 +652,12 @@ $('#password').focusout(function () {
             $('#password2').css('border', 'solid 0.2px red');
         }
         return;
+    }
+    let passwordValid = /^.*(?=.{5,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+    if (!passwordValid.test(password)) {
+        alert("비밀번호는 영문 + 숫자 조합이어야 합니다.");
+        $('#password').css('border', 'solid 0.2px red');
+        return false;
     }
 
     $('#password').css('border', 'solid 0.2px green');
