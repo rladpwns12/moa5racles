@@ -41,7 +41,7 @@ public class AdminController {
         info = hostConfirmService.searchRequestInfo(userId, storageType);
         mav.addObject("requestInfo", info);
         mav.setViewName("/admin/mApproveInformation");
-        System.out.println(mav);
+
 
         return mav;
     }
@@ -58,7 +58,6 @@ public class AdminController {
     @ResponseBody
     public boolean refuse(@RequestParam(value = "userId") int userId,
                           @RequestParam(value = "context") String context) {
-        System.out.println(userId+", " + context);
         return hostConfirmService.processRefuse(userId, context);
     }
     //-- end of hostapprove
@@ -67,7 +66,6 @@ public class AdminController {
     @RequestMapping(value = {"/report/list"}, method = RequestMethod.GET)
     public ModelAndView confirmReport() {
         ModelAndView mav = new ModelAndView();
-        System.out.println(adminReportSearchService.reportList());
         mav.addObject("reportList", adminReportSearchService.reportList());
         mav.setViewName("/admin/mReport");
 
@@ -85,13 +83,11 @@ public class AdminController {
     }
     @RequestMapping(value = "/report/reply", method = RequestMethod.POST)
     public @ResponseBody boolean replyReport(int reportId, String content){
-        System.out.println("reportId:"+reportId+", \ncontent"+content);
         Map<String,Object> replyInfo = new HashMap<String,Object>();
         replyInfo.put("reportId",reportId);
         replyInfo.put("content",content);
 
         boolean result = adminReportReplyService.replyReport(replyInfo);
-        System.out.println("serviceResult in controller:" + result);
         return result;
     }
     //-- end of report

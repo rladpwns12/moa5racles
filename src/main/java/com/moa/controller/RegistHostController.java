@@ -34,13 +34,10 @@ public class RegistHostController {
         int userId;
         CustomUser customUser = (CustomUser) auth.getPrincipal();
 
-       log.info("들어옴");
         Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
         Iterator<? extends GrantedAuthority> iter = authorities.iterator();
         while(iter.hasNext()){
-           log.info("for문 들어옴");
             GrantedAuthority authority = iter.next();
-            log.info(authority.getAuthority());
         }
 
         if(customUser.getLoginVO().getFlag() == null){

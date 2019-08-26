@@ -47,7 +47,6 @@ public class StoreRequestDAOImpl implements StoreRequestDAO {
         productSizeList=productSizeList.substring(1,productSizeList.length()-1);
 
         map.put("productSizeList",productSizeList);
-        map.forEach((k,v)-> System.out.println(k+" / "+v));
         mapper.insert(map);
         return storeRequestVO.getStoreRequestNum();
     }

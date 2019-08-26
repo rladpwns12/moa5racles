@@ -19,7 +19,6 @@ public class LuggageRequestInfoService {
 
 	public ReadStoreRequestVO selectLuggageRequestInfo(int requestId) {
 		ReadStoreRequestVO readStoreRequestVO = storeRequestDAO.search(requestId);
-		log.info(new Long(requestId));
 		readStoreRequestVO.setAttachFileList(attachDAO.searchByArticleSR(new Long(requestId)));
 		return readStoreRequestVO;
 	}

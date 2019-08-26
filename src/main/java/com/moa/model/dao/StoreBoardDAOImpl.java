@@ -55,7 +55,6 @@ public class StoreBoardDAOImpl implements StoreBoardDAO {
     public void insert(StoreBoardFormVO storeBoardFormVO) {
         StoreBoardMapper mapper = sqlSession_oracle.getMapper(StoreBoardMapper.class);
         mapper.insertStoreBoard(storeBoardFormVO);
-        log.info(storeBoardFormVO.getArticleNum());
         if(storeBoardFormVO.getPet()!=null)
             mapper.insertPet(storeBoardFormVO);
     }

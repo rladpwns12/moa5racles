@@ -17,11 +17,9 @@ public class PayDAOImpl implements PayDAO {
 
     @Override
     public boolean updateHistory(PayVO payVO) {
-        log.info("DAO");
         PayMapper mapper = sqlSession_oracle.getMapper(PayMapper.class);
         boolean result;
         result = mapper.updateHistory(payVO);
-        log.info("result: " + result);
         return result;
     }
 }

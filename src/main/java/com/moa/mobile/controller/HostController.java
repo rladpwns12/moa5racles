@@ -23,7 +23,6 @@ public class HostController {
         //임시 아이디
         int userId = 7;
         List<RequestListInfoVO> list = hostRequestSearchService.searchRequestList(userId);
-        System.out.println(list);
         return list;
     }
 }

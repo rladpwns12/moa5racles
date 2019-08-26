@@ -40,7 +40,6 @@ public class HostRegistrationService {
                 return hostStorageDAO.insertNewHome(nhsVO);
             }
             else {
-                System.out.println("home & exception");
             }
         }
         else if(storageType.equals("store") || storageType.equals("company")) {
@@ -71,7 +70,6 @@ public class HostRegistrationService {
                 return hostStorageDAO.insertNewCompany(ncsVO);
             }
             else {
-                System.out.println("company & exception");
             }
         }
         else if(storageType.equals("other")) {
@@ -94,15 +92,12 @@ public class HostRegistrationService {
                 nosVO.setDetailAddress((String)hostInfo.get("detailAddress"));
                 nosVO.setUserId((Integer)hostInfo.get("userId"));
                 nosVO.setOtherText((String)hostInfo.get("otherText"));
-                System.out.println("2");
                 return hostStorageDAO.insertNewOther(nosVO);
             }
             else {
-                System.out.println("other & exception");
             }
         }
         else {
-            System.out.println("exception");
         }
         return false;
     }

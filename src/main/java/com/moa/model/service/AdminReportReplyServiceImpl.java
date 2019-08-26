@@ -13,7 +13,6 @@ public class AdminReportReplyServiceImpl implements AdminReportReplyService{
     @Override
     public boolean replyReport(Map<String, Object> replyInfo) {
         Integer result = reportDAO.insertResultReport(replyInfo);
-        System.out.println("daoResult in service : "+result);
         if(result >= 1){
             return true;
         }

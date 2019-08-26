@@ -61,9 +61,6 @@ public class FileUpload {
 						if (pictureList == null) {
 							pictureList = new ArrayList<String>();
 						}
-						/*System.out.println("파라미터이름: "+fileItem.getFieldName());
-						System.out.println("파일이름: "+fileItem.getName());
-						System.out.println("파일크기: "+fileItem.getSize()+"bytes");*/
 						pictureList.add(fileItem.getName());
 						int idx = fileItem.getName().lastIndexOf("\\");
 						if (idx == -1) {

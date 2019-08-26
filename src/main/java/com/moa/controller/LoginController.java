@@ -37,18 +37,15 @@ public class LoginController {
 
     @RequestMapping(value="/admin/login")
     public String adminLogin(String error, String logout, Model model){
-        log.info("adminLoginPage()...");
         return "admin/mLogin";
     }
 
     @RequestMapping(value="/userLogin")
     public String loginPage(String error, String logout, Model model){
-        log.info("loginPage()...");
         return "userLogin";
     }
     @RequestMapping(value="/exit")
     public String exitRedirect(String error, String logout, Model model){
-        log.info("exitRedirect()...");
         return "exitRedirect";
     }
 

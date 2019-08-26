@@ -24,10 +24,10 @@ public class MyAspect {
         // before excution에서 실행될 메서드
         HttpServletRequest request=
                 ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-        Logger.info(String.format("[AOP] REQUEST URI : %s",request.getRequestURI()));
+
         Object retVal= pjp.proceed(); // 홀딩된 원래의 메서드 실행
         long endTime=System.nanoTime();
-        Logger.info(String.format("Elapsed time : %s",((double)(endTime-startTime))/1000000000));
+
         return retVal;
     }
 }

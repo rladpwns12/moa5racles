@@ -33,9 +33,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         String password = request.getParameter(this.password);
         String errorMessage = null;
 
-        String requestURI = request.getRequestURI();
-        log.info("defaultFailureUrl : "+defaultFailureUrl);
-        log.info("requestURI : "+requestURI);
         if(e instanceof BadCredentialsException) {
             errorMessage = ID_PW_INCORRECT_MESSAGE;
         } else if(e instanceof InternalAuthenticationServiceException) {

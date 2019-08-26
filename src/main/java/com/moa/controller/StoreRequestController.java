@@ -54,11 +54,9 @@ public class StoreRequestController {
     public @ResponseBody
     boolean entrust(@PathVariable("articleNum") int articleNum,
                     StoreRequestVO storeRequestVO, Authentication auth, BindingResult bindingResult) {
-        log.warn(storeRequestVO);
         collectionValidator.validate(storeRequestVO, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            log.warn(bindingResult.getAllErrors().toString());
             return false;
         }
         CustomUser customUser = (CustomUser) auth.getPrincipal();

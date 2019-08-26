@@ -48,7 +48,6 @@ public class AndroidPushPeriodicNotification {
         // onMessageReceived가 호출되지 않는다.
         body.put("data", notification);
 
-        System.out.println(body.toString());
 
         return body.toString();
     }
@@ -80,7 +79,6 @@ public class AndroidPushPeriodicNotification {
         // onMessageReceived가 호출되지 않는다.
         body.put("data", notification);
 
-        System.out.println(body.toString());
 
         return body.toString();
     }

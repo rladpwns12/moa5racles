@@ -81,9 +81,7 @@ public class HostPageController {
     @RequestMapping(value="/requestlist/info/{requestNum}", method = RequestMethod.GET)
     @ResponseBody
     public ReadStoreRequestVO myPageRequestInfo(@PathVariable("requestNum") int requestId){
-        System.out.println(requestId);
         ReadStoreRequestVO requestVO = luggageRequestInfoService.selectLuggageRequestInfo(requestId);
-        System.out.println(requestVO);
         requestVO.setApplicationDate(requestVO.getApplicationDate());
         return requestVO;
     }
@@ -175,14 +173,12 @@ public class HostPageController {
         //결과
         result.put("list",list);
         result.put("pagination",pagination);
-        log.info(result);
         return result;
     }
 
     @RequestMapping(value = "/confirmdone/delete",method = RequestMethod.POST)
     public @ResponseBody boolean deleteRequest(int articleNum,
                                                String state){
-        System.out.println("articleNum:"+articleNum+",state:"+state);
         boolean result = false;
         if(state == null || state.equals("")){
             return result;

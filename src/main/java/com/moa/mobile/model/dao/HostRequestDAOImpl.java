@@ -19,7 +19,6 @@ public class HostRequestDAOImpl implements HostRequestDAO{
     @Override
     public List<RequestListInfoVO> requestList(int hostId) {
         HostRequestMapper mapper = sqlSession.getMapper(HostRequestMapper.class);
-        System.out.println(mapper);
         return mapper.hostRequestList(hostId);
     }
 }

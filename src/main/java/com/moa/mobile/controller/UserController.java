@@ -22,7 +22,6 @@ public class UserController {
         //임시 아이디
         int userId = 1;
         List<ApplyListInfoVO> list = userApplySearchService.searchApplyList(userId);
-        System.out.println(list);
         return list;
     }
     @RequestMapping(value="/info/{requestNum}", method = RequestMethod.GET)

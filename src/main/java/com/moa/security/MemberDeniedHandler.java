@@ -28,7 +28,6 @@ public class MemberDeniedHandler implements AccessDeniedHandler {
     }
 
     private String CheckRegExp(String uriPath, HttpServletRequest request) {
-        log.info("URIPath : " + uriPath);
         if (uriPath.matches(REGISTHOST)) {
             if (request.isUserInRole(ROLE_HOST))
                 return messageSource.getMessage("accessDenied.alreadyHost", null, Locale.getDefault());

@@ -46,7 +46,6 @@ public class MemberInfoServiceImpl implements MemberInfoService, UserDetailsServ
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         LoginVO loginVO = userDAO.checkLogin(email);
         loginVO.setProfile(attachDAO.searchByUserId(Long.parseLong(loginVO.getUserId())));
-        log.info("loadUserByUsername");
         if(loginVO==null) {
             throw new InternalAuthenticationServiceException(email);
         }

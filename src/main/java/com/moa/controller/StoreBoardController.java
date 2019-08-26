@@ -65,9 +65,7 @@ public class StoreBoardController {
     @RequestMapping(value = "/keep", method = RequestMethod.POST)
     public @ResponseBody boolean keepRegisterStoreBoard( StoreBoardFormVO storeBoardFormVO, Authentication auth,BindingResult bindingResult) {
         collectionValidator.validate(storeBoardFormVO,bindingResult);
-        log.warn(storeBoardFormVO);
         if (bindingResult.hasErrors()) {
-            log.warn(bindingResult.getAllErrors().toString());
             return false;
         }
         String hostId;
@@ -80,7 +78,6 @@ public class StoreBoardController {
 
     @RequestMapping("/{articleNum}")
     public ModelAndView retrieveStoreBoard(@PathVariable("articleNum") int articleNum, String distance){
-        System.out.println(distance);
         ModelAndView mav=new ModelAndView();
         mav.setViewName(PathMessage.STORE_BOARD_ONE);
         mav.addObject("distance",distance);
