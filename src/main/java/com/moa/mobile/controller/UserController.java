@@ -2,9 +2,10 @@ package com.moa.mobile.controller;
 
 import com.moa.mobile.model.service.UserApplySearchService;
 import com.moa.mobile.model.vo.ApplyListInfoVO;
+import com.moa.model.service.LuggageRequestInfoService;
+import com.moa.model.vo.ReadStoreRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserApplySearchService userApplySearchService;
-
+    @Autowired
+    private LuggageRequestInfoService luggageRequestInfoService;
 
     @RequestMapping(value = "/list")
     public List<ApplyListInfoVO> requestList(){
@@ -22,5 +24,12 @@ public class UserController {
         List<ApplyListInfoVO> list = userApplySearchService.searchApplyList(userId);
         System.out.println(list);
         return list;
+    }
+    @RequestMapping(value="/info/{requestNum}", method = RequestMethod.GET)
+    @ResponseBody
+    public ReadStoreRequestVO myPageRequestInfo(@PathVariable("requestNum") int requestId){
+        ReadStoreRequestVO requestVO = luggageRequestInfoService.selectLuggageRequestInfo(requestId);
+        requestVO.setApplicationDate(requestVO.getApplicationDate());
+        return requestVO;
     }
 }

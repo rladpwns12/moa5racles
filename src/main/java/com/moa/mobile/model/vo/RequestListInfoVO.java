@@ -20,4 +20,5 @@ public class RequestListInfoVO {
     private Date startDate;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
+    private int articleNum;
 }

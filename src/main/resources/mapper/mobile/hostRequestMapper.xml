@@ -8,7 +8,7 @@
     <select id="hostRequestList" parameterType="int" resultType="com.moa.mobile.model.vo.RequestListInfoVO">
         select UT.nickname "nick",TRANSACTION_PRICE "price",
         APPLICATION_DATE AS "date",To_char(APPLICATION_DATE,'hh24:mi:ss') "time",TRANSACTION_STATE "state",
-        start_date startDate, end_date endDate
+        start_date startDate, end_date endDate, store_request_id "articleNum"
         from store_request_view
         left outer join user_tb UT
         using(user_id)
