@@ -43,10 +43,7 @@ public class StoreBoardController {
     @RequestMapping(value="/Search" , method=  RequestMethod.GET)
     public @ResponseBody
     List<EntrustSearchVO> hostSearchByFilter(DetailOptionVO detail){
-
         List<EntrustSearchVO> documents = storeBoardSearchService.search(detail);
-        log.info(documents.get(0));
-
         return documents;
     }
 

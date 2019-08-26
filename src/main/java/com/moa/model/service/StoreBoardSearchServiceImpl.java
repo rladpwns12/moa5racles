@@ -33,9 +33,9 @@ public class StoreBoardSearchServiceImpl implements StoreBoardSearchService {
 					en.getLatitude(),en.getLongitude(),"kilometer"))).substring(0,3);
 			en.setDistanceResult(distanceResult);
 			switch (en.getStoragePeriodTypeId()){
-				case "1":en.setStoragePeriodTypeId(DONT_CARE);break;
+				case "3":en.setStoragePeriodTypeId(DONT_CARE);break;
 				case "2":en.setStoragePeriodTypeId(LONG_DATE);break;
-				case "3":en.setStoragePeriodTypeId(SHORT_DATE);break;
+				case "1":en.setStoragePeriodTypeId(SHORT_DATE);break;
 			}
 		}
 		return entrustAry;
