@@ -54,7 +54,7 @@
                         success:function (data) {
                             if(data==true) {
                                 alert("삭제가 완료되었습니다.");
-                                location.href = "/main";
+                                location.href = "/storeboard";
                             }
                             else
                                 alert("삭제에 실패하였습니다.");

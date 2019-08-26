@@ -27,7 +27,7 @@ $(function () {
             alert("체크박스를 체크하세요");
             return;
         }
-        alert("물건을 맡깁니다.");
+        // alert("물건을 맡깁니다.");
         var str = "";
 
         $(".uploadResult ul li").each(function (i, obj) {
