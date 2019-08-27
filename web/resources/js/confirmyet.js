@@ -334,8 +334,8 @@ $.confirmYet = function (curPage) {
 
             //리스트
             $('.main_content>table>tbody>tr').remove('tr');
-            for (let i = result.pagination.curListCnt - 1; i >= 0; i--) {
-                if (i == result.pagination.curListCnt - 1) {//제목
+            for (let i = 0; i <= result.pagination.curListCnt - 1; i++) {
+                if (i == 0) {//제목
                     let tr = $('<tr/>').appendTo('.main_content>table>tbody');
                     $('<td/>', {text: '프로필', id: 'title_profile'}).appendTo(tr);
                     $('<td/>', {text: '닉네임', id: 'title_nick'}).appendTo(tr);
