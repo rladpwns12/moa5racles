@@ -68,8 +68,12 @@
             $(".img_btn").on("click",function(){
                 $(".gallary_div").css('display','block');
                 $(".gallary_wrap").css('visibility','visible');
+                $(".lslide  img").css('visibility','visible');
+
+
             });
             $(".gallary_div").click(function(){
+                $(".lslide img").css('visibility','hidden');
                 $(".gallary_wrap").css('visibility','hidden');
                 $(".gallary_div").css('display','none');
             })
