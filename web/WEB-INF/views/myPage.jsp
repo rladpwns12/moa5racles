@@ -59,7 +59,7 @@
               <div class="middle_context">
                 <div class="userinfo">
                   <div class="username">
-                    <h3>${userName}</h3>
+                    <h3>${userName}(<sec:authentication property="principal.loginVO.nick"/>)</h3>
                   </div>
                   <div class="useremail">
                     <h4>${userEmail}</h4>
