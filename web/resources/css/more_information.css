@@ -341,6 +341,11 @@
 .review_table tr{
   height: 50px;
 }
+.review_table td{
+  overflow:hidden;
+  white-space : nowrap;
+  text-overflow: ellipsis;
+}
 .review_star{
   font-size:11px;
   width:100px;
@@ -350,7 +355,7 @@
   width:30px;
 }
 .review_img{
-  width:30px;
+  width:41px;
 }
 .review_id{
   width:100px;

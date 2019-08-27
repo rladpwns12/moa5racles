@@ -24,7 +24,6 @@ function card(historyId, price) {
                 status: rsp.status,
                 depositDate: new Date().getTime()
             }
-            console.log("결제가 완료되었습니다.");
 
             $.ajax({
                 type: "POST",
@@ -39,14 +38,15 @@ function card(historyId, price) {
                 },
                 success: function (result) {
                     if (result) {
-                        alert("DB까지 갔다오기 성공");
+                        alert("결제에 성공하였습니다.");
                     } else {
-                        alert("DB까지 갔다오기 실패");
+                        alert("결제에 실패하였습니다.");
                     }
                     location.reload();
                 }
             });
         } else {
+            alert("결제에 실패하였습니다.");
             msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
             console.log(msg);
@@ -77,7 +77,6 @@ function kakao(historyId, price) {
                 status: rsp.status,
                 depositDate: new Date().getTime()
             }
-            console.log("결제가 완료되었습니다.");
 
             $.ajax({
                 type: "POST",
@@ -92,14 +91,15 @@ function kakao(historyId, price) {
                 },
                 success: function (result) {
                     if (result) {
-                        alert("DB까지 갔다오기 성공");
+                        alert("결제에 성공 하였습니다.");
                     } else {
-                        alert("DB까지 갔다오기 실패");
+                        alert("결제에 실패 하였습니다.");
                     }
                     location.reload();
                 }
             });
         } else {
+            alert("결제에 실패 하였습니다.");
             msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
             console.log(msg);

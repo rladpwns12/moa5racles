@@ -11,12 +11,12 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ProductVO {
     @NotNull
-    @MaxByteLength(maxValue = 60)
+    @MaxByteLength(maxValue = 60, minValue = 1)
     private String category;
     @NotNull
-    @MaxByteLength(maxValue = 150)
+    @MaxByteLength(maxValue = 150, minValue = 1)
     private String product;
     @NotNull
-    @MaxByteLength(maxValue = 10)
+    @MaxByteLength(maxValue = 10, minValue = 1)
     private String productCnt;
 }

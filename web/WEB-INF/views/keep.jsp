@@ -192,7 +192,7 @@
 					</div>
 					<h2 class="head_5">상세 설명을 입력해주세요</h2>
 					<textarea class="post_contents" id="post_contents" name="content" rows="14" cols="60"
-							  placeholder="맡길 물건에 대한 간단한 설명을 입력해주세요" maxlength="1333"></textarea>
+							  placeholder="보관할 장소에 대한 간단한 설명을 입력해주세요" maxlength="1333"></textarea>
 				</div>
 
 				<div class="content6" id="content6" style="display: none;">
