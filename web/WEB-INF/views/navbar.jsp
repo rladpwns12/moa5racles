@@ -59,7 +59,7 @@
                             <img src="/resources/image/navbar/profile.png" alt="">
                         </div>
                         <div class="author_name">
-                            <sec:authentication property="principal.loginVO.name"/> <br/>
+                            <sec:authentication property="principal.loginVO.name"/>(<sec:authentication property="principal.loginVO.nick"/>) <br/>
                             <span class="author_email">
                                 <sec:authentication property="principal.loginVO.email"/>
                             </span>
