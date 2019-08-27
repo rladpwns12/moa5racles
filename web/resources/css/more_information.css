@@ -388,7 +388,6 @@
 a:hover, a:focus {
   text-decoration: none;
   color: #ffffff;
-  background-color: #3B3769;
 }
 .text-right{
   width:96%;
@@ -412,4 +411,8 @@ a:hover, a:focus {
   color: #8a8a8a;
   font-size: 18px;
   horiz-align: center;
+}
+
+#close-review-box:hover{
+  background-color: #3B3769;
 }
