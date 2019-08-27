@@ -27,7 +27,6 @@ $(function () {
             alert("체크박스를 체크하세요");
             return;
         }
-        // alert("물건을 맡깁니다.");
         var str = "";
 
         $(".uploadResult ul li").each(function (i, obj) {
@@ -227,9 +226,27 @@ function nextForm() {
             num++;
             return;
         case 2:
+            if ($('#box').val() < 0) {
+                alert("5호 박스 개수가 음수가 될 수 없습니다.");
+                $('#box').val(0);
+                $('#box').focus();
+                return;
+            }
+            if ($('#bicycle').val() < 0) {
+                alert("자전거 이상 크기가 음수가 될 수 없습니다.");
+                $('#bicycle').val(0);
+                $('#bicycle').focus();
+                return;
+            }
+            if ($('#bed').val() < 0) {
+                alert("싱글 침대 이상 크기가 음수가 될 수 없습니다.");
+                $('#bed').val(0);
+                $('#bed').focus();
+                return;
+            }
             for (i = 0; i < 3; i++) {
-                var size = document.getElementsByClassName("productSize[" + i + "]");
-                if (size.value != 0)
+                var size = document.getElementsByClassName("sizeCnt");
+                if (size[i].value != 0)
                     break;
             }
             if (i == 3) {
@@ -252,6 +269,11 @@ function nextForm() {
             }
             if ($('#bargain_price').prop("checked") && $('#bargain').val() == 0) {
                 alert("흥정가격을 입력하거나 측정 가격를 체크해주세요");
+                return;
+            }
+            if ($('#bargain_price').prop("checked") && $('#bargain').val() < 100) {
+                alert("흥정가격은 최소 100원 이상 입력해야 합니다");
+                $('#bargain').focus();
                 return;
             }
 
@@ -302,7 +324,6 @@ function nextForm() {
             $("#content7").show();
             num++;
             return;
-
         case 7:
             $("#left_side").hide();
             $("#right_side").hide();
@@ -448,13 +469,13 @@ $(document).ready(function () {
             $('#bargain').val(0);
     })
 })
-
-$("#box").change(function () {
-    measuredPriceSetting();
-});
-$("#bicycle").change(function () {
-    measuredPriceSetting();
-});
-$('#bed').change(function () {
-    measuredPriceSetting();
-});
+//
+// $("#box").change(function () {
+//     measuredPriceSetting();
+// });
+// $("#bicycle").change(function () {
+//     measuredPriceSetting();
+// });
+// $('#bed').change(function () {
+//     measuredPriceSetting();
+// });

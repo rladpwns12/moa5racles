@@ -102,19 +102,19 @@
                     </div>
                     <div class="product_size_1">
                         5호 박스 개수 <input type="number" id="box" class="sizeCnt" name="productSize[0]" min=0 max=100
-                                        value=0>개
+                                        value=0 onchange="measuredPriceSetting()">개
                     </div>
                     <input type="hidden" id="firstMultiple" value="${multiplePriceList[0]}">
 
                     <div class="content2_header">박스에 들어가지 않는 물건이라면 이곳에 입력해주세요.</div>
                     <div class="product_size_2">
                         자전거 이상 크기 <input type="number" id="bicycle" class="sizeCnt" name="productSize[1]" min=0 max=100
-                                         value=0>개
+                                         value=0 onchange="measuredPriceSetting()">개
                         <input type="hidden" id="secondMultiple" value="${multiplePriceList[1]}">
                     </div>
                     <div class="product_size_3">
                         싱글 침대 이상 크기 <input type="number" id="bed" class="sizeCnt" name="productSize[2]" min=0 max=100
-                                           value=0>개
+                                           value=0 onchange="measuredPriceSetting()">개
                         <input type="hidden" id="thirdMultiple" value="${multiplePriceList[2]}">
                     </div>
                 </div>
