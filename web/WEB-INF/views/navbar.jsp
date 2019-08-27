@@ -22,6 +22,8 @@
             <a href="/storeboard" id="take_charge_btn">보관소 찾기</a>
             <sec:authorize access="hasRole('ROLE_HOST')">
                 <a href="javascript:void(0)">&nbsp;|&nbsp;</a>
+                <a href="/storeboard/keep" id="leave_btn">보관소 등록</a>
+                <a href="javascript:void(0)">&nbsp;|&nbsp;</a>
                 <a href="/hostpage" id="leave_btn">호스트 페이지</a>
             </sec:authorize>
         </div>
