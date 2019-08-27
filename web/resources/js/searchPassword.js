@@ -204,6 +204,13 @@ function isPasswordValid(input) {
         $('#password').focus();
         return false;
     }
+    let passwordValid = /^.*(?=.{5,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+    if (!passwordValid.test(input)) {
+        alert("비밀번호는 영문 + 숫자 조합이어야 합니다.");
+        $('#password').css('border', 'solid 0.2px red');
+        return false;
+    }
+
     return true;
 }
 
