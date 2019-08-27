@@ -68,10 +68,14 @@
             $(".img_btn").on("click",function(){
                 $(".gallary_div").css('display','block');
                 $(".gallary_wrap").css('visibility','visible');
+                $(".lslide  img").css('visibility','visible');
+
+
             });
             $(".gallary_div").click(function(){
+                $(".lslide img").css('visibility','hidden');
                 $(".gallary_wrap").css('visibility','hidden');
-                setTimeout(function(){$(".gallary_div").css('display','none');},220);
+                $(".gallary_div").css('display','none');
             })
 
             $('#image-gallery').lightSlider({
