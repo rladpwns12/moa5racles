@@ -421,3 +421,9 @@ a:hover, a:focus {
 #close-review-box:hover{
   background-color: #3B3769;
 }
+.lSPager li{
+  height: 50px;
+}
+.lSSlideOuter .lSPager.lSGallery img{
+  height: 100%!important;
+}

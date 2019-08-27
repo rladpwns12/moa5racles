@@ -71,7 +71,7 @@
             });
             $(".gallary_div").click(function(){
                 $(".gallary_wrap").css('visibility','hidden');
-                setTimeout(function(){$(".gallary_div").css('display','none');},220);
+                $(".gallary_div").css('display','none');
             })
 
             $('#image-gallery').lightSlider({
