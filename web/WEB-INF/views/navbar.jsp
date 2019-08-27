@@ -30,7 +30,10 @@
     </div>
     <div class="menu navber_right">
 
-
+        <sec:authorize access="hasRole('ROLE_USER')">
+            <div><a onclick="reportPopup();" style="cursor:pointer;">신고하기</a><img class="report_img" src="/resources/image/report.png"></div>
+            <a href="javascript:void(0)">|</a>
+        </sec:authorize>
         <sec:authorize access="isAuthenticated()">
             <form class=".logout" action="/logout" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
